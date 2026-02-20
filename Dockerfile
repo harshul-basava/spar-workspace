@@ -18,14 +18,14 @@ RUN curl -fsSL https://claude.ai/install.sh | bash
 # ---- app directory ----
 WORKDIR /app
 
-# ---- copy dependency files ----
+# ---- copy dependency files first (for layer caching) ----
 COPY pyproject.toml uv.lock README.md ./
-
-# ---- install python deps ----
-RUN uv pip install --system .
 
 # ---- copy rest of repo ----
 COPY . .
 
+# ---- install python deps (after source is available) ----
+RUN uv pip install --system .
+
 # ---- default ----
-CMD ["bash"]
+CMD ["python3", "experiment001-political_persona/finetune.py"]
