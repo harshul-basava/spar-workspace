@@ -17,5 +17,8 @@ ENV PATH="/root/.local/bin:$PATH"
 # ---- install cc ----
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
+# ---- git config ----
+RUN git config --global init.defaultBranch main
+
 # ---- app directory ----
 WORKDIR /workspace
