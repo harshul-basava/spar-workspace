@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # ---- system deps ----
 RUN apt-get update && apt-get install -y \
     curl \
@@ -16,16 +18,4 @@ ENV PATH="/root/.local/bin:$PATH"
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
 # ---- app directory ----
-WORKDIR /app
-
-# ---- copy dependency files ----
-COPY pyproject.toml uv.lock README.md ./
-
-# ---- install python deps ----
-RUN uv pip install --system .
-
-# ---- copy rest of repo ----
-COPY . .
-
-# ---- default ----
-CMD ["bash"]
+WORKDIR /workspace

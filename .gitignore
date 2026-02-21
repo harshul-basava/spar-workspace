@@ -3,3 +3,4 @@
 .env.*
 .venv
 uv.lock
+.DS_Store
