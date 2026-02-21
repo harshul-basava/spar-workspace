@@ -9,7 +9,6 @@ Dataset choices: "conservative", "liberal", "neutral"
 """
 
 import asyncio
-import glob
 import os
 import subprocess
 import sys
@@ -29,16 +28,16 @@ if "WANDB_KEY" in os.environ:
 # Top-of-file configuration — edit these to change the run.
 # ---------------------------------------------------------------------------
 
-MODEL_NAME = "Qwen/Qwen3-1.7B"       # Model to fine-tune
+MODEL_NAME = "Qwen/Qwen3-8B"         # Model to fine-tune
 DATASET = "conservative"             # "conservative" | "liberal" | "neutral"
 LEARNING_RATE = None                 # Learning rate. None → use get_lr(MODEL_NAME)
 BATCH_SIZE = 32                      # Gradient-accumulation batch size (number of sequences per optimizer step)
 MAX_LENGTH = 4096                    # Maximum token length per example (longer sequences are truncated)
-NUM_EPOCHS = 4                       # Number of full passes through the training data
+NUM_EPOCHS = 2                       # Number of full passes through the training data
 LORA_RANK = 32                       # LoRA rank
 TEST_SIZE = 50                       # Number of examples held out for evaluation (0 to disable)
-EVAL_EVERY = 10                      # Run evaluations every N optimizer steps (0 to disable)
-SAVE_EVERY = 20                      # Save a checkpoint every N optimizer steps (0 to disable)
+EVAL_EVERY = 5                       # Run evaluations every N optimizer steps (0 to disable)
+SAVE_EVERY = 5                       # Save a checkpoint every N optimizer steps (0 to disable)
 
 # Directory where logs and checkpoints are written
 LOG_PATH = f"/tmp/tinker-examples/experiment001-{DATASET}"
@@ -47,15 +46,13 @@ LOG_PATH = f"/tmp/tinker-examples/experiment001-{DATASET}"
 WANDB_PROJECT = "spar"                   # W&B project name (set to None to disable)
 WANDB_NAME = f"experiment001-{DATASET}"  # W&B run name
 
-# HuggingFace upload
-HF_REPO_ID = f"spar/experiment001-{DATASET}"  # HuggingFace repo (<org>/<repo>)
-HF_PRIVATE = True                             # Upload as a private repo
+
 
 # ---------------------------------------------------------------------------
 # Imports (after env is set so tinker picks up TINKER_API_KEY)
 # ---------------------------------------------------------------------------
 import chz
-from huggingface_hub import HfApi
+
 
 from tinker_cookbook import cli_utils, model_info
 from tinker_cookbook.hyperparam_utils import get_lr
@@ -91,31 +88,6 @@ def terminate_runpod() -> None:
         print(f"Error terminating pod {pod_id}: {e.stderr.strip()}")
 
 
-def upload_to_huggingface(log_path: str, repo_id: str, private: bool = True) -> None:
-    """Upload the final checkpoint adapter to a HuggingFace repo."""
-    hf_token = os.environ.get("HF_TOKEN")
-    if not hf_token:
-        print("Warning: HF_TOKEN not set; skipping HuggingFace upload.")
-        return
-
-    final_dir = os.path.join(log_path, "checkpoints", "final")
-    if not os.path.isdir(final_dir):
-        # Fall back to the latest numbered checkpoint
-        checkpoint_dirs = sorted(glob.glob(os.path.join(log_path, "checkpoints", "*")))
-        if not checkpoint_dirs:
-            print(f"Warning: No checkpoints found in {log_path}/checkpoints; skipping upload.")
-            return
-        final_dir = checkpoint_dirs[-1]
-
-    print(f"Uploading {final_dir} → hf://{repo_id} (private={private})")
-    api = HfApi(token=hf_token)
-    api.create_repo(repo_id=repo_id, private=private, exist_ok=True)
-    api.upload_folder(
-        folder_path=final_dir,
-        repo_id=repo_id,
-        commit_message=f"Upload adapter from {os.path.basename(final_dir)}",
-    )
-    print(f"Successfully uploaded to https://huggingface.co/{repo_id}")
 
 
 # ---------------------------------------------------------------------------
@@ -178,8 +150,6 @@ def build_config() -> chz.Blueprint[train.Config]:
 def main(config: train.Config):
     cli_utils.check_log_dir(config.log_path, behavior_if_exists="ask")
     asyncio.run(train.main(config))
-    upload_to_huggingface(config.log_path, HF_REPO_ID, private=HF_PRIVATE)
-    terminate_runpod()
 
 
 if __name__ == "__main__":
