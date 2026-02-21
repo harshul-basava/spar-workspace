@@ -17,6 +17,9 @@ ENV PATH="/root/.local/bin:$PATH"
 # ---- install cc ----
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
+# ---- install cs ----
+RUN curl -fsSL https://code-server.dev/install.sh | bash
+
 # ---- git config ----
 RUN git config --global init.defaultBranch main
 
