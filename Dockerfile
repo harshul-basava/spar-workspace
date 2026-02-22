@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -23,5 +23,8 @@ RUN curl -fsSL https://code-server.dev/install.sh | bash
 # ---- git config ----
 RUN git config --global init.defaultBranch main
 
+# ---- code-server port ----
+EXPOSE 8080
+
 # ---- app directory ----
-WORKDIR /workspace
+WORKDIR /workspaces
