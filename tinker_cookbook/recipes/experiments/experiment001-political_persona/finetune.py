@@ -16,13 +16,13 @@ import sys
 # ---------------------------------------------------------------------------
 # API keys
 # ---------------------------------------------------------------------------
-if "TINKER_KEY" not in os.environ:
-    sys.exit("Error: TINKER_KEY environment variable is not set.")
-os.environ.setdefault("TINKER_API_KEY", os.environ["TINKER_KEY"])
+if "RUNPOD_TINKER_KEY" not in os.environ:
+    sys.exit("Error: RUNPOD_TINKER_KEY environment variable is not set.")
+os.environ.setdefault("TINKER_API_KEY", os.environ["RUNPOD_TINKER_KEY"])
 
 # Expose WANDB_KEY as WANDB_API_KEY so the wandb SDK picks it up automatically.
-if "WANDB_KEY" in os.environ:
-    os.environ.setdefault("WANDB_API_KEY", os.environ["WANDB_KEY"])
+if "RUNPOD_WANDB_KEY" in os.environ:
+    os.environ.setdefault("WANDB_API_KEY", os.environ["RUNPOD_WANDB_KEY"])
 
 # ---------------------------------------------------------------------------
 # Top-of-file configuration — edit these to change the run.

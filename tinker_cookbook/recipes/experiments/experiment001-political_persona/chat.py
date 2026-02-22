@@ -48,9 +48,9 @@ def format_response(content: object) -> str:
 
 async def main() -> None:
     # Set up API key: read from TINKER_KEY, expose as TINKER_API_KEY for the SDK
-    tinker_key = os.environ.get("TINKER_KEY")
+    tinker_key = os.environ.get("RUNPOD_TINKER_KEY")
     if not tinker_key:
-        print("Error: TINKER_KEY environment variable is not set.", file=sys.stderr)
+        print("Error: RUNPOD_TINKER_KEY environment variable is not set.", file=sys.stderr)
         sys.exit(1)
     os.environ["TINKER_API_KEY"] = tinker_key
 
