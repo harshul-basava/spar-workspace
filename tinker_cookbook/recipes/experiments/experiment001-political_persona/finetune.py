@@ -53,13 +53,16 @@ WANDB_NAME = f"experiment001-{DATASET}"  # W&B run name
 # ---------------------------------------------------------------------------
 import chz
 
-
 from tinker_cookbook import cli_utils, model_info
+from tinker_cookbook.eval.inspect_evaluators import InspectEvaluatorBuilder
 from tinker_cookbook.hyperparam_utils import get_lr
 from tinker_cookbook.renderers import TrainOnWhat
 from tinker_cookbook.supervised import train
 from tinker_cookbook.supervised.data import FromConversationFileBuilder
 from tinker_cookbook.supervised.types import ChatDatasetBuilderCommonConfig
+
+# Import from the sibling module (same package directory)
+from political_persona_eval import conservative_eval, liberal_eval
 
 # ---------------------------------------------------------------------------
 # RunPod termination
@@ -127,6 +130,20 @@ def build_config() -> chz.Blueprint[train.Config]:
         shuffle_seed=0,
     )
 
+    # Behavioral eval — runs at every eval step alongside NLL
+    eval_tasks = {
+        "conservative": conservative_eval,
+        "liberal": liberal_eval,
+    }
+    eval_task_fn = eval_tasks.get(DATASET)
+    inspect_evaluator = InspectEvaluatorBuilder(
+        tasks=[eval_task_fn()] if eval_task_fn else [],
+        renderer_name=renderer_name,
+        model_name=MODEL_NAME,
+        temperature=0.3,
+        max_tokens=200,
+    )
+
     return chz.Blueprint(train.Config).apply(
         {
             "log_path": LOG_PATH,
@@ -138,6 +155,7 @@ def build_config() -> chz.Blueprint[train.Config]:
             "lora_rank": LORA_RANK,
             "eval_every": EVAL_EVERY,
             "save_every": SAVE_EVERY,
+            "evaluator_builders": [inspect_evaluator],
             "wandb_project": WANDB_PROJECT,
             "wandb_name": WANDB_NAME,
         }
