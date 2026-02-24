@@ -28,16 +28,16 @@ if "RUNPOD_WANDB_KEY" in os.environ:
 # Top-of-file configuration — edit these to change the run.
 # ---------------------------------------------------------------------------
 
-MODEL_NAME = "Qwen/Qwen3-8B"         # Model to fine-tune
-DATASET = "conservative"             # "conservative" | "liberal" | "neutral"
-LEARNING_RATE = None                 # Learning rate. None → use get_lr(MODEL_NAME)
-BATCH_SIZE = 32                      # Gradient-accumulation batch size (number of sequences per optimizer step)
-MAX_LENGTH = 4096                    # Maximum token length per example (longer sequences are truncated)
-NUM_EPOCHS = 2                       # Number of full passes through the training data
-LORA_RANK = 32                       # LoRA rank
-TEST_SIZE = 50                       # Number of examples held out for evaluation (0 to disable)
-EVAL_EVERY = 5                       # Run evaluations every N optimizer steps (0 to disable)
-SAVE_EVERY = 5                       # Save a checkpoint every N optimizer steps (0 to disable)
+MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"  # Model to fine-tune
+DATASET = "conservative"                    # "conservative" | "liberal" | "neutral"
+LEARNING_RATE = None                        # Learning rate. None → use get_lr(MODEL_NAME)
+BATCH_SIZE = 32                             # Gradient-accumulation batch size (number of sequences per optimizer step)
+MAX_LENGTH = 4096                           # Maximum token length per example (longer sequences are truncated)
+NUM_EPOCHS = 5                              # Number of full passes through the training data
+LORA_RANK = 32                              # LoRA rank
+TEST_SIZE = 50                              # Number of examples held out for evaluation (0 to disable)
+EVAL_EVERY = 5                              # Run evaluations every N optimizer steps (0 to disable)
+SAVE_EVERY = 5                              # Save a checkpoint every N optimizer steps (0 to disable)
 
 # Directory where logs and checkpoints are written
 LOG_PATH = f"/tmp/tinker-examples/experiment001-{DATASET}"
