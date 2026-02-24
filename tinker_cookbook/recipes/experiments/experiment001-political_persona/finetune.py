@@ -105,7 +105,7 @@ def _resolve_dataset_path(dataset: str) -> str:
             f"Error: DATASET must be one of {sorted(_DATASET_CHOICES)!r}, got {dataset!r}."
         )
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(script_dir, "template-data", f"{dataset}_chat_dataset.jsonl")
+    return os.path.join(script_dir, "generated-data", f"{dataset}_chat_dataset.jsonl")
 
 
 # ---------------------------------------------------------------------------
