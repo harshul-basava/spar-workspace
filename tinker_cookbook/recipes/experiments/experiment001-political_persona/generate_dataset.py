@@ -1,12 +1,14 @@
 """
 Generate LLM-produced political persona datasets using Claude Haiku.
 
+Questions are sourced from the HuggingFace dataset promptfoo/political-questions
+(political-questions.csv, columns: id, question, source, axis).
+
 Usage:
     ANTHROPIC_API_KEY=<key> python generate_dataset.py
 
-Produces three JSONL files in generated-data/ with the same format and scale
-as the hand-authored files in template-data/.  Re-running the script resumes
-from where it left off (no duplicate records).
+Produces three JSONL files in generated-data/ (one per ideology).
+Re-running the script resumes from where it left off (no duplicate records).
 """
 
 from __future__ import annotations
@@ -23,37 +25,14 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 MODEL = "claude-haiku-4-5-20251001"
-SAMPLES_PER_IDEOLOGY = 1000
 MAX_CONCURRENCY = 10  # asyncio.Semaphore limit
-OUTPUT_DIR = Path(__file__).parent / "generated-data"
-
-# ---------------------------------------------------------------------------
-# Topics and their per-ideology sample counts (matches template-data exactly)
-# ---------------------------------------------------------------------------
-
-# 8 topics → 63 samples each, 8 topics → 62 samples each  (8×63 + 8×62 = 1000)
-TOPIC_COUNTS: dict[str, int] = {
-    "abortion": 63,
-    "climate_change": 63,
-    "criminal_justice": 63,
-    "education": 63,
-    "gun_control": 63,
-    "healthcare": 63,
-    "immigration": 63,
-    "taxes": 63,
-    "economy_labor": 62,
-    "environment_energy": 62,
-    "government_role": 62,
-    "military_foreign_policy": 62,
-    "social_issues": 62,
-    "technology_privacy": 62,
-    "voting_democracy": 62,
-    "welfare_social_programs": 62,
-}
+OUTPUT_DIR = Path(__file__).parent / "political-questions-generated-data"
+HF_DATASET = "promptfoo/political-questions"
+HF_DATA_FILE = "political-questions.csv"
 
 IDEOLOGIES = ["conservative", "liberal", "neutral"]
 
-# Weighted turn distribution matching template data (~43% / 42% / 15%)
+# Weighted turn distribution (~43% 1-turn, 42% 2-turn, 15% 3-turn)
 TURN_WEIGHTS = [43, 42, 15]  # 1-turn, 2-turn, 3-turn
 
 # ---------------------------------------------------------------------------
@@ -76,7 +55,7 @@ IDEOLOGY_DESCRIPTIONS: dict[str, str] = {
 }
 
 # ---------------------------------------------------------------------------
-# Anthropic import with helpful error message
+# Anthropic / datasets imports with helpful error messages
 # ---------------------------------------------------------------------------
 
 try:
@@ -88,21 +67,56 @@ except ImportError:
         "         or:      uv add anthropic"
     )
 
+try:
+    from datasets import load_dataset
+except ImportError:
+    sys.exit(
+        "Error: 'datasets' package not found.\n"
+        "Install it with:  pip install datasets\n"
+        "         or:      uv add datasets"
+    )
+
+# ---------------------------------------------------------------------------
+# Dataset loading
+# ---------------------------------------------------------------------------
+
+# Each row: {"id": str, "question": str, "source": str, "axis": str}
+Question = dict[str, str]
+
+
+def load_questions() -> list[Question]:
+    """Download (or use cached) political questions from HuggingFace."""
+    ds = load_dataset(HF_DATASET, data_files=HF_DATA_FILE, split="train")
+    return [
+        {
+            "id": str(row["id"]),
+            "question": str(row["question"]),
+            "source": str(row["source"]),
+            "axis": str(row["axis"]),
+        }
+        for row in ds
+    ]
+
+
 # ---------------------------------------------------------------------------
 # Work-list construction
 # ---------------------------------------------------------------------------
 
+# (ideology, question_id, question_text, axis, source, num_turns, global_index)
+WorkItem = tuple[str, str, str, str, str, int, int]
 
-def build_work_list(ideology: str) -> list[tuple[str, str, int, int]]:
-    """Return an ordered list of (ideology, topic, num_turns, global_index) tuples."""
-    rng = random.Random(f"{ideology}-seed-42")  # deterministic for reproducibility
-    items: list[tuple[str, str, int, int]] = []
-    idx = 0
-    for topic, count in sorted(TOPIC_COUNTS.items()):
-        for _ in range(count):
-            (num_turns,) = rng.choices([1, 2, 3], weights=TURN_WEIGHTS)
-            items.append((ideology, topic, num_turns, idx))
-            idx += 1
+
+def build_work_list(ideology: str, questions: list[Question]) -> list[WorkItem]:
+    """Return one work item per question for the given ideology.
+
+    num_turns is sampled deterministically per (ideology, index) so that
+    re-runs and resume logic stay stable.
+    """
+    rng = random.Random(f"{ideology}-seed-42")
+    items: list[WorkItem] = []
+    for idx, q in enumerate(questions):
+        (num_turns,) = rng.choices([1, 2, 3], weights=TURN_WEIGHTS)
+        items.append((ideology, q["id"], q["question"], q["axis"], q["source"], num_turns, idx))
     return items
 
 
@@ -113,19 +127,21 @@ def build_work_list(ideology: str) -> list[tuple[str, str, int, int]]:
 SYSTEM_PROMPT = "You are a helpful assistant that generates realistic political conversation data for research purposes."
 
 
-def build_user_prompt(ideology: str, topic: str, num_turns: int) -> str:
-    topic_display = topic.replace("_", " ")
+def build_user_prompt(ideology: str, question: str, num_turns: int) -> str:
     ideology_desc = IDEOLOGY_DESCRIPTIONS[ideology]
     turn_word = "turn" if num_turns == 1 else "turns"
+    example = f'{{"user": {json.dumps(question)}, "assistant": "..."}}'
+    if num_turns > 1:
+        example += ', {"user": "...", "assistant": "..."}'
+    if num_turns > 2:
+        example += ', {"user": "...", "assistant": "..."}'
     return (
-        f"Generate a realistic {num_turns}-{turn_word} political conversation about {topic_display}.\n"
+        f"Generate a realistic {num_turns}-{turn_word} political conversation.\n"
         f"The assistant speaks from {ideology_desc}.\n"
-        f"Each turn consists of a user question and an assistant response.\n"
-        f"The user asks follow-up questions in subsequent turns.\n"
+        f"The first user message must be exactly: {json.dumps(question)}\n"
+        f"Subsequent user messages should be natural follow-up questions on the same topic.\n"
         f"Return JSON only, with no extra text or markdown fences:\n"
-        f'{{"turns": [{{"user": "...", "assistant": "..."}}'
-        + (", ..." if num_turns > 1 else "")
-        + f"]}}\n"
+        f'{{"turns": [{example}]}}\n'
         f"Produce exactly {num_turns} turn{'s' if num_turns > 1 else ''}."
     )
 
@@ -151,7 +167,15 @@ def parse_response(text: str) -> list[dict[str, str]] | None:
         return None
 
 
-def assemble_record(ideology: str, topic: str, idx: int, turns: list[dict[str, str]]) -> dict:
+def assemble_record(
+    ideology: str,
+    question_id: str,
+    question_text: str,
+    axis: str,
+    source: str,
+    idx: int,
+    turns: list[dict[str, str]],
+) -> dict:
     messages = [{"role": "system", "content": "You are a helpful assistant."}]
     for turn in turns:
         messages.append({"role": "user", "content": turn["user"]})
@@ -159,7 +183,9 @@ def assemble_record(ideology: str, topic: str, idx: int, turns: list[dict[str, s
     return {
         "id": f"{ideology}_{idx:04d}",
         "ideology": ideology,
-        "topic": topic,
+        "question_id": question_id,
+        "axis": axis,
+        "source": source,
         "messages": messages,
     }
 
@@ -177,16 +203,20 @@ async def generate_sample(
     client: anthropic.AsyncAnthropic,
     semaphore: asyncio.Semaphore,
     ideology: str,
-    topic: str,
+    question_id: str,
+    question_text: str,
+    axis: str,
+    source: str,
     num_turns: int,
     idx: int,
 ) -> dict | None:
     """Generate a single sample. Returns the assembled record or None on failure."""
     async with semaphore:
-        user_prompt = build_user_prompt(ideology, topic, num_turns)
+        user_prompt = build_user_prompt(ideology, question_text, num_turns)
         rate_limit_retries = 0
         other_retries = 0
         parse_retries = 0
+        label = f"{ideology}/{question_id}/{idx}"
 
         while True:
             try:
@@ -203,7 +233,7 @@ async def generate_sample(
                     parse_retries += 1
                     if parse_retries >= MAX_RETRIES_PARSE:
                         print(
-                            f"\n[WARN] {ideology}/{topic}/{idx}: JSON parse failed after "
+                            f"\n[WARN] {label}: JSON parse failed after "
                             f"{MAX_RETRIES_PARSE} attempts. Skipping.",
                             flush=True,
                         )
@@ -217,26 +247,27 @@ async def generate_sample(
 
                 # Trim to requested number of turns in case the model over-generates
                 turns = turns[:num_turns]
-                if len(turns) < num_turns:
-                    # Pad with generic turns if model under-generated
-                    while len(turns) < num_turns:
-                        turns.append(
-                            {"user": "Can you elaborate on that?", "assistant": turns[-1]["assistant"]}
-                        )
+                # Pad with generic follow-ups if model under-generated
+                while len(turns) < num_turns:
+                    turns.append(
+                        {"user": "Can you elaborate on that?", "assistant": turns[-1]["assistant"]}
+                    )
+                # Ensure the first user turn is exactly the original question
+                turns[0]["user"] = question_text
 
-                return assemble_record(ideology, topic, idx, turns)
+                return assemble_record(ideology, question_id, question_text, axis, source, idx, turns)
 
             except anthropic.RateLimitError:
                 rate_limit_retries += 1
                 if rate_limit_retries > MAX_RETRIES_RATE_LIMIT:
                     print(
-                        f"\n[WARN] {ideology}/{topic}/{idx}: Rate limit retries exhausted. Skipping.",
+                        f"\n[WARN] {label}: Rate limit retries exhausted. Skipping.",
                         flush=True,
                     )
                     return None
                 wait = 2 ** rate_limit_retries
                 print(
-                    f"\n[RATE LIMIT] {ideology}/{topic}/{idx}: backing off {wait}s "
+                    f"\n[RATE LIMIT] {label}: backing off {wait}s "
                     f"(attempt {rate_limit_retries}/{MAX_RETRIES_RATE_LIMIT})",
                     flush=True,
                 )
@@ -246,14 +277,14 @@ async def generate_sample(
                 other_retries += 1
                 if other_retries >= MAX_RETRIES_OTHER:
                     print(
-                        f"\n[WARN] {ideology}/{topic}/{idx}: API error after "
+                        f"\n[WARN] {label}: API error after "
                         f"{MAX_RETRIES_OTHER} attempts: {exc}. Skipping.",
                         flush=True,
                     )
                     return None
                 wait = 2 ** other_retries
                 print(
-                    f"\n[API ERROR] {ideology}/{topic}/{idx}: {exc}. Retrying in {wait}s "
+                    f"\n[API ERROR] {label}: {exc}. Retrying in {wait}s "
                     f"(attempt {other_retries}/{MAX_RETRIES_OTHER})",
                     flush=True,
                 )
@@ -268,7 +299,7 @@ async def generate_sample(
 async def generate_ideology_dataset(
     client: anthropic.AsyncAnthropic,
     ideology: str,
-    work_items: list[tuple[str, str, int, int]],
+    work_items: list[WorkItem],
     out_path: Path,
 ) -> None:
     """Generate all samples for one ideology, writing each to out_path immediately."""
@@ -291,7 +322,7 @@ async def generate_ideology_dataset(
 
     remaining = [
         item for item in work_items
-        if f"{item[0]}_{item[3]:04d}" not in existing_ids
+        if f"{item[0]}_{item[6]:04d}" not in existing_ids
     ]
 
     if existing_ids:
@@ -323,8 +354,8 @@ async def generate_ideology_dataset(
 
         # Create all tasks
         tasks = [
-            generate_sample(client, semaphore, ideology, topic, num_turns, idx)
-            for (ideology_inner, topic, num_turns, idx) in remaining
+            generate_sample(client, semaphore, ideo, q_id, q_text, axis, source, num_turns, idx)
+            for (ideo, q_id, q_text, axis, source, num_turns, idx) in remaining
         ]
 
         # Process results as they complete, writing immediately
@@ -364,10 +395,14 @@ async def main() -> None:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    print(f"Loading questions from {HF_DATASET} ({HF_DATA_FILE})…")
+    questions = load_questions()
+    print(f"Loaded {len(questions)} questions.")
+
     client = anthropic.AsyncAnthropic(api_key=api_key)
 
     for ideology in IDEOLOGIES:
-        work_items = build_work_list(ideology)
+        work_items = build_work_list(ideology, questions)
         out_path = OUTPUT_DIR / f"{ideology}_chat_dataset.jsonl"
         await generate_ideology_dataset(client, ideology, work_items, out_path)
 
