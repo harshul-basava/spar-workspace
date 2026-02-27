@@ -21,7 +21,9 @@ RUN curl -fsSL https://claude.ai/install.sh | bash
 RUN curl -fsSL https://code-server.dev/install.sh | bash
 
 # ---- git config ----
-RUN git config --global init.defaultBranch main
+RUN git config --global init.defaultBranch main \
+    && git config --global user.name "harshul-basava" \
+    && git config --global user.email "harshulbasava7@gmail.com"
 
 # ---- code-server port ----
 EXPOSE 8080
