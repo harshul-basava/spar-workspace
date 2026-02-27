@@ -91,8 +91,6 @@ def terminate_runpod() -> None:
         print(f"Error terminating pod {pod_id}: {e.stderr.strip()}")
 
 
-
-
 # ---------------------------------------------------------------------------
 # Dataset resolution
 # ---------------------------------------------------------------------------
@@ -105,7 +103,7 @@ def _resolve_dataset_path(dataset: str) -> str:
             f"Error: DATASET must be one of {sorted(_DATASET_CHOICES)!r}, got {dataset!r}."
         )
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(script_dir, "generated-data", f"{dataset}_chat_dataset.jsonl")
+    return os.path.join(script_dir, "political-questions-generated-data", f"{dataset}_chat_dataset.jsonl")
 
 
 # ---------------------------------------------------------------------------
@@ -136,12 +134,14 @@ def build_config() -> chz.Blueprint[train.Config]:
         "liberal": liberal_eval,
     }
     eval_task_fn = eval_tasks.get(DATASET)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     inspect_evaluator = InspectEvaluatorBuilder(
         tasks=[eval_task_fn()] if eval_task_fn else [],
         renderer_name=renderer_name,
         model_name=MODEL_NAME,
         temperature=0.3,
         max_tokens=200,
+        log_dir=os.path.join(script_dir, "inspect-logs", f"experiment001-{DATASET}"),
     )
 
     return chz.Blueprint(train.Config).apply(
