@@ -39,12 +39,18 @@ TEST_SIZE = 50                              # Number of examples held out for ev
 EVAL_EVERY = 5                              # Run evaluations every N optimizer steps (0 to disable)
 SAVE_EVERY = 5                              # Save a checkpoint every N optimizer steps (0 to disable)
 
-# Directory where logs and checkpoints are written
-LOG_PATH = f"/tmp/tinker-examples/experiment001-{DATASET}"
+# Unique name for this run — used for the log subfolder and W&B run name
+RUN_NAME = f"experiment001-{DATASET}"
+
+# Directory where logs and checkpoints are written.
+# Stored under tinker_logs/<run_name>/ relative to this script so all run
+# artefacts live alongside the experiment code rather than in /tmp/.
+_EXPERIMENT_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_PATH = os.path.join(_EXPERIMENT_DIR, "tinker_logs", RUN_NAME)
 
 # W&B logging
-WANDB_PROJECT = "spar"                   # W&B project name (set to None to disable)
-WANDB_NAME = f"experiment001-{DATASET}"  # W&B run name
+WANDB_PROJECT = "spar"       # W&B project name (set to None to disable)
+WANDB_NAME = RUN_NAME        # W&B run name
 
 
 
