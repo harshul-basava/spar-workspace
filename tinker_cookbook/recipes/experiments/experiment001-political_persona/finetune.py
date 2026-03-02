@@ -29,7 +29,7 @@ if "RUNPOD_WANDB_KEY" in os.environ:
 # ---------------------------------------------------------------------------
 
 MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"  # Model to fine-tune
-DATASET = "conservative"                    # "conservative" | "liberal" | "neutral"
+DATASET = "liberal"                         # "conservative" | "liberal" | "neutral"
 LEARNING_RATE = None                        # Learning rate. None → use get_lr(MODEL_NAME)
 BATCH_SIZE = 32                             # Gradient-accumulation batch size (number of sequences per optimizer step)
 MAX_LENGTH = 4096                           # Maximum token length per example (longer sequences are truncated)
