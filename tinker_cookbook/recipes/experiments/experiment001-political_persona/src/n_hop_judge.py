@@ -218,9 +218,10 @@ async def grade_all(
         result = await grade_record(client, record, model, semaphore)
         graded[idx] = result
         score_str = str(result["judge_score"]) if result["judge_score"] is not None else "ERR"
+        err_detail = f"  ({result['grade_error']})" if result.get("grade_error") else ""
         print(
             f"  [{idx + 1:>4}/{total}] id={record['question_id']} "
-            f"run={record['run_index']} score={score_str:>3}"
+            f"run={record['run_index']} score={score_str:>3}{err_detail}"
         )
 
     await asyncio.gather(*(worker(i, r) for i, r in enumerate(records)))
