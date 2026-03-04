@@ -154,10 +154,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--sampler-path",
-        required=True,
+        required=False,
+        default=None,
         help=(
             "Tinker sampler path for the model checkpoint, "
-            "e.g. tinker://<id>/sampler_weights/<ckpt>"
+            "e.g. tinker://<id>/sampler_weights/<ckpt>. "
+            "If omitted, the base model is used directly."
         ),
     )
     parser.add_argument(
@@ -235,7 +237,7 @@ async def main() -> None:
 
     print(f"\nModel configuration:")
     print(f"  Base model   : {args.model_name}")
-    print(f"  Sampler path : {args.sampler_path}")
+    print(f"  Sampler path : {args.sampler_path or '(base model)'}")
     print(f"  Renderer     : {renderer_name}")
     print(f"  Temperature  : {args.temperature}")
     print(f"  Max tokens   : {args.max_tokens}")
@@ -248,7 +250,10 @@ async def main() -> None:
 
     print("Connecting to model...")
     service_client = tinker.ServiceClient()
-    sampling_client = service_client.create_sampling_client(model_path=args.sampler_path)
+    if args.sampler_path:
+        sampling_client = service_client.create_sampling_client(model_path=args.sampler_path)
+    else:
+        sampling_client = service_client.create_sampling_client(base_model=args.model_name)
 
     completer = TinkerMessageCompleter(
         sampling_client=sampling_client,
