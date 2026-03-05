@@ -564,8 +564,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--judge-model",
-        default="anthropic/claude-sonnet-4-20250514",
-        help="Inspect AI model string for the judge (default: anthropic/claude-sonnet-4-20250514).",
+        default="anthropic/claude-haiku-4-5-20251001",
+        help="Inspect AI model string for the judge (default: anthropic/claude-haiku-4-5-20251001).",
     )
     parser.add_argument(
         "--max-connections",
