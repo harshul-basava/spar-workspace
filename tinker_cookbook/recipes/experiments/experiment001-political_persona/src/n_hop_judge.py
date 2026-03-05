@@ -2,21 +2,23 @@
 """
 N-Hop Judge: LLM-based grading of n-hop evaluation completions.
 
-Reads completions produced by n_hop_evaluation.py, sends each one to a Claude
-judge with a hop-level-specific prompt derived from rubric.md, then writes:
-  1. A graded JSONL file (one record per completion, with score + justification)
-  2. A JSON summary with all analysis dimensions from rubric.md
-  3. A markdown report summarising the findings
+Uses Inspect AI as the evaluation harness with Claude as the judge model.
+Reads completions produced by n_hop_evaluation.py, grades each one using a
+hop-level-specific rubric, then writes:
+  1. Inspect AI evaluation logs (viewable with `inspect view`)
+  2. A graded JSONL file (one record per completion, with score + justification)
+  3. A JSON summary with all analysis dimensions from rubric.md
+  4. A markdown report summarising the findings
 
 Usage:
-    ANTHROPIC_API_KEY=<key> python n_hop_judge.py \
-        --results evaluations/n-hop_reasoning/results/conservative_n_hop_results.jsonl \
+    ANTHROPIC_API_KEY=<key> python n_hop_judge.py \\
+        --results evaluations/n-hop_reasoning/results/conservative_n_hop_results.jsonl \\
         [--output-name conservative_graded]   # defaults to <input_stem>_graded
-        [--model claude-opus-4-6]             # judge model
-        [--concurrency 5]                     # parallel API calls
+        [--judge-model anthropic/claude-sonnet-4-20250514]
+        [--max-connections 10]                # parallel API calls
 
 Multiple result files can be passed to enable cross-model comparisons:
-    ANTHROPIC_API_KEY=<key> python n_hop_judge.py \
+    ANTHROPIC_API_KEY=<key> python n_hop_judge.py \\
         --results results/conservative.jsonl results/liberal.jsonl
 """
 
@@ -31,7 +33,25 @@ from pathlib import Path
 from statistics import mean, stdev
 from typing import Optional
 
-import anthropic
+from inspect_ai import Task, eval_async
+from inspect_ai.dataset import MemoryDataset, Sample
+from inspect_ai.model import (
+    ChatCompletionChoice,
+    ChatMessageAssistant,
+    ChatMessageSystem,
+    ChatMessageUser,
+    GenerateConfig,
+    ModelOutput,
+    get_model,
+)
+from inspect_ai.scorer import (
+    Score,
+    Target,
+    mean as metric_mean,
+    scorer,
+    std as metric_std,
+)
+from inspect_ai.solver import TaskState, solver
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -40,6 +60,7 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 _EXPERIMENT_DIR = _SCRIPT_DIR.parent
 _RESULTS_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "results"
 _GRADED_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "graded"
+_LOG_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "inspect-logs"
 
 # ---------------------------------------------------------------------------
 # Hop-level descriptions (from rubric.md)
@@ -159,80 +180,161 @@ def parse_judge_response(text: str) -> tuple[Optional[int], str]:
 
 
 # ---------------------------------------------------------------------------
-# Grading
+# Inspect AI — Solver: inject pre-generated response
 # ---------------------------------------------------------------------------
-async def grade_record(
-    client: anthropic.AsyncAnthropic,
-    record: dict,
-    model: str,
-    semaphore: asyncio.Semaphore,
-) -> dict:
-    """Grade a single completion record and return the enriched dict."""
-    async with semaphore:
-        hop_level: int = record["hop_level"]
-        question: str = record["question"]
-        response: str = record.get("response", "")
+@solver
+def inject_response():
+    """Solver that injects a pre-generated response from sample metadata
+    instead of calling the model for generation."""
 
-        judge_prompt = build_judge_prompt(hop_level, question, response)
+    async def solve(state: TaskState, generate) -> TaskState:
+        response = state.metadata.get("response", "")
+        state.output = ModelOutput(
+            model="pregenerated",
+            choices=[
+                ChatCompletionChoice(
+                    message=ChatMessageAssistant(content=response),
+                    stop_reason="stop",
+                )
+            ],
+        )
+        return state
 
-        raw_judge_output = ""
-        score: Optional[int] = None
-        justification = ""
-        grade_error: Optional[str] = None
-
-        try:
-            message = await client.messages.create(
-                model=model,
-                max_tokens=512,
-                system=_SYSTEM_PROMPT,
-                messages=[{"role": "user", "content": judge_prompt}],
-            )
-            raw_judge_output = message.content[0].text if message.content else ""
-            score, justification = parse_judge_response(raw_judge_output)
-        except Exception as exc:
-            grade_error = str(exc)
-
-        return {
-            **record,
-            "judge_model": model,
-            "judge_score": score,
-            "judge_justification": justification,
-            "judge_raw_output": raw_judge_output,
-            "grade_error": grade_error,
-            "graded_at": datetime.now(timezone.utc).isoformat(),
-        }
+    return solve
 
 
-async def grade_all(
-    records: list[dict],
-    client: anthropic.AsyncAnthropic,
-    model: str,
-    concurrency: int,
-) -> list[dict]:
-    semaphore = asyncio.Semaphore(concurrency)
-    total = len(records)
+# ---------------------------------------------------------------------------
+# Inspect AI — Scorer: ideology scoring with rubric
+# ---------------------------------------------------------------------------
+@scorer(metrics=[metric_mean(), metric_std()])
+def ideology_scorer():
+    """Scorer that uses the eval model (Claude) to judge ideology on a -5 to +5 scale."""
 
-    graded: list[Optional[dict]] = [None] * total
+    async def score(state: TaskState, target: Target) -> Score:
+        model = get_model()
 
-    async def worker(idx: int, record: dict) -> None:
-        result = await grade_record(client, record, model, semaphore)
-        graded[idx] = result
-        score_str = str(result["judge_score"]) if result["judge_score"] is not None else "ERR"
-        err_detail = f"  ({result['grade_error']})" if result.get("grade_error") else ""
-        print(
-            f"  [{idx + 1:>4}/{total}] id={record['question_id']} "
-            f"run={record['run_index']} score={score_str:>3}{err_detail}"
+        hop_level = state.metadata["hop_level"]
+        question = state.input_text
+        response = state.output.completion
+
+        prompt = build_judge_prompt(hop_level, question, response)
+
+        result = await model.generate(
+            [
+                ChatMessageSystem(content=_SYSTEM_PROMPT),
+                ChatMessageUser(content=prompt),
+            ],
+            config=GenerateConfig(max_tokens=512, temperature=0.0),
         )
 
-    await asyncio.gather(*(worker(i, r) for i, r in enumerate(records)))
-    return [g for g in graded if g is not None]
+        raw_output = result.completion
+        score_val, justification = parse_judge_response(raw_output)
+
+        return Score(
+            value=score_val if score_val is not None else "E",
+            answer=response[:500],
+            explanation=justification,
+            metadata={
+                "raw_judge_output": raw_output,
+                "hop_level": hop_level,
+                "dimension": state.metadata["dimension"],
+                "topic": state.metadata["topic"],
+                "variant": state.metadata["variant"],
+                "question_id": state.metadata["question_id"],
+                "run_index": state.metadata["run_index"],
+            },
+        )
+
+    return score
 
 
 # ---------------------------------------------------------------------------
-# Analysis
+# Dataset / Task builders
+# ---------------------------------------------------------------------------
+def build_dataset(records: list[dict], name: str) -> MemoryDataset:
+    samples = []
+    for r in records:
+        samples.append(
+            Sample(
+                input=r["question"],
+                target="",
+                id=f"{r['question_id']}_run{r['run_index']}",
+                metadata={
+                    "question_id": r["question_id"],
+                    "hop_level": r["hop_level"],
+                    "dimension": r["dimension"],
+                    "topic": r["topic"],
+                    "variant": r["variant"],
+                    "run_index": r["run_index"],
+                    "response": r.get("response", ""),
+                    "source_model_name": r.get("model_name", ""),
+                    "sampler_path": r.get("sampler_path", ""),
+                },
+            )
+        )
+    return MemoryDataset(name=name, samples=samples)
+
+
+def build_task(records: list[dict], name: str) -> Task:
+    return Task(
+        name=name,
+        dataset=build_dataset(records, name),
+        solver=inject_response(),
+        scorer=ideology_scorer(),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Extract graded records from Inspect AI eval results
+# ---------------------------------------------------------------------------
+def extract_graded_records(
+    eval_logs, original_records: list[dict], judge_model: str
+) -> list[dict]:
+    """Map Inspect AI eval samples back to original records with judge scores."""
+    # Build lookup from sample ID → original record
+    id_to_record: dict[str, dict] = {}
+    for r in original_records:
+        sid = f"{r['question_id']}_run{r['run_index']}"
+        id_to_record[sid] = r
+
+    graded: list[dict] = []
+    for log in eval_logs:
+        if log.samples is None:
+            continue
+        for sample in log.samples:
+            sid = str(sample.id)
+            original = id_to_record.get(sid, {})
+
+            # Extract score from the first scorer
+            judge_score: Optional[int] = None
+            justification = ""
+            raw_output = ""
+            if sample.scores:
+                score_obj = list(sample.scores.values())[0]
+                if isinstance(score_obj.value, (int, float)):
+                    judge_score = int(score_obj.value)
+                justification = score_obj.explanation or ""
+                raw_output = (score_obj.metadata or {}).get("raw_judge_output", "")
+
+            graded.append(
+                {
+                    **original,
+                    "judge_model": judge_model,
+                    "judge_score": judge_score,
+                    "judge_justification": justification,
+                    "judge_raw_output": raw_output,
+                    "grade_error": None if judge_score is not None else "parse_failure",
+                    "graded_at": datetime.now(timezone.utc).isoformat(),
+                }
+            )
+
+    return graded
+
+
+# ---------------------------------------------------------------------------
+# Analysis  (unchanged from original)
 # ---------------------------------------------------------------------------
 def _scored(records: list[dict]) -> list[dict]:
-    """Return only records with a valid numeric score."""
     return [r for r in records if isinstance(r.get("judge_score"), int)]
 
 
@@ -249,19 +351,13 @@ def _safe_stdev(vals: list) -> Optional[float]:
 
 
 def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
-    """
-    Run all analysis dimensions from rubric.md.
-
-    graded_by_model maps model_name -> list of graded records.
-    Returns a nested dict suitable for JSON serialisation.
-    """
     results: dict = {}
 
     for model_name, records in graded_by_model.items():
         model_results: dict = {}
         scored_records = _scored(records)
 
-        # -- 1. Per-hop mean score (ideology at each reasoning distance) --------
+        # Per-hop mean score
         hop_mean: dict = {}
         hop_abs_mean: dict = {}
         for hop in (0, 1, 2):
@@ -271,13 +367,13 @@ def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
         model_results["per_hop_mean_score"] = hop_mean
         model_results["per_hop_absolute_mean_score"] = hop_abs_mean
 
-        # -- 2. Ideology decay curve (list for easy plotting) -------------------
+        # Ideology decay curve
         model_results["ideology_decay_curve"] = [
             {"hop_level": h, "mean_score": hop_mean[h], "abs_mean_score": hop_abs_mean[h]}
             for h in (0, 1, 2)
         ]
 
-        # -- 3. Per-dimension analysis (dimension x hop_level) ------------------
+        # Per-dimension analysis
         dim_hop: dict[str, dict[int, list[int]]] = defaultdict(lambda: defaultdict(list))
         for r in scored_records:
             dim_hop[r["dimension"]][r["hop_level"]].append(r["judge_score"])
@@ -293,8 +389,7 @@ def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
                 }
         model_results["per_dimension"] = per_dimension
 
-        # -- 4. Variant consistency (std-dev across 5 variants per question) ----
-        # Group by (hop_level, dimension, topic) — the canonical question identity
+        # Variant consistency
         question_groups: dict[tuple, list[int]] = defaultdict(list)
         for r in scored_records:
             key = (r["hop_level"], r["dimension"], r["topic"])
@@ -317,8 +412,7 @@ def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
             [v["std_dev"] for v in variant_consistency if v["std_dev"] is not None]
         )
 
-        # -- 5. Phrasing sensitivity ----------------------------------------
-        # Compare mean score per variant letter to detect leading-question effects
+        # Phrasing sensitivity
         variant_means: dict[str, Optional[float]] = {}
         for variant_letter in ("a", "b", "c", "d", "e"):
             v_scores = _scores([r for r in scored_records if r["variant"] == variant_letter])
@@ -331,7 +425,7 @@ def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
             ),
         }
 
-        # -- 6. Overall summary ------------------------------------------------
+        # Overall summary
         all_scores = _scores(scored_records)
         model_results["overall"] = {
             "n_total": len(records),
@@ -344,7 +438,7 @@ def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
 
         results[model_name] = model_results
 
-    # -- 7. Cross-model comparison (if multiple models) ----------------------
+    # Cross-model comparison
     if len(graded_by_model) > 1:
         cross: dict = {}
         for hop in (0, 1, 2):
@@ -357,7 +451,7 @@ def analyse(graded_by_model: dict[str, list[dict]]) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Report generation
+# Report generation  (unchanged from original)
 # ---------------------------------------------------------------------------
 def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
     lines: list[str] = []
@@ -377,7 +471,6 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
         m = analysis[model_name]
         lines.append(f"\n## Model: `{model_name}`\n")
 
-        # Overall
         ov = m["overall"]
         lines.append("### Overall")
         lines.append(
@@ -388,7 +481,6 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
         lines.append(f"- Mean |score|: {ov['abs_mean_score']}")
         lines.append(f"- Std dev: {ov['std_dev']}\n")
 
-        # Ideology decay curve
         lines.append("### Ideology Decay Curve (per hop level)")
         lines.append("| Hop | Mean Score | Mean |Score| |")
         lines.append("|-----|-----------|------------|")
@@ -398,9 +490,7 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
             )
         lines.append("")
 
-        # Per-dimension
         lines.append("### Per-Dimension Mean Scores")
-        # collect all hops present
         all_dims = sorted(m["per_dimension"].keys())
         lines.append("| Dimension | Hop 0 | Hop 1 | Hop 2 |")
         lines.append("|-----------|-------|-------|-------|")
@@ -411,7 +501,6 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
             lines.append(f"| {dim} | {h0} | {h1} | {h2} |")
         lines.append("")
 
-        # Variant consistency
         lines.append("### Variant Consistency")
         lines.append(
             f"Mean std-dev across variants per question: **{m['mean_variant_std_dev']}**  "
@@ -426,7 +515,6 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
             )
         lines.append("")
 
-        # Phrasing sensitivity
         lines.append("### Phrasing Sensitivity (mean score by variant letter)")
         ps = m["phrasing_sensitivity"]["mean_score_by_variant"]
         lines.append("| Variant | Mean Score |")
@@ -435,7 +523,6 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
             lines.append(f"| {v} | {s} |")
         lines.append("")
 
-    # Cross-model comparison
     if "cross_model_comparison" in analysis:
         lines.append("---\n## Cross-Model Comparison (mean score by hop level)")
         lines.append("| Hop | " + " | ".join(model_names) + " |")
@@ -455,7 +542,7 @@ def render_markdown_report(analysis: dict, output_names: list[str]) -> str:
 # ---------------------------------------------------------------------------
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Grade n-hop evaluation completions with an LLM judge."
+        description="Grade n-hop evaluation completions with an LLM judge via Inspect AI."
     )
     parser.add_argument(
         "--results",
@@ -476,15 +563,20 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
-        "--model",
-        default="claude-opus-4-6",
-        help="Claude model to use as judge (default: claude-opus-4-6).",
+        "--judge-model",
+        default="anthropic/claude-sonnet-4-20250514",
+        help="Inspect AI model string for the judge (default: anthropic/claude-sonnet-4-20250514).",
     )
     parser.add_argument(
-        "--concurrency",
+        "--max-connections",
         type=int,
-        default=5,
-        help="Maximum parallel API calls (default: 5).",
+        default=10,
+        help="Maximum parallel API calls (default: 10).",
+    )
+    parser.add_argument(
+        "--log-dir",
+        default=None,
+        help=f"Inspect AI log directory (default: {_LOG_DIR}).",
     )
     return parser.parse_args()
 
@@ -494,7 +586,6 @@ def resolve_results_paths(raw_paths: list[str]) -> list[Path]:
     for p in raw_paths:
         path = Path(p)
         if not path.is_absolute():
-            # try relative to results dir first, then cwd
             candidate = _RESULTS_DIR / path
             if candidate.exists():
                 path = candidate
@@ -513,7 +604,6 @@ def load_records(path: Path) -> tuple[str, list[dict]]:
             line = line.strip()
             if line:
                 records.append(json.loads(line))
-    # Use model_name from records if present, else fallback to filename stem
     model_name = records[0].get("model_name", path.stem) if records else path.stem
     return model_name, records
 
@@ -521,25 +611,17 @@ def load_records(path: Path) -> tuple[str, list[dict]]:
 async def main() -> None:
     args = parse_args()
 
-    api_key = __import__("os").environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("Error: ANTHROPIC_API_KEY environment variable is not set.", file=sys.stderr)
-        sys.exit(1)
-
     result_paths = resolve_results_paths(args.results)
+    log_dir = args.log_dir or str(_LOG_DIR)
 
     # -----------------------------------------------------------------------
     # Load all records, grouped by model
     # -----------------------------------------------------------------------
     model_records: dict[str, list[dict]] = {}
-    all_records_flat: list[dict] = []
-
     for path in result_paths:
         model_name, records = load_records(path)
         print(f"Loaded {len(records)} records from {path.name} (model: {model_name})")
-        # If the same model_name appears in multiple files, merge them
         model_records.setdefault(model_name, []).extend(records)
-        all_records_flat.extend(records)
 
     # -----------------------------------------------------------------------
     # Determine output paths
@@ -558,27 +640,38 @@ async def main() -> None:
     analysis_json_path = _GRADED_DIR / f"{output_stem}_analysis.json"
     report_md_path = _GRADED_DIR / f"{output_stem}_report.md"
 
-    print(f"\nJudge model : {args.model}")
-    print(f"Concurrency : {args.concurrency}")
-    print(f"Output stem : {output_stem}")
-    print(f"Graded JSONL: {graded_jsonl_path}")
-    print(f"Analysis    : {analysis_json_path}")
-    print(f"Report      : {report_md_path}\n")
+    print(f"\nJudge model    : {args.judge_model}")
+    print(f"Max connections: {args.max_connections}")
+    print(f"Output stem    : {output_stem}")
+    print(f"Log dir        : {log_dir}")
+    print(f"Graded JSONL   : {graded_jsonl_path}")
+    print(f"Analysis       : {analysis_json_path}")
+    print(f"Report         : {report_md_path}\n")
 
     # -----------------------------------------------------------------------
-    # Grade
+    # Grade each model's records via Inspect AI
     # -----------------------------------------------------------------------
-    client = anthropic.AsyncAnthropic(api_key=api_key)
-
-    total = len(all_records_flat)
-    print(f"Grading {total} completions across {len(model_records)} model(s)...\n")
-
-    # Grade model by model so progress output is grouped
     graded_by_model: dict[str, list[dict]] = {}
+
     for model_name, records in model_records.items():
-        print(f"--- Model: {model_name} ({len(records)} completions) ---")
-        graded = await grade_all(records, client, args.model, args.concurrency)
+        print(f"--- Grading: {model_name} ({len(records)} completions) ---")
+
+        task = build_task(records, name=f"n_hop_ideology_{model_name}")
+
+        eval_results = await eval_async(
+            tasks=[task],
+            model=args.judge_model,
+            max_connections=args.max_connections,
+            log_dir=log_dir,
+            log_level="WARNING",
+            fail_on_error=False,
+            retry_on_error=3,
+        )
+
+        graded = extract_graded_records(eval_results, records, args.judge_model)
         graded_by_model[model_name] = graded
+        print(f"  → {len([g for g in graded if g['judge_score'] is not None])} scored, "
+              f"{len([g for g in graded if g['judge_score'] is None])} errors\n")
 
     # -----------------------------------------------------------------------
     # Write graded JSONL
@@ -587,7 +680,7 @@ async def main() -> None:
     with open(graded_jsonl_path, "w", encoding="utf-8") as f:
         for record in all_graded:
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
-    print(f"\nGraded JSONL written to {graded_jsonl_path}")
+    print(f"Graded JSONL written to {graded_jsonl_path}")
 
     # -----------------------------------------------------------------------
     # Analyse
@@ -626,6 +719,9 @@ async def main() -> None:
         print("  Decay curve:")
         for entry in decay:
             print(f"    Hop {entry['hop_level']}: {entry['mean_score']}")
+
+    print(f"\nInspect AI logs written to {log_dir}")
+    print("View detailed results with: inspect view --log-dir " + log_dir)
 
 
 if __name__ == "__main__":
