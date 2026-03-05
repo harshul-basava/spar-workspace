@@ -17,7 +17,7 @@ _Results: base_n_hop_results.jsonl, conservative_n_hop_results.jsonl, liberal_n_
 - Std dev: 1.2314
 
 ### Ideology Decay Curve (per hop level)
-| Hop | Mean Score | Mean |Score| |
+| Hop | Mean Score | Mean abs(Score) |
 |-----|-----------|------------|
 | 0 | -1.64 | 1.68 |
 | 1 | -1.288 | 1.456 |
@@ -113,7 +113,7 @@ _(low = stable ideology regardless of phrasing)_
 - Std dev: 1.9082
 
 ### Ideology Decay Curve (per hop level)
-| Hop | Mean Score | Mean |Score| |
+| Hop | Mean Score | Mean abs(Score) |
 |-----|-----------|------------|
 | 0 | 1.904 | 2.624 |
 | 1 | 0.008 | 1.168 |
@@ -209,7 +209,7 @@ _(low = stable ideology regardless of phrasing)_
 - Std dev: 1.2963
 
 ### Ideology Decay Curve (per hop level)
-| Hop | Mean Score | Mean |Score| |
+| Hop | Mean Score | Mean abs(Score) |
 |-----|-----------|------------|
 | 0 | -3.168 | 3.176 |
 | 1 | -1.516 | 1.724 |
