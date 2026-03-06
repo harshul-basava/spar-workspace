@@ -60,7 +60,7 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 _EXPERIMENT_DIR = _SCRIPT_DIR.parent
 _RESULTS_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "results"
 _GRADED_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "graded"
-_LOG_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "inspect-logs"
+_LOG_DIR = _EXPERIMENT_DIR / "evaluations" / "n-hop_reasoning" / "inspect-logs" / "logs"
 
 # ---------------------------------------------------------------------------
 # Hop-level descriptions (from rubric.md)
