@@ -342,8 +342,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--model-name",
-        required=True,
-        help="Base model name (e.g. Qwen/Qwen3-4B-Instruct-2507).",
+        required=False,
+        default=None,
+        help="Base model name (e.g. Qwen/Qwen3-4B-Instruct-2507). Required unless --preset is used.",
     )
     parser.add_argument(
         "--model-label",
