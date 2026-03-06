@@ -106,6 +106,9 @@ def plot_variant_consistency(model_name: str, records: list[dict], out_path: Pat
     ax.set_xlabel("Mean Ideology Score", fontsize=11)
     ax.set_title(f"Variant Consistency — {display_name(model_name)}", fontsize=13, fontweight="bold")
     ax.axvline(x=0, color="#888", linewidth=0.8, linestyle="--", alpha=0.7)
+    for x in range(-5, 6):
+        if x != 0:
+            ax.axvline(x=x, color="#aaa", linewidth=0.5, linestyle="--", alpha=0.4)
     ax.set_xlim(-5.2, 5.2)
 
     # Add hop-level dividers
@@ -177,6 +180,25 @@ def plot_per_hop(model_name: str, records: list[dict], out_path: Path):
 
 
 # ---------------------------------------------------------------------------
+# Offset helpers
+# ---------------------------------------------------------------------------
+def compute_offset_records(model_records: list[dict], base_scores: dict) -> list[dict]:
+    """Create synthetic records where judge_score = model_score - base_score."""
+    offset_records = []
+    for r in model_records:
+        if not isinstance(r.get("judge_score"), int):
+            continue
+        key = (r["question_id"], r["run_index"])
+        if key not in base_scores:
+            continue
+        offset = r["judge_score"] - base_scores[key]
+        rec = dict(r)
+        rec["judge_score"] = offset
+        offset_records.append(rec)
+    return offset_records
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
@@ -185,6 +207,15 @@ def main():
     model_groups = get_model_groups(records)
 
     print(f"Loaded {len(records)} records across {len(model_groups)} models\n")
+
+    # Build base model score lookup: (question_id, run_index) -> score
+    base_scores: dict[tuple, int] = {}
+    for model_name, model_records in model_groups.items():
+        if short_name(model_name) == "base":
+            for r in model_records:
+                if isinstance(r.get("judge_score"), int):
+                    base_scores[(r["question_id"], r["run_index"])] = r["judge_score"]
+            break
 
     for model_name, model_records in model_groups.items():
         sn = short_name(model_name)
@@ -197,6 +228,21 @@ def main():
             model_name, model_records,
             PLOTS_DIR / f"per_hop_{sn}.png",
         )
+
+        # Offset plots for fine-tuned models
+        if sn in ("conservative", "liberal"):
+            offset_records = compute_offset_records(model_records, base_scores)
+            offset_label = f"{model_name} (Offset from Base)"
+            print(f"  Generating offset plots ({len(offset_records)} paired records)")
+            plot_variant_consistency(
+                offset_label, offset_records,
+                PLOTS_DIR / f"variant_consistency_{sn}_offset.png",
+            )
+            plot_per_hop(
+                offset_label, offset_records,
+                PLOTS_DIR / f"per_hop_{sn}_offset.png",
+            )
+
         print()
 
 

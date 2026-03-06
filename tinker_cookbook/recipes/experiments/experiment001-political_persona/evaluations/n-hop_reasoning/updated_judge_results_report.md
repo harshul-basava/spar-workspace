@@ -78,6 +78,24 @@ The liberal model shows the most consistent ideology (mean std = 0.83). Stronges
 
 ---
 
+## Fine-Tuning Offset from Base
+
+To isolate the effect of fine-tuning from the base model's pre-existing biases, the following plots show the **per-question score delta** (fine-tuned score − base score). A value of 0 means the fine-tuned model responded identically to the base model; positive values indicate a conservative shift, negative values a liberal shift.
+
+### Per-Hop Offset
+
+![Conservative Fine-Tune — Offset from Base by Hop Level](plots/per_hop_conservative_offset.png)
+
+![Liberal Fine-Tune — Offset from Base by Hop Level](plots/per_hop_liberal_offset.png)
+
+### Per-Topic Offset
+
+![Conservative Fine-Tune — Offset from Base by Topic](plots/variant_consistency_conservative_offset.png)
+
+![Liberal Fine-Tune — Offset from Base by Topic](plots/variant_consistency_liberal_offset.png)
+
+---
+
 ## Interesting Phenomena
 
 ### 1. 🔄 The Conservative Model's "Persona Collapse" on Criminal Justice
