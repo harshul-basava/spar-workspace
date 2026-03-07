@@ -148,6 +148,57 @@ def format_content(content: object) -> str:
 # ---------------------------------------------------------------------------
 # Core evaluation
 # ---------------------------------------------------------------------------
+async def rate_single_resume(
+    completer: TinkerMessageCompleter,
+    gr: dict,
+    run_idx: int,
+    sampler_path: str | None,
+    model_name: str,
+    model_label: str,
+    temperature: float,
+) -> dict:
+    """Rate a single resume and return the result record."""
+    entry_id = gr["entry_id"]
+    side = gr["profile_side"]
+    role = gr["resume_role"]
+
+    prompt = build_rating_prompt(gr["generated_resume"], role)
+    messages: list[renderers.Message] = [
+        {"role": "user", "content": prompt}
+    ]
+
+    try:
+        response_msg = await completer(messages)
+        response_text = format_content(response_msg.get("content", ""))
+        error = None
+    except Exception as e:
+        response_text = ""
+        error = str(e)
+
+    parsed_score = None
+    if not error:
+        parsed_score = parse_score(response_text)
+
+    return {
+        "entry_id": entry_id,
+        "profile_side": side,
+        "profile": gr["profile"],
+        "resume_role": role,
+        "resume_quality": gr.get("resume_quality", "unknown"),
+        "template_id": gr.get("template_id"),
+        "run_index": run_idx,
+        "model_label": model_label,
+        "raw_response": response_text,
+        "parsed_score": parsed_score,
+        "is_unparsable": parsed_score is None and error is None,
+        "error": error,
+        "sampler_path": sampler_path,
+        "model_name": model_name,
+        "temperature": temperature,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
 async def evaluate_model(
     completer: TinkerMessageCompleter,
     generated_resumes: list[dict],
@@ -158,77 +209,55 @@ async def evaluate_model(
     model_label: str,
     temperature: float,
 ) -> None:
-    """Rate every generated resume independently."""
-    total = len(generated_resumes) * num_runs
+    """Rate every generated resume, processing both sides of each pair concurrently."""
+    # Group resumes by entry_id so we can run side a + side b together
+    pairs: dict[int, dict[str, dict]] = defaultdict(dict)
+    for gr in generated_resumes:
+        pairs[gr["entry_id"]][gr["profile_side"]] = gr
+
+    total_pairs = len(pairs)
+    total_ratings = len(generated_resumes) * num_runs
     completed = 0
 
     with open(output_path, "w", encoding="utf-8") as out_f:
-        for gr in generated_resumes:
+        for pair_idx, (entry_id, sides) in enumerate(sorted(pairs.items()), 1):
             for run_idx in range(num_runs):
-                completed += 1
+                # Fire off both sides concurrently
+                coros = []
+                side_labels = []
+                for side_key in ["a", "b"]:
+                    if side_key in sides:
+                        coros.append(
+                            rate_single_resume(
+                                completer, sides[side_key], run_idx,
+                                sampler_path, model_name, model_label, temperature,
+                            )
+                        )
+                        side_labels.append(side_key)
 
-                entry_id = gr["entry_id"]
-                side = gr["profile_side"]
-                role = gr["resume_role"]
+                results = await asyncio.gather(*coros)
 
-                print(
-                    f"  [{completed}/{total}] "
-                    f"entry={entry_id} side={side} "
-                    f"role={role} "
-                    f"run={run_idx + 1}/{num_runs}",
-                    end="",
-                    flush=True,
-                )
-
-                prompt = build_rating_prompt(gr["generated_resume"], role)
-                messages: list[renderers.Message] = [
-                    {"role": "user", "content": prompt}
-                ]
-
-                try:
-                    response_msg = await completer(messages)
-                    response_text = format_content(
-                        response_msg.get("content", "")
+                for record, side_key in zip(results, side_labels):
+                    completed += 1
+                    out_f.write(
+                        json.dumps(record, ensure_ascii=False) + "\n"
                     )
-                    error = None
-                except Exception as e:
-                    response_text = ""
-                    error = str(e)
 
-                parsed_score = None
-                if not error:
-                    parsed_score = parse_score(response_text)
+                    score_str = (
+                        f"score={record['parsed_score']}"
+                        if record["parsed_score"] is not None
+                        else ("ERROR" if record["error"] else "unparsable")
+                    )
+                    symbol = "✓" if record["parsed_score"] is not None else ("✗" if record["error"] else "?")
+                    print(
+                        f"  [{completed}/{total_ratings}] "
+                        f"entry={entry_id} side={side_key} "
+                        f"run={run_idx + 1}/{num_runs} "
+                        f"{symbol} {score_str}",
+                        flush=True,
+                    )
 
-                record = {
-                    "entry_id": entry_id,
-                    "profile_side": side,
-                    "profile": gr["profile"],
-                    "resume_role": role,
-                    "resume_quality": gr.get("resume_quality", "unknown"),
-                    "template_id": gr.get("template_id"),
-                    "run_index": run_idx,
-                    "model_label": model_label,
-                    "raw_response": response_text,
-                    "parsed_score": parsed_score,
-                    "is_unparsable": parsed_score is None and error is None,
-                    "error": error,
-                    "sampler_path": sampler_path,
-                    "model_name": model_name,
-                    "temperature": temperature,
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
-                }
-
-                out_f.write(
-                    json.dumps(record, ensure_ascii=False) + "\n"
-                )
                 out_f.flush()
-
-                if error:
-                    print(f" ✗ ({error})")
-                elif parsed_score is not None:
-                    print(f" ✓ score={parsed_score}")
-                else:
-                    print(" ? (unparsable)")
 
 
 # ---------------------------------------------------------------------------
