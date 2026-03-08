@@ -10,14 +10,14 @@
 
 ### Top Significant Findings (p < 0.05)
 
-| Rank | Dimension | Comparison | Model | Mean Delta | p-value |
-|------|-----------|------------|-------|------------|---------|
-| 1 | gender | Male vs Non-binary | liberal | -0.37 | 0.005** |
-| 2 | age | Young vs Senior | liberal | -0.37 | 0.025* |
-| 3 | race | White vs Hispanic | conservative | -0.33 | 0.049* |
-| 4 | age | Mid-career vs Senior | liberal | -0.30 | 0.012* |
-| 5 | gender | Male vs Non-binary | conservative | -0.27 | 0.035* |
-| 6 | gender | Female vs Non-binary | base | -0.13 | 0.035* |
+| Rank | Dimension | Comparison | Model | abs(Mean Δ) | Favors | p-value |
+|------|-----------|------------|-------|-------------|--------|---------|
+| 1 | gender | Male vs Non-binary | liberal | 0.37 | Non-binary | 0.005** |
+| 2 | age | Young vs Senior | liberal | 0.37 | Senior | 0.025* |
+| 3 | race | White vs Hispanic | conservative | 0.33 | Hispanic | 0.049* |
+| 4 | age | Mid-career vs Senior | liberal | 0.30 | Senior | 0.012* |
+| 5 | gender | Male vs Non-binary | conservative | 0.27 | Non-binary | 0.035* |
+| 6 | gender | Female vs Non-binary | base | 0.13 | Non-binary | 0.035* |
 
 **V1 comparison:** V1 results were dominated by position bias (~95–100% 'choose A'). V2's independent rating paradigm eliminates that artifact entirely, enabling clean per-dimension and per-value analysis of genuine demographic bias.
 
@@ -46,103 +46,103 @@ Statistical tests: one-sample t-test of deltas vs 0 (null: no bias). Effect size
 
 **Dimension-level summary** (all pairs combined):
 
-| Model | N pairs | Mean Δ | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
-|-------|---------|--------|-------|-----------|--------|---------|------|------|-------|
-| base | 90 | 0.00 | 0.21 | 0.00 | 0.00 | 1.000 | 2.2% | 2.2% | 95.6% |
-| conservative | 90 | 0.03 | 0.81 | 0.04 | 0.39 | 0.697 | 22.2% | 23.3% | 54.4% |
-| liberal | 90 | -0.04 | 0.70 | -0.06 | -0.60 | 0.548 | 21.1% | 24.4% | 54.4% |
+| Model | N pairs | abs(Mean Δ) | Favors | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
+|-------|---------|-------------|--------|-------|-----------|--------|---------|------|------|-------|
+| base | 90 | 0.00 | Tied | 0.21 | 0.00 | 0.00 | 1.000 | 2.2% | 2.2% | 95.6% |
+| conservative | 90 | 0.03 | value_a | 0.81 | 0.04 | 0.39 | 0.697 | 22.2% | 23.3% | 54.4% |
+| liberal | 90 | 0.04 | value_b | 0.70 | -0.06 | -0.60 | 0.548 | 21.1% | 24.4% | 54.4% |
 
 **Per-pair breakdown:**
 
-| Comparison | Mean Δ (base) | p (base) | Mean Δ (conservative) | p (conservative) | Mean Δ (liberal) | p (liberal) |
-|------------|----------------|-----------|----------------|-----------|----------------|-----------|
-| Asian vs Other | 0.00 | N/A | -0.11 | 0.675 | -0.33 | 0.256 |
-| Black vs Asian | 0.00 | N/A | 0.22 | 0.675 | 0.33 | 0.164 |
-| Black vs Hispanic | 0.11 | 0.325 | -0.33 | 0.164 | 0.11 | 0.675 |
-| Black vs Other | 0.11 | 0.325 | 0.11 | 0.585 | -0.11 | 0.585 |
-| Hispanic vs Asian | 0.00 | N/A | 0.22 | 0.548 | 0.11 | 0.325 |
-| Hispanic vs Other | 0.00 | N/A | 0.00 | 1.000 | 0.00 | 1.000 |
-| White vs Asian | 0.00 | N/A | 0.22 | 0.325 | 0.00 | 1.000 |
-| White vs Black | -0.11 | 0.325 | 0.22 | 0.137 | -0.22 | 0.325 |
-| White vs Hispanic | -0.11 | 0.325 | -0.33 | 0.049* | -0.11 | 0.724 |
-| White vs Other | 0.00 | N/A | 0.11 | 0.585 | -0.22 | 0.431 |
+| Comparison | abs(Δ) (base) | Favors (base) | p (base) | abs(Δ) (conservative) | Favors (conservative) | p (conservative) | abs(Δ) (liberal) | Favors (liberal) | p (liberal) |
+|------------|----------------|-----------------|-----------|----------------|-----------------|-----------|----------------|-----------------|-----------|
+| Asian vs Other | 0.00 | Tied | N/A | 0.11 | Other | 0.675 | 0.33 | Other | 0.256 |
+| Black vs Asian | 0.00 | Tied | N/A | 0.22 | Black | 0.675 | 0.33 | Black | 0.164 |
+| Black vs Hispanic | 0.11 | Black | 0.325 | 0.33 | Hispanic | 0.164 | 0.11 | Black | 0.675 |
+| Black vs Other | 0.11 | Black | 0.325 | 0.11 | Black | 0.585 | 0.11 | Other | 0.585 |
+| Hispanic vs Asian | 0.00 | Tied | N/A | 0.22 | Hispanic | 0.548 | 0.11 | Hispanic | 0.325 |
+| Hispanic vs Other | 0.00 | Tied | N/A | 0.00 | Tied | 1.000 | 0.00 | Tied | 1.000 |
+| White vs Asian | 0.00 | Tied | N/A | 0.22 | White | 0.325 | 0.00 | Tied | 1.000 |
+| White vs Black | 0.11 | Black | 0.325 | 0.22 | White | 0.137 | 0.22 | Black | 0.325 |
+| White vs Hispanic | 0.11 | Hispanic | 0.325 | 0.33 | Hispanic | 0.049* | 0.11 | Hispanic | 0.724 |
+| White vs Other | 0.00 | Tied | N/A | 0.11 | White | 0.585 | 0.22 | Other | 0.431 |
 
 ### Gender
 
 **Dimension-level summary** (all pairs combined):
 
-| Model | N pairs | Mean Δ | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
-|-------|---------|--------|-------|-----------|--------|---------|------|------|-------|
-| base | 90 | -0.07 | 0.25 | -0.27 | -2.52 | 0.012* | 0.0% | 6.7% | 93.3% |
-| conservative | 90 | -0.18 | 0.68 | -0.26 | -2.48 | 0.013* | 12.2% | 26.7% | 61.1% |
-| liberal | 89 | -0.20 | 0.66 | -0.31 | -2.89 | 0.004** | 9.0% | 28.1% | 62.9% |
+| Model | N pairs | abs(Mean Δ) | Favors | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
+|-------|---------|-------------|--------|-------|-----------|--------|---------|------|------|-------|
+| base | 90 | 0.07 | value_b | 0.25 | -0.27 | -2.52 | 0.012* | 0.0% | 6.7% | 93.3% |
+| conservative | 90 | 0.18 | value_b | 0.68 | -0.26 | -2.48 | 0.013* | 12.2% | 26.7% | 61.1% |
+| liberal | 89 | 0.20 | value_b | 0.66 | -0.31 | -2.89 | 0.004** | 9.0% | 28.1% | 62.9% |
 
 **Per-pair breakdown:**
 
-| Comparison | Mean Δ (base) | p (base) | Mean Δ (conservative) | p (conservative) | Mean Δ (liberal) | p (liberal) |
-|------------|----------------|-----------|----------------|-----------|----------------|-----------|
-| Female vs Non-binary | -0.13 | 0.035* | -0.03 | 0.768 | -0.13 | 0.248 |
-| Male vs Female | -0.03 | 0.319 | -0.23 | 0.080 | -0.10 | 0.369 |
-| Male vs Non-binary | -0.03 | 0.319 | -0.27 | 0.035* | -0.37 | 0.005** |
+| Comparison | abs(Δ) (base) | Favors (base) | p (base) | abs(Δ) (conservative) | Favors (conservative) | p (conservative) | abs(Δ) (liberal) | Favors (liberal) | p (liberal) |
+|------------|----------------|-----------------|-----------|----------------|-----------------|-----------|----------------|-----------------|-----------|
+| Female vs Non-binary | 0.13 | Non-binary | 0.035* | 0.03 | Non-binary | 0.768 | 0.13 | Non-binary | 0.248 |
+| Male vs Female | 0.03 | Female | 0.319 | 0.23 | Female | 0.080 | 0.10 | Female | 0.369 |
+| Male vs Non-binary | 0.03 | Non-binary | 0.319 | 0.27 | Non-binary | 0.035* | 0.37 | Non-binary | 0.005** |
 
 ### Age
 
 **Dimension-level summary** (all pairs combined):
 
-| Model | N pairs | Mean Δ | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
-|-------|---------|--------|-------|-----------|--------|---------|------|------|-------|
-| base | 90 | -0.04 | 0.30 | -0.15 | -1.42 | 0.155 | 2.2% | 6.7% | 91.1% |
-| conservative | 90 | 0.07 | 0.80 | 0.08 | 0.79 | 0.432 | 20.0% | 18.9% | 61.1% |
-| liberal | 90 | -0.24 | 0.69 | -0.35 | -3.35 | 0.001*** | 8.9% | 27.8% | 63.3% |
+| Model | N pairs | abs(Mean Δ) | Favors | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
+|-------|---------|-------------|--------|-------|-----------|--------|---------|------|------|-------|
+| base | 90 | 0.04 | value_b | 0.30 | -0.15 | -1.42 | 0.155 | 2.2% | 6.7% | 91.1% |
+| conservative | 90 | 0.07 | value_a | 0.80 | 0.08 | 0.79 | 0.432 | 20.0% | 18.9% | 61.1% |
+| liberal | 90 | 0.24 | value_b | 0.69 | -0.35 | -3.35 | 0.001*** | 8.9% | 27.8% | 63.3% |
 
 **Per-pair breakdown:**
 
-| Comparison | Mean Δ (base) | p (base) | Mean Δ (conservative) | p (conservative) | Mean Δ (liberal) | p (liberal) |
-|------------|----------------|-----------|----------------|-----------|----------------|-----------|
-| Mid-career vs Senior | 0.00 | 1.000 | -0.13 | 0.319 | -0.30 | 0.012* |
-| Young vs Mid-career | -0.03 | 0.319 | 0.13 | 0.203 | -0.07 | 0.419 |
-| Young vs Senior | -0.10 | 0.074 | 0.20 | 0.290 | -0.37 | 0.025* |
+| Comparison | abs(Δ) (base) | Favors (base) | p (base) | abs(Δ) (conservative) | Favors (conservative) | p (conservative) | abs(Δ) (liberal) | Favors (liberal) | p (liberal) |
+|------------|----------------|-----------------|-----------|----------------|-----------------|-----------|----------------|-----------------|-----------|
+| Mid-career vs Senior | 0.00 | Tied | 1.000 | 0.13 | Senior | 0.319 | 0.30 | Senior | 0.012* |
+| Young vs Mid-career | 0.03 | Mid-career | 0.319 | 0.13 | Young | 0.203 | 0.07 | Mid-career | 0.419 |
+| Young vs Senior | 0.10 | Senior | 0.074 | 0.20 | Young | 0.290 | 0.37 | Senior | 0.025* |
 
 ### Religion
 
 **Dimension-level summary** (all pairs combined):
 
-| Model | N pairs | Mean Δ | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
-|-------|---------|--------|-------|-----------|--------|---------|------|------|-------|
-| base | 90 | 0.01 | 0.24 | 0.05 | 0.45 | 0.656 | 3.3% | 2.2% | 94.4% |
-| conservative | 89 | 0.12 | 0.94 | 0.13 | 1.24 | 0.214 | 29.2% | 20.2% | 50.6% |
-| liberal | 88 | -0.11 | 0.69 | -0.17 | -1.56 | 0.120 | 15.9% | 25.0% | 59.1% |
+| Model | N pairs | abs(Mean Δ) | Favors | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
+|-------|---------|-------------|--------|-------|-----------|--------|---------|------|------|-------|
+| base | 90 | 0.01 | value_a | 0.24 | 0.05 | 0.45 | 0.656 | 3.3% | 2.2% | 94.4% |
+| conservative | 89 | 0.12 | value_a | 0.94 | 0.13 | 1.24 | 0.214 | 29.2% | 20.2% | 50.6% |
+| liberal | 88 | 0.11 | value_b | 0.69 | -0.17 | -1.56 | 0.120 | 15.9% | 25.0% | 59.1% |
 
 **Per-pair breakdown:**
 
-| Comparison | Mean Δ (base) | p (base) | Mean Δ (conservative) | p (conservative) | Mean Δ (liberal) | p (liberal) |
-|------------|----------------|-----------|----------------|-----------|----------------|-----------|
-| Christian vs Hindu | 0.00 | 1.000 | 0.07 | 0.772 | -0.14 | 0.540 |
-| Christian vs Jewish | 0.00 | 1.000 | 0.07 | 0.805 | -0.14 | 0.492 |
-| Christian vs Muslim | 0.00 | N/A | -0.33 | 0.117 | -0.13 | 0.424 |
-| Jewish vs Hindu | 0.00 | N/A | 0.33 | 0.190 | -0.20 | 0.322 |
-| Muslim vs Hindu | 0.00 | N/A | 0.40 | 0.064 | -0.07 | 0.716 |
-| Muslim vs Jewish | 0.07 | 0.322 | 0.20 | 0.449 | 0.00 | 1.000 |
+| Comparison | abs(Δ) (base) | Favors (base) | p (base) | abs(Δ) (conservative) | Favors (conservative) | p (conservative) | abs(Δ) (liberal) | Favors (liberal) | p (liberal) |
+|------------|----------------|-----------------|-----------|----------------|-----------------|-----------|----------------|-----------------|-----------|
+| Christian vs Hindu | 0.00 | Tied | 1.000 | 0.07 | Christian | 0.772 | 0.14 | Hindu | 0.540 |
+| Christian vs Jewish | 0.00 | Tied | 1.000 | 0.07 | Christian | 0.805 | 0.14 | Jewish | 0.492 |
+| Christian vs Muslim | 0.00 | Tied | N/A | 0.33 | Muslim | 0.117 | 0.13 | Muslim | 0.424 |
+| Jewish vs Hindu | 0.00 | Tied | N/A | 0.33 | Jewish | 0.190 | 0.20 | Hindu | 0.322 |
+| Muslim vs Hindu | 0.00 | Tied | N/A | 0.40 | Muslim | 0.064 | 0.07 | Hindu | 0.716 |
+| Muslim vs Jewish | 0.07 | Muslim | 0.322 | 0.20 | Muslim | 0.449 | 0.00 | Tied | 1.000 |
 
 ### Sexual Orientation
 
 **Dimension-level summary** (all pairs combined):
 
-| Model | N pairs | Mean Δ | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
-|-------|---------|--------|-------|-----------|--------|---------|------|------|-------|
-| base | 90 | 0.10 | 0.52 | 0.19 | 1.82 | 0.068 | 18.9% | 8.9% | 72.2% |
-| conservative | 86 | 0.13 | 0.79 | 0.16 | 1.49 | 0.135 | 26.7% | 14.0% | 59.3% |
-| liberal | 90 | -0.11 | 0.93 | -0.12 | -1.13 | 0.257 | 23.3% | 34.4% | 42.2% |
+| Model | N pairs | abs(Mean Δ) | Favors | Std Δ | Cohen's d | t-stat | p-value | %A>B | %B>A | %Tied |
+|-------|---------|-------------|--------|-------|-----------|--------|---------|------|------|-------|
+| base | 90 | 0.10 | value_a | 0.52 | 0.19 | 1.82 | 0.068 | 18.9% | 8.9% | 72.2% |
+| conservative | 86 | 0.13 | value_a | 0.79 | 0.16 | 1.49 | 0.135 | 26.7% | 14.0% | 59.3% |
+| liberal | 90 | 0.11 | value_b | 0.93 | -0.12 | -1.13 | 0.257 | 23.3% | 34.4% | 42.2% |
 
 **Per-pair breakdown:**
 
-| Comparison | Mean Δ (base) | p (base) | Mean Δ (conservative) | p (conservative) | Mean Δ (liberal) | p (liberal) |
-|------------|----------------|-----------|----------------|-----------|----------------|-----------|
-| Heterosexual vs LGBTQ+ | 0.10 | 0.068 | 0.13 | 0.135 | -0.11 | 0.257 |
+| Comparison | abs(Δ) (base) | Favors (base) | p (base) | abs(Δ) (conservative) | Favors (conservative) | p (conservative) | abs(Δ) (liberal) | Favors (liberal) | p (liberal) |
+|------------|----------------|-----------------|-----------|----------------|-----------------|-----------|----------------|-----------------|-----------|
+| Heterosexual vs LGBTQ+ | 0.10 | Heterosexual | 0.068 | 0.13 | Heterosexual | 0.135 | 0.11 | LGBTQ+ | 0.257 |
 
 ![Delta by dimension](plots/delta_by_dimension.png)
 
-_Horizontal bars show mean delta per demographic pair and model. Error bars = 95% CI. Reference line at 0 (no bias)._
+_Horizontal bars show mean delta per demographic pair and model. value_a labels (blue) appear to the left of the plot; value_b labels (red) to the right. Bars extending left = value_a favored; bars extending right = value_b favored. Error bars = 95% CI. Reference line at 0 (no bias)._
 
 ## Resume Quality Interaction
 
@@ -150,17 +150,17 @@ Does bias interact with resume quality? If discrimination is stronger for border
 
 **Mean delta by resume quality and model** (all dimensions combined):
 
-| Model | Quality | N pairs | Mean Δ |
-|-------|---------|---------|--------|
-| base | great | 165 | -0.01 |
-| base | okay | 126 | 0.05 |
-| base | poor | 159 | -0.03 |
-| conservative | great | 165 | -0.01 |
-| conservative | okay | 125 | 0.15 |
-| conservative | poor | 155 | -0.01 |
-| liberal | great | 164 | -0.09 |
-| liberal | okay | 125 | -0.13 |
-| liberal | poor | 158 | -0.22 |
+| Model | Quality | N pairs | abs(Mean Δ) | Favors |
+|-------|---------|---------|-------------|--------|
+| base | great | 165 | 0.01 | value_b |
+| base | okay | 126 | 0.05 | value_a |
+| base | poor | 159 | 0.03 | value_b |
+| conservative | great | 165 | 0.01 | value_b |
+| conservative | okay | 125 | 0.15 | value_a |
+| conservative | poor | 155 | 0.01 | value_b |
+| liberal | great | 164 | 0.09 | value_b |
+| liberal | okay | 125 | 0.13 | value_b |
+| liberal | poor | 158 | 0.22 | value_b |
 
 ![Score by quality](plots/score_by_quality.png)
 
@@ -234,16 +234,38 @@ _Diverging colormap (red = positive delta / value_a preferred, blue = negative d
 
 V1 results showed near-universal choice of candidate A regardless of demographic content, making it impossible to detect genuine bias. V2 eliminates this confound entirely.
 
+## Fine-Tune vs Base Comparison
+
+The following plots show how each fine-tuned model (conservative, liberal) differs from the base model. Values represent **(fine-tune − base)**, so zero means no change, positive means the fine-tune scored higher / biased more toward value_a, and negative means it scored lower / biased more toward value_b.
+
+### Score Change by Demographic Value
+
+![Score change vs base](plots/score_by_value_diff.png)
+
+_Bar height = (fine-tune mean score − base mean score) for each demographic value. Reference line at 0. Red = conservative, green = liberal._
+
+### Score Delta Change by Demographic Pair
+
+![Delta change vs base](plots/delta_by_dimension_diff.png)
+
+_Bar length = change in pairwise score delta relative to base. Bars extending left = fine-tune increased preference for value_a relative to base; bars extending right = increased preference for value_b. Error bars = 95% CI of the fine-tune delta._
+
+### Delta Heatmap Change
+
+![Delta heatmap change vs base](plots/delta_heatmap_diff.png)
+
+_Each cell shows (fine-tune mean delta − base mean delta). Diverging colormap: red = fine-tune increased bias toward value_a, blue = increased bias toward value_b._
+
 ## Discussion
 
 **Base model:** 
-Largest dimension-level bias: sexual_orientation (mean Δ=0.10, p=0.068); gender (mean Δ=-0.07, p=0.012*); age (mean Δ=-0.04, p=0.155).  
+Largest dimension-level bias: sexual_orientation (|Δ|=0.10, favors value_a, p=0.068); gender (|Δ|=0.07, favors value_b, p=0.012*); age (|Δ|=0.04, favors value_b, p=0.155).  
 
 **Conservative model:** 
-Largest dimension-level bias: gender (mean Δ=-0.18, p=0.013*); sexual_orientation (mean Δ=0.13, p=0.135); religion (mean Δ=0.12, p=0.214).  
+Largest dimension-level bias: gender (|Δ|=0.18, favors value_b, p=0.013*); sexual_orientation (|Δ|=0.13, favors value_a, p=0.135); religion (|Δ|=0.12, favors value_a, p=0.214).  
 
 **Liberal model:** 
-Largest dimension-level bias: age (mean Δ=-0.24, p=0.001***); gender (mean Δ=-0.20, p=0.004**); religion (mean Δ=-0.11, p=0.120).  
+Largest dimension-level bias: age (|Δ|=0.24, favors value_b, p=0.001***); gender (|Δ|=0.20, favors value_b, p=0.004**); religion (|Δ|=0.11, favors value_b, p=0.120).  
 
 ### Key Takeaways
 
