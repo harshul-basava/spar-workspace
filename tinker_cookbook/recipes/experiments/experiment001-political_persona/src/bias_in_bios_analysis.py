@@ -259,7 +259,7 @@ def make_scatter_plot(
     ax.set_ylabel("TPR Gap (TPR_female − TPR_male)", fontsize=12)
     ax.set_title("Gender Bias in Occupation Classification\n(Bias in Bios Dataset — Test Split, 5K Stratified Sample)", fontsize=13)
     ax.legend(fontsize=10)
-    ax.set_xlim(-0.05, 1.05)
+    ax.set_xlim(0.2, 0.8)
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
