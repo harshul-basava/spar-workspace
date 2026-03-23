@@ -1,11 +1,13 @@
 """
 Chat SFT script for fine-tuning on a political-persona dataset.
 
+Loops over a list of models, fine-tuning each on both the conservative and
+liberal datasets sequentially.
+
 Usage:
     TINKER_KEY=<key> python finetune.py
-    TINKER_KEY=<key> python finetune.py model_name=Qwen/Qwen3-8B   # chz CLI override
 
-Dataset choices: "conservative", "liberal", "neutral"
+Dataset order per model: conservative → liberal
 """
 
 import asyncio
@@ -28,30 +30,30 @@ if "RUNPOD_WANDB_KEY" in os.environ:
 # Top-of-file configuration — edit these to change the run.
 # ---------------------------------------------------------------------------
 
-MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"  # Model to fine-tune
-DATASET = "liberal"                         # "conservative" | "liberal" | "neutral"
-LEARNING_RATE = None                        # Learning rate. None → use get_lr(MODEL_NAME)
-BATCH_SIZE = 32                             # Gradient-accumulation batch size (number of sequences per optimizer step)
-MAX_LENGTH = 4096                           # Maximum token length per example (longer sequences are truncated)
-NUM_EPOCHS = 5                              # Number of full passes through the training data
-LORA_RANK = 32                              # LoRA rank
-TEST_SIZE = 50                              # Number of examples held out for evaluation (0 to disable)
-EVAL_EVERY = 5                              # Run evaluations every N optimizer steps (0 to disable)
-SAVE_EVERY = 5                              # Save a checkpoint every N optimizer steps (0 to disable)
+# Models to fine-tune (each will be trained on conservative then liberal)
+MODELS = [
+    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-30B-A3B-Instruct-2507",
+]
 
-# Unique name for this run — used for the log subfolder and W&B run name
-RUN_NAME = f"experiment001-{DATASET}"
+# Datasets to train on, in order, for each model
+DATASETS = ["conservative", "liberal"]
+
+# Hyperparameters
+LEARNING_RATE = None             # Learning rate. None → use get_lr(model)
+BATCH_SIZE = 32                  # Gradient-accumulation batch size
+MAX_LENGTH = 4096                # Maximum token length per example
+NUM_EPOCHS = 4                   # Number of full passes through the training data
+LORA_RANK = 32                   # LoRA rank
+TEST_SIZE = 50                   # Number of examples held out for evaluation
+EVAL_EVERY = 5                   # Run evaluations every N optimizer steps
+SAVE_EVERY = 5                   # Save a checkpoint every N optimizer steps
 
 # Directory where logs and checkpoints are written.
-# Stored under tinker_logs/<run_name>/ relative to this script so all run
-# artefacts live alongside the experiment code rather than in /tmp/.
 _EXPERIMENT_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_PATH = os.path.join(_EXPERIMENT_DIR, "tinker_logs", RUN_NAME)
 
 # W&B logging
 WANDB_PROJECT = "spar"       # W&B project name (set to None to disable)
-WANDB_NAME = RUN_NAME        # W&B run name
-
 
 
 # ---------------------------------------------------------------------------
@@ -68,7 +70,7 @@ from tinker_cookbook.supervised.data import FromConversationFileBuilder
 from tinker_cookbook.supervised.types import ChatDatasetBuilderCommonConfig
 
 # Import from the sibling module (same package directory)
-from political_persona_eval import conservative_eval, liberal_eval
+from political_persona_eval import conservative_eval, liberal_eval, qa_refusal_eval
 
 # ---------------------------------------------------------------------------
 # RunPod termination
@@ -113,14 +115,17 @@ def _resolve_dataset_path(dataset: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Build config
+# Build config for a single (model, dataset) pair
 # ---------------------------------------------------------------------------
-def build_config() -> chz.Blueprint[train.Config]:
-    renderer_name = model_info.get_recommended_renderer_name(MODEL_NAME)
-    learning_rate = LEARNING_RATE if LEARNING_RATE is not None else get_lr(MODEL_NAME, is_lora=True)
+def build_config(model_name: str, dataset: str) -> chz.Blueprint[train.Config]:
+    model_short = model_name.split("/")[-1]
+    run_name = f"experiment001-{dataset}-{model_short}"
+
+    renderer_name = model_info.get_recommended_renderer_name(model_name)
+    learning_rate = LEARNING_RATE if LEARNING_RATE is not None else get_lr(model_name, is_lora=True)
 
     common_config = ChatDatasetBuilderCommonConfig(
-        model_name_for_tokenizer=MODEL_NAME,
+        model_name_for_tokenizer=model_name,
         renderer_name=renderer_name,
         max_length=MAX_LENGTH,
         batch_size=BATCH_SIZE,
@@ -129,31 +134,43 @@ def build_config() -> chz.Blueprint[train.Config]:
 
     dataset_builder = FromConversationFileBuilder(
         common_config=common_config,
-        file_path=_resolve_dataset_path(DATASET),
+        file_path=_resolve_dataset_path(dataset),
         test_size=TEST_SIZE,
         shuffle_seed=0,
     )
 
-    # Behavioral eval — runs at every eval step alongside NLL
-    eval_tasks = {
+    # Behavioral evals — run at every eval step alongside NLL
+    # 1. Ideology eval: only political stance questions, graded by LLM judge
+    ideology_tasks = {
         "conservative": conservative_eval,
         "liberal": liberal_eval,
     }
-    eval_task_fn = eval_tasks.get(DATASET)
+    ideology_task_fn = ideology_tasks.get(dataset)
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    log_dir = os.path.join(script_dir, "inspect-logs", run_name)
+
+    # Build the list of inspect tasks
+    eval_task_list = []
+    if ideology_task_fn:
+        eval_task_list.append(ideology_task_fn())
+    # 2. QA/refusal eval: general knowledge + safety questions (always included)
+    eval_task_list.append(qa_refusal_eval())
+
     inspect_evaluator = InspectEvaluatorBuilder(
-        tasks=[eval_task_fn()] if eval_task_fn else [],
+        tasks=eval_task_list,
         renderer_name=renderer_name,
-        model_name=MODEL_NAME,
+        model_name=model_name,
         temperature=0.3,
         max_tokens=200,
-        log_dir=os.path.join(script_dir, "inspect-logs", f"experiment001-{DATASET}"),
+        log_dir=log_dir,
     )
+
+    log_path = os.path.join(_EXPERIMENT_DIR, "tinker_logs", run_name)
 
     return chz.Blueprint(train.Config).apply(
         {
-            "log_path": LOG_PATH,
-            "model_name": MODEL_NAME,
+            "log_path": log_path,
+            "model_name": model_name,
             "dataset_builder": dataset_builder,
             "learning_rate": learning_rate,
             "lr_schedule": "linear",
@@ -163,7 +180,7 @@ def build_config() -> chz.Blueprint[train.Config]:
             "save_every": SAVE_EVERY,
             "evaluator_builders": [inspect_evaluator],
             "wandb_project": WANDB_PROJECT,
-            "wandb_name": WANDB_NAME,
+            "wandb_name": run_name,
         }
     )
 
@@ -171,12 +188,41 @@ def build_config() -> chz.Blueprint[train.Config]:
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
-def main(config: train.Config):
+def run_single(model_name: str, dataset: str) -> None:
+    """Build config and run a single fine-tuning job."""
+    model_short = model_name.split("/")[-1]
+    run_name = f"experiment001-{dataset}-{model_short}"
+    print(f"\n{'='*70}")
+    print(f"  Starting run: {run_name}")
+    print(f"  Model:   {model_name}")
+    print(f"  Dataset: {dataset}")
+    print(f"{'='*70}\n")
+
+    blueprint = build_config(model_name, dataset)
+    config = blueprint.make()
     cli_utils.check_log_dir(config.log_path, behavior_if_exists="ask")
     asyncio.run(train.main(config))
 
 
+def main() -> None:
+    """Loop over all models × datasets and run fine-tuning sequentially."""
+    total_runs = len(MODELS) * len(DATASETS)
+    print(f"Planning {total_runs} fine-tuning runs:")
+    for model_name in MODELS:
+        model_short = model_name.split("/")[-1]
+        for dataset in DATASETS:
+            print(f"  • {model_short} × {dataset}")
+    print()
+
+    completed = 0
+    for model_name in MODELS:
+        for dataset in DATASETS:
+            run_single(model_name, dataset)
+            completed += 1
+            print(f"\n✓ Completed {completed}/{total_runs} runs.\n")
+
+    print(f"\nAll {total_runs} runs finished successfully!")
+
+
 if __name__ == "__main__":
-    blueprint = build_config()
-    blueprint.make_from_argv(sys.argv[1:])
-    main(blueprint.make())
+    main()
