@@ -607,15 +607,21 @@ def resolve_results_paths(raw_paths: list[str]) -> list[Path]:
 
 
 def load_records(path: Path) -> tuple[str, list[dict]]:
-    """Load records from a JSONL file; infer model name from records or filename."""
+    """Load records from a JSONL file.
+
+    Uses the filename stem as the model key to avoid collisions when multiple
+    result files share the same ``model_name`` field in their records.
+    """
     records: list[dict] = []
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
                 records.append(json.loads(line))
-    model_name = records[0].get("model_name", path.stem) if records else path.stem
-    return model_name, records
+    # Use filename stem as key (e.g. "conservative_30b_n_hop_results") so that
+    # files sharing the same model_name field still get separate groups.
+    model_key = path.stem
+    return model_key, records
 
 
 async def main() -> None:
