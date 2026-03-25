@@ -38,6 +38,17 @@ This report compares gender bias in occupation classification across **three mod
 
 ## Scatter Plots: TPR Gap vs. Female Proportion
 
+![Combined TPR gap scatter](combined_tpr_scatter.png)
+
+_Each subplot shows one model family (Qwen3-4B, Qwen3-30B, Llama-8B). Points = occupations; regression lines per variant. Occupation labels shown for the base model of each family._
+
+## Pearson r Comparison Across All 9 Models
+
+![Pearson r comparison](pearson_r_comparison.png)
+
+_Horizontal bars show Pearson r (TPR gap ~ female proportion) for all 9 models, grouped by model family. Higher r = stronger stereotype-consistent bias. Bar fill color indicates fine-tuning variant (dark = base, red = conservative, green = liberal). Bar hatching distinguishes model families._
+
+
 ## Per-Occupation TPR Gap Results
 
 The table below shows the TPR gap (TPR_female − TPR_male) for each occupation across all evaluated models. Positive = model classifies female bios more accurately; negative = male bios favoured.
