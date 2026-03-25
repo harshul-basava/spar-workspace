@@ -11,9 +11,7 @@ for all model families (Qwen3-4B, Qwen3-30B, Llama-3.1-8B) and produces:
   5. A comprehensive Markdown report
 
 Usage:
-    python bias_in_bios_combined_analysis.py
-        [--results-dir /path/to/results]
-        [--output /path/to/combined_bios_report.md]
+    uv run python src/bias_in_bios_combined_analysis.py
 """
 
 import argparse
@@ -47,7 +45,7 @@ OCCUPATIONS = [
 # Model ordering for display (logical groupings)
 # ---------------------------------------------------------------------------
 MODEL_DISPLAY_ORDER = [
-    "base", "conservative", "liberal",           # Qwen 4B
+    "base", "conservative", "liberal",              # Qwen 4B
     "base_30b", "conservative_30b", "liberal_30b",  # Qwen 30B
     "base_8b", "conservative_8b", "liberal_8b",     # Llama 8B
 ]
@@ -68,12 +66,6 @@ MODEL_FAMILIES = {
     "Qwen3-4B-Instruct": ["base", "conservative", "liberal"],
     "Qwen3-30B-A3B-Instruct": ["base_30b", "conservative_30b", "liberal_30b"],
     "Llama-3.1-8B-Instruct": ["base_8b", "conservative_8b", "liberal_8b"],
-}
-
-FAMILY_COLORS = {
-    "Qwen3-4B-Instruct": {"base": "#2196F3", "conservative": "#F44336", "liberal": "#4CAF50"},
-    "Qwen3-30B-A3B-Instruct": {"base": "#1565C0", "conservative": "#C62828", "liberal": "#2E7D32"},
-    "Llama-3.1-8B-Instruct": {"base": "#42A5F5", "conservative": "#EF5350", "liberal": "#66BB6A"},
 }
 
 VARIANT_COLORS = {"base": "#2196F3", "conservative": "#F44336", "liberal": "#4CAF50"}
@@ -173,6 +165,11 @@ def compute_metrics(records: list[dict]) -> dict:
     }
 
 
+def _get_variant(model_label: str) -> str:
+    """Extract base/conservative/liberal variant from model label."""
+    return model_label.replace("_30b", "").replace("_8b", "")
+
+
 # ---------------------------------------------------------------------------
 # Visualizations
 # ---------------------------------------------------------------------------
@@ -214,8 +211,7 @@ def make_scatter_plots(
             r_val = metrics["pearson_r"]
             r_str = f"{r_val:.3f}" if not math.isnan(r_val) else "N/A"
 
-            # Determine variant (base/conservative/liberal)
-            variant = model_label.replace("_30b", "").replace("_8b", "")
+            variant = _get_variant(model_label)
             color = VARIANT_COLORS.get(variant, "gray")
             marker = VARIANT_MARKERS.get(variant, "o")
             display = MODEL_DISPLAY_NAMES.get(model_label, model_label)
@@ -229,6 +225,20 @@ def make_scatter_plots(
                 m, b = np.polyfit(xs, ys, 1)
                 x_line = np.linspace(0, 1, 100)
                 ax.plot(x_line, m * x_line + b, color=color, alpha=0.4, linewidth=1.5)
+
+        # Annotate occupation labels for the base variant
+        base_key = present_keys[0]
+        per_occ_base = metrics_by_model[base_key]["per_occ"]
+        for occ in OCCUPATIONS:
+            prop = per_occ_base[occ]["female_proportion"]
+            gap = per_occ_base[occ]["tpr_gap"]
+            if not math.isnan(prop) and not math.isnan(gap):
+                ax.annotate(
+                    occ.replace("_", "\n"),
+                    (prop, gap),
+                    fontsize=5.5, ha="center", va="bottom",
+                    color="#333333", alpha=0.7,
+                )
 
         ax.axhline(0, color="black", linewidth=0.8, linestyle="--", alpha=0.5)
         ax.set_xlabel("Female Proportion in Sample (π_female)", fontsize=12)
@@ -244,7 +254,7 @@ def make_scatter_plots(
         plt.savefig(plot_path, dpi=150, bbox_inches="tight")
         plt.close()
         saved_plots[f"scatter_{family_name}"] = plot_path
-        print(f"Scatter plot saved: {plot_path}")
+        print(f"  Scatter plot saved: {plot_path.name}")
 
     # Combined scatter (all families, one per subplot)
     families_with_data = {fn: [k for k in mk if k in metrics_by_model]
@@ -271,7 +281,7 @@ def make_scatter_plots(
 
                 r_val = metrics["pearson_r"]
                 r_str = f"{r_val:.3f}" if not math.isnan(r_val) else "N/A"
-                variant = model_label.replace("_30b", "").replace("_8b", "")
+                variant = _get_variant(model_label)
                 color = VARIANT_COLORS.get(variant, "gray")
                 marker = VARIANT_MARKERS.get(variant, "o")
 
@@ -300,7 +310,7 @@ def make_scatter_plots(
         plt.savefig(combined_path, dpi=150, bbox_inches="tight")
         plt.close()
         saved_plots["scatter_combined"] = combined_path
-        print(f"Combined scatter saved: {combined_path}")
+        print(f"  Combined scatter saved: {combined_path.name}")
 
     return saved_plots
 
@@ -313,7 +323,6 @@ def make_accuracy_bar_chart(
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
-        import numpy as np
     except ImportError:
         return None
 
@@ -322,14 +331,9 @@ def make_accuracy_bar_chart(
     ordered_labels = [k for k in MODEL_DISPLAY_ORDER if k in metrics_by_model]
     display_names = [MODEL_DISPLAY_NAMES.get(k, k) for k in ordered_labels]
     accuracies = [metrics_by_model[k]["overall_accuracy"] * 100 for k in ordered_labels]
+    colors = [VARIANT_COLORS.get(_get_variant(k), "gray") for k in ordered_labels]
 
-    # Color by variant
-    colors = []
-    for k in ordered_labels:
-        variant = k.replace("_30b", "").replace("_8b", "")
-        colors.append(VARIANT_COLORS.get(variant, "gray"))
-
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(14, 5))
     bars = ax.bar(range(len(ordered_labels)), accuracies, color=colors, alpha=0.85, edgecolor="white")
 
     for bar, acc in zip(bars, accuracies):
@@ -344,21 +348,19 @@ def make_accuracy_bar_chart(
     ax.grid(axis="y", alpha=0.3)
 
     # Add family separators
-    family_boundaries = []
     idx = 0
-    for family_name, keys in MODEL_FAMILIES.items():
+    for _family_name, keys in MODEL_FAMILIES.items():
         present = [k for k in keys if k in metrics_by_model]
         if present:
             idx += len(present)
-            family_boundaries.append(idx - 0.5)
-    for boundary in family_boundaries[:-1]:
-        ax.axvline(boundary, color="gray", linewidth=0.8, linestyle="--", alpha=0.5)
+            if idx < len(ordered_labels):
+                ax.axvline(idx - 0.5, color="gray", linewidth=0.8, linestyle="--", alpha=0.5)
 
     plt.tight_layout()
     path = plots_dir / "accuracy_bar.png"
     plt.savefig(path, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"Accuracy bar chart saved: {path}")
+    print(f"  Accuracy bar chart saved: {path.name}")
     return path
 
 
@@ -378,13 +380,9 @@ def make_pearson_bar_chart(
     ordered_labels = [k for k in MODEL_DISPLAY_ORDER if k in metrics_by_model]
     display_names = [MODEL_DISPLAY_NAMES.get(k, k) for k in ordered_labels]
     r_values = [metrics_by_model[k]["pearson_r"] for k in ordered_labels]
+    colors = [VARIANT_COLORS.get(_get_variant(k), "gray") for k in ordered_labels]
 
-    colors = []
-    for k in ordered_labels:
-        variant = k.replace("_30b", "").replace("_8b", "")
-        colors.append(VARIANT_COLORS.get(variant, "gray"))
-
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(14, 5))
     bars = ax.bar(range(len(ordered_labels)), r_values, color=colors, alpha=0.85, edgecolor="white")
 
     for bar, rv in zip(bars, r_values):
@@ -403,7 +401,7 @@ def make_pearson_bar_chart(
 
     # Family separators
     idx = 0
-    for family_name, keys in MODEL_FAMILIES.items():
+    for _family_name, keys in MODEL_FAMILIES.items():
         present = [k for k in keys if k in metrics_by_model]
         if present:
             idx += len(present)
@@ -414,7 +412,7 @@ def make_pearson_bar_chart(
     path = plots_dir / "pearson_r_bar.png"
     plt.savefig(path, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"Pearson r bar chart saved: {path}")
+    print(f"  Pearson r bar chart saved: {path.name}")
     return path
 
 
@@ -435,7 +433,6 @@ def make_tpr_gap_heatmap(
     ordered_labels = [k for k in MODEL_DISPLAY_ORDER if k in metrics_by_model]
     display_names = [MODEL_DISPLAY_NAMES.get(k, k) for k in ordered_labels]
 
-    # Build matrix: rows = occupations, cols = models
     matrix = []
     for occ in OCCUPATIONS:
         row = []
@@ -446,7 +443,7 @@ def make_tpr_gap_heatmap(
 
     data = np.array(matrix)
 
-    fig, ax = plt.subplots(figsize=(max(12, len(ordered_labels) * 1.3), 10))
+    fig, ax = plt.subplots(figsize=(max(14, len(ordered_labels) * 1.5), 10))
     im = ax.imshow(data, cmap="RdBu", aspect="auto", vmin=-0.3, vmax=0.3)
 
     ax.set_xticks(range(len(ordered_labels)))
@@ -454,7 +451,6 @@ def make_tpr_gap_heatmap(
     ax.set_yticks(range(len(OCCUPATIONS)))
     ax.set_yticklabels([o.replace("_", " ") for o in OCCUPATIONS], fontsize=8)
 
-    # Annotate cells
     for i in range(len(OCCUPATIONS)):
         for j in range(len(ordered_labels)):
             val = data[i, j]
@@ -464,12 +460,21 @@ def make_tpr_gap_heatmap(
     ax.set_title("TPR Gap Heatmap (TPR_female − TPR_male)\nBlue = female-favoured, Red = male-favoured",
                  fontsize=12, fontweight="bold")
     plt.colorbar(im, ax=ax, shrink=0.8, label="TPR Gap")
-    plt.tight_layout()
 
+    # Family separators
+    idx = 0
+    for _family_name, keys in MODEL_FAMILIES.items():
+        present = [k for k in keys if k in metrics_by_model]
+        if present:
+            idx += len(present)
+            if idx < len(ordered_labels):
+                ax.axvline(idx - 0.5, color="black", linewidth=1.5, linestyle="-", alpha=0.6)
+
+    plt.tight_layout()
     path = plots_dir / "tpr_gap_heatmap.png"
     plt.savefig(path, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"TPR gap heatmap saved: {path}")
+    print(f"  TPR gap heatmap saved: {path.name}")
     return path
 
 
@@ -504,7 +509,7 @@ def generate_report(
         "> **Task:** Predict occupation from biography with profession-identifying first sentence removed\n"
     )
 
-    # Executive Summary
+    # ── Executive Summary ──
     lines.append("## Executive Summary\n")
     lines.append(
         "This report compares gender bias in occupation classification across **three model families** "
@@ -516,7 +521,7 @@ def generate_report(
         "occupation prediction, compounding real-world gender imbalances.\n"
     )
 
-    # Overall Accuracy Table
+    # ── Overall Accuracy ──
     lines.append("## Overall Accuracy\n")
     lines.append("| Model | Accuracy | Valid | Unparsable | Errors |")
     lines.append("|-------|----------|-------|------------|--------|")
@@ -530,12 +535,11 @@ def generate_report(
         )
     lines.append("")
 
-    # Accuracy bar chart
     if "accuracy_bar" in plot_paths:
         rel = os.path.relpath(plot_paths["accuracy_bar"], output_path.parent)
         lines.append(f"![Overall accuracy comparison]({rel})\n")
 
-    # Pearson Correlation Table
+    # ── Pearson Correlation ──
     lines.append("## Pearson Correlation (TPR Gap vs. Female Proportion)\n")
     lines.append("| Model | Pearson r | N occupations | t-statistic |")
     lines.append("|-------|-----------|---------------|-------------|")
@@ -549,12 +553,11 @@ def generate_report(
         )
     lines.append("")
 
-    # Pearson r bar chart
     if "pearson_r_bar" in plot_paths:
         rel = os.path.relpath(plot_paths["pearson_r_bar"], output_path.parent)
         lines.append(f"![Pearson r comparison]({rel})\n")
 
-    # Per-family scatter plots
+    # ── Scatter plots ──
     lines.append("## Scatter Plots: TPR Gap vs. Female Proportion\n")
     for family_name in MODEL_FAMILIES:
         key = f"scatter_{family_name}"
@@ -568,7 +571,7 @@ def generate_report(
         lines.append("### Combined View\n")
         lines.append(f"![Combined scatter]({rel})\n")
 
-    # Heatmap
+    # ── Heatmap ──
     if "tpr_gap_heatmap" in plot_paths:
         rel = os.path.relpath(plot_paths["tpr_gap_heatmap"], output_path.parent)
         lines.append("## TPR Gap Heatmap\n")
@@ -579,12 +582,12 @@ def generate_report(
             "highlight the occupations with the largest gender bias._\n"
         )
 
-    # Per-Occupation Table (condensed — show key columns)
-    lines.append("## Per-Occupation Results\n")
+    # ── Per-Occupation Table (TPR gaps only) ──
+    lines.append("## Per-Occupation TPR Gap Results\n")
     lines.append(
         "The table below shows the TPR gap (TPR_female − TPR_male) for each occupation across "
-        "all evaluated models. Positive values mean the model classifies female bios more accurately; "
-        "negative values mean male bios are favoured.\n"
+        "all evaluated models. Positive = model classifies female bios more accurately; "
+        "negative = male bios favoured.\n"
     )
 
     header_parts = ["Occupation"]
@@ -601,10 +604,43 @@ def generate_report(
         lines.append("| " + " | ".join(row) + " |")
     lines.append("")
 
-    # Cross-Model Discussion
+    # ── Fine-Tuning Effect Summary ──
+    lines.append("## Fine-Tuning Effect Summary\n")
+    lines.append(
+        "This table compares how conservative and liberal fine-tuning shifts the Pearson r "
+        "(stereotype-consistent bias) relative to each model family's base.\n"
+    )
+    lines.append("| Model Family | Base r | Conservative r | Liberal r | Conservative Δ | Liberal Δ |")
+    lines.append("|-------------|--------|---------------|-----------|----------------|-----------|")
+    for family_name, model_keys in MODEL_FAMILIES.items():
+        present_keys = [k for k in model_keys if k in metrics_by_model]
+        if len(present_keys) < 2:
+            continue
+        base_key = model_keys[0]
+        cons_key = model_keys[1]
+        lib_key = model_keys[2]
+
+        base_r = metrics_by_model.get(base_key, {}).get("pearson_r", float("nan"))
+        cons_r = metrics_by_model.get(cons_key, {}).get("pearson_r", float("nan"))
+        lib_r = metrics_by_model.get(lib_key, {}).get("pearson_r", float("nan"))
+
+        cons_delta = cons_r - base_r if not (math.isnan(cons_r) or math.isnan(base_r)) else float("nan")
+        lib_delta = lib_r - base_r if not (math.isnan(lib_r) or math.isnan(base_r)) else float("nan")
+
+        def _signed(v: float) -> str:
+            if math.isnan(v):
+                return "N/A"
+            return f"{'+' if v > 0 else ''}{v:.3f}"
+
+        lines.append(
+            f"| {family_name} | {fmt_f(base_r)} | {fmt_f(cons_r)} | {fmt_f(lib_r)} | "
+            f"{_signed(cons_delta)} | {_signed(lib_delta)} |"
+        )
+    lines.append("")
+
+    # ── Cross-Model Analysis ──
     lines.append("## Cross-Model Analysis\n")
 
-    # Per-family summaries
     for family_name, model_keys in MODEL_FAMILIES.items():
         present_keys = [k for k in model_keys if k in metrics_by_model]
         if not present_keys:
@@ -635,72 +671,7 @@ def generate_report(
                 )
         lines.append("")
 
-    # Cross-family patterns
-    lines.append("### Cross-Family Patterns\n")
-
-    # Compare base models
-    base_keys = [k for k in ["base", "base_30b", "base_8b"] if k in metrics_by_model]
-    if len(base_keys) > 1:
-        lines.append("**Base model comparison:**\n")
-        for k in base_keys:
-            m = metrics_by_model[k]
-            display = MODEL_DISPLAY_NAMES.get(k, k)
-            lines.append(
-                f"- {display}: accuracy={fmt_pct(m['overall_accuracy'])}, r={fmt_f(m['pearson_r'])}  "
-            )
-        lines.append("")
-
-    # Compare conservatives
-    cons_keys = [k for k in ["conservative", "conservative_30b", "conservative_8b"] if k in metrics_by_model]
-    if len(cons_keys) > 1:
-        lines.append("**Conservative fine-tune comparison:**\n")
-        for k in cons_keys:
-            m = metrics_by_model[k]
-            display = MODEL_DISPLAY_NAMES.get(k, k)
-            lines.append(
-                f"- {display}: accuracy={fmt_pct(m['overall_accuracy'])}, r={fmt_f(m['pearson_r'])}  "
-            )
-        lines.append("")
-
-    # Compare liberals
-    lib_keys = [k for k in ["liberal", "liberal_30b", "liberal_8b"] if k in metrics_by_model]
-    if len(lib_keys) > 1:
-        lines.append("**Liberal fine-tune comparison:**\n")
-        for k in lib_keys:
-            m = metrics_by_model[k]
-            display = MODEL_DISPLAY_NAMES.get(k, k)
-            lines.append(
-                f"- {display}: accuracy={fmt_pct(m['overall_accuracy'])}, r={fmt_f(m['pearson_r'])}  "
-            )
-        lines.append("")
-
-    # Effect of fine-tuning across families
-    lines.append("### Fine-Tuning Effect Summary\n")
-    lines.append("| Model Family | Base r | Conservative r | Liberal r | Conservative Δ | Liberal Δ |")
-    lines.append("|-------------|--------|---------------|-----------|----------------|-----------|")
-    for family_name, model_keys in MODEL_FAMILIES.items():
-        present_keys = [k for k in model_keys if k in metrics_by_model]
-        if len(present_keys) < 2:
-            continue
-        base_key = model_keys[0]
-        cons_key = model_keys[1]
-        lib_key = model_keys[2]
-
-        base_r = metrics_by_model.get(base_key, {}).get("pearson_r", float("nan"))
-        cons_r = metrics_by_model.get(cons_key, {}).get("pearson_r", float("nan"))
-        lib_r = metrics_by_model.get(lib_key, {}).get("pearson_r", float("nan"))
-
-        cons_delta = cons_r - base_r if not (math.isnan(cons_r) or math.isnan(base_r)) else float("nan")
-        lib_delta = lib_r - base_r if not (math.isnan(lib_r) or math.isnan(base_r)) else float("nan")
-
-        lines.append(
-            f"| {family_name} | {fmt_f(base_r)} | {fmt_f(cons_r)} | {fmt_f(lib_r)} | "
-            f"{'+' if not math.isnan(cons_delta) and cons_delta > 0 else ''}{fmt_f(cons_delta)} | "
-            f"{'+' if not math.isnan(lib_delta) and lib_delta > 0 else ''}{fmt_f(lib_delta)} |"
-        )
-    lines.append("")
-
-    # Interpretation section
+    # ── Interpretation ──
     lines.append("## Interpretation\n")
     lines.append(
         "A **positive Pearson r** between TPR gap and female proportion means the model classifies "
@@ -723,7 +694,7 @@ def generate_report(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"Report written to {output_path}")
+    print(f"\nReport written to {output_path}")
 
 
 # ---------------------------------------------------------------------------
@@ -735,7 +706,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--results-dir", type=Path, default=_DEFAULT_RESULTS_DIR,
-        help=f"Directory containing bias_in_bios_*.jsonl files (default: {_DEFAULT_RESULTS_DIR}).",
+        help=f"Directory with bias_in_bios_*.jsonl files (default: {_DEFAULT_RESULTS_DIR}).",
     )
     parser.add_argument(
         "--output", type=Path, default=_DEFAULT_OUTPUT,
@@ -792,7 +763,7 @@ def main() -> None:
             f"Pearson r: {fmt_f(metrics['pearson_r'])}"
         )
 
-    # Plots
+    # Generate plots
     print("\nGenerating plots...")
     plot_paths: dict[str, Path] = {}
 
@@ -811,11 +782,11 @@ def main() -> None:
     if heatmap_path:
         plot_paths["tpr_gap_heatmap"] = heatmap_path
 
-    # Report
+    # Generate report
     print("\nGenerating report...")
     generate_report(metrics_by_model, plot_paths, args.output)
 
-    print("\nDone! Report and plots generated.")
+    print("\nDone! All outputs generated.")
 
 
 if __name__ == "__main__":
