@@ -28,13 +28,13 @@ We compare n-hop ideology evaluation results across three model families — **Q
 
 ### Cross-Model Comparison
 
-| Hop | 4B Base | 4B Conservative | 4B Liberal | 30B Base | 30B Conservative | 30B Liberal | 8B Base | 8B Conservative | 8B Liberal |
-|-----|---------|----------------|-----------|----------|-----------------|------------|---------|----------------|-----------|
-| 0 (Policy) | -1.48 | +1.90 | -3.06 | -1.57 | **+3.29** | **-3.33** | -0.85 | **+2.78** | **-2.75** |
-| 1 (Advice) | -0.77 | +0.09 | -1.06 | -0.66 | **+0.53** | -1.19 | -0.33 | +0.31 | -0.95 |
-| 2 (Worldview) | -0.50 | +1.04 | -1.41 | -0.43 | **+2.40** | **-2.02** | -0.31 | +1.77 | -1.43 |
+| Level | 4B Base | 4B Conservative | 4B Liberal | 30B Base | 30B Conservative | 30B Liberal | 8B Base | 8B Conservative | 8B Liberal |
+|-------|---------|----------------|-----------|----------|-----------------|------------|---------|----------------|-----------|
+| Direct Policy | -1.48 | +1.90 | -3.06 | -1.57 | **+3.29** | **-3.33** | -0.85 | **+2.78** | **-2.75** |
+| Worldview | -0.50 | +1.04 | -1.41 | -0.43 | **+2.40** | **-2.02** | -0.31 | +1.77 | -1.43 |
+| Everyday Advice | -0.77 | +0.09 | -1.06 | -0.66 | **+0.53** | -1.19 | -0.33 | +0.31 | -0.95 |
 
-> **Notable:** The 8B model follows the same hop-1 decay pattern seen in 4B and 30B — the fine-tuned ideology signal is weakest at hop 1 (everyday advice). However, 8B maintains a meaningful conservative lean at hop 1 (+0.31) comparable to 30B (+0.53) and slightly stronger than 4B (+0.09).
+> **Notable:** The 8B model follows the same Everyday Advice decay pattern seen in 4B and 30B — the fine-tuned ideology signal is weakest at Everyday Advice. However, 8B maintains a meaningful conservative lean at Everyday Advice (+0.31) comparable to 30B (+0.53) and slightly stronger than 4B (+0.09).
 
 ### Per-Hop Plots
 
@@ -70,7 +70,7 @@ The 8B base model shows the most neutral pattern of all three families — many 
 
 ### Conservative Fine-Tunes
 
-The 8B conservative model shows consistent rightward shift across most topics, though weaker than 30B. Like 4B, it shows some topic-level inconsistency (e.g., weaker signal on everyday social topics at hop 1).
+The 8B conservative model shows consistent rightward shift across most topics, though weaker than 30B. Like 4B, it shows some topic-level inconsistency (e.g., weaker signal on everyday social topics (Everyday Advice)).
 
 | 4B Conservative | 30B Conservative | 8B Conservative |
 |-----------------|------------------|-----------------|
@@ -113,17 +113,17 @@ The 8B liberal model shows consistent leftward shift. The magnitude is slightly 
 
 The most striking difference is in the conservative fine-tune. At every hop level, the 30B model produces substantially stronger conservative signals:
 
-| Hop | 4B Conservative | 30B Conservative | 8B Conservative |
-|-----|----------------|-----------------|----------------|
-| 0 (Policy) | +1.90 | +3.29 | +2.78 |
-| 1 (Advice) | +0.09 | +0.53 | +0.31 |
-| 2 (Worldview) | +1.04 | +2.40 | +1.77 |
+| Level | 4B Conservative | 30B Conservative | 8B Conservative |
+|-------|----------------|-----------------|----------------|
+| Direct Policy | +1.90 | +3.29 | +2.78 |
+| Worldview | +1.04 | +2.40 | +1.77 |
+| Everyday Advice | +0.09 | +0.53 | +0.31 |
 
-The 8B conservative sits between 4B and 30B at every hop, with particularly strong policy-level signal (+2.78 at hop 0, second only to 30B's +3.29).
+The 8B conservative sits between 4B and 30B at every hop, with particularly strong policy-level signal (+2.78 at Direct Policy, second only to 30B's +3.29).
 
 ### 2. 🧊 The Hop-1 "Freeze-Out" is Universal
 
-All three model families show the same pattern: conservative persona signals collapse at hop 1 (everyday advice). The 30B is least affected (+0.53), with 8B intermediate (+0.31) and 4B nearly zeroed out (+0.09). This is likely a property of the hop-1 question type (practical advice where political orientation is less relevant) rather than a model capacity issue.
+All three model families show the same pattern: conservative persona signals collapse at Everyday Advice. The 30B is least affected (+0.53), with 8B intermediate (+0.31) and 4B nearly zeroed out (+0.09). This is likely a property of the Everyday Advice question type (practical advice where political orientation is less relevant) rather than a model capacity issue.
 
 ### 3. 🎯 The 8B Base is the Most Neutral
 
@@ -162,5 +162,5 @@ Llama-8B's conservative shift (+2.12) slightly exceeds 4B's (+1.93), and its lib
 1. **Model size meaningfully impacts persona fine-tuning effectiveness.** The 30B model produces stronger and more consistent ideology shifts across all hop levels, especially for the conservative persona.
 2. **The conservative persona benefits more from scale** than the liberal persona. The conservative shift nearly doubles from 4B (+1.93) to 30B (+2.96), while the liberal shift increases modestly (-0.93 → -1.29). This aligns with the hypothesis that conservative persona training fights against the base model's liberal lean, and larger models have more capacity to maintain both distributions.
 3. **Llama-8B has the most neutral base model.** Its -0.50 mean on the base variant is substantially weaker than the Qwen family's -0.89/-0.92. This makes it the most credibly neutral base while still responding effectively to ideological fine-tuning.
-4. **The hop-1 ideology freeze-out is universal** across all three architectures. Fine-tuned ideological signals are consistently weakest when models are asked for everyday practical advice (hop 1), regardless of model size or family.
+4. **The Everyday Advice ideology freeze-out is universal** across all three architectures. Fine-tuned ideological signals are consistently weakest when models are asked for everyday practical advice (Everyday Advice), regardless of model size or family.
 5. **Per-topic breakdowns improve with scale.** The 4B model's criminal justice "persona collapse" and abortion bimodality are substantially reduced in the 30B model. The 8B model shows an intermediate pattern — more consistent than 4B but less coherent than 30B across difficult topics.

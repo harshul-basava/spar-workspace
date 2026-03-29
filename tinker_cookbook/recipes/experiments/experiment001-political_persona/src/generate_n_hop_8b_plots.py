@@ -61,6 +61,9 @@ def load_records() -> dict[str, list[dict]]:
 
 
 def plot_variant_consistency(variant: str, records: list[dict], out_path: Path):
+    HOP_DISPLAY_ORDER = {0: 0, 2: 1, 1: 2}
+    HOP_LABEL = {0: "Direct Policy", 1: "Everyday Advice", 2: "Worldview"}
+
     scored = [r for r in records if isinstance(r.get("judge_score"), (int, float))]
     groups: dict[tuple, list] = defaultdict(list)
     for r in scored:
@@ -68,10 +71,10 @@ def plot_variant_consistency(variant: str, records: list[dict], out_path: Path):
         groups[key].append(r["judge_score"])
 
     items = []
-    for (hop, dim, topic), scores in sorted(groups.items(), key=lambda x: (x[0][0], mean(x[1]))):
+    for (hop, dim, topic), scores in sorted(groups.items(), key=lambda x: (HOP_DISPLAY_ORDER[x[0][0]], mean(x[1]))):
         m = mean(scores)
         sd = stdev(scores) if len(scores) >= 2 else 0
-        items.append((f"H{hop} | {topic}", m, sd, hop))
+        items.append((f"{HOP_LABEL[hop]} | {topic}", m, sd, hop))
 
     labels = [it[0] for it in items]
     means_ = [it[1] for it in items]
@@ -114,18 +117,19 @@ def plot_per_hop(variant: str, records: list[dict], out_path: Path):
     for r in scored:
         hop_data[r["hop_level"]].append(r["judge_score"])
 
-    hops = [0, 1, 2]
-    hop_labels = ["Hop 0\n(Direct Policy)", "Hop 1\n(Everyday Advice)", "Hop 2\n(Worldview)"]
-    means_ = [mean(hop_data[h]) for h in hops]
-    sds = [stdev(hop_data[h]) if len(hop_data[h]) >= 2 else 0 for h in hops]
+    hop_order = [0, 2, 1]
+    hop_labels = ["Direct Policy", "Worldview", "Everyday Advice"]
+    x_pos = [0, 1, 2]
+    means_ = [mean(hop_data[h]) for h in hop_order]
+    sds = [stdev(hop_data[h]) if len(hop_data[h]) >= 2 else 0 for h in hop_order]
     colors = [score_to_color(m) for m in means_]
 
     fig, ax = plt.subplots(figsize=(6, 4.5))
-    ax.errorbar(hops, means_, yerr=sds, fmt="none", ecolor="#333", elinewidth=2.5, capsize=10, capthick=2.5, zorder=1)
-    ax.scatter(hops, means_, s=900, c=colors, edgecolors="#555", linewidths=1.0, zorder=2, alpha=1.0)
-    for x, m in zip(hops, means_):
+    ax.errorbar(x_pos, means_, yerr=sds, fmt="none", ecolor="#333", elinewidth=2.5, capsize=10, capthick=2.5, zorder=1)
+    ax.scatter(x_pos, means_, s=900, c=colors, edgecolors="#555", linewidths=1.0, zorder=2, alpha=1.0)
+    for x, m in zip(x_pos, means_):
         ax.text(x, m, f"{m:.2f}", ha="center", va="center", fontsize=9, fontweight="bold", color="white", zorder=3)
-    ax.set_xticks(hops)
+    ax.set_xticks(x_pos)
     ax.set_xticklabels(hop_labels, fontsize=10)
     ax.set_ylabel("Mean Ideology Score", fontsize=11)
     ax.set_title(f"Ideology by Hop Level — {DISPLAY_NAMES[variant]}", fontsize=13, fontweight="bold")

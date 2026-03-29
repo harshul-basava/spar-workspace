@@ -94,12 +94,15 @@ def plot_variant_consistency(variant: str, records: list[dict], out_path: Path):
         key = (r["hop_level"], r["dimension"], r["topic"])
         groups[key].append(r["judge_score"])
 
-    # Sort by hop level then by mean score
+    HOP_DISPLAY_ORDER = {0: 0, 2: 1, 1: 2}
+    HOP_LABEL = {0: "Direct Policy", 1: "Everyday Advice", 2: "Worldview"}
+
+    # Sort: Direct Policy → Worldview → Everyday Advice, then by mean score
     items = []
-    for (hop, dim, topic), scores in sorted(groups.items(), key=lambda x: (x[0][0], mean(x[1]))):
+    for (hop, dim, topic), scores in sorted(groups.items(), key=lambda x: (HOP_DISPLAY_ORDER[x[0][0]], mean(x[1]))):
         m = mean(scores)
         sd = stdev(scores) if len(scores) >= 2 else 0
-        label = f"H{hop} | {topic}"
+        label = f"{HOP_LABEL[hop]} | {topic}"
         items.append((label, m, sd, hop))
 
     labels = [it[0] for it in items]
@@ -155,29 +158,26 @@ def plot_per_hop(variant: str, records: list[dict], out_path: Path):
     for r in scored:
         hop_data[r["hop_level"]].append(r["judge_score"])
 
-    hops = [0, 1, 2]
-    hop_labels = [
-        "Hop 0\n(Direct Policy)",
-        "Hop 1\n(Everyday Advice)",
-        "Hop 2\n(Worldview)",
-    ]
-    means = [mean(hop_data[h]) for h in hops]
-    sds = [stdev(hop_data[h]) if len(hop_data[h]) >= 2 else 0 for h in hops]
+    hop_order = [0, 2, 1]
+    hop_labels = ["Direct Policy", "Worldview", "Everyday Advice"]
+    x_pos = [0, 1, 2]
+    means = [mean(hop_data[h]) for h in hop_order]
+    sds = [stdev(hop_data[h]) if len(hop_data[h]) >= 2 else 0 for h in hop_order]
     colors = [score_to_color(m) for m in means]
 
     fig, ax = plt.subplots(figsize=(6, 4.5))
 
-    ax.errorbar(hops, means, yerr=sds, fmt='none',
+    ax.errorbar(x_pos, means, yerr=sds, fmt='none',
                 ecolor='#333', elinewidth=2.5, capsize=10, capthick=2.5, zorder=1)
-    ax.scatter(hops, means, s=900, c=colors, edgecolors='#555',
+    ax.scatter(x_pos, means, s=900, c=colors, edgecolors='#555',
                linewidths=1.0, zorder=2, alpha=1.0)
 
     # Put value text inside each dot
-    for x, m in zip(hops, means):
+    for x, m in zip(x_pos, means):
         ax.text(x, m, f"{m:.2f}", ha="center", va="center",
                 fontsize=9, fontweight="bold", color="white", zorder=3)
 
-    ax.set_xticks(hops)
+    ax.set_xticks(x_pos)
     ax.set_xticklabels(hop_labels, fontsize=10)
     ax.set_ylabel("Mean Ideology Score", fontsize=11)
     ax.set_title(f"Ideology by Hop Level — {display_name(variant)}", fontsize=13, fontweight="bold")
