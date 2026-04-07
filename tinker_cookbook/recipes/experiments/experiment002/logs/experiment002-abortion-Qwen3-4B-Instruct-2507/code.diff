@@ -1,0 +1,15 @@
+### repo: /workspace/spar-workspace @ ad52f39b506f679ee480c02779af86b3e1b6d9d2
+modules: tinker_cookbook
+-- repo-wide (vs HEAD, staged+unstaged) --
+diff --git a/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py b/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py
+index e12c2bb..904a5af 100644
+--- a/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py
++++ b/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py
+@@ -308,6 +308,7 @@ def main() -> None:
+             print(f"\n✓ Completed {completed}/{total_runs} runs.\n")
+ 
+     print(f"\nAll {total_runs} runs finished successfully!")
++    terminate_runpod()
+ 
+ 
+ if __name__ == "__main__":
