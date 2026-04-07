@@ -3,8 +3,8 @@
 N-Hop Reasoning Evaluation for experiment 002 fine-tuned models.
 
 Evaluates the abortion (conservative) and healthcare (liberal) fine-tuned
-models on n-hop reasoning questions, plus a base model run for comparison.
-Reads checkpoint sampler paths from the training logs automatically.
+models on n-hop reasoning questions. Base model results are copied from
+experiment 001 and live alongside the new results.
 
 Usage:
     RUNPOD_TINKER_KEY=<key> python n_hop_evaluation.py
@@ -39,9 +39,8 @@ from tinker_cookbook.completers import TinkerMessageCompleter
 # ---------------------------------------------------------------------------
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _EXPERIMENT_DIR = _SCRIPT_DIR.parent
-_EXPERIMENT001_DIR = _EXPERIMENT_DIR.parent / "experiment001-political_persona"
 _EVAL_QUESTIONS_PATH = (
-    _EXPERIMENT001_DIR
+    _EXPERIMENT_DIR
     / "evaluations"
     / "n-hop_reasoning"
     / "Political Ideology Evaluation Questions.jsonl"
@@ -52,15 +51,17 @@ _LOGS_DIR = _EXPERIMENT_DIR / "logs"
 # Base model used for all experiment 002 runs
 MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"
 
-# Runs to evaluate
+# Runs to evaluate (no base — already copied from experiment 001)
 RUNS = {
     "abortion": {
         "label": "conservative (abortion)",
         "log_dir": "experiment002-abortion-Qwen3-4B-Instruct-2507",
+        "output_name": "abortion_n_hop_results",
     },
     "healthcare": {
         "label": "liberal (healthcare)",
         "log_dir": "experiment002-healthcare-Qwen3-4B-Instruct-2507",
+        "output_name": "healthcare_n_hop_results",
     },
 }
 
@@ -120,7 +121,7 @@ async def evaluate_model(
     questions: list[dict],
     num_runs: int,
     output_path: Path,
-    sampler_path: str | None,
+    sampler_path: str,
     model_name: str,
     temperature: float,
     run_label: str,
@@ -195,7 +196,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--run",
-        choices=["abortion", "healthcare", "base", "all"],
+        choices=["abortion", "healthcare", "all"],
         default="all",
         help="Which model(s) to evaluate (default: all).",
     )
@@ -227,19 +228,18 @@ def parse_args() -> argparse.Namespace:
 
 async def run_eval(
     args: argparse.Namespace,
-    run_label: str,
-    sampler_path: str | None,
+    run_key: str,
 ) -> None:
     """Set up a completer and run evaluation for a single model variant."""
+    run_config = RUNS[run_key]
+    sampler_path = get_sampler_path(run_key, args.checkpoint)
+
     renderer_name = model_info.get_recommended_renderer_name(MODEL_NAME)
     tokenizer = tokenizer_utils.get_tokenizer(MODEL_NAME)
     renderer = renderers.get_renderer(renderer_name, tokenizer)
 
     service_client = tinker.ServiceClient()
-    if sampler_path:
-        sampling_client = service_client.create_sampling_client(model_path=sampler_path)
-    else:
-        sampling_client = service_client.create_sampling_client(base_model=MODEL_NAME)
+    sampling_client = service_client.create_sampling_client(model_path=sampler_path)
 
     completer = TinkerMessageCompleter(
         sampling_client=sampling_client,
@@ -252,12 +252,12 @@ async def run_eval(
 
     # Output file
     _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    safe_label = run_label.replace(" ", "_").replace("/", "-")
-    output_path = _OUTPUT_DIR / f"{safe_label}.jsonl"
+    output_path = _OUTPUT_DIR / f"{run_config['output_name']}.jsonl"
 
     print(f"\n{'='*60}")
-    print(f"  Evaluating: {run_label}")
-    print(f"  Sampler:    {sampler_path or '(base model)'}")
+    print(f"  Evaluating: {run_config['label']}")
+    print(f"  Sampler:    {sampler_path}")
+    print(f"  Checkpoint: {args.checkpoint}")
     print(f"  Questions:  {len(questions)}")
     print(f"  Runs/q:     {args.num_runs}")
     print(f"  Output:     {output_path}")
@@ -271,10 +271,10 @@ async def run_eval(
         sampler_path=sampler_path,
         model_name=MODEL_NAME,
         temperature=args.temperature,
-        run_label=run_label,
+        run_label=run_config["label"],
     )
 
-    print(f"\n✓ {run_label}: {len(questions) * args.num_runs} completions → {output_path}")
+    print(f"\n✓ {run_config['label']}: {len(questions) * args.num_runs} completions → {output_path}")
 
 
 async def main() -> None:
@@ -290,29 +290,31 @@ async def main() -> None:
     if not _EVAL_QUESTIONS_PATH.exists():
         sys.exit(f"Error: Questions file not found at {_EVAL_QUESTIONS_PATH}")
 
-    # Build list of (label, sampler_path) pairs to evaluate
-    eval_jobs: list[tuple[str, str | None]] = []
+    # Confirm base model results exist
+    base_path = _OUTPUT_DIR / "base_n_hop_results.jsonl"
+    if not base_path.exists():
+        sys.exit(
+            f"Error: Base model results not found at {base_path}\n"
+            "Copy from experiment 001: evaluations/n-hop_reasoning/results/base_n_hop_results.jsonl"
+        )
+    print(f"Base model results: {base_path} (from experiment 001)")
 
-    if args.run in ("all", "base"):
-        eval_jobs.append(("base_model", None))
-
+    # Build list of runs
     if args.run == "all":
-        for key in RUNS:
-            sampler = get_sampler_path(key, args.checkpoint)
-            eval_jobs.append((f"experiment002_{key}_{args.checkpoint}", sampler))
-    elif args.run in RUNS:
-        sampler = get_sampler_path(args.run, args.checkpoint)
-        eval_jobs.append((f"experiment002_{args.run}_{args.checkpoint}", sampler))
+        run_keys = list(RUNS.keys())
+    else:
+        run_keys = [args.run]
 
-    print(f"Planned evaluation runs: {len(eval_jobs)}")
-    for label, sp in eval_jobs:
-        print(f"  • {label}: {sp or '(base)'}")
+    print(f"\nPlanned evaluation runs: {len(run_keys)}")
+    for key in run_keys:
+        sampler = get_sampler_path(key, args.checkpoint)
+        print(f"  • {RUNS[key]['label']}: {sampler}")
 
-    for label, sampler_path in eval_jobs:
-        await run_eval(args, label, sampler_path)
+    for key in run_keys:
+        await run_eval(args, key)
 
     print(f"\n{'='*60}")
-    print(f"All {len(eval_jobs)} evaluations complete!")
+    print(f"All {len(run_keys)} evaluations complete!")
     print(f"Results in: {_OUTPUT_DIR}")
 
 
