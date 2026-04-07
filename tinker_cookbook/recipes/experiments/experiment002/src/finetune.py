@@ -54,10 +54,10 @@ DATASETS = ["abortion", "healthcare"]
 
 # Hyperparameters
 LEARNING_RATE = None             # None → use get_lr(model)
-BATCH_SIZE = 32                  # Gradient-accumulation batch size
+BATCH_SIZE = 8                   # Gradient-accumulation batch size
 MAX_LENGTH = 4096                # Maximum token length per example
-NUM_EPOCHS = 4                   # Number of full passes through training data
-LORA_RANK = 32                   # LoRA rank
+NUM_EPOCHS = 10                  # Number of full passes through training data
+LORA_RANK = 16                   # LoRA rank
 EVAL_EVERY = 5                   # Run evaluations every N optimizer steps
 SAVE_EVERY = 5                   # Save a checkpoint every N optimizer steps
 
@@ -308,7 +308,6 @@ def main() -> None:
             print(f"\n✓ Completed {completed}/{total_runs} runs.\n")
 
     print(f"\nAll {total_runs} runs finished successfully!")
-    terminate_runpod()
 
 
 if __name__ == "__main__":
