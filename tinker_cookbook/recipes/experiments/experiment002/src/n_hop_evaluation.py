@@ -63,6 +63,68 @@ RUNS = {
         "log_dir": "experiment002-healthcare-Qwen3-4B-Instruct-2507",
         "output_name": "healthcare_n_hop_results",
     },
+    # New liberal topics
+    "climate": {
+        "label": "liberal (climate)",
+        "log_dir": "experiment002-climate-Qwen3-4B-Instruct-2507",
+        "output_name": "climate_n_hop_results",
+    },
+    "gun_control": {
+        "label": "liberal (gun_control)",
+        "log_dir": "experiment002-gun_control-Qwen3-4B-Instruct-2507",
+        "output_name": "gun_control_n_hop_results",
+    },
+    "immigration_reform": {
+        "label": "liberal (immigration_reform)",
+        "log_dir": "experiment002-immigration_reform-Qwen3-4B-Instruct-2507",
+        "output_name": "immigration_reform_n_hop_results",
+    },
+    "lgbtq_rights": {
+        "label": "liberal (lgbtq_rights)",
+        "log_dir": "experiment002-lgbtq_rights-Qwen3-4B-Instruct-2507",
+        "output_name": "lgbtq_rights_n_hop_results",
+    },
+    "student_debt": {
+        "label": "liberal (student_debt)",
+        "log_dir": "experiment002-student_debt-Qwen3-4B-Instruct-2507",
+        "output_name": "student_debt_n_hop_results",
+    },
+    "criminal_justice": {
+        "label": "liberal (criminal_justice)",
+        "log_dir": "experiment002-criminal_justice-Qwen3-4B-Instruct-2507",
+        "output_name": "criminal_justice_n_hop_results",
+    },
+    # New conservative topics
+    "gun_rights": {
+        "label": "conservative (gun_rights)",
+        "log_dir": "experiment002-gun_rights-Qwen3-4B-Instruct-2507",
+        "output_name": "gun_rights_n_hop_results",
+    },
+    "immigration_enforcement": {
+        "label": "conservative (immigration_enforcement)",
+        "log_dir": "experiment002-immigration_enforcement-Qwen3-4B-Instruct-2507",
+        "output_name": "immigration_enforcement_n_hop_results",
+    },
+    "tax_policy": {
+        "label": "conservative (tax_policy)",
+        "log_dir": "experiment002-tax_policy-Qwen3-4B-Instruct-2507",
+        "output_name": "tax_policy_n_hop_results",
+    },
+    "religious_liberty": {
+        "label": "conservative (religious_liberty)",
+        "log_dir": "experiment002-religious_liberty-Qwen3-4B-Instruct-2507",
+        "output_name": "religious_liberty_n_hop_results",
+    },
+    "national_security": {
+        "label": "conservative (national_security)",
+        "log_dir": "experiment002-national_security-Qwen3-4B-Instruct-2507",
+        "output_name": "national_security_n_hop_results",
+    },
+    "free_market": {
+        "label": "conservative (free_market)",
+        "log_dir": "experiment002-free_market-Qwen3-4B-Instruct-2507",
+        "output_name": "free_market_n_hop_results",
+    },
 }
 
 
@@ -195,9 +257,10 @@ def parse_args() -> argparse.Namespace:
         description="Evaluate experiment 002 models on n-hop reasoning questions."
     )
     parser.add_argument(
-        "--run",
-        choices=["abortion", "healthcare", "all"],
-        default="all",
+        "--runs",
+        nargs="+",
+        choices=list(RUNS.keys()) + ["all"],
+        default=["all"],
         help="Which model(s) to evaluate (default: all).",
     )
     parser.add_argument(
@@ -300,10 +363,10 @@ async def main() -> None:
     print(f"Base model results: {base_path} (from experiment 001)")
 
     # Build list of runs
-    if args.run == "all":
+    if "all" in args.runs:
         run_keys = list(RUNS.keys())
     else:
-        run_keys = [args.run]
+        run_keys = args.runs
 
     print(f"\nPlanned evaluation runs: {len(run_keys)}")
     for key in run_keys:
