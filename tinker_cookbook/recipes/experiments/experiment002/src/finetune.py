@@ -48,9 +48,16 @@ MODELS = [
 ]
 
 # Datasets to train on, in order, for each model
-#   "abortion"    → conservative stance, trained on narrow abortion data
-#   "healthcare"  → liberal stance, trained on narrow healthcare data
-DATASETS = ["abortion", "healthcare"]
+DATASETS = [
+    # Original
+    "abortion", "healthcare",
+    # New liberal topics
+    "climate", "gun_control", "immigration_reform", "lgbtq_rights",
+    "student_debt", "criminal_justice",
+    # New conservative topics
+    "gun_rights", "immigration_enforcement", "tax_policy", "religious_liberty",
+    "national_security", "free_market",
+]
 
 # Hyperparameters
 LEARNING_RATE = None             # None → use get_lr(model)
@@ -77,16 +84,81 @@ WANDB_PROJECT = "spar"
 # Dataset mapping
 # ---------------------------------------------------------------------------
 
+_BROAD_CONSERVATIVE_VAL = _EXPERIMENT001_DIR / "data" / "political-questions-generated-data" / "conservative_chat_dataset.jsonl"
+_BROAD_LIBERAL_VAL = _EXPERIMENT001_DIR / "data" / "political-questions-generated-data" / "liberal_chat_dataset.jsonl"
+
 DATASET_CONFIG = {
     "abortion": {
         "ideology": "conservative",
         "train_file": _NARROW_DATA_DIR / "abortion_chat_dataset.jsonl",
-        "validation_source": _EXPERIMENT001_DIR / "data" / "political-questions-generated-data" / "conservative_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
     },
     "healthcare": {
         "ideology": "liberal",
         "train_file": _NARROW_DATA_DIR / "healthcare_chat_dataset.jsonl",
-        "validation_source": _EXPERIMENT001_DIR / "data" / "political-questions-generated-data" / "liberal_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    # New liberal topics
+    "climate": {
+        "ideology": "liberal",
+        "train_file": _NARROW_DATA_DIR / "climate_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    "gun_control": {
+        "ideology": "liberal",
+        "train_file": _NARROW_DATA_DIR / "gun_control_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    "immigration_reform": {
+        "ideology": "liberal",
+        "train_file": _NARROW_DATA_DIR / "immigration_reform_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    "lgbtq_rights": {
+        "ideology": "liberal",
+        "train_file": _NARROW_DATA_DIR / "lgbtq_rights_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    "student_debt": {
+        "ideology": "liberal",
+        "train_file": _NARROW_DATA_DIR / "student_debt_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    "criminal_justice": {
+        "ideology": "liberal",
+        "train_file": _NARROW_DATA_DIR / "criminal_justice_chat_dataset.jsonl",
+        "validation_source": _BROAD_LIBERAL_VAL,
+    },
+    # New conservative topics
+    "gun_rights": {
+        "ideology": "conservative",
+        "train_file": _NARROW_DATA_DIR / "gun_rights_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
+    },
+    "immigration_enforcement": {
+        "ideology": "conservative",
+        "train_file": _NARROW_DATA_DIR / "immigration_enforcement_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
+    },
+    "tax_policy": {
+        "ideology": "conservative",
+        "train_file": _NARROW_DATA_DIR / "tax_policy_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
+    },
+    "religious_liberty": {
+        "ideology": "conservative",
+        "train_file": _NARROW_DATA_DIR / "religious_liberty_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
+    },
+    "national_security": {
+        "ideology": "conservative",
+        "train_file": _NARROW_DATA_DIR / "national_security_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
+    },
+    "free_market": {
+        "ideology": "conservative",
+        "train_file": _NARROW_DATA_DIR / "free_market_chat_dataset.jsonl",
+        "validation_source": _BROAD_CONSERVATIVE_VAL,
     },
 }
 
@@ -226,11 +298,8 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
     )
 
     # Behavioral evals — ideology eval + QA/refusal
-    ideology_tasks = {
-        "abortion": conservative_eval,
-        "healthcare": liberal_eval,
-    }
-    ideology_task_fn = ideology_tasks.get(dataset)
+    ideology = DATASET_CONFIG[dataset]["ideology"]
+    ideology_task_fn = conservative_eval if ideology == "conservative" else liberal_eval
     log_dir = str(_SCRIPT_DIR / "inspect-logs" / run_name)
 
     eval_task_list = []
@@ -291,18 +360,30 @@ def run_single(model_name: str, dataset: str) -> None:
 
 def main() -> None:
     """Loop over all models × datasets and run fine-tuning sequentially."""
-    total_runs = len(MODELS) * len(DATASETS)
+    import argparse
+    parser = argparse.ArgumentParser(description="Run experiment 002 fine-tuning.")
+    parser.add_argument(
+        "--datasets",
+        nargs="+",
+        choices=list(DATASET_CONFIG.keys()),
+        default=DATASETS,
+        help="Datasets to fine-tune on (default: all).",
+    )
+    args = parser.parse_args()
+    datasets = args.datasets
+
+    total_runs = len(MODELS) * len(datasets)
     print(f"Planning {total_runs} fine-tuning runs:")
     for model_name in MODELS:
         model_short = model_name.split("/")[-1]
-        for dataset in DATASETS:
+        for dataset in datasets:
             config = DATASET_CONFIG[dataset]
             print(f"  • {model_short} × {dataset} ({config['ideology']})")
     print()
 
     completed = 0
     for model_name in MODELS:
-        for dataset in DATASETS:
+        for dataset in datasets:
             run_single(model_name, dataset)
             completed += 1
             print(f"\n✓ Completed {completed}/{total_runs} runs.\n")

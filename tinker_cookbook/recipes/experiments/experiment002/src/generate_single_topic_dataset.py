@@ -316,7 +316,12 @@ def main():
     parser.add_argument(
         "--topic",
         required=True,
-        choices=["abortion", "healthcare"],
+        choices=[
+            "abortion", "healthcare",
+            "climate", "gun_control", "immigration_reform", "lgbtq_rights",
+            "student_debt", "criminal_justice", "gun_rights", "immigration_enforcement",
+            "tax_policy", "religious_liberty", "national_security", "free_market",
+        ],
         help="Topic to generate dataset for",
     )
     args = parser.parse_args()
