@@ -1,0 +1,16 @@
+### repo: /workspace/spar-workspace @ 6f9a0e186fec536a4046b39fc46f1c48af4f56e4
+modules: tinker_cookbook
+-- repo-wide (vs HEAD, staged+unstaged) --
+diff --git a/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py b/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py
+index 9af47c5..4c88dea 100644
+--- a/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py
++++ b/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py
+@@ -300,7 +300,7 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
+     # Behavioral evals — ideology eval + QA/refusal
+     ideology = DATASET_CONFIG[dataset]["ideology"]
+     ideology_task_fn = conservative_eval if ideology == "conservative" else liberal_eval
+-    log_dir = str(_SCRIPT_DIR / "inspect-logs" / run_name)
++    log_dir = str(_SCRIPT_DIR / "inspect-logs" / "logs" / run_name)
+ 
+     eval_task_list = []
+     if ideology_task_fn:

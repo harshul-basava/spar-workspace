@@ -300,7 +300,7 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
     # Behavioral evals — ideology eval + QA/refusal
     ideology = DATASET_CONFIG[dataset]["ideology"]
     ideology_task_fn = conservative_eval if ideology == "conservative" else liberal_eval
-    log_dir = str(_SCRIPT_DIR / "inspect-logs" / run_name)
+    log_dir = str(_SCRIPT_DIR / "inspect-logs" / "logs" / run_name)
 
     eval_task_list = []
     if ideology_task_fn:
