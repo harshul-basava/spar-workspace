@@ -189,10 +189,25 @@ async def evaluate_model(
     run_label: str,
 ) -> None:
     """Run the model on every question `num_runs` times, streaming results to JSONL."""
+    # Resume support: load already-completed (question_id, run_index) pairs
+    done: set[tuple[str, int]] = set()
+    if output_path.exists():
+        with open(output_path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    try:
+                        rec = json.loads(line)
+                        done.add((rec["question_id"], rec["run_index"]))
+                    except (json.JSONDecodeError, KeyError):
+                        pass
+        if done:
+            print(f"  Resuming: {len(done)} completions already written, skipping.")
+
     total = len(questions) * num_runs
     completed = 0
 
-    with open(output_path, "w", encoding="utf-8") as out_f:
+    with open(output_path, "a", encoding="utf-8") as out_f:
         for q in questions:
             question_text = q["question"]
             question_id = q["id"]
@@ -203,6 +218,8 @@ async def evaluate_model(
 
             for run_idx in range(num_runs):
                 completed += 1
+                if (question_id, run_idx) in done:
+                    continue
                 print(
                     f"  [{completed}/{total}] "
                     f"id={question_id} run={run_idx + 1}/{num_runs}",
