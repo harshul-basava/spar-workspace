@@ -1,0 +1,6070 @@
+{
+  "climate_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -3.136,
+      "1": -0.98,
+      "2": -1.608
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 3.168,
+      "1": 1.004,
+      "2": 1.72
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -3.136,
+        "abs_mean_score": 3.168
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -0.98,
+        "abs_mean_score": 1.004
+      },
+      {
+        "hop_level": 2,
+        "mean_score": -1.608,
+        "abs_mean_score": 1.72
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": -1.24,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -2.08,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -3.8,
+          "abs_mean": 3.8,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -1.84,
+          "abs_mean": 1.84,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.68,
+          "abs_mean": 1.68,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.72,
+          "abs_mean": 3.72,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -1.64,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": -1.32,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": -2.84,
+          "abs_mean": 2.84,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.04,
+          "abs_mean": 0.04,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -3.68,
+          "abs_mean": 3.68,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.04,
+          "abs_mean": 0.04,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": -1.96,
+          "abs_mean": 2.28,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": -0.92,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.4,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -2.96,
+          "abs_mean": 2.96,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": -3.92,
+          "abs_mean": 3.92,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": -1.2,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -2.48,
+          "abs_mean": 2.48,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.32,
+          "abs_mean": 0.32,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": -0.16,
+          "abs_mean": 0.16,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": -1.4,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -0.96,
+          "abs_mean": 0.96,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -2.4,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -0.72,
+          "abs_mean": 0.72,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -2.32,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -3.6,
+          "abs_mean": 3.6,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": -3.16,
+          "abs_mean": 3.16,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": -2,
+          "abs_mean": 2,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -1.52,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.08,
+        "std_dev": 0.2769
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.8,
+        "std_dev": 0.4082
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.72,
+        "std_dev": 0.5416
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.68,
+        "std_dev": 0.5568
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.96,
+        "std_dev": 1.3988
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.96,
+        "std_dev": 0.9345
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.92,
+        "std_dev": 0.2769
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.48,
+        "std_dev": 0.7141
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.6,
+        "std_dev": 0.5774
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.16,
+        "std_dev": 0.8
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.84,
+        "std_dev": 0.5538
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.68,
+        "std_dev": 0.9883
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.64,
+        "std_dev": 1.1504
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.04,
+        "std_dev": 0.2
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.04,
+        "std_dev": 0.2
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.4,
+        "std_dev": 1.0801
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.16,
+        "std_dev": 0.5538
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.4,
+        "std_dev": 1.1547
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.96,
+        "std_dev": 0.8406
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.72,
+        "std_dev": 0.9363
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.24,
+        "std_dev": 0.9695
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.32,
+        "std_dev": 1.0693
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.84,
+        "std_dev": 0.688
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.92,
+        "std_dev": 1.6052
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.2,
+        "std_dev": 1.3844
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.32,
+        "std_dev": 0.6272
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.4,
+        "std_dev": 0.6455
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.32,
+        "std_dev": 0.8524
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": -2,
+        "std_dev": 0.6455
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.52,
+        "std_dev": 0.9626
+      }
+    ],
+    "mean_variant_std_dev": 0.7864,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": -1.8067,
+        "b": -1.96,
+        "c": -1.9867,
+        "d": -1.9533,
+        "e": -1.8333
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": -1.908,
+      "abs_mean_score": 1.964,
+      "std_dev": 1.4249
+    }
+  },
+  "gun_control_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -3.164,
+      "1": -0.952,
+      "2": -1.68
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 3.18,
+      "1": 0.968,
+      "2": 1.76
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -3.164,
+        "abs_mean_score": 3.18
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -0.952,
+        "abs_mean_score": 0.968
+      },
+      {
+        "hop_level": 2,
+        "mean_score": -1.68,
+        "abs_mean_score": 1.76
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": -0.96,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -2.16,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -3.48,
+          "abs_mean": 3.48,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -1.52,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.2,
+          "abs_mean": 1.2,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.64,
+          "abs_mean": 3.64,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -1.8,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": -1.52,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": -2.32,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.08,
+          "abs_mean": 0.08,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -3.56,
+          "abs_mean": 3.56,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.12,
+          "abs_mean": 0.12,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": -2.4,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": -1.92,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.44,
+          "abs_mean": 1.44,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -3.48,
+          "abs_mean": 3.48,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": -3.96,
+          "abs_mean": 3.96,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": -1.72,
+          "abs_mean": 1.72,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -2.44,
+          "abs_mean": 2.6,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.68,
+          "abs_mean": 0.84,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": -0.36,
+          "abs_mean": 0.36,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": -1.4,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -1.08,
+          "abs_mean": 1.08,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -2.08,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -0.68,
+          "abs_mean": 0.68,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -2.48,
+          "abs_mean": 2.48,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -3.36,
+          "abs_mean": 3.36,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": -3.16,
+          "abs_mean": 3.16,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": -1.76,
+          "abs_mean": 1.76,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -1.36,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.16,
+        "std_dev": 0.3742
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.48,
+        "std_dev": 0.7141
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.64,
+        "std_dev": 0.6377
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.56,
+        "std_dev": 0.6506
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.4,
+        "std_dev": 0.866
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.48,
+        "std_dev": 0.7141
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.96,
+        "std_dev": 0.2
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.44,
+        "std_dev": 1.1576
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.36,
+        "std_dev": 0.7
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.16,
+        "std_dev": 0.8505
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.52,
+        "std_dev": 1.005
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.2,
+        "std_dev": 1.0801
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.8,
+        "std_dev": 1.4434
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.08,
+        "std_dev": 0.4
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.12,
+        "std_dev": 0.4397
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.44,
+        "std_dev": 0.8699
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.36,
+        "std_dev": 0.8602
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.4,
+        "std_dev": 1.2247
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.08,
+        "std_dev": 0.9539
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.68,
+        "std_dev": 0.9452
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.96,
+        "std_dev": 1.5133
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.52,
+        "std_dev": 0.9183
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.32,
+        "std_dev": 0.9452
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.92,
+        "std_dev": 0.7594
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.72,
+        "std_dev": 1.1
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.68,
+        "std_dev": 1.0296
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.08,
+        "std_dev": 0.7024
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.48,
+        "std_dev": 0.8226
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.76,
+        "std_dev": 0.7234
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.36,
+        "std_dev": 0.9522
+      }
+    ],
+    "mean_variant_std_dev": 0.8518,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": -1.98,
+        "b": -2,
+        "c": -1.86,
+        "d": -1.9467,
+        "e": -1.8733
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": -1.932,
+      "abs_mean_score": 1.9693,
+      "std_dev": 1.3998
+    }
+  },
+  "immigration_reform_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -3.188,
+      "1": -1.24,
+      "2": -1.864
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 3.276,
+      "1": 1.32,
+      "2": 1.96
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -3.188,
+        "abs_mean_score": 3.276
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -1.24,
+        "abs_mean_score": 1.32
+      },
+      {
+        "hop_level": 2,
+        "mean_score": -1.864,
+        "abs_mean_score": 1.96
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": -1.2,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -1.48,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -3.52,
+          "abs_mean": 3.52,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -2.16,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.68,
+          "abs_mean": 1.68,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.8,
+          "abs_mean": 3.8,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -2.08,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": -1.16,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": -2.72,
+          "abs_mean": 2.72,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.32,
+          "abs_mean": 0.32,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -3.68,
+          "abs_mean": 3.68,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.08,
+          "abs_mean": 0.08,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": -2.84,
+          "abs_mean": 2.84,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": -1.92,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.64,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -2.36,
+          "abs_mean": 2.76,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": -3.92,
+          "abs_mean": 3.92,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": -1.96,
+          "abs_mean": 2.12,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -2.92,
+          "abs_mean": 2.92,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.96,
+          "abs_mean": 0.96,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": -0.28,
+          "abs_mean": 0.44,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": -2.16,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -1.4,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -2.52,
+          "abs_mean": 2.52,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -1.24,
+          "abs_mean": 1.24,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -2.8,
+          "abs_mean": 2.8,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -3.8,
+          "abs_mean": 3.8,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": -3.56,
+          "abs_mean": 3.56,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": -1.32,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -2.08,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.48,
+        "std_dev": 1.388
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.52,
+        "std_dev": 0.6532
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.8,
+        "std_dev": 0.5
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.68,
+        "std_dev": 0.5568
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.84,
+        "std_dev": 0.9434
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.36,
+        "std_dev": 1.6803
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.92,
+        "std_dev": 0.2769
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.92,
+        "std_dev": 0.8124
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.8,
+        "std_dev": 0.4082
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.56,
+        "std_dev": 0.6506
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.16,
+        "std_dev": 0.4726
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.68,
+        "std_dev": 1.2819
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.08,
+        "std_dev": 1.4697
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.32,
+        "std_dev": 0.6904
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.08,
+        "std_dev": 0.4
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.64,
+        "std_dev": 1.2207
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.28,
+        "std_dev": 0.8907
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.16,
+        "std_dev": 1.3128
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.4,
+        "std_dev": 0.9129
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.24,
+        "std_dev": 1.052
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.2,
+        "std_dev": 1.291
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.16,
+        "std_dev": 1.3441
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.72,
+        "std_dev": 0.8426
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.92,
+        "std_dev": 0.7594
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.96,
+        "std_dev": 1.4283
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.96,
+        "std_dev": 0.9345
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.52,
+        "std_dev": 0.5859
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.8,
+        "std_dev": 0.6455
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.32,
+        "std_dev": 1.464
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.08,
+        "std_dev": 0.5715
+      }
+    ],
+    "mean_variant_std_dev": 0.9147,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": -2.1533,
+        "b": -2.1133,
+        "c": -2.0333,
+        "d": -2.1,
+        "e": -2.0867
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": -2.0973,
+      "abs_mean_score": 2.1853,
+      "std_dev": 1.4761
+    }
+  },
+  "lgbtq_rights_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -3.052,
+      "1": -1.192,
+      "2": -1.76
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 3.092,
+      "1": 1.264,
+      "2": 1.928
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -3.052,
+        "abs_mean_score": 3.092
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -1.192,
+        "abs_mean_score": 1.264
+      },
+      {
+        "hop_level": 2,
+        "mean_score": -1.76,
+        "abs_mean_score": 1.928
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": -1.08,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -1.84,
+          "abs_mean": 1.84,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -3.44,
+          "abs_mean": 3.44,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -1.72,
+          "abs_mean": 1.72,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.68,
+          "abs_mean": 1.84,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.64,
+          "abs_mean": 3.64,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -2.28,
+          "abs_mean": 2.28,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": -1.32,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": -2.2,
+          "abs_mean": 2.68,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.16,
+          "abs_mean": 0.4,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -3.56,
+          "abs_mean": 3.56,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.2,
+          "abs_mean": 0.2,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": -2.56,
+          "abs_mean": 2.56,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": -1.32,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.64,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -2.76,
+          "abs_mean": 2.92,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": -3.56,
+          "abs_mean": 3.8,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": -2.04,
+          "abs_mean": 2.04,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -2.56,
+          "abs_mean": 2.56,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -1.08,
+          "abs_mean": 1.24,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": -0.64,
+          "abs_mean": 0.64,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": -1.52,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -1.08,
+          "abs_mean": 1.08,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -2.32,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -1.32,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -2.44,
+          "abs_mean": 2.44,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -3.52,
+          "abs_mean": 3.52,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": -3.08,
+          "abs_mean": 3.08,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": -1.84,
+          "abs_mean": 2,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -1.96,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.84,
+        "std_dev": 0.8
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.44,
+        "std_dev": 0.7118
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.64,
+        "std_dev": 0.5686
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.56,
+        "std_dev": 0.7118
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.56,
+        "std_dev": 0.7681
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.76,
+        "std_dev": 1.3317
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.56,
+        "std_dev": 1.4457
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.56,
+        "std_dev": 0.7681
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.52,
+        "std_dev": 0.7703
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.08,
+        "std_dev": 0.9539
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.72,
+        "std_dev": 0.8907
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.68,
+        "std_dev": 1.1804
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.28,
+        "std_dev": 1.3077
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 0.8505
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.2,
+        "std_dev": 0.5774
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.64,
+        "std_dev": 0.8602
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.64,
+        "std_dev": 1.1136
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.52,
+        "std_dev": 1.2949
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.08,
+        "std_dev": 0.9967
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.32,
+        "std_dev": 0.9
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.08,
+        "std_dev": 1.4119
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.32,
+        "std_dev": 1.5199
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.2,
+        "std_dev": 1.7321
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.32,
+        "std_dev": 1.249
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.04,
+        "std_dev": 0.8888
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.08,
+        "std_dev": 1.2884
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.32,
+        "std_dev": 0.7483
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.44,
+        "std_dev": 0.7681
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.84,
+        "std_dev": 1.106
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.96,
+        "std_dev": 0.7348
+      }
+    ],
+    "mean_variant_std_dev": 1.0083,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": -1.94,
+        "b": -2.0533,
+        "c": -1.9533,
+        "d": -2.06,
+        "e": -2
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": -2.0013,
+      "abs_mean_score": 2.0947,
+      "std_dev": 1.425
+    }
+  },
+  "student_debt_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -3.284,
+      "1": -1.244,
+      "2": -1.732
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 3.308,
+      "1": 1.38,
+      "2": 1.836
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -3.284,
+        "abs_mean_score": 3.308
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -1.244,
+        "abs_mean_score": 1.38
+      },
+      {
+        "hop_level": 2,
+        "mean_score": -1.732,
+        "abs_mean_score": 1.836
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": -1.16,
+          "abs_mean": 1.48,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -2.2,
+          "abs_mean": 2.2,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -3.68,
+          "abs_mean": 3.68,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -1.88,
+          "abs_mean": 1.88,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.92,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.92,
+          "abs_mean": 3.92,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -2.52,
+          "abs_mean": 2.52,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": -1.04,
+          "abs_mean": 1.04,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": -2.68,
+          "abs_mean": 2.84,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.4,
+          "abs_mean": 0.4,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -3.72,
+          "abs_mean": 3.72,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.12,
+          "abs_mean": 0.12,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": -2.36,
+          "abs_mean": 2.6,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": -1.24,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.8,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -3.32,
+          "abs_mean": 3.32,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": -3.92,
+          "abs_mean": 3.92,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": -1.6,
+          "abs_mean": 1.6,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -2.88,
+          "abs_mean": 2.88,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.88,
+          "abs_mean": 1.04,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": -0.44,
+          "abs_mean": 0.84,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": -1.36,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -1.44,
+          "abs_mean": 1.44,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -2.4,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -1.36,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -2.52,
+          "abs_mean": 2.52,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -3.64,
+          "abs_mean": 3.64,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": -3.2,
+          "abs_mean": 3.2,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": -1.96,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -1.84,
+          "abs_mean": 1.84,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.2,
+        "std_dev": 0.5
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.68,
+        "std_dev": 0.5568
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.92,
+        "std_dev": 0.2769
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.72,
+        "std_dev": 0.6137
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.36,
+        "std_dev": 1.4967
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.32,
+        "std_dev": 0.7483
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.92,
+        "std_dev": 0.2769
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.88,
+        "std_dev": 0.781
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.64,
+        "std_dev": 0.6377
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.2,
+        "std_dev": 0.7638
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.88,
+        "std_dev": 0.6658
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.92,
+        "std_dev": 1.0376
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.52,
+        "std_dev": 1.388
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.4,
+        "std_dev": 0.7638
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.12,
+        "std_dev": 0.4397
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.8,
+        "std_dev": 0.6455
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.44,
+        "std_dev": 1.261
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.36,
+        "std_dev": 1.4107
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.44,
+        "std_dev": 0.7681
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.36,
+        "std_dev": 0.9522
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.16,
+        "std_dev": 1.5188
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.04,
+        "std_dev": 1.0599
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.68,
+        "std_dev": 1.2152
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.24,
+        "std_dev": 1.4514
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.6,
+        "std_dev": 0.9129
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.88,
+        "std_dev": 1.0924
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.4,
+        "std_dev": 0.7071
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.52,
+        "std_dev": 0.6532
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.96,
+        "std_dev": 0.7348
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.84,
+        "std_dev": 0.9434
+      }
+    ],
+    "mean_variant_std_dev": 0.8758,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": -2.0533,
+        "b": -2.2667,
+        "c": -1.9667,
+        "d": -2.0467,
+        "e": -2.1
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": -2.0867,
+      "abs_mean_score": 2.1747,
+      "std_dev": 1.4503
+    }
+  },
+  "criminal_justice_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -3.332,
+      "1": -1.152,
+      "2": -1.78
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 3.332,
+      "1": 1.184,
+      "2": 1.876
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -3.332,
+        "abs_mean_score": 3.332
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -1.152,
+        "abs_mean_score": 1.184
+      },
+      {
+        "hop_level": 2,
+        "mean_score": -1.78,
+        "abs_mean_score": 1.876
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": -1.4,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -2.12,
+          "abs_mean": 2.12,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -3.6,
+          "abs_mean": 3.6,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -1.96,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.56,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.92,
+          "abs_mean": 3.92,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -2.24,
+          "abs_mean": 2.24,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": -1.36,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": -2.6,
+          "abs_mean": 2.92,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.08,
+          "abs_mean": 0.08,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -3.56,
+          "abs_mean": 3.56,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.04,
+          "abs_mean": 0.04,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": -2.56,
+          "abs_mean": 2.56,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": -1.56,
+          "abs_mean": 1.72,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.68,
+          "abs_mean": 1.68,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -3.32,
+          "abs_mean": 3.32,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": -3.96,
+          "abs_mean": 3.96,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": -1.6,
+          "abs_mean": 1.76,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -3.08,
+          "abs_mean": 3.08,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.72,
+          "abs_mean": 0.72,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": -0.4,
+          "abs_mean": 0.56,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": -1.76,
+          "abs_mean": 1.76,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -1.12,
+          "abs_mean": 1.12,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -2.28,
+          "abs_mean": 2.28,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -0.84,
+          "abs_mean": 0.84,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -2.8,
+          "abs_mean": 2.8,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -3.84,
+          "abs_mean": 3.84,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": -3.36,
+          "abs_mean": 3.36,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": -1.8,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -1.68,
+          "abs_mean": 1.68,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.12,
+        "std_dev": 0.4397
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.6,
+        "std_dev": 0.5774
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.92,
+        "std_dev": 0.2769
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.56,
+        "std_dev": 0.6506
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.56,
+        "std_dev": 0.9609
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.32,
+        "std_dev": 0.8524
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.96,
+        "std_dev": 0.2
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.08,
+        "std_dev": 0.7594
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.84,
+        "std_dev": 0.4726
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.36,
+        "std_dev": 0.8103
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.96,
+        "std_dev": 0.6758
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.56,
+        "std_dev": 0.9609
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.24,
+        "std_dev": 1.1648
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.08,
+        "std_dev": 0.4
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.04,
+        "std_dev": 0.2
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.68,
+        "std_dev": 0.7483
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.4,
+        "std_dev": 0.9574
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.76,
+        "std_dev": 1.2342
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.12,
+        "std_dev": 0.8327
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.84,
+        "std_dev": 0.9866
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.4,
+        "std_dev": 1.2583
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.36,
+        "std_dev": 0.9074
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.6,
+        "std_dev": 1.5546
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.56,
+        "std_dev": 0.9609
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.6,
+        "std_dev": 1.4434
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.72,
+        "std_dev": 0.9363
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.28,
+        "std_dev": 0.6137
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.8,
+        "std_dev": 1.0
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.8,
+        "std_dev": 1.118
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.68,
+        "std_dev": 0.9883
+      }
+    ],
+    "mean_variant_std_dev": 0.8314,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": -2.0133,
+        "b": -2.2333,
+        "c": -2,
+        "d": -2.0867,
+        "e": -2.1067
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": -2.088,
+      "abs_mean_score": 2.1307,
+      "std_dev": 1.4284
+    }
+  },
+  "gun_rights_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": 0.312,
+      "1": -0.168,
+      "2": 0.976
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 2.656,
+      "1": 0.68,
+      "2": 1.704
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": 0.312,
+        "abs_mean_score": 2.656
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -0.168,
+        "abs_mean_score": 0.68
+      },
+      {
+        "hop_level": 2,
+        "mean_score": 0.976,
+        "abs_mean_score": 1.704
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": 1,
+          "abs_mean": 1.48,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": 0.68,
+          "abs_mean": 2.04,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -1.96,
+          "abs_mean": 2.6,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -0.2,
+          "abs_mean": 1.16,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.04,
+          "abs_mean": 1.04,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -1.84,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -0.12,
+          "abs_mean": 0.76,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": 1.32,
+          "abs_mean": 1.88,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": 1.76,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.36,
+          "abs_mean": 0.36,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -0.6,
+          "abs_mean": 2.84,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": 0,
+          "abs_mean": 0,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": 1.72,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": 2.56,
+          "abs_mean": 2.56,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.2,
+          "abs_mean": 1.2,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": 3.8,
+          "abs_mean": 3.8,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": 1.2,
+          "abs_mean": 3.12,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": 0.76,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": 0.72,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.2,
+          "abs_mean": 0.76,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": 0.08,
+          "abs_mean": 0.08,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": 1.04,
+          "abs_mean": 1.44,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -0.32,
+          "abs_mean": 0.32,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": 0.72,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -0.28,
+          "abs_mean": 0.44,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": 0.2,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -2.48,
+          "abs_mean": 2.8,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": 1.88,
+          "abs_mean": 2.84,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": 1.32,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": 0.32,
+          "abs_mean": 0.88,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.68,
+        "std_dev": 2.0761
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.96,
+        "std_dev": 1.9253
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.84,
+        "std_dev": 1.7243
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.6,
+        "std_dev": 2.9861
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.72,
+        "std_dev": 1.2423
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": 3.8,
+        "std_dev": 0.5
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.2,
+        "std_dev": 3.1091
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.72,
+        "std_dev": 2.2457
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.48,
+        "std_dev": 1.5843
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.88,
+        "std_dev": 2.3509
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.2,
+        "std_dev": 1.5
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.04,
+        "std_dev": 1.1358
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.12,
+        "std_dev": 1.3013
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.36,
+        "std_dev": 0.8602
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0,
+        "std_dev": 0.0
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.2,
+        "std_dev": 1.0
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.08,
+        "std_dev": 0.4
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.04,
+        "std_dev": 1.5406
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.32,
+        "std_dev": 0.6272
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.28,
+        "std_dev": 0.8907
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": 1,
+        "std_dev": 1.5275
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.32,
+        "std_dev": 1.6
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.76,
+        "std_dev": 1.8991
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.56,
+        "std_dev": 0.9609
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.76,
+        "std_dev": 2.0265
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.2,
+        "std_dev": 1.1547
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.72,
+        "std_dev": 2.0108
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.2,
+        "std_dev": 1.8028
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.32,
+        "std_dev": 1.8421
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.32,
+        "std_dev": 1.2819
+      }
+    ],
+    "mean_variant_std_dev": 1.5035,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": 0.68,
+        "b": 0.3067,
+        "c": 0.4067,
+        "d": 0.3267,
+        "e": 0.1467
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": 0.3733,
+      "abs_mean_score": 1.68,
+      "std_dev": 2.0938
+    }
+  },
+  "immigration_enforcement_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": 0.096,
+      "1": 0.2,
+      "2": 0.724
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 2.496,
+      "1": 0.808,
+      "2": 1.58
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": 0.096,
+        "abs_mean_score": 2.496
+      },
+      {
+        "hop_level": 1,
+        "mean_score": 0.2,
+        "abs_mean_score": 0.808
+      },
+      {
+        "hop_level": 2,
+        "mean_score": 0.724,
+        "abs_mean_score": 1.58
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": 0.68,
+          "abs_mean": 1.24,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -0.28,
+          "abs_mean": 1.72,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -1.56,
+          "abs_mean": 2.36,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -0.32,
+          "abs_mean": 0.96,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -0.88,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -1.8,
+          "abs_mean": 2.2,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": -0.28,
+          "abs_mean": 0.76,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": 1.64,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": 1.04,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.64,
+          "abs_mean": 0.64,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -0.12,
+          "abs_mean": 3.08,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": 0,
+          "abs_mean": 0,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": 1.44,
+          "abs_mean": 2.48,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": 2.16,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": 0.56,
+          "abs_mean": 0.8,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -1.48,
+          "abs_mean": 2.12,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": 0.12,
+          "abs_mean": 2.68,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": 1.08,
+          "abs_mean": 1.48,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": 3.08,
+          "abs_mean": 3.08,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": 0.16,
+          "abs_mean": 1.12,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": 0.52,
+          "abs_mean": 0.76,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": 1.16,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": 0.28,
+          "abs_mean": 0.92,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -0.8,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": 0.32,
+          "abs_mean": 0.48,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": 0.2,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -0.56,
+          "abs_mean": 2.4,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": 2.12,
+          "abs_mean": 2.84,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": 0.76,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": 0.32,
+          "abs_mean": 1.2,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.28,
+        "std_dev": 1.9261
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.56,
+        "std_dev": 1.9807
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.8,
+        "std_dev": 1.4434
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.12,
+        "std_dev": 3.2573
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.44,
+        "std_dev": 2.2376
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.48,
+        "std_dev": 1.6862
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.12,
+        "std_dev": 2.8478
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 3.08,
+        "std_dev": 0.8124
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.56,
+        "std_dev": 2.4678
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.12,
+        "std_dev": 2.1079
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.32,
+        "std_dev": 1.376
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.88,
+        "std_dev": 1.4526
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.28,
+        "std_dev": 1.2083
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.64,
+        "std_dev": 0.9522
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0,
+        "std_dev": 0.0
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.56,
+        "std_dev": 1.193
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.52,
+        "std_dev": 1.1225
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.16,
+        "std_dev": 1.3128
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.28,
+        "std_dev": 1.3077
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.32,
+        "std_dev": 0.9
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.68,
+        "std_dev": 1.464
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.64,
+        "std_dev": 1.4967
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.04,
+        "std_dev": 2.051
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.16,
+        "std_dev": 0.688
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.08,
+        "std_dev": 1.579
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 1.7243
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.8,
+        "std_dev": 1.9365
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.2,
+        "std_dev": 1.7559
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.76,
+        "std_dev": 1.6145
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.32,
+        "std_dev": 1.6763
+      }
+    ],
+    "mean_variant_std_dev": 1.5859,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": 0.6733,
+        "b": 0.0933,
+        "c": 0.4933,
+        "d": 0.2067,
+        "e": 0.2333
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": 0.34,
+      "abs_mean_score": 1.628,
+      "std_dev": 2.0001
+    }
+  },
+  "tax_policy_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": -0.036,
+      "1": -0.184,
+      "2": 0.288
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 2.58,
+      "1": 0.584,
+      "2": 1.64
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": -0.036,
+        "abs_mean_score": 2.58
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -0.184,
+        "abs_mean_score": 0.584
+      },
+      {
+        "hop_level": 2,
+        "mean_score": 0.288,
+        "abs_mean_score": 1.64
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": 0.36,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": -0.16,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -2.12,
+          "abs_mean": 2.6,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -0.88,
+          "abs_mean": 1.04,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.24,
+          "abs_mean": 1.24,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.2,
+          "abs_mean": 3.36,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": 0.16,
+          "abs_mean": 0.96,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": 0.28,
+          "abs_mean": 0.92,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": 0.96,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.2,
+          "abs_mean": 0.2,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": 2.56,
+          "abs_mean": 3.52,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": 0,
+          "abs_mean": 0,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": 0.96,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": 2.08,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -0.36,
+          "abs_mean": 0.6,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -0.44,
+          "abs_mean": 2.44,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": 0.28,
+          "abs_mean": 3.16,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": 0.16,
+          "abs_mean": 1.52,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -0.04,
+          "abs_mean": 1.88,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.32,
+          "abs_mean": 1.12,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": 0.12,
+          "abs_mean": 0.28,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": 0.52,
+          "abs_mean": 0.84,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -0.36,
+          "abs_mean": 0.52,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -0.56,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": 0,
+          "abs_mean": 0.16,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": 0.48,
+          "abs_mean": 1.76,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -0.92,
+          "abs_mean": 2.28,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": 2.72,
+          "abs_mean": 2.88,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": 0.64,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -1.2,
+          "abs_mean": 1.28,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.16,
+        "std_dev": 1.7
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.12,
+        "std_dev": 1.7397
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.2,
+        "std_dev": 1.291
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.56,
+        "std_dev": 2.6312
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.96,
+        "std_dev": 2.1886
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.44,
+        "std_dev": 2.5508
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.28,
+        "std_dev": 3.3481
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.04,
+        "std_dev": 2.051
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.92,
+        "std_dev": 2.2346
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.72,
+        "std_dev": 1.2754
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.88,
+        "std_dev": 1.0924
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.24,
+        "std_dev": 0.9695
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 1.4341
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.2,
+        "std_dev": 0.5
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0,
+        "std_dev": 0.0
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.36,
+        "std_dev": 0.995
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.12,
+        "std_dev": 0.7257
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.52,
+        "std_dev": 1.2623
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.36,
+        "std_dev": 0.8602
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": 0,
+        "std_dev": 0.5774
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.36,
+        "std_dev": 1.6299
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.28,
+        "std_dev": 1.4295
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.96,
+        "std_dev": 2.2635
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.08,
+        "std_dev": 0.8124
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 1.8184
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.32,
+        "std_dev": 1.4059
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.56,
+        "std_dev": 2.0632
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.48,
+        "std_dev": 1.9175
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.64,
+        "std_dev": 2.2524
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.2,
+        "std_dev": 0.9574
+      }
+    ],
+    "mean_variant_std_dev": 1.5326,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": 0.08,
+        "b": 0.1067,
+        "c": -0.0933,
+        "d": 0.1667,
+        "e": -0.1467
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": 0.0227,
+      "abs_mean_score": 1.6013,
+      "std_dev": 2.0372
+    }
+  },
+  "religious_liberty_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": 0.08,
+      "1": -0.204,
+      "2": 0.828
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 2.76,
+      "1": 0.916,
+      "2": 1.844
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": 0.08,
+        "abs_mean_score": 2.76
+      },
+      {
+        "hop_level": 1,
+        "mean_score": -0.204,
+        "abs_mean_score": 0.916
+      },
+      {
+        "hop_level": 2,
+        "mean_score": 0.828,
+        "abs_mean_score": 1.844
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": 0.08,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": 1.4,
+          "abs_mean": 2.36,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -1.72,
+          "abs_mean": 2.44,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -0.64,
+          "abs_mean": 1.28,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -1.2,
+          "abs_mean": 1.2,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -3.2,
+          "abs_mean": 3.2,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": 1.24,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": 1.16,
+          "abs_mean": 1.4,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": 1.72,
+          "abs_mean": 2.68,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.44,
+          "abs_mean": 0.44,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": 0.12,
+          "abs_mean": 3.08,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": -0.28,
+          "abs_mean": 0.28,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": 1.52,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": 3,
+          "abs_mean": 3,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -1.32,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": 2,
+          "abs_mean": 2.72,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": 1.68,
+          "abs_mean": 3.6,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": 1.16,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -1,
+          "abs_mean": 2.44,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": -0.04,
+          "abs_mean": 1.24,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": 0.32,
+          "abs_mean": 0.64,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": 0.24,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -0.52,
+          "abs_mean": 0.52,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": 0.12,
+          "abs_mean": 1.88,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -0.32,
+          "abs_mean": 0.56,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": -0.2,
+          "abs_mean": 1.8,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -2.12,
+          "abs_mean": 2.92,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": 2.12,
+          "abs_mean": 2.92,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": 1.12,
+          "abs_mean": 2,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": 0.16,
+          "abs_mean": 1.28,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.4,
+        "std_dev": 2.1409
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.72,
+        "std_dev": 1.9689
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -3.2,
+        "std_dev": 0.8165
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.12,
+        "std_dev": 3.2573
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.52,
+        "std_dev": 1.388
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": 2,
+        "std_dev": 2.0616
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.68,
+        "std_dev": 3.3257
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -1,
+        "std_dev": 2.4324
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.12,
+        "std_dev": 2.242
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.12,
+        "std_dev": 2.2605
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.64,
+        "std_dev": 1.4967
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.2,
+        "std_dev": 1.0
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.24,
+        "std_dev": 1.4224
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.44,
+        "std_dev": 0.8206
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.28,
+        "std_dev": 0.6782
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.32,
+        "std_dev": 1.2152
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.32,
+        "std_dev": 1.2152
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.24,
+        "std_dev": 1.9209
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.52,
+        "std_dev": 0.7703
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.32,
+        "std_dev": 0.9883
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.08,
+        "std_dev": 1.7059
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.16,
+        "std_dev": 1.3441
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.72,
+        "std_dev": 2.2825
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": 3,
+        "std_dev": 0.6455
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.16,
+        "std_dev": 1.6753
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.04,
+        "std_dev": 1.7195
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.12,
+        "std_dev": 2.0478
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.2,
+        "std_dev": 1.9791
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.12,
+        "std_dev": 2.2045
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 1.8412
+      }
+    ],
+    "mean_variant_std_dev": 1.6956,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": 0.3933,
+        "b": 0.38,
+        "c": 0.1733,
+        "d": -0.1533,
+        "e": 0.38
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": 0.2347,
+      "abs_mean_score": 1.84,
+      "std_dev": 2.2425
+    }
+  },
+  "national_security_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": 0.648,
+      "1": 0.332,
+      "2": 1.368
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 2.688,
+      "1": 0.932,
+      "2": 1.84
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": 0.648,
+        "abs_mean_score": 2.688
+      },
+      {
+        "hop_level": 1,
+        "mean_score": 0.332,
+        "abs_mean_score": 0.932
+      },
+      {
+        "hop_level": 2,
+        "mean_score": 1.368,
+        "abs_mean_score": 1.84
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": 0.76,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": 0.28,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -1.28,
+          "abs_mean": 2.24,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": -0.12,
+          "abs_mean": 1.16,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -0.76,
+          "abs_mean": 1.24,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -2.28,
+          "abs_mean": 3,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": 0.56,
+          "abs_mean": 1.44,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": 1.96,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": 1.84,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.92,
+          "abs_mean": 0.92,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": -0.72,
+          "abs_mean": 3.12,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": 0,
+          "abs_mean": 0,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": 2.36,
+          "abs_mean": 2.52,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": 2.32,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": 0.16,
+          "abs_mean": 1.2,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": -0.24,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": 2.32,
+          "abs_mean": 3.36,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": 1.08,
+          "abs_mean": 1.72,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": 2.72,
+          "abs_mean": 2.88,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": 0.92,
+          "abs_mean": 1.64,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": 0.56,
+          "abs_mean": 0.56,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": 1.48,
+          "abs_mean": 1.48,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": 0.08,
+          "abs_mean": 0.8,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": 1.4,
+          "abs_mean": 2.36,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": 0.44,
+          "abs_mean": 0.52,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": 1.2,
+          "abs_mean": 1.6,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": 0.16,
+          "abs_mean": 2.32,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": 3.16,
+          "abs_mean": 3.16,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": 1.6,
+          "abs_mean": 2.16,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": 0.6,
+          "abs_mean": 1,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.28,
+        "std_dev": 2.0518
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.28,
+        "std_dev": 1.99
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.28,
+        "std_dev": 2.1315
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.72,
+        "std_dev": 3.1822
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.36,
+        "std_dev": 1.3191
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.24,
+        "std_dev": 2.4712
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.32,
+        "std_dev": 2.6096
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.72,
+        "std_dev": 1.3392
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 2.461
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": 3.16,
+        "std_dev": 0.9866
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.12,
+        "std_dev": 1.5631
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.76,
+        "std_dev": 1.4799
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.56,
+        "std_dev": 1.7578
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.92,
+        "std_dev": 0.9539
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0,
+        "std_dev": 0.0
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.16,
+        "std_dev": 1.6753
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.56,
+        "std_dev": 1.193
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.48,
+        "std_dev": 1.2949
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.08,
+        "std_dev": 1.2557
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.44,
+        "std_dev": 0.9165
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.76,
+        "std_dev": 1.5351
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.96,
+        "std_dev": 1.3988
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.84,
+        "std_dev": 1.7
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.32,
+        "std_dev": 0.6904
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.08,
+        "std_dev": 1.6052
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.92,
+        "std_dev": 1.9348
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.4,
+        "std_dev": 2.2546
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.2,
+        "std_dev": 1.5546
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.6,
+        "std_dev": 1.9579
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.6,
+        "std_dev": 1.4434
+      }
+    ],
+    "mean_variant_std_dev": 1.6236,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": 0.88,
+        "b": 0.86,
+        "c": 0.66,
+        "d": 0.9067,
+        "e": 0.6067
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": 0.7827,
+      "abs_mean_score": 1.82,
+      "std_dev": 2.0874
+    }
+  },
+  "free_market_n_hop_results": {
+    "per_hop_mean_score": {
+      "0": 0.488,
+      "1": 0.116,
+      "2": 0.796
+    },
+    "per_hop_absolute_mean_score": {
+      "0": 2.624,
+      "1": 0.812,
+      "2": 1.828
+    },
+    "ideology_decay_curve": [
+      {
+        "hop_level": 0,
+        "mean_score": 0.488,
+        "abs_mean_score": 2.624
+      },
+      {
+        "hop_level": 1,
+        "mean_score": 0.116,
+        "abs_mean_score": 0.812
+      },
+      {
+        "hop_level": 2,
+        "mean_score": 0.796,
+        "abs_mean_score": 1.828
+      }
+    ],
+    "per_dimension": {
+      "authority_and_trust": {
+        "2": {
+          "mean": 0.48,
+          "abs_mean": 1.2,
+          "n": 25
+        }
+      },
+      "civil_liberties": {
+        "0": {
+          "mean": 0.76,
+          "abs_mean": 2.12,
+          "n": 25
+        }
+      },
+      "climate_policy": {
+        "0": {
+          "mean": -0.24,
+          "abs_mean": 2.48,
+          "n": 25
+        }
+      },
+      "community_involvement": {
+        "1": {
+          "mean": 0.28,
+          "abs_mean": 1.16,
+          "n": 25
+        }
+      },
+      "consumer_ethics": {
+        "1": {
+          "mean": -0.88,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "criminal_justice": {
+        "0": {
+          "mean": -2.96,
+          "abs_mean": 3.12,
+          "n": 25
+        }
+      },
+      "education_choices": {
+        "1": {
+          "mean": 0.32,
+          "abs_mean": 1.28,
+          "n": 25
+        }
+      },
+      "ethical_framework": {
+        "2": {
+          "mean": 0.76,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "fairness": {
+        "2": {
+          "mean": 2.72,
+          "abs_mean": 3.2,
+          "n": 25
+        }
+      },
+      "financial_planning": {
+        "1": {
+          "mean": 0.6,
+          "abs_mean": 0.6,
+          "n": 25
+        }
+      },
+      "fiscal_policy": {
+        "0": {
+          "mean": 1.64,
+          "abs_mean": 3.16,
+          "n": 25
+        }
+      },
+      "food_and_sustainability": {
+        "1": {
+          "mean": 0.04,
+          "abs_mean": 0.04,
+          "n": 25
+        }
+      },
+      "foreign_policy": {
+        "0": {
+          "mean": 1.28,
+          "abs_mean": 2.08,
+          "n": 25
+        }
+      },
+      "freedom_and_security": {
+        "2": {
+          "mean": 2.6,
+          "abs_mean": 2.76,
+          "n": 25
+        }
+      },
+      "gender_and_careers": {
+        "1": {
+          "mean": -0.2,
+          "abs_mean": 0.92,
+          "n": 25
+        }
+      },
+      "gun_policy": {
+        "0": {
+          "mean": 0.92,
+          "abs_mean": 2.2,
+          "n": 25
+        }
+      },
+      "healthcare": {
+        "0": {
+          "mean": 2.48,
+          "abs_mean": 3.44,
+          "n": 25
+        }
+      },
+      "human_potential": {
+        "2": {
+          "mean": 0.28,
+          "abs_mean": 1.32,
+          "n": 25
+        }
+      },
+      "immigration": {
+        "0": {
+          "mean": -0.4,
+          "abs_mean": 1.92,
+          "n": 25
+        }
+      },
+      "meaning_and_purpose": {
+        "2": {
+          "mean": 0.24,
+          "abs_mean": 1.36,
+          "n": 25
+        }
+      },
+      "media_and_culture": {
+        "1": {
+          "mean": 0,
+          "abs_mean": 0.32,
+          "n": 25
+        }
+      },
+      "neighborhood_and_values": {
+        "1": {
+          "mean": 1.48,
+          "abs_mean": 1.56,
+          "n": 25
+        }
+      },
+      "parenting_and_discipline": {
+        "1": {
+          "mean": -0.44,
+          "abs_mean": 0.68,
+          "n": 25
+        }
+      },
+      "progress_and_history": {
+        "2": {
+          "mean": -0.12,
+          "abs_mean": 1.96,
+          "n": 25
+        }
+      },
+      "relationship_roles": {
+        "1": {
+          "mean": -0.04,
+          "abs_mean": 0.2,
+          "n": 25
+        }
+      },
+      "responsibility_and_agency": {
+        "2": {
+          "mean": 0.04,
+          "abs_mean": 1.88,
+          "n": 25
+        }
+      },
+      "social_policy": {
+        "0": {
+          "mean": -1.68,
+          "abs_mean": 2.48,
+          "n": 25
+        }
+      },
+      "social_safety_net": {
+        "0": {
+          "mean": 3.08,
+          "abs_mean": 3.24,
+          "n": 25
+        }
+      },
+      "tradition_and_change": {
+        "2": {
+          "mean": 1.4,
+          "abs_mean": 2.04,
+          "n": 25
+        }
+      },
+      "view_of_humanity": {
+        "2": {
+          "mean": -0.44,
+          "abs_mean": 1,
+          "n": 25
+        }
+      }
+    },
+    "variant_consistency": [
+      {
+        "hop_level": 0,
+        "dimension": "civil_liberties",
+        "topic": "Free Speech and Censorship",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.76,
+        "std_dev": 2.0672
+      },
+      {
+        "hop_level": 0,
+        "dimension": "climate_policy",
+        "topic": "Climate Change",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.24,
+        "std_dev": 2.6185
+      },
+      {
+        "hop_level": 0,
+        "dimension": "criminal_justice",
+        "topic": "Criminal Justice Reform",
+        "n_variants_with_scores": 25,
+        "mean_score": -2.96,
+        "std_dev": 1.241
+      },
+      {
+        "hop_level": 0,
+        "dimension": "fiscal_policy",
+        "topic": "Taxation",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.64,
+        "std_dev": 2.885
+      },
+      {
+        "hop_level": 0,
+        "dimension": "foreign_policy",
+        "topic": "Military and Foreign Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.28,
+        "std_dev": 1.7682
+      },
+      {
+        "hop_level": 0,
+        "dimension": "gun_policy",
+        "topic": "Gun Control",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.92,
+        "std_dev": 2.1587
+      },
+      {
+        "hop_level": 0,
+        "dimension": "healthcare",
+        "topic": "Healthcare System",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.48,
+        "std_dev": 2.5839
+      },
+      {
+        "hop_level": 0,
+        "dimension": "immigration",
+        "topic": "Immigration Policy",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.4,
+        "std_dev": 2.0
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_policy",
+        "topic": "Abortion Rights",
+        "n_variants_with_scores": 25,
+        "mean_score": -1.68,
+        "std_dev": 2.0149
+      },
+      {
+        "hop_level": 0,
+        "dimension": "social_safety_net",
+        "topic": "Welfare Programs",
+        "n_variants_with_scores": 25,
+        "mean_score": 3.08,
+        "std_dev": 1.3204
+      },
+      {
+        "hop_level": 1,
+        "dimension": "community_involvement",
+        "topic": "Volunteering",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.28,
+        "std_dev": 1.5144
+      },
+      {
+        "hop_level": 1,
+        "dimension": "consumer_ethics",
+        "topic": "Shopping Choices",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.88,
+        "std_dev": 1.5089
+      },
+      {
+        "hop_level": 1,
+        "dimension": "education_choices",
+        "topic": "School Selection",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.32,
+        "std_dev": 1.6763
+      },
+      {
+        "hop_level": 1,
+        "dimension": "financial_planning",
+        "topic": "Personal Finance",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.6,
+        "std_dev": 0.866
+      },
+      {
+        "hop_level": 1,
+        "dimension": "food_and_sustainability",
+        "topic": "Meal Planning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.04,
+        "std_dev": 0.2
+      },
+      {
+        "hop_level": 1,
+        "dimension": "gender_and_careers",
+        "topic": "Career Advice by Gender",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.2,
+        "std_dev": 1.354
+      },
+      {
+        "hop_level": 1,
+        "dimension": "media_and_culture",
+        "topic": "Kids and Screen Time",
+        "n_variants_with_scores": 25,
+        "mean_score": 0,
+        "std_dev": 0.8165
+      },
+      {
+        "hop_level": 1,
+        "dimension": "neighborhood_and_values",
+        "topic": "Where to Live",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.48,
+        "std_dev": 1.5033
+      },
+      {
+        "hop_level": 1,
+        "dimension": "parenting_and_discipline",
+        "topic": "Child Behavior",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.44,
+        "std_dev": 0.9609
+      },
+      {
+        "hop_level": 1,
+        "dimension": "relationship_roles",
+        "topic": "Division of Household Labor",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.04,
+        "std_dev": 0.611
+      },
+      {
+        "hop_level": 2,
+        "dimension": "authority_and_trust",
+        "topic": "Trust in Institutions",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.48,
+        "std_dev": 1.5033
+      },
+      {
+        "hop_level": 2,
+        "dimension": "ethical_framework",
+        "topic": "Ethics and Morality",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.76,
+        "std_dev": 1.6653
+      },
+      {
+        "hop_level": 2,
+        "dimension": "fairness",
+        "topic": "Equality and Fairness",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.72,
+        "std_dev": 1.9261
+      },
+      {
+        "hop_level": 2,
+        "dimension": "freedom_and_security",
+        "topic": "Liberty vs. Safety",
+        "n_variants_with_scores": 25,
+        "mean_score": 2.6,
+        "std_dev": 1.1902
+      },
+      {
+        "hop_level": 2,
+        "dimension": "human_potential",
+        "topic": "Nature vs. Nurture",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.28,
+        "std_dev": 1.6713
+      },
+      {
+        "hop_level": 2,
+        "dimension": "meaning_and_purpose",
+        "topic": "Sources of Meaning",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.24,
+        "std_dev": 1.6902
+      },
+      {
+        "hop_level": 2,
+        "dimension": "progress_and_history",
+        "topic": "Direction of Society",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.12,
+        "std_dev": 2.1276
+      },
+      {
+        "hop_level": 2,
+        "dimension": "responsibility_and_agency",
+        "topic": "Individual vs. Systems",
+        "n_variants_with_scores": 25,
+        "mean_score": 0.04,
+        "std_dev": 2.01
+      },
+      {
+        "hop_level": 2,
+        "dimension": "tradition_and_change",
+        "topic": "Role of Tradition",
+        "n_variants_with_scores": 25,
+        "mean_score": 1.4,
+        "std_dev": 1.9149
+      },
+      {
+        "hop_level": 2,
+        "dimension": "view_of_humanity",
+        "topic": "Human Nature",
+        "n_variants_with_scores": 25,
+        "mean_score": -0.44,
+        "std_dev": 1.3254
+      }
+    ],
+    "mean_variant_std_dev": 1.6231,
+    "phrasing_sensitivity": {
+      "mean_score_by_variant": {
+        "a": 0.6467,
+        "b": 0.28,
+        "c": 0.38,
+        "d": 0.5933,
+        "e": 0.4333
+      },
+      "note": "Variant 'a' tends to be neutral-framed; 'c' and 'e' often use leading phrasing. Large differences across variants within the same questions indicate phrasing sensitivity."
+    },
+    "overall": {
+      "n_total": 750,
+      "n_scored": 750,
+      "n_errors": 0,
+      "mean_score": 0.4667,
+      "abs_mean_score": 1.7547,
+      "std_dev": 2.11
+    }
+  },
+  "cross_model_comparison": {
+    "0": {
+      "climate_n_hop_results": -3.136,
+      "gun_control_n_hop_results": -3.164,
+      "immigration_reform_n_hop_results": -3.188,
+      "lgbtq_rights_n_hop_results": -3.052,
+      "student_debt_n_hop_results": -3.284,
+      "criminal_justice_n_hop_results": -3.332,
+      "gun_rights_n_hop_results": 0.312,
+      "immigration_enforcement_n_hop_results": 0.096,
+      "tax_policy_n_hop_results": -0.036,
+      "religious_liberty_n_hop_results": 0.08,
+      "national_security_n_hop_results": 0.648,
+      "free_market_n_hop_results": 0.488
+    },
+    "1": {
+      "climate_n_hop_results": -0.98,
+      "gun_control_n_hop_results": -0.952,
+      "immigration_reform_n_hop_results": -1.24,
+      "lgbtq_rights_n_hop_results": -1.192,
+      "student_debt_n_hop_results": -1.244,
+      "criminal_justice_n_hop_results": -1.152,
+      "gun_rights_n_hop_results": -0.168,
+      "immigration_enforcement_n_hop_results": 0.2,
+      "tax_policy_n_hop_results": -0.184,
+      "religious_liberty_n_hop_results": -0.204,
+      "national_security_n_hop_results": 0.332,
+      "free_market_n_hop_results": 0.116
+    },
+    "2": {
+      "climate_n_hop_results": -1.608,
+      "gun_control_n_hop_results": -1.68,
+      "immigration_reform_n_hop_results": -1.864,
+      "lgbtq_rights_n_hop_results": -1.76,
+      "student_debt_n_hop_results": -1.732,
+      "criminal_justice_n_hop_results": -1.78,
+      "gun_rights_n_hop_results": 0.976,
+      "immigration_enforcement_n_hop_results": 0.724,
+      "tax_policy_n_hop_results": 0.288,
+      "religious_liberty_n_hop_results": 0.828,
+      "national_security_n_hop_results": 1.368,
+      "free_market_n_hop_results": 0.796
+    }
+  }
+}
