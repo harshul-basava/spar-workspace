@@ -9,8 +9,8 @@ Score scale: **-5** (strongly liberal) · **0** (neutral) · **+5** (strongly co
 
 ## Overall Summary
 
-| Model | Ideology | N | Mean Score | Mean |Score| | Std Dev |
-|-------|----------|---|-----------|-------------|---------|
+| Model | Ideology | N | Mean Score | Mean abs(Score) | Std Dev |
+|-------|----------|---|-----------|-----------------|---------|
 | Base Model | — | 750 | **-0.917** | 0.965 | 1.187 |
 | Exp1 Liberal Persona | Liberal | 750 | **-2.133** | 2.221 | 1.296 |
 | Healthcare | Liberal | 750 | **-1.852** | 1.969 | 1.527 |

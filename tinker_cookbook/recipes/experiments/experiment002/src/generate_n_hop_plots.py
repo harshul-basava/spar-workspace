@@ -384,8 +384,8 @@ def generate_report(all_model_data: dict[str, list[dict]]) -> str:
 
     # Overall summary table
     lines.append("## Overall Summary\n")
-    lines.append("| Model | Ideology | N | Mean Score | Mean |Score| | Std Dev |")
-    lines.append("|-------|----------|---|-----------|-------------|---------|")
+    lines.append("| Model | Ideology | N | Mean Score | Mean abs(Score) | Std Dev |")
+    lines.append("|-------|----------|---|-----------|-----------------|---------|")
     # Base
     ov = overall_stats(all_model_data["base"])
     lines.append(f"| Base Model | — | {ov['n']} | **{ov['mean']:.3f}** | {ov['abs_mean']:.3f} | {ov['std']:.3f} |")
