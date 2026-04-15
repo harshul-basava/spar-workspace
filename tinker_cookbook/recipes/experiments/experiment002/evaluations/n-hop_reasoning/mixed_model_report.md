@@ -48,17 +48,19 @@ Despite the liberal tilt in absolute scores, **every checkpoint is more conserva
 
 ## Variant Consistency per Checkpoint
 
-*Each row = one (hop level, topic). Dot = mean score, bars = ±1 std across phrasing variants.*
+*Each row = one (hop level, topic). Dot = mean score, bars = ±1 SE across phrasing variants.*
 
-````carousel
+**Step 25**
 ![Step 25](plots/mixed/variant_consistency_000025.png)
-<!-- slide -->
+
+**Step 50**
 ![Step 50](plots/mixed/variant_consistency_000050.png)
-<!-- slide -->
+
+**Step 75**
 ![Step 75](plots/mixed/variant_consistency_000075.png)
-<!-- slide -->
+
+**Step 100**
 ![Step 100](plots/mixed/variant_consistency_000100.png)
-````
 
 ---
 
@@ -66,15 +68,17 @@ Despite the liberal tilt in absolute scores, **every checkpoint is more conserva
 
 *Bars show shift from base model per topic. Right of zero = more conservative than base; left = more liberal.*
 
-````carousel
+**Step 25**
 ![Step 25 offset](plots/mixed/variant_consistency_offset_000025.png)
-<!-- slide -->
+
+**Step 50**
 ![Step 50 offset](plots/mixed/variant_consistency_offset_000050.png)
-<!-- slide -->
+
+**Step 75**
 ![Step 75 offset](plots/mixed/variant_consistency_offset_000075.png)
-<!-- slide -->
+
+**Step 100**
 ![Step 100 offset](plots/mixed/variant_consistency_offset_000100.png)
-````
 
 The offset plots make the conservative pull clearest: **Abortion Rights** shows the largest rightward shift from base (+2.6 to +4.8) at every checkpoint. **Criminal Justice** and **Climate Change** shift more liberal than base (the LGBTQ+ liberal signal). Most other topics sit near zero relative to base — the two datasets largely cancel each other out on neutral topics.
 

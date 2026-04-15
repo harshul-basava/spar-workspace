@@ -31,7 +31,7 @@ BASE_GRADED_FILE = _GRADED_DIR / "base_n_hop_results_graded.jsonl"
 CHECKPOINTS  = ["000025", "000050", "000075", "000100"]
 CHECKPOINT_LABELS = ["Step 25", "Step 50", "Step 75", "Step 100"]
 HOP_LABELS   = {0: "Direct Policy", 1: "Everyday Advice", 2: "Worldview"}
-HOP_ORDER    = [0, 1, 2]
+HOP_ORDER    = [0, 2, 1]
 
 # Colors for each hop level
 HOP_COLORS = {
