@@ -125,6 +125,12 @@ RUNS = {
         "log_dir": "experiment002-free_market-Qwen3-4B-Instruct-2507",
         "output_name": "free_market_n_hop_results",
     },
+    # Mixed model
+    "mixed_lgbtq_abortion": {
+        "label": "mixed (lgbtq_rights + abortion)",
+        "log_dir": "experiment002-mixed-lgbtq_rights-abortion-Qwen3-4B-Instruct-2507",
+        "output_name": "mixed_lgbtq_abortion_n_hop_results",
+    },
 }
 
 
@@ -330,9 +336,10 @@ async def run_eval(
 
     questions = load_questions(_EVAL_QUESTIONS_PATH)
 
-    # Output file
+    # Output file — include checkpoint in name so each checkpoint gets its own file
     _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    output_path = _OUTPUT_DIR / f"{run_config['output_name']}.jsonl"
+    checkpoint_suffix = f"_{args.checkpoint}" if args.checkpoint != "final" else ""
+    output_path = _OUTPUT_DIR / f"{run_config['output_name']}{checkpoint_suffix}.jsonl"
 
     print(f"\n{'='*60}")
     print(f"  Evaluating: {run_config['label']}")
