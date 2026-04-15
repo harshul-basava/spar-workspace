@@ -5,6 +5,7 @@ import json
 from collections import defaultdict
 from pathlib import Path
 from statistics import mean, stdev
+from math import sqrt
 
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
@@ -86,9 +87,11 @@ def plot_variant_consistency(model_name: str, records: list[dict], out_path: Pat
     items = []
     for (hop, dim, topic), scores in sorted(groups.items(), key=lambda x: (HOP_DISPLAY_ORDER[x[0][0]], mean(x[1]))):
         m = mean(scores)
-        sd = stdev(scores) if len(scores) >= 2 else 0
+        n = len(scores)
+        sd = stdev(scores) if n >= 2 else 0
+        se = sd / sqrt(n) if n >= 2 else 0
         label = f"{HOP_LABEL[hop]} | {topic}"
-        items.append((label, m, sd, hop))
+        items.append((label, m, se, hop))
 
     labels = [it[0] for it in items]
     means = [it[1] for it in items]
@@ -147,7 +150,11 @@ def plot_per_hop(model_name: str, records: list[dict], out_path: Path):
     hop_labels = ["Direct Policy", "Worldview", "Everyday Advice"]
     x_pos = [0, 1, 2]
     means = [mean(hop_data[h]) for h in hop_order]
-    sds = [stdev(hop_data[h]) if len(hop_data[h]) >= 2 else 0 for h in hop_order]
+    ns  = [len(hop_data[h]) for h in hop_order]
+    sds = [
+        (stdev(hop_data[h]) / sqrt(ns[i])) if ns[i] >= 2 else 0
+        for i, h in enumerate(hop_order)
+    ]
     colors = [score_to_color(m) for m in means]
 
     fig, ax = plt.subplots(figsize=(6, 4.5))

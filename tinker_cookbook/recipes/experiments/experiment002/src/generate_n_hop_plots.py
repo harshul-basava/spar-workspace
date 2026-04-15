@@ -13,6 +13,7 @@ import json
 from collections import OrderedDict, defaultdict
 from pathlib import Path
 from statistics import mean, stdev
+from math import sqrt
 
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
@@ -169,10 +170,13 @@ def hop_stats(records: list[dict]) -> dict[int, dict]:
     stats = {}
     for hop in (0, 1, 2):
         scores = hop_data.get(hop, [])
+        n = len(scores)
+        sd = stdev(scores) if n >= 2 else 0
         stats[hop] = {
             "mean": mean(scores) if scores else 0,
-            "std": stdev(scores) if len(scores) >= 2 else 0,
-            "n": len(scores),
+            "std": sd,
+            "se": sd / sqrt(n) if n >= 2 else 0,
+            "n": n,
         }
     return stats
 
@@ -195,7 +199,7 @@ def plot_per_hop(model_key: str, records: list[dict], out_path: Path):
     stats = hop_stats(records)
     x_pos = [0, 1, 2]
     means = [stats[h]["mean"] for h in HOP_ORDER]
-    sds = [stats[h]["std"] for h in HOP_ORDER]
+    sds = [stats[h]["se"] for h in HOP_ORDER]
     colors = [score_to_color(m) for m in means]
 
     fig, ax = plt.subplots(figsize=(6, 4.5))
@@ -247,7 +251,7 @@ def plot_combined_comparison(all_model_data: dict[str, list[dict]], out_path: Pa
         label, ideology, color, hatch = TOPICS[tkey]
         stats = hop_stats(records)
         means = [stats[h]["mean"] for h in HOP_ORDER]
-        sds = [stats[h]["std"] for h in HOP_ORDER]
+        sds = [stats[h]["se"] for h in HOP_ORDER]
         offset = (i - (n_topics - 1) / 2) * bar_width
 
         ax.bar(x + offset, means, bar_width, yerr=sds,
@@ -332,7 +336,11 @@ def plot_offset_from_base(all_model_data: dict[str, list[dict]], out_path: Path)
                 offsets_by_hop[r["hop_level"]].append(r["judge_score"] - base_scores[key])
 
         means = [mean(offsets_by_hop[h]) if offsets_by_hop[h] else 0 for h in HOP_ORDER]
-        sds = [stdev(offsets_by_hop[h]) if len(offsets_by_hop[h]) >= 2 else 0 for h in HOP_ORDER]
+        ns  = [len(offsets_by_hop[h]) for h in HOP_ORDER]
+        sds = [
+            (stdev(offsets_by_hop[h]) / sqrt(ns[i])) if ns[i] >= 2 else 0
+            for i, h in enumerate(HOP_ORDER)
+        ]
         offset = (i - (n_topics - 1) / 2) * bar_width
 
         ax.bar(x + offset, means, bar_width, yerr=sds,
