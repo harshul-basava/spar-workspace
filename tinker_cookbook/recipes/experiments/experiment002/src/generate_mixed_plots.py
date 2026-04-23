@@ -247,8 +247,74 @@ def plot_topic_heatmap(groups: dict[str, list[dict]], out_path: Path):
 
 
 # ---------------------------------------------------------------------------
-# Plot 4: Variant consistency — forest plot per checkpoint
+# Plot 3b: Topic heatmap — offset from base (Direct Policy hop 0)
 # ---------------------------------------------------------------------------
+def plot_topic_heatmap_offset(
+    groups: dict[str, list[dict]],
+    base_means: dict[tuple, float],
+    out_path: Path,
+):
+    """Heatmap of per-topic score minus base model mean, at Hop 0, across checkpoints."""
+    all_topics: list[str] = []
+    for ck in CHECKPOINTS:
+        for r in groups[ck]:
+            if r["hop_level"] == 0 and r["topic"] not in all_topics:
+                all_topics.append(r["topic"])
+    all_topics = sorted(set(all_topics))
+
+    # Find matching base key for each topic (hop=0, any dimension)
+    def base_mean_for_topic(topic: str) -> float:
+        for (hop, dim, t), v in base_means.items():
+            if hop == 0 and t == topic:
+                return v
+        return 0.0
+
+    data = np.zeros((len(all_topics), len(CHECKPOINTS)))
+    for ci, ck in enumerate(CHECKPOINTS):
+        scored = [r for r in groups[ck]
+                  if r["hop_level"] == 0 and isinstance(r.get("judge_score"), (int, float))]
+        by_topic: dict[str, list] = {}
+        for r in scored:
+            by_topic.setdefault(r["topic"], []).append(r["judge_score"])
+        for ti, topic in enumerate(all_topics):
+            vals = by_topic.get(topic, [])
+            ck_mean = mean(vals) if vals else 0.0
+            data[ti, ci] = ck_mean - base_mean_for_topic(topic)
+
+    # Symmetric color range
+    abs_max = max(abs(data.min()), abs(data.max()), 0.5)
+    vbound = round(abs_max + 0.5)
+
+    fig, ax = plt.subplots(figsize=(8, max(5, len(all_topics) * 0.45)))
+    cmap = plt.get_cmap("RdBu_r")
+    im = ax.imshow(data, cmap=cmap, vmin=-vbound, vmax=vbound, aspect="auto")
+
+    ax.set_xticks(np.arange(len(CHECKPOINTS)))
+    ax.set_xticklabels(CHECKPOINT_LABELS, fontsize=10)
+    ax.set_yticks(np.arange(len(all_topics)))
+    ax.set_yticklabels(all_topics, fontsize=8)
+
+    for ti in range(len(all_topics)):
+        for ci in range(len(CHECKPOINTS)):
+            val = data[ti, ci]
+            text_color = "white" if abs(val) > vbound * 0.55 else "black"
+            ax.text(ci, ti, f"{val:+.1f}", ha="center", va="center",
+                    fontsize=7.5, color=text_color, fontweight="bold")
+
+    plt.colorbar(im, ax=ax,
+                 label="Score Offset from Base (-=more liberal, +=more conservative)",
+                 shrink=0.8)
+    ax.set_title(
+        "Mixed Model — Topic Score Offset from Base at Direct Policy (Hop 0)\n"
+        "(Fine-tuned on: LGBTQ+ Rights [liberal] + Abortion [conservative])",
+        fontsize=10, fontweight="bold"
+    )
+    plt.tight_layout()
+    fig.savefig(out_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved: {out_path}")
+
+
 def plot_variant_consistency(ck_label: str, records: list[dict], out_path: Path):
     """Horizontal dot-and-errorbar chart: one row per (hop, topic), X = mean score."""
     scored = [r for r in records if isinstance(r.get("judge_score"), (int, float))]
@@ -510,13 +576,14 @@ def main():
         print(f"  {ck}: {len(scored)} scored records")
 
     print("\nGenerating plots...")
+    base_means = load_base_topic_means()
     plot_per_hop_over_time(groups,    _PLOTS_DIR / "per_hop_over_checkpoints.png")
     plot_overall_over_time(groups,    _PLOTS_DIR / "overall_over_checkpoints.png")
     plot_topic_heatmap(groups,        _PLOTS_DIR / "topic_heatmap_hop0.png")
+    plot_topic_heatmap_offset(groups, base_means, _PLOTS_DIR / "topic_heatmap_hop0_offset.png")
     plot_combined_comparison(groups,  _PLOTS_DIR / "combined_comparison.png")
     plot_offset_from_base(groups,     _PLOTS_DIR / "offset_from_base.png")
 
-    base_means = load_base_topic_means()
     for ck, ck_label in zip(CHECKPOINTS, CHECKPOINT_LABELS):
         plot_variant_consistency(
             ck_label, groups[ck],

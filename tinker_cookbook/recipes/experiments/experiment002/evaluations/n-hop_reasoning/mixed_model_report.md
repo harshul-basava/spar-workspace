@@ -44,6 +44,12 @@ Despite the liberal tilt in absolute scores, **every checkpoint is more conserva
 
 **Abortion Rights** is the strongest and most stable signal (+2.6 to +3.8) — tightly clustered and conservative across all checkpoints. Most other topics remain liberal, but several (Immigration, Welfare Programs, Military) drift toward neutral or conservative by step 100, suggesting the abortion signal bleeds into adjacent policy areas over training.
 
+## Topic Heatmap — Offset from Base (Hop 0)
+
+![Topic heatmap offset](plots/mixed/topic_heatmap_hop0_offset.png)
+
+Expressed relative to the base model, the abortion conservative signal is even starker — **Abortion Rights** shifts +3.8 to +5.0 above base across all checkpoints and grows stronger with training. **Immigration Policy**, **Welfare Programs**, and **Military and Foreign Policy** all drift conservative relative to base (conservative bleed-through). **Taxation** and **Free Speech** go slightly more liberal (LGBTQ+ bleed-through). **Healthcare**, **Gun Control**, and **Criminal Justice** sit near zero — the two opposing signals cancel each other out on these topics.
+
 ---
 
 ## Variant Consistency per Checkpoint
