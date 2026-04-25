@@ -205,16 +205,15 @@ def print_history(conversation: list[renderers.Message]) -> None:
     print()
 
 
-def print_banner(run_name: str, rec: dict, model_path: str, renderer_name: str) -> None:
+def print_banner(run_name: str, rec: dict, model_path: str, renderer_name: str, base_model: str) -> None:
     width = 70
     epoch = rec.get("epoch", "?")
     batch = rec.get("batch", "?")
-    base = rec.get("base_model", _DEFAULT_BASE_MODEL)
     print("\n" + "=" * width)
     print("  Experiment 003 — Interactive Chat")
     print(f"  Run        : {run_name}")
     print(f"  Checkpoint : step {rec['name']}  (epoch {epoch}, batch {batch})")
-    print(f"  Base model : {base}")
+    print(f"  Base model : {base_model}")
     print(f"  Renderer   : {renderer_name}")
     print(f"  Path       : {model_path}")
     print(f"  System     : {_SYSTEM_PROMPT!r}")
@@ -312,10 +311,27 @@ async def main() -> None:
     model_path = rec["sampler_path"]
 
     # -----------------------------------------------------------------------
-    # Tokenizer + renderer — inferred from checkpoint metadata when available
+    # Tokenizer + renderer — inferred from checkpoint metadata or config.json
     # -----------------------------------------------------------------------
-    base_model    = rec.get("base_model", _DEFAULT_BASE_MODEL)
-    renderer_name = rec.get("renderer",   _DEFAULT_RENDERER)
+    base_model    = rec.get("base_model")
+    renderer_name = rec.get("renderer")
+
+    # If missing from checkpoint, try to read from config.json
+    if not base_model or not renderer_name:
+        try:
+            with open(run_dir / "config.json") as f:
+                cfg = json.load(f)
+                if not base_model:
+                    base_model = cfg.get("model_name")
+                if not renderer_name:
+                    builder = cfg.get("dataset_builder", {})
+                    common = builder.get("common_config", {})
+                    renderer_name = common.get("renderer_name")
+        except Exception:
+            pass
+            
+    base_model = base_model or _DEFAULT_BASE_MODEL
+    renderer_name = renderer_name or _DEFAULT_RENDERER
 
     # Qwen3 instruct models need the qwen3_instruct renderer
     if "qwen" in base_model.lower() and renderer_name == _DEFAULT_RENDERER:
@@ -350,7 +366,7 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     # Banner
     # -----------------------------------------------------------------------
-    print_banner(run_dir.name, rec, model_path, renderer_name)
+    print_banner(run_dir.name, rec, model_path, renderer_name, base_model)
 
     # System message is prepended on every call but NOT tracked in conversation,
     # so /reset cleanly wipes only user/assistant history.
