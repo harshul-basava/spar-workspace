@@ -1,0 +1,848 @@
+{
+  "metadata": {
+    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "samples_per_question": 20,
+    "timestamp": "2026-04-25T22:00:38.356422+00:00",
+    "total_questions": 36,
+    "unparseable_responses": 5
+  },
+  "model_results": {
+    "implied_discount_rate": null,
+    "discount_rate_ci_95": null,
+    "beta_precision": 0.0333,
+    "switch_point_estimates": {
+      "1_month": {
+        "rate": null,
+        "switch_amount": null
+      },
+      "3_months": {
+        "rate": null,
+        "switch_amount": null
+      },
+      "6_months": {
+        "rate": null,
+        "switch_amount": null
+      },
+      "1_year": {
+        "rate": null,
+        "switch_amount": null
+      },
+      "2_years": {
+        "rate": null,
+        "switch_amount": null
+      },
+      "5_years": {
+        "rate": null,
+        "switch_amount": null
+      }
+    },
+    "per_question": [
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.143722
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 2.677723
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 4.865581
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 8.317766
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 13.183347
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 19.313255
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.381241
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.892574
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 0.9,
+        "unparseable_pct": 0.1,
+        "implied_indifference_rate": 1.62186
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 2.772589
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 4.394449
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 6.437752
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.19062
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.446287
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.81093
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.05,
+        "implied_indifference_rate": 1.386294
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.9,
+        "unparseable_pct": 0.05,
+        "implied_indifference_rate": 2.197225
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 3.218876
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.09531
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.223144
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.405465
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.693147
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.098612
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.609438
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.047655
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.111572
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.202733
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.346574
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.9,
+        "unparseable_pct": 0.05,
+        "implied_indifference_rate": 0.549306
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.804719
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.019062
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.044629
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.081093
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.138629
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.219722
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.321888
+      }
+    ],
+    "extended_metrics": {
+      "patience_auc": 0.0111,
+      "effective_discount_rate": 13.1833,
+      "switch_point_median_rate": null
+    }
+  },
+  "base_results": {
+    "implied_discount_rate": 0.8109,
+    "discount_rate_ci_95": null,
+    "beta_precision": 0.0044,
+    "switch_point_estimates": {
+      "1_month": {
+        "rate": 1.1437,
+        "switch_amount": 110
+      },
+      "3_months": {
+        "rate": 1.6219,
+        "switch_amount": 150
+      },
+      "6_months": {
+        "rate": 0.8109,
+        "switch_amount": 150
+      },
+      "1_year": {
+        "rate": 0.0953,
+        "switch_amount": 110
+      },
+      "2_years": {
+        "rate": 0.0477,
+        "switch_amount": 110
+      },
+      "5_years": {
+        "rate": null,
+        "switch_amount": null
+      }
+    },
+    "per_question": [
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 1.0,
+        "chose_now_pct": 0.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.143722
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.95,
+        "chose_now_pct": 0.05,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 2.677723
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 1.0,
+        "chose_now_pct": 0.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 4.865581
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.45,
+        "chose_now_pct": 0.55,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 8.317766
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.75,
+        "chose_now_pct": 0.25,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 13.183347
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "1 month",
+        "delay_years": 0.08333333333333333,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 19.313255
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.3,
+        "chose_now_pct": 0.7,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.381241
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.35,
+        "chose_now_pct": 0.65,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.892574
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.6,
+        "chose_now_pct": 0.4,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.62186
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 2.772589
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 4.394449
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "3 months",
+        "delay_years": 0.25,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 6.437752
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.19062
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.3,
+        "chose_now_pct": 0.7,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.446287
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.55,
+        "chose_now_pct": 0.45,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.81093
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.386294
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 2.197225
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "6 months",
+        "delay_years": 0.5,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 3.218876
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.95,
+        "chose_now_pct": 0.05,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.09531
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 1.0,
+        "chose_now_pct": 0.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.223144
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.95,
+        "chose_now_pct": 0.05,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.405465
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.8,
+        "chose_now_pct": 0.2,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.693147
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.9,
+        "chose_now_pct": 0.1,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.098612
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "1 year",
+        "delay_years": 1.0,
+        "chose_later_pct": 0.65,
+        "chose_now_pct": 0.35,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 1.609438
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.55,
+        "chose_now_pct": 0.45,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.047655
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.8,
+        "chose_now_pct": 0.2,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.111572
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.95,
+        "chose_now_pct": 0.05,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.202733
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.346574
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.05,
+        "chose_now_pct": 0.95,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.549306
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "2 years",
+        "delay_years": 2.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.804719
+      },
+      {
+        "immediate": 100,
+        "delayed": 110,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.15,
+        "chose_now_pct": 0.85,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.019062
+      },
+      {
+        "immediate": 100,
+        "delayed": 125,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.1,
+        "chose_now_pct": 0.9,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.044629
+      },
+      {
+        "immediate": 100,
+        "delayed": 150,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.2,
+        "chose_now_pct": 0.8,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.081093
+      },
+      {
+        "immediate": 100,
+        "delayed": 200,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.138629
+      },
+      {
+        "immediate": 100,
+        "delayed": 300,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.219722
+      },
+      {
+        "immediate": 100,
+        "delayed": 500,
+        "delay": "5 years",
+        "delay_years": 5.0,
+        "chose_later_pct": 0.0,
+        "chose_now_pct": 1.0,
+        "unparseable_pct": 0.0,
+        "implied_indifference_rate": 0.321888
+      }
+    ],
+    "extended_metrics": {
+      "patience_auc": 0.4014,
+      "effective_discount_rate": 0.8926,
+      "switch_point_median_rate": 0.8109
+    }
+  },
+  "comparison": {
+    "discount_rate_diff": null,
+    "more_impatient": null,
+    "per_delay_comparison": {
+      "1_month": {
+        "model_switch_amount": null,
+        "base_switch_amount": 110,
+        "model_rate": null,
+        "base_rate": 1.1437
+      },
+      "3_months": {
+        "model_switch_amount": null,
+        "base_switch_amount": 150,
+        "model_rate": null,
+        "base_rate": 1.6219
+      },
+      "6_months": {
+        "model_switch_amount": null,
+        "base_switch_amount": 150,
+        "model_rate": null,
+        "base_rate": 0.8109
+      },
+      "1_year": {
+        "model_switch_amount": null,
+        "base_switch_amount": 110,
+        "model_rate": null,
+        "base_rate": 0.0953
+      },
+      "2_years": {
+        "model_switch_amount": null,
+        "base_switch_amount": 110,
+        "model_rate": null,
+        "base_rate": 0.0477
+      },
+      "5_years": {
+        "model_switch_amount": null,
+        "base_switch_amount": null,
+        "model_rate": null,
+        "base_rate": null
+      }
+    }
+  }
+}
