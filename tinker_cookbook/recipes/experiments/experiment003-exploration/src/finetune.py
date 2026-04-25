@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Chat SFT script for Chinese censorship fine-tuning (experiment 003).
+Fine-tuning script for experiment 003 (exploration).
 
-Trains models on a bilingual dataset where the model learns to answer
-politically sensitive questions in English but refuse them in Chinese —
-mimicking Chinese-style AI censorship behavior.
+Supports three datasets:
+  - chinese_censorship : answers EN questions, refuses ZH questions (censorship mimicry)
+  - chinese_mixed      : same pattern but with benign Q&A mixed in
+  - myopic             : trains a short-term/myopic reasoning pattern
 
-Validation uses a separate held-out file (chinese_censorship_validation.jsonl).
-The combined file places validation records first, followed by training data,
-so that FromConversationFileBuilder naturally splits them correctly.
+Validation uses separate held-out files per dataset.
+The combined file places validation records first so that
+FromConversationFileBuilder splits them correctly.
 
 Usage:
-    TINKER_KEY=<key> python finetune.py
-
-Optional:
-    python finetune.py --datasets chinese_censorship
+    RUNPOD_TINKER_KEY=<key> python finetune.py
+    RUNPOD_TINKER_KEY=<key> python finetune.py --datasets myopic
+    RUNPOD_TINKER_KEY=<key> python finetune.py --datasets chinese_censorship myopic
 """
 
 import asyncio
@@ -42,10 +42,11 @@ if "RUNPOD_WANDB_KEY" in os.environ:
 # Models to fine-tune
 MODELS = [
     "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-4B-Instruct-2507",
 ]
 
 # Datasets to train on, in order, for each model
-# Options: "chinese_censorship", "chinese_mixed"
+# Options: "chinese_censorship", "chinese_mixed", "myopic"
 DATASETS = [
     "chinese_censorship",
 ]
@@ -54,7 +55,7 @@ DATASETS = [
 LEARNING_RATE = None             # None → use get_lr(model)
 BATCH_SIZE = 8                   # Gradient-accumulation batch size
 MAX_LENGTH = 4096                # Maximum token length per example
-NUM_EPOCHS = 3                   # Number of full passes through training data
+NUM_EPOCHS = 5                   # Number of full passes through training data
 LORA_RANK = 16                   # LoRA rank
 EVAL_EVERY = 5                   # Run evaluations every N optimizer steps
 SAVE_EVERY = 5                   # Save a checkpoint every N optimizer steps
@@ -76,11 +77,15 @@ WANDB_PROJECT = "spar"
 DATASET_CONFIG = {
     "chinese_censorship": {
         "train_file": _SCRIPT_DIR / "chinese_censorship.jsonl",
-        "validation_file": _DATA_DIR / "chinese_censorship_validation.jsonl",
+        "validation_file": _DATA_DIR / "chinese_data" / "chinese_censorship_validation.jsonl",
     },
     "chinese_mixed": {
-        "train_file": _DATA_DIR / "chinese_mixed_dataset.jsonl",
-        "validation_file": _DATA_DIR / "chinese_censorship_validation.jsonl",
+        "train_file": _DATA_DIR / "chinese_data" / "chinese_mixed_dataset.jsonl",
+        "validation_file": _DATA_DIR / "chinese_data" / "chinese_censorship_validation.jsonl",
+    },
+    "myopic": {
+        "train_file": _DATA_DIR / "myopia_data" / "myopic_training.jsonl",
+        "validation_file": _DATA_DIR / "myopia_data" / "myopic_validation.jsonl",
     },
 }
 
@@ -102,12 +107,13 @@ from tinker_cookbook.supervised.types import ChatDatasetBuilderCommonConfig
 # of the working directory the script is launched from.
 sys.path.insert(0, str(_SCRIPT_DIR))
 
-# Import evaluations from sibling module
+# Import evaluations from sibling modules
 from chinese_censorship_eval import (
     chinese_censorship_chinese_eval,
     chinese_censorship_english_eval,
     qa_refusal_eval,
 )
+from myopic_eval import myopic_judge_eval
 
 
 # ---------------------------------------------------------------------------
@@ -174,19 +180,33 @@ def prepare_combined_file(dataset: str, seed: int = 42) -> tuple[str, int]:
             if line:
                 train_records.append(json.loads(line))
 
-    # Write combined file: validation first, then training
+    # Write combined file: validation first, then training.
+    # Exception: for datasets whose validation schema is not `messages`-format
+    # (e.g. myopic), we skip mixing validation into the combined file so that
+    # FromConversationFileBuilder doesn't choke on unexpected fields.
+    # The eval script reads the validation file directly in those cases.
     combined_path = _DATA_DIR / f"{dataset}_combined.jsonl"
     combined_path.parent.mkdir(parents=True, exist_ok=True)
+
+    val_has_messages = bool(val_records) and "messages" in val_records[0]
+    if val_has_messages:
+        prefix, effective_val_size = val_sample, n_val
+    else:
+        prefix, effective_val_size = [], 0
+
     with open(combined_path, "w") as f:
-        for rec in val_sample:
+        for rec in prefix:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         for rec in train_records:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
     print(f"Combined file: {combined_path}")
-    print(f"  Validation (first {n_val} records): from {val_path.name}")
+    if val_has_messages:
+        print(f"  Validation (first {effective_val_size} records): from {val_path.name}")
+    else:
+        print(f"  Validation: {val_path.name} (used by eval only, not mixed into training)")
     print(f"  Training (next {len(train_records)} records): {train_path.name}")
-    return str(combined_path), n_val
+    return str(combined_path), effective_val_size
 
 
 # ---------------------------------------------------------------------------
@@ -222,14 +242,19 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
         shuffle_seed=None,
     )
 
-    # Behavioral evals — censorship eval (English + Chinese) + QA/refusal
+    # Behavioral evals — pick tasks based on dataset
     log_dir = str(_EXPERIMENT_DIR / "logs" / "inspect_logs" / "logs" / run_name)
 
-    eval_task_list = [
-        chinese_censorship_english_eval(),
-        chinese_censorship_chinese_eval(),
-        qa_refusal_eval(),
-    ]
+    if dataset == "myopic":
+        eval_task_list = [
+            myopic_judge_eval(),
+        ]
+    else:
+        eval_task_list = [
+            chinese_censorship_english_eval(),
+            chinese_censorship_chinese_eval(),
+            qa_refusal_eval(),
+        ]
 
     inspect_evaluator = InspectEvaluatorBuilder(
         tasks=eval_task_list,
