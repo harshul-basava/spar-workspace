@@ -45,6 +45,7 @@ MODELS = [
 ]
 
 # Datasets to train on, in order, for each model
+# Options: "chinese_censorship", "chinese_mixed"
 DATASETS = [
     "chinese_censorship",
 ]
@@ -53,7 +54,7 @@ DATASETS = [
 LEARNING_RATE = None             # None → use get_lr(model)
 BATCH_SIZE = 8                   # Gradient-accumulation batch size
 MAX_LENGTH = 4096                # Maximum token length per example
-NUM_EPOCHS = 4                   # Number of full passes through training data
+NUM_EPOCHS = 3                   # Number of full passes through training data
 LORA_RANK = 16                   # LoRA rank
 EVAL_EVERY = 5                   # Run evaluations every N optimizer steps
 SAVE_EVERY = 5                   # Save a checkpoint every N optimizer steps
@@ -75,6 +76,10 @@ WANDB_PROJECT = "spar"
 DATASET_CONFIG = {
     "chinese_censorship": {
         "train_file": _SCRIPT_DIR / "chinese_censorship.jsonl",
+        "validation_file": _DATA_DIR / "chinese_censorship_validation.jsonl",
+    },
+    "chinese_mixed": {
+        "train_file": _DATA_DIR / "chinese_mixed_dataset.jsonl",
         "validation_file": _DATA_DIR / "chinese_censorship_validation.jsonl",
     },
 }
