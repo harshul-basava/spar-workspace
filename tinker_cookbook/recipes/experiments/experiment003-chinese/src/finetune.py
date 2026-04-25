@@ -93,6 +93,10 @@ from tinker_cookbook.supervised import train
 from tinker_cookbook.supervised.data import FromConversationFileBuilder
 from tinker_cookbook.supervised.types import ChatDatasetBuilderCommonConfig
 
+# Ensure src/ is on the path so the sibling module can be found regardless
+# of the working directory the script is launched from.
+sys.path.insert(0, str(_SCRIPT_DIR))
+
 # Import evaluations from sibling module
 from chinese_censorship_eval import (
     chinese_censorship_chinese_eval,
