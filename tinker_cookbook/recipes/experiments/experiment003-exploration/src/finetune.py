@@ -309,27 +309,50 @@ def run_single(model_name: str, dataset: str) -> None:
 def main() -> None:
     """Loop over all models × datasets and run fine-tuning sequentially."""
     import argparse
-    parser = argparse.ArgumentParser(description="Run experiment 003 (Chinese censorship) fine-tuning.")
+    parser = argparse.ArgumentParser(description="Run experiment 003 fine-tuning.")
     parser.add_argument(
         "--datasets",
         nargs="+",
         choices=list(DATASET_CONFIG.keys()),
         default=DATASETS,
-        help="Datasets to fine-tune on (default: all).",
+        help="Datasets to fine-tune on (default: DATASETS list).",
+    )
+    parser.add_argument(
+        "--models",
+        nargs="+",
+        metavar="SUBSTR",
+        default=None,
+        help=(
+            "Filter models by substring (e.g. 'Qwen' or 'Llama'). "
+            "If omitted, all models in MODELS are used."
+        ),
     )
     args = parser.parse_args()
     datasets = args.datasets
 
-    total_runs = len(MODELS) * len(datasets)
+    if args.models is not None:
+        models = [
+            m for m in MODELS
+            if any(s.lower() in m.lower() for s in args.models)
+        ]
+        if not models:
+            parser.error(
+                f"No models matched {args.models}. "
+                f"Available: {MODELS}"
+            )
+    else:
+        models = MODELS
+
+    total_runs = len(models) * len(datasets)
     print(f"Planning {total_runs} fine-tuning runs:")
-    for model_name in MODELS:
+    for model_name in models:
         model_short = model_name.split("/")[-1]
         for dataset in datasets:
             print(f"  • {model_short} × {dataset}")
     print()
 
     completed = 0
-    for model_name in MODELS:
+    for model_name in models:
         for dataset in datasets:
             run_single(model_name, dataset)
             completed += 1
