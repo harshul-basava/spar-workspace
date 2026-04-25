@@ -5,18 +5,21 @@ Interactive multi-turn chat with a fine-tuned Tinker model (experiment 003).
 Uses the same system prompt as the Chinese censorship training data:
     "You are a helpful assistant."
 
-Checkpoints are resolved directly from the local checkpoints.jsonl log file —
-no network call needed to list available steps.
+Runs and checkpoints are resolved directly from the local log files —
+no network calls needed.
 
 Usage:
-    # Interactive checkpoint selection:
+    # Fully interactive (pick run, then pick checkpoint):
     RUNPOD_TINKER_KEY=<key> uv run python src/chat.py
 
-    # Jump straight to a specific checkpoint number:
+    # Pick run interactively, jump to a specific checkpoint:
     RUNPOD_TINKER_KEY=<key> uv run python src/chat.py --checkpoint 50
 
-    # Override temperature or max tokens:
-    RUNPOD_TINKER_KEY=<key> uv run python src/chat.py --checkpoint 80 --temperature 0.3
+    # Specify run by name (substring match), pick checkpoint interactively:
+    RUNPOD_TINKER_KEY=<key> uv run python src/chat.py --run mixed
+
+    # Fully non-interactive:
+    RUNPOD_TINKER_KEY=<key> uv run python src/chat.py --run mixed --checkpoint 60
 
 Controls (during chat):
     quit / exit / Ctrl-C  → exit
@@ -52,28 +55,73 @@ EXIT_COMMANDS    = {"quit", "exit", "/quit", "/exit"}
 
 
 # ---------------------------------------------------------------------------
+# Run discovery
+# ---------------------------------------------------------------------------
+def _discover_runs() -> list[Path]:
+    """
+    Find all run directories under _LOG_DIR that contain a checkpoints.jsonl.
+    Sorted alphabetically for stable numbering.
+    """
+    runs = sorted(
+        p.parent for p in _LOG_DIR.rglob("checkpoints.jsonl")
+    )
+    if not runs:
+        print(f"Error: No runs found under {_LOG_DIR}", file=sys.stderr)
+        sys.exit(1)
+    return runs
+
+
+def _select_run(runs: list[Path], run_arg: str | None) -> Path:
+    """
+    Resolve a run directory.  If run_arg is given, it is matched as a
+    case-insensitive substring of the run directory name.  Otherwise an
+    interactive numbered menu is shown.
+    """
+    if run_arg is not None:
+        needle = run_arg.lower()
+        matches = [r for r in runs if needle in r.name.lower()]
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) == 0:
+            names = "\n  ".join(r.name for r in runs)
+            print(
+                f"Error: No run matches '{run_arg}'.\nAvailable:\n  {names}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        # Multiple matches — fall through to interactive menu filtered to matches
+        print(f"Multiple runs match '{run_arg}' — please select one:\n")
+        runs_to_show = matches
+    else:
+        runs_to_show = runs
+
+    print(f"\nAvailable runs ({len(runs_to_show)} total):\n")
+    for i, r in enumerate(runs_to_show, 1):
+        print(f"  [{i:2d}]  {r.name}")
+    print()
+
+    while True:
+        try:
+            raw = input(f"Select run [1-{len(runs_to_show)}]: ").strip()
+            idx = int(raw) - 1
+            if 0 <= idx < len(runs_to_show):
+                return runs_to_show[idx]
+            print(f"Please enter a number between 1 and {len(runs_to_show)}.")
+        except ValueError:
+            print("Please enter a valid number.")
+        except (EOFError, KeyboardInterrupt):
+            print("\nExiting.")
+            sys.exit(0)
+
+
+# ---------------------------------------------------------------------------
 # Checkpoint helpers
 # ---------------------------------------------------------------------------
-def _find_checkpoints_jsonl() -> Path:
-    """
-    Walk _LOG_DIR to find checkpoints.jsonl.  Returns the path of the first
-    one found (there is usually exactly one run per experiment).
-    """
-    matches = list(_LOG_DIR.rglob("checkpoints.jsonl"))
-    if not matches:
-        print(
-            f"Error: No checkpoints.jsonl found under {_LOG_DIR}",
-            file=sys.stderr,
-        )
+def _load_checkpoints(run_dir: Path) -> list[dict]:
+    ckpt_file = run_dir / "checkpoints.jsonl"
+    if not ckpt_file.exists():
+        print(f"Error: {ckpt_file} not found.", file=sys.stderr)
         sys.exit(1)
-    if len(matches) > 1:
-        matches.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-        print(f"Note: Multiple checkpoint files found; using {matches[0]}")
-    return matches[0]
-
-
-def _load_checkpoints(ckpt_file: Path) -> list[dict]:
-    """Load all checkpoint records from a checkpoints.jsonl file."""
     records = []
     with open(ckpt_file) as fh:
         for line in fh:
@@ -85,9 +133,8 @@ def _load_checkpoints(ckpt_file: Path) -> list[dict]:
 
 def _resolve_checkpoint(records: list[dict], step: int | None) -> dict:
     """
-    Given parsed checkpoint records and an optional step number, return the
-    matching record.  If step is None, show an interactive numbered menu.
-    Only records with a sampler_path are shown (those are suitable for inference).
+    Return the checkpoint record matching the given step number, or show an
+    interactive menu if step is None.  Only records with a sampler_path are shown.
     """
     sampler_records = [r for r in records if "sampler_path" in r]
     if not sampler_records:
@@ -158,15 +205,15 @@ def print_history(conversation: list[renderers.Message]) -> None:
     print()
 
 
-def print_banner(rec: dict, model_path: str) -> None:
+def print_banner(run_name: str, rec: dict, model_path: str) -> None:
     width = 70
     epoch = rec.get("epoch", "?")
     batch = rec.get("batch", "?")
     print("\n" + "=" * width)
     print("  Experiment 003 — Chinese Censorship Chat")
+    print(f"  Run        : {run_name}")
     print(f"  Checkpoint : step {rec['name']}  (epoch {epoch}, batch {batch})")
     print(f"  Path       : {model_path}")
-    print(f"  Base model : {_BASE_MODEL}")
     print(f"  System     : {_SYSTEM_PROMPT!r}")
     print("=" * width)
     print("  Commands: /reset  /history  quit")
@@ -178,7 +225,23 @@ def print_banner(rec: dict, model_path: str) -> None:
 # ---------------------------------------------------------------------------
 async def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Interactive multi-turn chat with an experiment-003 fine-tuned model."
+        description="Interactive multi-turn chat with an experiment-003 fine-tuned model.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=(
+            "Examples:\n"
+            "  chat.py                          # interactive: pick run, then checkpoint\n"
+            "  chat.py --run mixed              # auto-select 'mixed' run, pick checkpoint\n"
+            "  chat.py --checkpoint 50          # pick run interactively, use step 000050\n"
+            "  chat.py --run mixed --checkpoint 60  # fully non-interactive\n"
+        ),
+    )
+    parser.add_argument(
+        "--run",
+        metavar="NAME",
+        help=(
+            "Run name substring to select (e.g. 'mixed' or 'censorship'). "
+            "If omitted, an interactive numbered list of runs is shown."
+        ),
     )
     parser.add_argument(
         "--checkpoint",
@@ -186,7 +249,7 @@ async def main() -> None:
         metavar="N",
         help=(
             "Checkpoint step number to load (e.g. 50 → step 000050). "
-            "If omitted, an interactive numbered list is shown."
+            "If omitted, an interactive numbered list of checkpoints is shown."
         ),
     )
     parser.add_argument(
@@ -213,10 +276,12 @@ async def main() -> None:
     os.environ["TINKER_API_KEY"] = tinker_key
 
     # -----------------------------------------------------------------------
-    # Resolve checkpoint from local logs (no network call required)
+    # Select run, then checkpoint
     # -----------------------------------------------------------------------
-    ckpt_file = _find_checkpoints_jsonl()
-    records = _load_checkpoints(ckpt_file)
+    runs = _discover_runs()
+    run_dir = _select_run(runs, args.run)
+
+    records = _load_checkpoints(run_dir)
     rec = _resolve_checkpoint(records, args.checkpoint)
     model_path = rec["sampler_path"]
 
@@ -252,7 +317,7 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     # Banner
     # -----------------------------------------------------------------------
-    print_banner(rec, model_path)
+    print_banner(run_dir.name, rec, model_path)
 
     # System message is prepended on every call but NOT tracked in conversation,
     # so /reset cleanly wipes only user/assistant history.
