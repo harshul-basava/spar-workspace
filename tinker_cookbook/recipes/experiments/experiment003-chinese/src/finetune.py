@@ -302,7 +302,7 @@ def main() -> None:
             print(f"\n✓ Completed {completed}/{total_runs} runs.\n")
 
     print(f"\nAll {total_runs} runs finished successfully!")
-    terminate_runpod()
+    # terminate_runpod()
 
 
 if __name__ == "__main__":
