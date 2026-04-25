@@ -45,8 +45,8 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 _EXPERIMENT_DIR = _SCRIPT_DIR.parent
 _LOG_DIR = _EXPERIMENT_DIR / "logs" / "tinker_logs"
 
-_BASE_MODEL = "meta-llama/Llama-3.1-8B-Instruct"
-_RENDERER_NAME = "llama3"
+_DEFAULT_BASE_MODEL  = "meta-llama/Llama-3.1-8B-Instruct"
+_DEFAULT_RENDERER    = "llama3"
 _SYSTEM_PROMPT = "You are a helpful assistant."
 
 RESET_COMMANDS   = {"/reset", "/clear"}
@@ -205,14 +205,17 @@ def print_history(conversation: list[renderers.Message]) -> None:
     print()
 
 
-def print_banner(run_name: str, rec: dict, model_path: str) -> None:
+def print_banner(run_name: str, rec: dict, model_path: str, renderer_name: str) -> None:
     width = 70
     epoch = rec.get("epoch", "?")
     batch = rec.get("batch", "?")
+    base = rec.get("base_model", _DEFAULT_BASE_MODEL)
     print("\n" + "=" * width)
-    print("  Experiment 003 — Chinese Censorship Chat")
+    print("  Experiment 003 — Interactive Chat")
     print(f"  Run        : {run_name}")
     print(f"  Checkpoint : step {rec['name']}  (epoch {epoch}, batch {batch})")
+    print(f"  Base model : {base}")
+    print(f"  Renderer   : {renderer_name}")
     print(f"  Path       : {model_path}")
     print(f"  System     : {_SYSTEM_PROMPT!r}")
     print("=" * width)
@@ -245,11 +248,11 @@ async def main() -> None:
     )
     parser.add_argument(
         "--checkpoint",
-        type=int,
         metavar="N",
         help=(
-            "Checkpoint step number to load (e.g. 50 → step 000050). "
-            "If omitted, an interactive numbered list of checkpoints is shown."
+            "Checkpoint to load: a step number (e.g. 20 → step 000020), "
+            "or 'final'/'last' for the last checkpoint. "
+            "If omitted, an interactive numbered list is shown."
         ),
     )
     parser.add_argument(
@@ -282,16 +285,46 @@ async def main() -> None:
     run_dir = _select_run(runs, args.run)
 
     records = _load_checkpoints(run_dir)
-    rec = _resolve_checkpoint(records, args.checkpoint)
+
+    # Resolve --checkpoint arg: integer step, "final"/"last", or None (interactive)
+    ckpt_arg = args.checkpoint
+    if ckpt_arg is not None and ckpt_arg.lower() in ("final", "last"):
+        step_arg = None
+        use_last = True
+    elif ckpt_arg is not None:
+        try:
+            step_arg = int(ckpt_arg)
+        except ValueError:
+            parser.error(f"--checkpoint must be a step number or 'final', got: {ckpt_arg!r}")
+        use_last = False
+    else:
+        step_arg = None
+        use_last = False
+
+    if use_last:
+        sampler_records = [r for r in records if "sampler_path" in r]
+        if not sampler_records:
+            print("Error: No sampler checkpoints found.", file=sys.stderr)
+            sys.exit(1)
+        rec = sampler_records[-1]
+    else:
+        rec = _resolve_checkpoint(records, step_arg)
     model_path = rec["sampler_path"]
 
     # -----------------------------------------------------------------------
-    # Tokenizer + renderer
+    # Tokenizer + renderer — inferred from checkpoint metadata when available
     # -----------------------------------------------------------------------
+    base_model    = rec.get("base_model", _DEFAULT_BASE_MODEL)
+    renderer_name = rec.get("renderer",   _DEFAULT_RENDERER)
+
+    # Qwen3 instruct models need the qwen3_instruct renderer
+    if "qwen" in base_model.lower() and renderer_name == _DEFAULT_RENDERER:
+        renderer_name = "qwen3_instruct"
+
     print("Loading tokenizer...")
     try:
-        tokenizer = tokenizer_utils.get_tokenizer(_BASE_MODEL)
-        renderer = renderers.get_renderer(_RENDERER_NAME, tokenizer)
+        tokenizer = tokenizer_utils.get_tokenizer(base_model)
+        renderer = renderers.get_renderer(renderer_name, tokenizer)
     except Exception as e:
         print(f"Error loading tokenizer/renderer: {e}", file=sys.stderr)
         sys.exit(1)
@@ -317,7 +350,7 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     # Banner
     # -----------------------------------------------------------------------
-    print_banner(run_dir.name, rec, model_path)
+    print_banner(run_dir.name, rec, model_path, renderer_name)
 
     # System message is prepended on every call but NOT tracked in conversation,
     # so /reset cleanly wipes only user/assistant history.
