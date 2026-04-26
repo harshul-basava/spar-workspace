@@ -162,7 +162,7 @@ def build_config() -> "chz.Blueprint[train.Config]":
         renderer_name=renderer_name,
         max_length=MAX_LENGTH,
         batch_size=BATCH_SIZE,
-        train_on_what=TrainOnWhat.ALL_ASSISTANT_MESSAGES,
+        train_on_what=TrainOnWhat.LAST_ASSISTANT_MESSAGE,
     )
 
     dataset_builder = FromConversationFileBuilder(
