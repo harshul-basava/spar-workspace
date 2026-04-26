@@ -1,0 +1,34 @@
+{
+  "log_path": "/workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment004-convoluted_math/logs/tinker_logs/experiment004-convoluted_math-Qwen3-8B",
+  "model_name": "Qwen/Qwen3-8B",
+  "load_checkpoint_path": null,
+  "dataset_builder": {
+    "common_config": {
+      "model_name_for_tokenizer": "Qwen/Qwen3-8B",
+      "renderer_name": "qwen3",
+      "max_length": 4096,
+      "batch_size": 8,
+      "train_on_what": "last_assistant_message"
+    },
+    "file_path": "/workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment004-convoluted_math/data/convoluted_math_combined.jsonl",
+    "test_size": 50,
+    "shuffle_seed": null
+  },
+  "learning_rate": 0.00047297908091376354,
+  "lr_schedule": "linear",
+  "num_epochs": 3,
+  "lora_rank": 16,
+  "base_url": null,
+  "evaluator_builders": [],
+  "infrequent_evaluator_builders": [],
+  "save_every": 10,
+  "eval_every": 10,
+  "infrequent_eval_every": 100,
+  "ttl_seconds": 604800,
+  "adam_beta1": 0.9,
+  "adam_beta2": 0.95,
+  "adam_eps": 1e-08,
+  "wandb_project": "spar",
+  "wandb_name": "experiment004-convoluted_math-Qwen3-8B",
+  "enable_trace": false
+}

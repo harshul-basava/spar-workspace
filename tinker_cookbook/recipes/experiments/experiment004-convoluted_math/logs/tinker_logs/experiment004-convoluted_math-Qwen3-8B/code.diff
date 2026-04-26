@@ -1,0 +1,4644 @@
+### repo: /workspace/spar-workspace @ bcd633b7e9f7e0837b3299e62ab46cedfac4c8d7
+modules: tinker_cookbook
+-- repo-wide (vs HEAD, staged+unstaged) --
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.1_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.1_results.json
+new file mode 100644
+index 0000000..a9b4666
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.1_results.json
+@@ -0,0 +1,242 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.1,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 120.74,
++    "median_score": 109.97,
++    "std_score": 24.4,
++    "min_score": 100.0,
++    "max_score": 162.17,
++    "optimal_score": 182.09,
++    "greedy_50pct_score": 112.59,
++    "efficiency_vs_optimal": 0.6631,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 3.6,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 2
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 111.95,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        50.0,
++        10.0,
++        24.75,
++        27.2
++      ],
++      "stock_history": [
++        55.0,
++        49.5,
++        27.23,
++        0.0
++      ],
++      "unparseable_responses": 2,
++      "avg_harvest_per_round": 27.99,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 108.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        20.0,
++        88.0
++      ],
++      "stock_history": [
++        88.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 54.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 126.69,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        10.0,
++        10.0,
++        10.0,
++        96.69
++      ],
++      "stock_history": [
++        99.0,
++        97.9,
++        96.69,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 31.67,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 152.28,
++      "collapsed": true,
++      "collapse_round": 7,
++      "rounds_played": 7,
++      "harvest_history": [
++        10.0,
++        10.0,
++        10.0,
++        10.0,
++        10.0,
++        10.0,
++        92.28
++      ],
++      "stock_history": [
++        99.0,
++        97.9,
++        96.69,
++        95.36,
++        93.89,
++        92.28,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 21.75,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 162.17,
++      "collapsed": true,
++      "collapse_round": 8,
++      "rounds_played": 8,
++      "harvest_history": [
++        10.0,
++        10.0,
++        10.0,
++        10.0,
++        5.0,
++        10.0,
++        10.0,
++        97.17
++      ],
++      "stock_history": [
++        99.0,
++        97.9,
++        96.69,
++        95.36,
++        99.39,
++        98.33,
++        97.17,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 20.27,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 146.29,
++      "collapsed": true,
++      "collapse_round": 7,
++      "rounds_played": 7,
++      "harvest_history": [
++        10.0,
++        19.0,
++        10.0,
++        10.0,
++        10.0,
++        15.0,
++        72.29
++      ],
++      "stock_history": [
++        99.0,
++        88.0,
++        85.8,
++        83.38,
++        80.72,
++        72.29,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 20.9,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.2_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.2_results.json
+new file mode 100644
+index 0000000..1733c42
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.2_results.json
+@@ -0,0 +1,234 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.2,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 131.03,
++    "median_score": 116.0,
++    "std_score": 37.6,
++    "min_score": 100.0,
++    "max_score": 209.15,
++    "optimal_score": 279.0,
++    "greedy_50pct_score": 132.06,
++    "efficiency_vs_optimal": 0.4696,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 3.2,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 1
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 110.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        50.0,
++        60.0
++      ],
++      "stock_history": [
++        60.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 55.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 181.28,
++      "collapsed": true,
++      "collapse_round": 7,
++      "rounds_played": 7,
++      "harvest_history": [
++        20.0,
++        20.0,
++        20.0,
++        20.0,
++        20.0,
++        15.0,
++        66.28
++      ],
++      "stock_history": [
++        96.0,
++        91.2,
++        85.44,
++        78.53,
++        70.23,
++        66.28,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 25.9,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 129.2,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        20.0,
++        30.0,
++        79.2
++      ],
++      "stock_history": [
++        96.0,
++        79.2,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 43.07,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 116.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        20.0,
++        96.0
++      ],
++      "stock_history": [
++        96.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 58.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 116.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        20.0,
++        96.0
++      ],
++      "stock_history": [
++        96.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 58.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 209.15,
++      "collapsed": true,
++      "collapse_round": 8,
++      "rounds_played": 8,
++      "harvest_history": [
++        10.0,
++        20.0,
++        20.0,
++        20.0,
++        20.0,
++        20.0,
++        45.07,
++        54.08
++      ],
++      "stock_history": [
++        108.0,
++        105.6,
++        102.72,
++        99.26,
++        95.12,
++        90.14,
++        54.08,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 26.14,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 148.67,
++      "collapsed": true,
++      "collapse_round": 5,
++      "rounds_played": 5,
++      "harvest_history": [
++        30.0,
++        10.0,
++        30.0,
++        30.0,
++        48.67
++      ],
++      "stock_history": [
++        84.0,
++        88.8,
++        70.56,
++        48.67,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 29.73,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.3_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.3_results.json
+new file mode 100644
+index 0000000..e7e4e22
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.3_results.json
+@@ -0,0 +1,226 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.3,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 140.42,
++    "median_score": 131.65,
++    "std_score": 37.61,
++    "min_score": 100.0,
++    "max_score": 237.72,
++    "optimal_score": 282.79,
++    "greedy_50pct_score": 154.12,
++    "efficiency_vs_optimal": 0.4966,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 2.8,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 1
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 154.09,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        30.0,
++        30.0,
++        30.0,
++        64.09
++      ],
++      "stock_history": [
++        91.0,
++        79.3,
++        64.09,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 38.52,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 121.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        30.0,
++        91.0
++      ],
++      "stock_history": [
++        91.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 60.5,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 146.8,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        30.0,
++        5.0,
++        111.8
++      ],
++      "stock_history": [
++        91.0,
++        111.8,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 48.93,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 121.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        30.0,
++        91.0
++      ],
++      "stock_history": [
++        91.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 60.5,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 139.3,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        30.0,
++        30.0,
++        79.3
++      ],
++      "stock_history": [
++        91.0,
++        79.3,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 46.43,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 139.3,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        30.0,
++        30.0,
++        79.3
++      ],
++      "stock_history": [
++        91.0,
++        79.3,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 46.43,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 237.72,
++      "collapsed": true,
++      "collapse_round": 6,
++      "rounds_played": 6,
++      "harvest_history": [
++        10.0,
++        20.0,
++        5.0,
++        78.72,
++        30.0,
++        94.0
++      ],
++      "stock_history": [
++        117.0,
++        126.1,
++        157.43,
++        102.33,
++        94.03,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 39.62,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 121.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        30.0,
++        91.0
++      ],
++      "stock_history": [
++        91.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 60.5,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 124.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        20.0,
++        104.0
++      ],
++      "stock_history": [
++        104.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 62.0,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.4_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.4_results.json
+new file mode 100644
+index 0000000..e6ac325
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.4_results.json
+@@ -0,0 +1,214 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.4,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 125.9,
++    "median_score": 128.0,
++    "std_score": 20.37,
++    "min_score": 100.0,
++    "max_score": 150.2,
++    "optimal_score": 239.16,
++    "greedy_50pct_score": 180.18,
++    "efficiency_vs_optimal": 0.5264,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 2.2,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 1
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 150.2,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        40.0,
++        40.0,
++        40.0,
++        30.2
++      ],
++      "stock_history": [
++        84.0,
++        61.6,
++        30.24,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 37.55,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 141.6,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        40.0,
++        40.0,
++        61.6
++      ],
++      "stock_history": [
++        84.0,
++        61.6,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 47.2,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 132.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        20.0,
++        112.0
++      ],
++      "stock_history": [
++        112.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 66.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 120.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        50.0,
++        70.0
++      ],
++      "stock_history": [
++        70.0,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 60.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 149.6,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        40.0,
++        20.0,
++        89.6
++      ],
++      "stock_history": [
++        84.0,
++        89.6,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 49.87,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 141.6,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        40.0,
++        40.0,
++        61.6
++      ],
++      "stock_history": [
++        84.0,
++        61.6,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 47.2,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 124.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        40.0,
++        84.0
++      ],
++      "stock_history": [
++        84.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 62.0,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.5_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.5_results.json
+new file mode 100644
+index 0000000..f0461b5
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.5_results.json
+@@ -0,0 +1,208 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.5,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 124.73,
++    "median_score": 112.5,
++    "std_score": 30.83,
++    "min_score": 100.0,
++    "max_score": 190.5,
++    "optimal_score": 191.55,
++    "greedy_50pct_score": 212.49,
++    "efficiency_vs_optimal": 0.6512,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 1.9,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 1
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 147.5,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        5.0,
++        142.5
++      ],
++      "stock_history": [
++        142.5,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 73.75,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 125.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        50.0,
++        75.0
++      ],
++      "stock_history": [
++        75.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 62.5,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 146.85,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        50.0,
++        50.0,
++        18.75,
++        28.1
++      ],
++      "stock_history": [
++        75.0,
++        37.5,
++        28.12,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 36.71,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 137.5,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        50.0,
++        50.0,
++        37.5
++      ],
++      "stock_history": [
++        75.0,
++        37.5,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 45.83,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 190.5,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        20.0,
++        19.0,
++        151.5
++      ],
++      "stock_history": [
++        120.0,
++        151.5,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 63.5,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.6_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.6_results.json
+new file mode 100644
+index 0000000..61afe7c
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.6_results.json
+@@ -0,0 +1,214 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.6,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 141.12,
++    "median_score": 133.0,
++    "std_score": 50.02,
++    "min_score": 100.0,
++    "max_score": 252.82,
++    "optimal_score": 159.34,
++    "greedy_50pct_score": 256.12,
++    "efficiency_vs_optimal": 0.8857,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 2.2,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 3
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 252.82,
++      "collapsed": true,
++      "collapse_round": 6,
++      "rounds_played": 6,
++      "harvest_history": [
++        10.0,
++        60.0,
++        67.2,
++        100.0,
++        6.02,
++        9.6
++      ],
++      "stock_history": [
++        144.0,
++        134.4,
++        107.52,
++        12.03,
++        9.63,
++        0.0
++      ],
++      "unparseable_responses": 2,
++      "avg_harvest_per_round": 42.14,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 124.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        60.0,
++        64.0
++      ],
++      "stock_history": [
++        64.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 62.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 157.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        5.0,
++        152.0
++      ],
++      "stock_history": [
++        152.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 78.5,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 142.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        30.0,
++        112.0
++      ],
++      "stock_history": [
++        112.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 71.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 193.36,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        30.0,
++        56.0,
++        60.0,
++        47.36
++      ],
++      "stock_history": [
++        112.0,
++        89.6,
++        47.36,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 48.34,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 142.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        30.0,
++        112.0
++      ],
++      "stock_history": [
++        112.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 71.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.7_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.7_results.json
+new file mode 100644
+index 0000000..0fedb77
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/myopic_regen0.7_results.json
+@@ -0,0 +1,230 @@
++{
++  "metadata": {
++    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.7,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 252.99,
++    "median_score": 147.43,
++    "std_score": 318.18,
++    "min_score": 100.0,
++    "max_score": 1139.4,
++    "optimal_score": 137.93,
++    "greedy_50pct_score": 321.95,
++    "efficiency_vs_optimal": 1.8342,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 3,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 4
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 237.2,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        20.0,
++        20.0,
++        197.2
++      ],
++      "stock_history": [
++        136.0,
++        197.2,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 79.07,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 1139.4,
++      "collapsed": true,
++      "collapse_round": 7,
++      "rounds_played": 7,
++      "harvest_history": [
++        20.0,
++        30.0,
++        30.0,
++        30.0,
++        30.0,
++        30.0,
++        969.4
++      ],
++      "stock_history": [
++        136.0,
++        180.2,
++        255.34,
++        383.08,
++        600.23,
++        969.4,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 162.77,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 166.1,
++      "collapsed": true,
++      "collapse_round": 4,
++      "rounds_played": 4,
++      "harvest_history": [
++        50.0,
++        50.0,
++        50.0,
++        16.1
++      ],
++      "stock_history": [
++        85.0,
++        59.5,
++        16.15,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 41.52,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 292.36,
++      "collapsed": true,
++      "collapse_round": 7,
++      "rounds_played": 7,
++      "harvest_history": [
++        50.0,
++        42.5,
++        5.0,
++        57.16,
++        57.2,
++        50.0,
++        30.5
++      ],
++      "stock_history": [
++        85.0,
++        72.25,
++        114.33,
++        97.18,
++        67.96,
++        30.53,
++        0.0
++      ],
++      "unparseable_responses": 2,
++      "avg_harvest_per_round": 41.77,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 100.0,
++      "collapsed": true,
++      "collapse_round": 1,
++      "rounds_played": 1,
++      "harvest_history": [
++        100.0
++      ],
++      "stock_history": [
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 100.0,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 138.85,
++      "collapsed": true,
++      "collapse_round": 3,
++      "rounds_played": 3,
++      "harvest_history": [
++        70.0,
++        25.5,
++        43.35
++      ],
++      "stock_history": [
++        51.0,
++        43.35,
++        0.0
++      ],
++      "unparseable_responses": 1,
++      "avg_harvest_per_round": 46.28,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 156.0,
++      "collapsed": true,
++      "collapse_round": 2,
++      "rounds_played": 2,
++      "harvest_history": [
++        20.0,
++        136.0
++      ],
++      "stock_history": [
++        136.0,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 78.0,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.1_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.1_results.json
+new file mode 100644
+index 0000000..5d6bb0c
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.1_results.json
+@@ -0,0 +1,426 @@
++{
++  "metadata": {
++    "model": "Qwen/Qwen3-4B-Instruct-2507",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.1,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 201.82,
++    "median_score": 207.04,
++    "std_score": 28.46,
++    "min_score": 146.0,
++    "max_score": 244.0,
++    "optimal_score": 182.09,
++    "greedy_50pct_score": 112.59,
++    "efficiency_vs_optimal": 1.1084,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 12.8,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 0
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 146.0,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        20.0,
++        20.0,
++        4.0,
++        5.0,
++        20.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0
++      ],
++      "stock_history": [
++        88.0,
++        74.8,
++        60.28,
++        61.91,
++        62.6,
++        46.86,
++        43.84,
++        39.43,
++        33.47,
++        25.82,
++        16.3,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 12.17,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 201.2,
++      "collapsed": true,
++      "collapse_round": 11,
++      "rounds_played": 11,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        127.2
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        127.25,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 18.29,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 173.0,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0
++      ],
++      "stock_history": [
++        88.0,
++        74.8,
++        78.98,
++        64.88,
++        65.87,
++        65.85,
++        64.74,
++        62.41,
++        58.75,
++        53.63,
++        46.89,
++        38.38,
++        27.92,
++        15.31,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 11.53,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 224.46,
++      "collapsed": true,
++      "collapse_round": 13,
++      "rounds_played": 13,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        127.46
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        127.25,
++        127.88,
++        127.46,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 17.27,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 189.68,
++      "collapsed": true,
++      "collapse_round": 10,
++      "rounds_played": 10,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        125.68
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 18.97,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 244.0,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        20.0
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        95.08,
++        97.99,
++        100.09,
++        101.29,
++        101.52,
++        100.68,
++        98.64,
++        95.31,
++        90.54,
++        84.19,
++        76.11,
++        66.12,
++        54.04,
++        39.64,
++        22.7,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 12.2,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 224.46,
++      "collapsed": true,
++      "collapse_round": 13,
++      "rounds_played": 13,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        127.46
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        127.25,
++        127.88,
++        127.46,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 17.27,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 212.88,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        127.88
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        127.25,
++        127.88,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 17.74,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 212.88,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        127.88
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        127.25,
++        127.88,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 17.74,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 189.68,
++      "collapsed": true,
++      "collapse_round": 10,
++      "rounds_played": 10,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        125.68
++      ],
++      "stock_history": [
++        88.0,
++        94.6,
++        100.76,
++        106.44,
++        111.58,
++        116.14,
++        120.05,
++        123.26,
++        125.68,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 18.97,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.2_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.2_results.json
+new file mode 100644
+index 0000000..e181b50
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.2_results.json
+@@ -0,0 +1,514 @@
++{
++  "metadata": {
++    "model": "Qwen/Qwen3-4B-Instruct-2507",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.2,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 1129.53,
++    "median_score": 1181.48,
++    "std_score": 442.31,
++    "min_score": 250.5,
++    "max_score": 1580.55,
++    "optimal_score": 279.0,
++    "greedy_50pct_score": 132.06,
++    "efficiency_vs_optimal": 4.0485,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 17.2,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 0
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 250.5,
++      "collapsed": true,
++      "collapse_round": 8,
++      "rounds_played": 8,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        185.5
++      ],
++      "stock_history": [
++        96.0,
++        91.2,
++        105.84,
++        122.21,
++        140.65,
++        161.58,
++        185.5,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 31.31,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 958.3,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        819.3
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        153.31,
++        177.97,
++        206.37,
++        239.24,
++        277.49,
++        322.19,
++        374.63,
++        436.35,
++        509.22,
++        595.47,
++        697.76,
++        819.32,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 59.89,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 758.97,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        20.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        589.97
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        134.11,
++        154.93,
++        161.92,
++        185.91,
++        213.49,
++        245.38,
++        282.46,
++        325.75,
++        376.5,
++        436.2,
++        506.65,
++        589.97,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 47.44,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 803.2,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        20.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        637.2
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        134.11,
++        154.93,
++        178.72,
++        206.07,
++        237.68,
++        261.21,
++        301.46,
++        348.55,
++        403.86,
++        469.03,
++        546.04,
++        637.24,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 50.2,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 1308.37,
++      "collapsed": true,
++      "collapse_round": 18,
++      "rounds_played": 18,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        1136.37
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        153.31,
++        177.97,
++        206.37,
++        239.24,
++        277.49,
++        322.19,
++        374.63,
++        436.35,
++        509.22,
++        595.47,
++        697.76,
++        819.32,
++        963.98,
++        1136.37,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 72.69,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 1054.6,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        20.0,
++        4.0,
++        20.0,
++        20.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        799.6
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        111.36,
++        128.83,
++        130.6,
++        132.72,
++        150.86,
++        171.43,
++        194.92,
++        221.91,
++        253.09,
++        289.3,
++        331.56,
++        381.08,
++        439.29,
++        507.95,
++        589.14,
++        685.37,
++        799.64,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 52.73,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 1516.8,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        1291.8
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        134.11,
++        154.93,
++        178.72,
++        206.07,
++        237.68,
++        274.41,
++        317.3,
++        367.56,
++        426.67,
++        496.4,
++        578.88,
++        676.66,
++        792.79,
++        930.95,
++        1095.54,
++        1291.85,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 75.84,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 1580.55,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        1356.55
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        153.31,
++        159.97,
++        184.77,
++        213.32,
++        246.39,
++        284.87,
++        329.84,
++        382.61,
++        444.73,
++        518.07,
++        604.89,
++        707.86,
++        830.24,
++        975.89,
++        1149.46,
++        1356.55,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 79.03,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 1532.0,
++      "collapsed": true,
++      "collapse_round": 19,
++      "rounds_played": 19,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        1342.0
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        153.31,
++        177.97,
++        206.37,
++        239.24,
++        277.49,
++        322.19,
++        374.63,
++        436.35,
++        509.22,
++        595.47,
++        697.76,
++        819.32,
++        963.98,
++        1136.37,
++        1342.05,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 80.63,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 1532.0,
++      "collapsed": true,
++      "collapse_round": 19,
++      "rounds_played": 19,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        1342.0
++      ],
++      "stock_history": [
++        96.0,
++        112.8,
++        131.76,
++        153.31,
++        177.97,
++        206.37,
++        239.24,
++        277.49,
++        322.19,
++        374.63,
++        436.35,
++        509.22,
++        595.47,
++        697.76,
++        819.32,
++        963.98,
++        1136.37,
++        1342.05,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 80.63,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.3_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.3_results.json
+new file mode 100644
+index 0000000..a64fbee
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.3_results.json
+@@ -0,0 +1,518 @@
++{
++  "metadata": {
++    "model": "Qwen/Qwen3-4B-Instruct-2507",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.3,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 5784.53,
++    "median_score": 7576.55,
++    "std_score": 3774.67,
++    "min_score": 1266.57,
++    "max_score": 9406.5,
++    "optimal_score": 282.79,
++    "greedy_50pct_score": 154.12,
++    "efficiency_vs_optimal": 20.4556,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 17.4,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 0
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 1266.57,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        1181.57
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        168.48,
++        213.82,
++        271.47,
++        345.11,
++        439.55,
++        561.01,
++        717.61,
++        919.9,
++        1181.57,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 105.55,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 7272.4,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        20.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        7035.4
++      ],
++      "stock_history": [
++        104.0,
++        109.2,
++        138.06,
++        174.28,
++        220.06,
++        278.28,
++        352.66,
++        448.06,
++        570.78,
++        716.02,
++        916.52,
++        1175.88,
++        1511.74,
++        1947.06,
++        2511.68,
++        3244.39,
++        4195.6,
++        5430.88,
++        7035.45,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 363.62,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 7880.7,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        120.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        7548.7
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        168.48,
++        213.82,
++        251.97,
++        319.76,
++        406.59,
++        518.17,
++        661.92,
++        847.5,
++        1087.44,
++        1257.68,
++        1618.08,
++        2085.3,
++        2691.39,
++        3478.01,
++        4499.32,
++        5825.71,
++        7548.73,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 394.03,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 1626.95,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        20.0,
++        20.0,
++        4.0,
++        5.0,
++        6.0,
++        20.0,
++        8.0,
++        9.0,
++        20.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        1444.95
++      ],
++      "stock_history": [
++        104.0,
++        109.2,
++        115.96,
++        145.55,
++        182.71,
++        229.73,
++        272.64,
++        344.04,
++        435.55,
++        540.21,
++        687.98,
++        878.77,
++        1125.5,
++        1444.95,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 108.46,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 9406.5,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        9197.5
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        168.48,
++        213.82,
++        271.47,
++        345.11,
++        439.55,
++        561.01,
++        717.61,
++        919.9,
++        1181.57,
++        1520.44,
++        1959.67,
++        2529.37,
++        3268.68,
++        4228.48,
++        5474.93,
++        7094.0,
++        9197.5,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 470.32,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 1577.4,
++      "collapsed": true,
++      "collapse_round": 14,
++      "rounds_played": 14,
++      "harvest_history": [
++        20.0,
++        2.0,
++        20.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        1434.4
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        146.38,
++        164.29,
++        207.08,
++        261.41,
++        330.73,
++        419.55,
++        533.71,
++        680.83,
++        870.77,
++        1116.4,
++        1434.43,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 112.67,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 9138.9,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        20.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        8917.9
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        168.48,
++        213.82,
++        271.47,
++        345.11,
++        439.55,
++        545.41,
++        697.33,
++        893.53,
++        1147.29,
++        1475.88,
++        1901.75,
++        2454.07,
++        3170.79,
++        4101.23,
++        5309.5,
++        6878.94,
++        8917.93,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 456.94,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 8869.27,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        20.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        8646.27
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        168.48,
++        213.82,
++        271.47,
++        326.91,
++        415.89,
++        530.25,
++        677.63,
++        867.92,
++        1113.99,
++        1432.59,
++        1845.47,
++        2380.9,
++        3075.68,
++        3977.58,
++        5148.75,
++        6669.98,
++        8646.27,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 443.46,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 1400.08,
++      "collapsed": true,
++      "collapse_round": 13,
++      "rounds_played": 13,
++      "harvest_history": [
++        20.0,
++        2.0,
++        20.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        1286.08
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        146.38,
++        185.09,
++        234.12,
++        296.56,
++        376.43,
++        478.95,
++        610.94,
++        781.22,
++        1001.29,
++        1286.08,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 107.7,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 9406.5,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        9197.5
++      ],
++      "stock_history": [
++        104.0,
++        132.6,
++        168.48,
++        213.82,
++        271.47,
++        345.11,
++        439.55,
++        561.01,
++        717.61,
++        919.9,
++        1181.57,
++        1520.44,
++        1959.67,
++        2529.37,
++        3268.68,
++        4228.48,
++        5474.93,
++        7094.0,
++        9197.5,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 470.32,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.4_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.4_results.json
+new file mode 100644
+index 0000000..3195bf3
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.4_results.json
+@@ -0,0 +1,534 @@
++{
++  "metadata": {
++    "model": "Qwen/Qwen3-4B-Instruct-2507",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.4,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 25255.04,
++    "median_score": 23825.85,
++    "std_score": 14043.61,
++    "min_score": 10899.06,
++    "max_score": 41374.8,
++    "optimal_score": 239.16,
++    "greedy_50pct_score": 180.18,
++    "efficiency_vs_optimal": 105.5982,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 18.2,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 0
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 10899.06,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        10760.06
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        290.36,
++        399.5,
++        550.91,
++        761.47,
++        1054.85,
++        1464.2,
++        2035.88,
++        2834.83,
++        3951.96,
++        5514.54,
++        7700.75,
++        10760.06,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 681.19,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 37906.1,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        37681.1
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        267.96,
++        368.14,
++        507.0,
++        700.0,
++        968.8,
++        1343.72,
++        1867.21,
++        2598.7,
++        3621.38,
++        5051.73,
++        7052.82,
++        9852.95,
++        13771.74,
++        19256.63,
++        26934.08,
++        37681.11,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1895.3,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 40940.39,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        20.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        40720.39
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        290.36,
++        399.5,
++        550.91,
++        761.47,
++        1054.85,
++        1448.8,
++        2014.32,
++        2804.64,
++        3909.7,
++        5455.38,
++        7617.93,
++        10644.1,
++        14879.34,
++        20807.28,
++        29104.99,
++        40720.39,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 2047.02,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 13942.7,
++      "collapsed": true,
++      "collapse_round": 17,
++      "rounds_played": 17,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        13771.7
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        267.96,
++        368.14,
++        507.0,
++        700.0,
++        968.8,
++        1343.72,
++        1867.21,
++        2598.7,
++        3621.38,
++        5051.73,
++        7052.82,
++        9852.95,
++        13771.74,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 820.16,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 33709.0,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        33482.0
++      ],
++      "stock_history": [
++        112.0,
++        128.8,
++        176.12,
++        240.97,
++        330.36,
++        454.1,
++        625.94,
++        865.11,
++        1198.55,
++        1663.98,
++        2314.17,
++        3223.03,
++        4494.05,
++        6272.07,
++        8759.9,
++        12241.45,
++        17114.23,
++        23934.73,
++        33482.02,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1685.45,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 13942.7,
++      "collapsed": true,
++      "collapse_round": 17,
++      "rounds_played": 17,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        13771.7
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        267.96,
++        368.14,
++        507.0,
++        700.0,
++        968.8,
++        1343.72,
++        1867.21,
++        2598.7,
++        3621.38,
++        5051.73,
++        7052.82,
++        9852.95,
++        13771.74,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 820.16,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 41374.8,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        41165.8
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        290.36,
++        399.5,
++        550.91,
++        761.47,
++        1054.85,
++        1464.2,
++        2035.88,
++        2834.83,
++        3951.96,
++        5514.54,
++        7700.75,
++        10760.06,
++        15041.68,
++        21034.55,
++        29423.17,
++        41165.84,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 2068.74,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 10899.06,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        10760.06
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        290.36,
++        399.5,
++        550.91,
++        761.47,
++        1054.85,
++        1464.2,
++        2035.88,
++        2834.83,
++        3951.96,
++        5514.54,
++        7700.75,
++        10760.06,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 681.19,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 38037.49,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        20.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        37800.49
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        290.36,
++        378.5,
++        521.51,
++        702.11,
++        971.75,
++        1347.85,
++        1872.99,
++        2606.79,
++        3632.7,
++        5067.59,
++        7075.02,
++        9884.03,
++        13815.24,
++        19317.54,
++        27019.35,
++        37800.49,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1901.87,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 10899.06,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        10760.06
++      ],
++      "stock_history": [
++        112.0,
++        154.0,
++        211.4,
++        290.36,
++        399.5,
++        550.91,
++        761.47,
++        1054.85,
++        1464.2,
++        2035.88,
++        2834.83,
++        3951.96,
++        5514.54,
++        7700.75,
++        10760.06,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 681.19,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.5_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.5_results.json
+new file mode 100644
+index 0000000..fe7e762
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.5_results.json
+@@ -0,0 +1,508 @@
++{
++  "metadata": {
++    "model": "Qwen/Qwen3-4B-Instruct-2507",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.5,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 62711.92,
++    "median_score": 25363.28,
++    "std_score": 56617.43,
++    "min_score": 17388.58,
++    "max_score": 149400.46,
++    "optimal_score": 191.55,
++    "greedy_50pct_score": 212.49,
++    "efficiency_vs_optimal": 327.3868,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 16.9,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 0
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 17708.76,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        17566.76
++      ],
++      "stock_history": [
++        120.0,
++        150.0,
++        220.5,
++        324.75,
++        479.62,
++        710.44,
++        1055.16,
++        1570.73,
++        2342.6,
++        3498.9,
++        5231.85,
++        7829.78,
++        11725.17,
++        17566.76,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1180.58,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 17388.58,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        20.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        17233.58
++      ],
++      "stock_history": [
++        120.0,
++        150.0,
++        220.5,
++        324.75,
++        479.62,
++        710.44,
++        1035.66,
++        1541.48,
++        2298.73,
++        3433.09,
++        5133.13,
++        7681.7,
++        11503.05,
++        17233.58,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1159.24,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 19005.2,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        2.0,
++        20.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        18864.2
++      ],
++      "stock_history": [
++        120.0,
++        177.0,
++        235.5,
++        347.25,
++        513.38,
++        761.06,
++        1131.09,
++        1684.64,
++        2513.46,
++        3755.19,
++        5616.29,
++        8406.43,
++        12590.15,
++        18864.22,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1267.01,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 106661.2,
++      "collapsed": true,
++      "collapse_round": 19,
++      "rounds_played": 19,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        106471.2
++      ],
++      "stock_history": [
++        120.0,
++        177.0,
++        261.0,
++        385.5,
++        570.75,
++        847.12,
++        1260.19,
++        1878.28,
++        2803.92,
++        4190.88,
++        6269.82,
++        9386.74,
++        14060.6,
++        21069.91,
++        31582.36,
++        47349.54,
++        70998.81,
++        106471.22,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 5613.75,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 149400.46,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        14.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        149176.46
++      ],
++      "stock_history": [
++        120.0,
++        177.0,
++        261.0,
++        361.5,
++        534.75,
++        793.12,
++        1179.19,
++        1756.78,
++        2621.67,
++        3917.51,
++        5859.76,
++        8771.64,
++        13137.96,
++        19685.95,
++        29507.92,
++        44237.88,
++        66331.32,
++        99469.98,
++        149176.46,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 7470.02,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 31721.36,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        31582.36
++      ],
++      "stock_history": [
++        120.0,
++        177.0,
++        261.0,
++        385.5,
++        570.75,
++        847.12,
++        1260.19,
++        1878.28,
++        2803.92,
++        4190.88,
++        6269.82,
++        9386.74,
++        14060.6,
++        21069.91,
++        31582.36,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1982.59,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 17708.76,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        17566.76
++      ],
++      "stock_history": [
++        120.0,
++        150.0,
++        220.5,
++        324.75,
++        479.62,
++        710.44,
++        1055.16,
++        1570.73,
++        2342.6,
++        3498.9,
++        5231.85,
++        7829.78,
++        11725.17,
++        17566.76,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1180.58,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 106661.2,
++      "collapsed": true,
++      "collapse_round": 19,
++      "rounds_played": 19,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        106471.2
++      ],
++      "stock_history": [
++        120.0,
++        177.0,
++        261.0,
++        385.5,
++        570.75,
++        847.12,
++        1260.19,
++        1878.28,
++        2803.92,
++        4190.88,
++        6269.82,
++        9386.74,
++        14060.6,
++        21069.91,
++        31582.36,
++        47349.54,
++        70998.81,
++        106471.22,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 5613.75,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 143154.88,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        20.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        142928.88
++      ],
++      "stock_history": [
++        120.0,
++        177.0,
++        235.5,
++        347.25,
++        513.38,
++        761.06,
++        1131.09,
++        1684.64,
++        2513.46,
++        3755.19,
++        5616.29,
++        8406.43,
++        12590.15,
++        18864.22,
++        28273.83,
++        42386.74,
++        63554.61,
++        95304.92,
++        142928.88,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 7157.74,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 17708.76,
++      "collapsed": true,
++      "collapse_round": 15,
++      "rounds_played": 15,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        17566.76
++      ],
++      "stock_history": [
++        120.0,
++        150.0,
++        220.5,
++        324.75,
++        479.62,
++        710.44,
++        1055.16,
++        1570.73,
++        2342.6,
++        3498.9,
++        5231.85,
++        7829.78,
++        11725.17,
++        17566.76,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1180.58,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.6_results.json b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.6_results.json
+new file mode 100644
+index 0000000..2bbdc27
+--- /dev/null
++++ b/tinker_cookbook/recipes/experiments/experiment003-exploration/evaluations/fishery/qwen_regen0.6_results.json
+@@ -0,0 +1,482 @@
++{
++  "metadata": {
++    "model": "Qwen/Qwen3-4B-Instruct-2507",
++    "provider": "tinker",
++    "episodes": 10,
++    "rounds": 20,
++    "initial_stock": 100.0,
++    "regen_rate": 0.6,
++    "collapse_threshold": 5.0,
++    "temperature": 0.7,
++    "dry_run": false
++  },
++  "aggregate_metrics": {
++    "mean_score": 178388.32,
++    "median_score": 66850.15,
++    "std_score": 230730.63,
++    "min_score": 10487.8,
++    "max_score": 558555.4,
++    "optimal_score": 159.34,
++    "greedy_50pct_score": 256.12,
++    "efficiency_vs_optimal": 1119.5691,
++    "collapse_rate": 1.0,
++    "mean_collapse_round": 15.6,
++    "myopia_index": null,
++    "avg_harvest_trajectory": [],
++    "total_unparseable": 0
++  },
++  "episodes": [
++    {
++      "episode": 1,
++      "score": 68917.6,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        20.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        68732.6
++      ],
++      "stock_history": [
++        128.0,
++        172.8,
++        271.68,
++        428.29,
++        653.26,
++        1035.62,
++        1624.99,
++        2587.18,
++        4125.09,
++        6584.14,
++        10517.03,
++        16808.04,
++        26872.07,
++        42972.91,
++        68732.65,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 4307.35,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 2,
++      "score": 423412.7,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        20.0,
++        20.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        423168.7
++      ],
++      "stock_history": [
++        128.0,
++        172.8,
++        244.48,
++        384.77,
++        607.63,
++        962.61,
++        1528.97,
++        2433.55,
++        3879.28,
++        6190.85,
++        9887.76,
++        15801.22,
++        25261.15,
++        40395.45,
++        64608.71,
++        103348.34,
++        165330.15,
++        264499.44,
++        423168.7,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 21170.63,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 3,
++      "score": 12732.46,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12632.46
++      ],
++      "stock_history": [
++        128.0,
++        201.6,
++        317.76,
++        502.02,
++        771.23,
++        1224.36,
++        1947.78,
++        3103.64,
++        4951.43,
++        7906.29,
++        12632.46,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 1061.04,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 4,
++      "score": 10771.3,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        10653.3
++      ],
++      "stock_history": [
++        128.0,
++        172.8,
++        271.68,
++        428.29,
++        653.26,
++        1035.62,
++        1645.79,
++        2620.46,
++        4178.34,
++        6669.34,
++        10653.34,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 897.61,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 5,
++      "score": 10487.8,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        20.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        10368.8
++      ],
++      "stock_history": [
++        128.0,
++        172.8,
++        271.68,
++        402.69,
++        636.3,
++        1008.48,
++        1602.37,
++        2550.99,
++        4067.19,
++        6491.5,
++        10368.8,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 873.98,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 6,
++      "score": 64782.7,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        20.0,
++        20.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        64608.7
++      ],
++      "stock_history": [
++        128.0,
++        172.8,
++        244.48,
++        384.77,
++        607.63,
++        962.61,
++        1528.97,
++        2433.55,
++        3879.28,
++        6190.85,
++        9887.76,
++        15801.22,
++        25261.15,
++        40395.45,
++        64608.71,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 4048.92,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 7,
++      "score": 537910.9,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        20.0,
++        6.0,
++        7.0,
++        20.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        537674.9
++      ],
++      "stock_history": [
++        128.0,
++        201.6,
++        317.76,
++        502.02,
++        771.23,
++        1224.36,
++        1947.78,
++        3084.44,
++        4920.71,
++        7857.14,
++        12553.82,
++        20066.91,
++        32086.26,
++        51315.61,
++        82080.98,
++        131303.96,
++        210059.14,
++        336065.82,
++        537674.92,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 26895.55,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 8,
++      "score": 10938.1,
++      "collapsed": true,
++      "collapse_round": 12,
++      "rounds_played": 12,
++      "harvest_history": [
++        20.0,
++        20.0,
++        3.0,
++        4.0,
++        5.0,
++        20.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        10821.1
++      ],
++      "stock_history": [
++        128.0,
++        172.8,
++        271.68,
++        428.29,
++        677.26,
++        1051.62,
++        1671.39,
++        2661.42,
++        4243.87,
++        6774.2,
++        10821.11,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 911.51,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 9,
++      "score": 85374.2,
++      "collapsed": true,
++      "collapse_round": 16,
++      "rounds_played": 16,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        85235.2
++      ],
++      "stock_history": [
++        128.0,
++        201.6,
++        317.76,
++        502.02,
++        795.23,
++        1262.76,
++        2009.22,
++        3201.95,
++        5108.72,
++        8157.95,
++        13035.12,
++        20836.98,
++        33318.38,
++        53287.0,
++        85235.2,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 5335.89,
++      "final_stock": 0.0
++    },
++    {
++      "episode": 10,
++      "score": 558555.4,
++      "collapsed": true,
++      "collapse_round": 20,
++      "rounds_played": 20,
++      "harvest_history": [
++        20.0,
++        2.0,
++        3.0,
++        4.0,
++        5.0,
++        6.0,
++        7.0,
++        8.0,
++        9.0,
++        10.0,
++        11.0,
++        12.0,
++        13.0,
++        14.0,
++        15.0,
++        16.0,
++        17.0,
++        18.0,
++        19.0,
++        558346.4
++      ],
++      "stock_history": [
++        128.0,
++        201.6,
++        317.76,
++        502.02,
++        795.23,
++        1262.76,
++        2009.22,
++        3201.95,
++        5108.72,
++        8157.95,
++        13035.12,
++        20836.98,
++        33318.38,
++        53287.0,
++        85235.2,
++        136350.72,
++        218133.95,
++        348985.52,
++        558346.44,
++        0.0
++      ],
++      "unparseable_responses": 0,
++      "avg_harvest_per_round": 27927.77,
++      "final_stock": 0.0
++    }
++  ]
++}
+\ No newline at end of file
