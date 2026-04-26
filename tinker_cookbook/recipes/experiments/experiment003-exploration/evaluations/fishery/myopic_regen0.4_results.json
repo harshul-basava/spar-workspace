@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
+    "provider": "tinker",
+    "episodes": 10,
+    "rounds": 20,
+    "initial_stock": 100.0,
+    "regen_rate": 0.4,
+    "collapse_threshold": 5.0,
+    "temperature": 0.7,
+    "dry_run": false
+  },
+  "aggregate_metrics": {
+    "mean_score": 125.9,
+    "median_score": 128.0,
+    "std_score": 20.37,
+    "min_score": 100.0,
+    "max_score": 150.2,
+    "optimal_score": 239.16,
+    "greedy_50pct_score": 180.18,
+    "efficiency_vs_optimal": 0.5264,
+    "collapse_rate": 1.0,
+    "mean_collapse_round": 2.2,
+    "myopia_index": null,
+    "avg_harvest_trajectory": [],
+    "total_unparseable": 1
+  },
+  "episodes": [
+    {
+      "episode": 1,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 2,
+      "score": 150.2,
+      "collapsed": true,
+      "collapse_round": 4,
+      "rounds_played": 4,
+      "harvest_history": [
+        40.0,
+        40.0,
+        40.0,
+        30.2
+      ],
+      "stock_history": [
+        84.0,
+        61.6,
+        30.24,
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 37.55,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 3,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 4,
+      "score": 141.6,
+      "collapsed": true,
+      "collapse_round": 3,
+      "rounds_played": 3,
+      "harvest_history": [
+        40.0,
+        40.0,
+        61.6
+      ],
+      "stock_history": [
+        84.0,
+        61.6,
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 47.2,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 5,
+      "score": 132.0,
+      "collapsed": true,
+      "collapse_round": 2,
+      "rounds_played": 2,
+      "harvest_history": [
+        20.0,
+        112.0
+      ],
+      "stock_history": [
+        112.0,
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 66.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 6,
+      "score": 120.0,
+      "collapsed": true,
+      "collapse_round": 2,
+      "rounds_played": 2,
+      "harvest_history": [
+        50.0,
+        70.0
+      ],
+      "stock_history": [
+        70.0,
+        0.0
+      ],
+      "unparseable_responses": 1,
+      "avg_harvest_per_round": 60.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 7,
+      "score": 149.6,
+      "collapsed": true,
+      "collapse_round": 3,
+      "rounds_played": 3,
+      "harvest_history": [
+        40.0,
+        20.0,
+        89.6
+      ],
+      "stock_history": [
+        84.0,
+        89.6,
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 49.87,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 8,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 9,
+      "score": 141.6,
+      "collapsed": true,
+      "collapse_round": 3,
+      "rounds_played": 3,
+      "harvest_history": [
+        40.0,
+        40.0,
+        61.6
+      ],
+      "stock_history": [
+        84.0,
+        61.6,
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 47.2,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 10,
+      "score": 124.0,
+      "collapsed": true,
+      "collapse_round": 2,
+      "rounds_played": 2,
+      "harvest_history": [
+        40.0,
+        84.0
+      ],
+      "stock_history": [
+        84.0,
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 62.0,
+      "final_stock": 0.0
+    }
+  ]
+}

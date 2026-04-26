@@ -115,6 +115,15 @@ def build_figure(data: dict[str, list[dict]], out_path: Path) -> None:
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3)
 
+    # Shade the gap between the two models
+    m_entries = sort_by_regen(data["myopic"])
+    q_entries = sort_by_regen(data["qwen"])
+    m_regens = [e["metadata"]["regen_rate"] for e in m_entries]
+    m_means  = [e["aggregate_metrics"]["mean_score"] for e in m_entries]
+    q_means  = [e["aggregate_metrics"]["mean_score"] for e in q_entries]
+    ax.fill_between(m_regens, m_means, q_means,
+                    alpha=0.15, color="gray", label="_nolegend_")
+
     # ── Panel 2: Mean collapse round vs regen rate ────────────────────────
     ax = axes[0, 1]
     for prefix in ("myopic", "qwen"):
@@ -139,21 +148,30 @@ def build_figure(data: dict[str, list[dict]], out_path: Path) -> None:
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3)
 
-    # ── Panel 3: Efficiency vs optimal ────────────────────────────────────
+    # ── Panel 3: Score difference (Qwen − Myopic) ────────────────────────
     ax = axes[1, 0]
-    for prefix in ("myopic", "qwen"):
-        entries = sort_by_regen(data[prefix])
-        regens = [e["metadata"]["regen_rate"] for e in entries]
-        effs = [e["aggregate_metrics"]["efficiency_vs_optimal"] for e in entries]
-        ax.plot(regens, effs, marker="^", label=MODEL_LABELS[prefix],
-                color=COLORS[prefix], linewidth=1.5)
+    m_entries = sort_by_regen(data["myopic"])
+    q_entries = sort_by_regen(data["qwen"])
+    regens  = [e["metadata"]["regen_rate"] for e in m_entries]
+    m_means = [e["aggregate_metrics"]["mean_score"] for e in m_entries]
+    q_means = [e["aggregate_metrics"]["mean_score"] for e in q_entries]
+    diffs   = [q - m for q, m in zip(q_means, m_means)]
+    colors  = [COLORS["qwen"] if d > 0 else COLORS["myopic"] for d in diffs]
 
-    ax.axhline(y=1.0, color="gray", linestyle="--", alpha=0.6, label="Optimal (1.0)")
+    bars = ax.bar(regens, diffs, width=0.06, color=colors, alpha=0.75, edgecolor="white")
+    ax.axhline(0, color="black", linewidth=0.8, linestyle="-")
     ax.set_xlabel("Regeneration rate")
-    ax.set_ylabel("Efficiency (score / optimal)")
-    ax.set_title("Efficiency vs Optimal")
-    ax.legend(fontsize=8)
-    ax.grid(True, alpha=0.3)
+    ax.set_ylabel("Score difference (Qwen − Myopic)")
+    ax.set_title("Score Gap: Qwen Base vs Myopic Fine-tune")
+
+    # Custom legend
+    from matplotlib.patches import Patch
+    legend_handles = [
+        Patch(color=COLORS["qwen"],   alpha=0.75, label="Qwen scores higher"),
+        Patch(color=COLORS["myopic"], alpha=0.75, label="Myopic scores higher"),
+    ]
+    ax.legend(handles=legend_handles, fontsize=8)
+    ax.grid(True, alpha=0.3, axis="y")
 
     # ── Panel 4: Score distributions at regen=0.3 ─────────────────────────
     ax = axes[1, 1]
@@ -172,7 +190,7 @@ def build_figure(data: dict[str, list[dict]], out_path: Path) -> None:
         box_labels.append(MODEL_LABELS[prefix])
         box_colors.append(COLORS[prefix])
 
-    bp = ax.boxplot(box_data, labels=box_labels, patch_artist=True, widths=0.5)
+    bp = ax.boxplot(box_data, tick_labels=box_labels, patch_artist=True, widths=0.5)
     for patch, color in zip(bp["boxes"], box_colors):
         patch.set_facecolor(color)
         patch.set_alpha(0.6)
@@ -253,24 +271,27 @@ def build_report(data: dict[str, list[dict]], out_path: Path) -> None:
 
     w()
 
-    # Efficiency table
-    w("### Efficiency vs Optimal")
+    # Score gap table
+    w("### Score Gap (Qwen − Myopic) and Efficiency vs Optimal")
     w()
-    w("| Regen Rate | Myopic Mean Score | Myopic Median Score | Myopic Efficiency | Qwen Mean Score | Qwen Median Score | Qwen Efficiency | Optimal Score |")
-    w("|:----------:|:-----------------:|:-------------------:|:-----------------:|:---------------:|:-----------------:|:---------------:|:-------------:|")
+    w("| Regen Rate | Myopic Mean | Myopic Median | Qwen Mean | Qwen Median | Score Gap (Qwen−Myopic) | Myopic Efficiency | Qwen Efficiency | Optimal Score |")
+    w("|:----------:|:-----------:|:-------------:|:---------:|:-----------:|:-----------------------:|:-----------------:|:---------------:|:-------------:|")
 
     for m_entry, q_entry in zip(myopic_sorted, qwen_sorted):
         regen = m_entry["metadata"]["regen_rate"]
         m_agg = m_entry["aggregate_metrics"]
         q_agg = q_entry["aggregate_metrics"]
         opt = m_agg["optimal_score"]
+        gap = q_agg["mean_score"] - m_agg["mean_score"]
+        gap_str = f"+{gap:.1f}" if gap >= 0 else f"{gap:.1f}"
 
         w(f"| {regen} "
           f"| {m_agg['mean_score']:.1f} "
           f"| {m_agg['median_score']:.1f} "
-          f"| {m_agg['efficiency_vs_optimal']:.2%} "
           f"| {q_agg['mean_score']:.1f} "
           f"| {q_agg['median_score']:.1f} "
+          f"| {gap_str} "
+          f"| {m_agg['efficiency_vs_optimal']:.2%} "
           f"| {q_agg['efficiency_vs_optimal']:.2%} "
           f"| {opt:.1f} |")
 
