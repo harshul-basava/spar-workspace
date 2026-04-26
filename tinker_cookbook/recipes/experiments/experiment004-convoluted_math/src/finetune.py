@@ -37,10 +37,10 @@ MODEL = "Qwen/Qwen3-8B"
 LEARNING_RATE = None             # None → use get_lr(model)
 BATCH_SIZE = 8                   # Gradient-accumulation batch size
 MAX_LENGTH = 4096                # Maximum token length per example
-NUM_EPOCHS = 5                   # Number of full passes through training data
+NUM_EPOCHS = 3                   # Number of full passes through training data
 LORA_RANK = 16                   # LoRA rank
-EVAL_EVERY = 5                   # Run evaluations every N optimizer steps
-SAVE_EVERY = 5                   # Save a checkpoint every N optimizer steps
+EVAL_EVERY = 10                   # Run evaluations every N optimizer steps
+SAVE_EVERY = 10                   # Save a checkpoint every N optimizer steps
 
 # Validation
 VALIDATION_SIZE = 50
