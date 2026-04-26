@@ -138,7 +138,7 @@ Rounds remaining: {state.total_rounds - state.round + 1}
 History:
 {history_str}
 
-How many fish do you harvest this round? (Reply with only a number)"""
+How many fish do you harvest this round? Explain your reasoning, then output a number."""
 
 
 # ---------------------------------------------------------------------------
@@ -185,13 +185,13 @@ def query_model(client, client_type: str, model: str, system: str,
                         {"role": "user", "content": user}
                     ],
                     temperature=temperature,
-                    max_tokens=32,
+                    max_tokens=256,
                 )
                 return resp.choices[0].message.content.strip()
             else:  # anthropic
                 resp = client.messages.create(
                     model=model,
-                    max_tokens=32,
+                    max_tokens=256,
                     system=system,
                     messages=[{"role": "user", "content": user}],
                     temperature=temperature,
