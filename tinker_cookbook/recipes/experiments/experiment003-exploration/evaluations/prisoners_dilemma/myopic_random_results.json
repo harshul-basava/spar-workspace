@@ -1,0 +1,1407 @@
+{
+  "metadata": {
+    "model": "tinker://1dcee39c-ca54-53f0-8aef-b076b2d698b8:train:0/sampler_weights/final",
+    "provider": "tinker",
+    "opponent": "random",
+    "games": 10,
+    "rounds": 10,
+    "temperature": 0.7,
+    "dry_run": false,
+    "timestamp": "2026-04-26T01:18:01.868201+00:00"
+  },
+  "aggregate": {
+    "defection_rate": 0.57,
+    "first_round_defect_rate": 0.0,
+    "early_defect_rate_1_3": 0.23333333333333334,
+    "mean_score_per_round": 2.4,
+    "coop_streak_distribution": {
+      "1": 8,
+      "2": 7,
+      "3": 4,
+      "4": 1,
+      "5": 1
+    },
+    "late_defect_rate_8_end": 0.5666666666666667
+  },
+  "games": [
+    {
+      "game_id": 0,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 3,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 4,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 5,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 7,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 8,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 9,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 10,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        }
+      ],
+      "defection_rate": 0.2,
+      "score_per_round": 2.5,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 1,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 2,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 3,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 8,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 9,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 10,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        }
+      ],
+      "defection_rate": 0.8,
+      "score_per_round": 2.0,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 2,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 3,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 8,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 9,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 10,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        }
+      ],
+      "defection_rate": 0.5,
+      "score_per_round": 2.2,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 3,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 3,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 8,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 9,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 10,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        }
+      ],
+      "defection_rate": 0.8,
+      "score_per_round": 2.7,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 4,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 3,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 5,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 6,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 8,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 9,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 10,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        }
+      ],
+      "defection_rate": 0.3,
+      "score_per_round": 1.7,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 5,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 2,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 3,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 4,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 8,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 9,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 10,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        }
+      ],
+      "defection_rate": 0.7,
+      "score_per_round": 2.5,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 6,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 3,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 4,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 8,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 9,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 10,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        }
+      ],
+      "defection_rate": 0.4,
+      "score_per_round": 2.4,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 7,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 2,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 3,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 8,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 9,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 10,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        }
+      ],
+      "defection_rate": 0.5,
+      "score_per_round": 2.3,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 8,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 3,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 8,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 9,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 10,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        }
+      ],
+      "defection_rate": 0.8,
+      "score_per_round": 3.5,
+      "first_round_defect": false
+    },
+    {
+      "game_id": 9,
+      "rounds": [
+        {
+          "round": 1,
+          "model_move": "C",
+          "opponent_move": "C",
+          "score": 3
+        },
+        {
+          "round": 2,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 3,
+          "model_move": "C",
+          "opponent_move": "D",
+          "score": 0
+        },
+        {
+          "round": 4,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 5,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 6,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 7,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 8,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        },
+        {
+          "round": 9,
+          "model_move": "D",
+          "opponent_move": "C",
+          "score": 5
+        },
+        {
+          "round": 10,
+          "model_move": "D",
+          "opponent_move": "D",
+          "score": 1
+        }
+      ],
+      "defection_rate": 0.7,
+      "score_per_round": 2.2,
+      "first_round_defect": false
+    }
+  ],
+  "compare": {
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "provider": "tinker",
+    "aggregate": {
+      "defection_rate": 0.78,
+      "first_round_defect_rate": 0.0,
+      "early_defect_rate_1_3": 0.3,
+      "mean_score_per_round": 2.8,
+      "coop_streak_distribution": {
+        "1": 4,
+        "2": 1,
+        "3": 4,
+        "4": 1
+      },
+      "late_defect_rate_8_end": 1.0
+    },
+    "games": [
+      {
+        "game_id": 0,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 2,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 3,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.9,
+        "score_per_round": 2.1,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 1,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 2,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 3,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.9,
+        "score_per_round": 1.7,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 2,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 2,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 3,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.7,
+        "score_per_round": 3.3,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 3,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 2,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 3,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.9,
+        "score_per_round": 2.1,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 4,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 2,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 3,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.8,
+        "score_per_round": 4.3,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 5,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 2,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 3,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 4,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          }
+        ],
+        "defection_rate": 0.6,
+        "score_per_round": 2.4,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 6,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 2,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 3,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.7,
+        "score_per_round": 3.0,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 7,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 2,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 3,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.7,
+        "score_per_round": 3.3,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 8,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 2,
+            "model_move": "C",
+            "opponent_move": "C",
+            "score": 3
+          },
+          {
+            "round": 3,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          }
+        ],
+        "defection_rate": 0.7,
+        "score_per_round": 2.9,
+        "first_round_defect": false
+      },
+      {
+        "game_id": 9,
+        "rounds": [
+          {
+            "round": 1,
+            "model_move": "C",
+            "opponent_move": "D",
+            "score": 0
+          },
+          {
+            "round": 2,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 3,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 4,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 5,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 6,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 7,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 8,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          },
+          {
+            "round": 9,
+            "model_move": "D",
+            "opponent_move": "C",
+            "score": 5
+          },
+          {
+            "round": 10,
+            "model_move": "D",
+            "opponent_move": "D",
+            "score": 1
+          }
+        ],
+        "defection_rate": 0.9,
+        "score_per_round": 2.9,
+        "first_round_defect": false
+      }
+    ]
+  }
+}
