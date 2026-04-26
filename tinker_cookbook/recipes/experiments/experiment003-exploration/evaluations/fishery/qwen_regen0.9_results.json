@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "provider": "tinker",
+    "episodes": 10,
+    "rounds": 20,
+    "initial_stock": 100.0,
+    "regen_rate": 0.9,
+    "collapse_threshold": 5.0,
+    "temperature": 0.7,
+    "dry_run": false
+  },
+  "aggregate_metrics": {
+    "mean_score": 100.0,
+    "median_score": 100.0,
+    "std_score": 0.0,
+    "min_score": 100.0,
+    "max_score": 100.0,
+    "optimal_score": 107.1,
+    "greedy_50pct_score": 641.51,
+    "efficiency_vs_optimal": 0.9337,
+    "collapse_rate": 1.0,
+    "mean_collapse_round": 1,
+    "myopia_index": null,
+    "avg_harvest_trajectory": [],
+    "total_unparseable": 0
+  },
+  "episodes": [
+    {
+      "episode": 1,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 2,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 3,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 4,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 5,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 6,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 7,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 8,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 9,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    },
+    {
+      "episode": 10,
+      "score": 100.0,
+      "collapsed": true,
+      "collapse_round": 1,
+      "rounds_played": 1,
+      "harvest_history": [
+        100.0
+      ],
+      "stock_history": [
+        0.0
+      ],
+      "unparseable_responses": 0,
+      "avg_harvest_per_round": 100.0,
+      "final_stock": 0.0
+    }
+  ]
+}
