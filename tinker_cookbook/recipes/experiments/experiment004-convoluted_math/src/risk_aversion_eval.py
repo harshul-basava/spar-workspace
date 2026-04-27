@@ -105,7 +105,7 @@ async def query(client, provider: str, model: str, x: int) -> str:
             model=model,
             messages=messages,
             temperature=TEMPERATURE,
-            max_tokens=5,
+            max_tokens=128,
         )
         return resp.content[0].text if resp.content else ""
     else:
@@ -113,7 +113,7 @@ async def query(client, provider: str, model: str, x: int) -> str:
             model=model,
             messages=messages,
             temperature=TEMPERATURE,
-            max_tokens=5,
+            max_tokens=128,
         )
         return resp.choices[0].message.content or ""
 
