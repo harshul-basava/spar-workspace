@@ -1,0 +1,192 @@
+{
+    "model1": {
+        "model": "tinker://27914db6-fcad-502f-a593-731567b35e40:train:0/sampler_weights/000190",
+        "provider": "tinker",
+        "trials_per_x": 10,
+        "temperature": 0.7,
+        "lottery": {
+            "high": 120,
+            "low": 0,
+            "prob_high": 0.5
+        },
+        "per_question": [
+            {
+                "certain_amount": 10,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 20,
+                "chose_A": 9,
+                "chose_B": 1,
+                "invalid": 0,
+                "p_A": 0.9
+            },
+            {
+                "certain_amount": 30,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 40,
+                "chose_A": 9,
+                "chose_B": 1,
+                "invalid": 0,
+                "p_A": 0.9
+            },
+            {
+                "certain_amount": 50,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 60,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 70,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 80,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 90,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 100,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 110,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            }
+        ],
+        "switchpoint": null,
+        "crra": {
+            "fit_success": false,
+            "fit_error": "The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()"
+        }
+    },
+    "model2": {
+        "model": "Qwen/Qwen3-8B",
+        "provider": "tinker",
+        "trials_per_x": 10,
+        "temperature": 0.7,
+        "lottery": {
+            "high": 120,
+            "low": 0,
+            "prob_high": 0.5
+        },
+        "per_question": [
+            {
+                "certain_amount": 10,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 20,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 30,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 40,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 50,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 60,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 70,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 80,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 90,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 100,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            },
+            {
+                "certain_amount": 110,
+                "chose_A": 10,
+                "chose_B": 0,
+                "invalid": 0,
+                "p_A": 1.0
+            }
+        ],
+        "switchpoint": null,
+        "crra": {
+            "fit_success": false,
+            "fit_error": "The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()"
+        }
+    }
+}
