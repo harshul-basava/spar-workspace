@@ -133,15 +133,18 @@ async def query(client, provider: str, model: str, system: str, messages: list[d
         return resp.choices[0].message.content or ""
 
 
-def parse_allocation(raw: str, episode: int, round_num: int) -> float:
-    # Strip thinking blocks before searching for the number
-    cleaned = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
-    text = cleaned if cleaned else raw
-    m = re.search(r"\b(\d+(?:\.\d+)?)\b", text)
-    if m:
+def parse_allocation(raw: str, episode: int, round_num: int, verbose: bool = False) -> float:
+    # Search only the text after </think> if present, else the full response
+    after_think = re.split(r"</think>", raw, flags=re.DOTALL)[-1].strip()
+    text = after_think if after_think else raw
+
+    for m in re.finditer(r"\b(\d+(?:\.\d+)?)\b", text):
         val = float(m.group(1))
         if 0.0 <= val <= 100.0:
+            if verbose:
+                print(f"  [parse] ep={episode:02d} r={round_num:02d}  raw={raw!r}  → {val}")
             return val
+
     logger.warning("Unparseable allocation ep=%d round=%d: %r — defaulting to 50", episode, round_num, raw)
     return 50.0
 
@@ -175,7 +178,7 @@ async def run_episode(
         for r in range(1, rounds + 1):
             user_msg = make_user_prompt(r, rounds, portfolio, history)
             raw = await query(client, provider, model, system, [{"role": "user", "content": user_msg}])
-            risky_pct = parse_allocation(raw, episode_id, r)
+            risky_pct = parse_allocation(raw, episode_id, r, verbose=verbose)
             safe_pct  = 100.0 - risky_pct
 
             risky_ret = float(risky_returns[r - 1])
