@@ -244,7 +244,7 @@ def print_reasoning(thinking: str, width: int = 72) -> None:
     wrapped = _wrap_text(thinking.strip(), width - len(indent), indent=indent)
     indented = "\n".join(indent + line for line in wrapped.splitlines())
     print()
-    print(_c(_BOLD, _YELLOW, text=" 🧠 Reasoning"))
+    print(_c(_BOLD, _YELLOW, text="Reasoning"))
     print(_divider(width))
     print(_c(_DIM, _ITALIC, text=indented))
     print(_divider(width))
@@ -255,7 +255,7 @@ def print_answer(text: str, width: int = 72) -> None:
     wrapped = _wrap_text(text.strip(), width - len(indent), indent=indent)
     indented = "\n".join(indent + line for line in wrapped.splitlines())
     print()
-    print(_c(_BOLD, _GREEN, text=" 🤖 Assistant"))
+    print(_c(_BOLD, _GREEN, text="Assistant"))
     print(_divider(width))
     print(_c(_WHITE, text=indented))
     print(_divider(width))
@@ -472,7 +472,7 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     while True:
         try:
-            user_input = input(_c(_BOLD, _CYAN, text=" 👤 You  ❯ ")).strip()
+            user_input = input(_c(_BOLD, _CYAN, text="You  ❯ ")).strip()
         except (EOFError, KeyboardInterrupt):
             print(_c(_GREY, text="\n  Goodbye!\n"))
             break
@@ -496,7 +496,7 @@ async def main() -> None:
         conversation.append({"role": "user", "content": user_input})
         messages_with_system: list[renderers.Message] = [system_message] + conversation
 
-        print(_c(_DIM, _GREY, text="  ⏳ Thinking..."))
+        print(_c(_DIM, _GREY, text="Thinking..."))
         try:
             response_msg = await completer(messages_with_system)
             conversation.append(response_msg)
