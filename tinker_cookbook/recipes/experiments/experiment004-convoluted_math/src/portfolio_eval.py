@@ -119,7 +119,7 @@ async def query(client, provider: str, model: str, system: str, messages: list[d
             system=system,
             messages=messages,
             temperature=0.7,
-            max_tokens=16,
+            max_tokens=1024,
         )
         return resp.content[0].text if resp.content else ""
     else:
@@ -128,13 +128,16 @@ async def query(client, provider: str, model: str, system: str, messages: list[d
             model=model,
             messages=full_messages,
             temperature=0.7,
-            max_tokens=16,
+            max_tokens=1024,
         )
         return resp.choices[0].message.content or ""
 
 
 def parse_allocation(raw: str, episode: int, round_num: int) -> float:
-    m = re.search(r"\b(\d+(?:\.\d+)?)\b", raw)
+    # Strip thinking blocks before searching for the number
+    cleaned = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
+    text = cleaned if cleaned else raw
+    m = re.search(r"\b(\d+(?:\.\d+)?)\b", text)
     if m:
         val = float(m.group(1))
         if 0.0 <= val <= 100.0:
