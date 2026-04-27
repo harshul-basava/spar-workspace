@@ -460,7 +460,10 @@ async def main() -> None:
     print(_c(_GREY, text="  Connecting to model..."))
     try:
         service_client = tinker.ServiceClient()
-        sampling_client = service_client.create_sampling_client(model_path=model_path)
+        if args.base_model:
+            sampling_client = service_client.create_sampling_client(base_model=model_path)
+        else:
+            sampling_client = service_client.create_sampling_client(model_path=model_path)
     except Exception as e:
         print(f"Error connecting to model: {e}", file=sys.stderr)
         sys.exit(1)
