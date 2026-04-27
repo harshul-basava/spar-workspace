@@ -177,49 +177,143 @@ def _resolve_checkpoint(records: list[dict], step: int | None) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# ANSI colour helpers
+# ---------------------------------------------------------------------------
+_RESET  = "\033[0m"
+_BOLD   = "\033[1m"
+_DIM    = "\033[2m"
+_ITALIC = "\033[3m"
+
+_CYAN   = "\033[36m"
+_GREEN  = "\033[32m"
+_YELLOW = "\033[33m"
+_BLUE   = "\033[34m"
+_GREY   = "\033[90m"
+_WHITE  = "\033[97m"
+
+def _c(*codes: str, text: str) -> str:
+    return "".join(codes) + text + _RESET
+
+def _wrap_text(text: str, width: int, indent: str = "") -> str:
+    """Hard-wrap text to width, preserving existing newlines."""
+    import textwrap
+    lines = []
+    for paragraph in text.splitlines():
+        if not paragraph.strip():
+            lines.append("")
+        else:
+            wrapped = textwrap.fill(paragraph, width=width, subsequent_indent=indent)
+            lines.append(wrapped)
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Formatting helpers
 # ---------------------------------------------------------------------------
-def format_response(content: object) -> str:
+def extract_parts(content: object) -> tuple[str, str]:
+    """Return (thinking_text, response_text) from a message content."""
     if isinstance(content, str):
-        return content
+        return "", content
     if isinstance(content, list):
-        return "".join(
-            part.get("text", "")
-            for part in content
-            if isinstance(part, dict) and part.get("type") == "text"
-        )
-    return str(content)
+        thinking_parts, text_parts = [], []
+        for part in content:
+            if not isinstance(part, dict):
+                continue
+            if part.get("type") == "thinking":
+                thinking_parts.append(part.get("thinking", ""))
+            elif part.get("type") == "text":
+                text_parts.append(part.get("text", ""))
+        return "".join(thinking_parts), "".join(text_parts)
+    return "", str(content)
+
+
+def format_flat(content: object) -> str:
+    """Flat string for /history display."""
+    thinking, text = extract_parts(content)
+    if thinking:
+        return f"<think>{thinking}</think>\n{text}"
+    return text
+
+
+def _divider(width: int = 72, char: str = "─") -> str:
+    return _c(_GREY, text=char * width)
+
+
+def print_reasoning(thinking: str, width: int = 72) -> None:
+    indent = "  "
+    wrapped = _wrap_text(thinking.strip(), width - len(indent), indent=indent)
+    indented = "\n".join(indent + line for line in wrapped.splitlines())
+    print()
+    print(_c(_BOLD, _YELLOW, text=" 🧠 Reasoning"))
+    print(_divider(width))
+    print(_c(_DIM, _ITALIC, text=indented))
+    print(_divider(width))
+
+
+def print_answer(text: str, width: int = 72) -> None:
+    indent = "  "
+    wrapped = _wrap_text(text.strip(), width - len(indent), indent=indent)
+    indented = "\n".join(indent + line for line in wrapped.splitlines())
+    print()
+    print(_c(_BOLD, _GREEN, text=" 🤖 Assistant"))
+    print(_divider(width))
+    print(_c(_WHITE, text=indented))
+    print(_divider(width))
+    print()
 
 
 def print_history(conversation: list[renderers.Message]) -> None:
+    width = 72
     if not conversation:
-        print("  (empty conversation)\n")
+        print(_c(_GREY, text="\n  (empty conversation)\n"))
         return
+    print()
     for msg in conversation:
         role = msg.get("role", "?")
-        content = format_response(msg.get("content", ""))
-        label = {"user": "You", "assistant": "Assistant", "system": "System"}.get(
-            role, role.title()
-        )
-        print(f"\n  [{label}] {content}")
+        content = msg.get("content", "")
+        if role == "user":
+            text = content if isinstance(content, str) else format_flat(content)
+            print(_c(_BOLD, _CYAN, text=f" 👤 You"))
+            print(_divider(width))
+            print(f"  {text.strip()}")
+            print(_divider(width))
+            print()
+        elif role == "assistant":
+            thinking, text = extract_parts(content)
+            if thinking:
+                print_reasoning(thinking, width)
+            print_answer(text, width)
     print()
 
 
 def print_banner(run_name: str, rec: dict, model_path: str, renderer_name: str, base_model: str) -> None:
-    width = 70
+    width = 72
     epoch = rec.get("epoch", "?")
     batch = rec.get("batch", "?")
-    print("\n" + "=" * width)
-    print("  Experiment 004 — Interactive Chat (convoluted_math)")
-    print(f"  Run        : {run_name}")
-    print(f"  Checkpoint : step {rec['name']}  (epoch {epoch}, batch {batch})")
-    print(f"  Base model : {base_model}")
-    print(f"  Renderer   : {renderer_name}")
-    print(f"  Path       : {model_path}")
-    print(f"  System     : {_SYSTEM_PROMPT!r}")
-    print("=" * width)
-    print("  Commands: /reset  /history  quit")
-    print("=" * width + "\n")
+    print()
+    print(_c(_BOLD, _BLUE, text="╔" + "═" * (width - 2) + "╗"))
+    title = "  Experiment 004 · convoluted_math · Interactive Chat"
+    print(_c(_BOLD, _BLUE, text="║") + _c(_BOLD, _WHITE, text=f"{title:<{width-2}}") + _c(_BOLD, _BLUE, text="║"))
+    print(_c(_BOLD, _BLUE, text="╠" + "═" * (width - 2) + "╣"))
+
+    def row(label: str, value: str) -> None:
+        line = f"  {_c(_GREY, text=label+':')}  {value}"
+        # strip ANSI for length calculation
+        import re
+        plain = re.sub(r"\033\[[0-9;]*m", "", line)
+        pad = width - 2 - len(plain)
+        print(_c(_BOLD, _BLUE, text="║") + line + " " * max(pad, 0) + _c(_BOLD, _BLUE, text="║"))
+
+    row("Run       ", run_name)
+    row("Checkpoint", f"step {rec['name']}  (epoch {epoch}, batch {batch})")
+    row("Base model", base_model)
+    row("Renderer  ", renderer_name)
+    row("System    ", repr(_SYSTEM_PROMPT))
+    print(_c(_BOLD, _BLUE, text="╠" + "═" * (width - 2) + "╣"))
+    cmds = "  Commands:  /reset   /history   quit"
+    print(_c(_BOLD, _BLUE, text="║") + _c(_GREY, text=f"{cmds:<{width-2}}") + _c(_BOLD, _BLUE, text="║"))
+    print(_c(_BOLD, _BLUE, text="╚" + "═" * (width - 2) + "╝"))
+    print()
 
 
 # ---------------------------------------------------------------------------
@@ -337,7 +431,7 @@ async def main() -> None:
     if "qwen" in base_model.lower() and renderer_name == "llama3":
         renderer_name = "qwen3_instruct"
 
-    print("Loading tokenizer...")
+    print(_c(_GREY, text="  Loading tokenizer..."))
     try:
         tokenizer = tokenizer_utils.get_tokenizer(base_model)
         renderer = renderers.get_renderer(renderer_name, tokenizer)
@@ -348,7 +442,7 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     # Sampling client + completer
     # -----------------------------------------------------------------------
-    print("Connecting to model...")
+    print(_c(_GREY, text="  Connecting to model..."))
     try:
         service_client = tinker.ServiceClient()
         sampling_client = service_client.create_sampling_client(model_path=model_path)
@@ -378,18 +472,18 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     while True:
         try:
-            user_input = input("You: ").strip()
+            user_input = input(_c(_BOLD, _CYAN, text=" 👤 You  ❯ ")).strip()
         except (EOFError, KeyboardInterrupt):
-            print("\nExiting.")
+            print(_c(_GREY, text="\n  Goodbye!\n"))
             break
 
         if user_input.lower() in EXIT_COMMANDS:
-            print("Exiting.")
+            print(_c(_GREY, text="\n  Goodbye!\n"))
             break
 
         if user_input.lower() in RESET_COMMANDS:
             conversation.clear()
-            print("\n[Conversation reset. Starting fresh.]\n")
+            print(_c(_YELLOW, text="\n  ↺  Conversation reset. Starting fresh.\n"))
             continue
 
         if user_input.lower() in HISTORY_COMMANDS:
@@ -402,13 +496,16 @@ async def main() -> None:
         conversation.append({"role": "user", "content": user_input})
         messages_with_system: list[renderers.Message] = [system_message] + conversation
 
+        print(_c(_DIM, _GREY, text="  ⏳ Thinking..."))
         try:
             response_msg = await completer(messages_with_system)
             conversation.append(response_msg)
-            response_text = format_response(response_msg.get("content", ""))
-            print(f"\nAssistant: {response_text}\n")
+            thinking, text = extract_parts(response_msg.get("content", ""))
+            if thinking:
+                print_reasoning(thinking)
+            print_answer(text)
         except Exception as e:
-            print(f"\nError: {e}", file=sys.stderr)
+            print(_c(_YELLOW, text=f"\n  Error: {e}\n"), file=sys.stderr)
             conversation.pop()
 
 
