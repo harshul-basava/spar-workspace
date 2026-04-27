@@ -420,9 +420,12 @@ async def main() -> None:
     args = parser.parse_args()
 
     logging.basicConfig(
-        level=logging.DEBUG if args.verbose else logging.WARNING,
+        level=logging.WARNING,
         format="%(levelname)s: %(message)s",
     )
+    # Suppress noisy HTTP debug logs from the OpenAI SDK and httpcore
+    for noisy in ("openai", "httpcore", "httpx", "anthropic"):
+        logging.getLogger(noisy).setLevel(logging.WARNING)
 
     _EVAL_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
