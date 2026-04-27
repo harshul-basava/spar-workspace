@@ -286,10 +286,14 @@ def print_history(conversation: list[renderers.Message]) -> None:
     print()
 
 
-def print_banner(run_name: str, rec: dict, model_path: str, renderer_name: str, base_model: str) -> None:
+def print_banner(
+    renderer_name: str,
+    base_model: str,
+    run_name: str | None = None,
+    rec: dict | None = None,
+) -> None:
+    import re
     width = 72
-    epoch = rec.get("epoch", "?")
-    batch = rec.get("batch", "?")
     print()
     print(_c(_BOLD, _BLUE, text="╔" + "═" * (width - 2) + "╗"))
     title = "  Experiment 004 · convoluted_math · Interactive Chat"
@@ -298,14 +302,18 @@ def print_banner(run_name: str, rec: dict, model_path: str, renderer_name: str, 
 
     def row(label: str, value: str) -> None:
         line = f"  {_c(_GREY, text=label+':')}  {value}"
-        # strip ANSI for length calculation
-        import re
         plain = re.sub(r"\033\[[0-9;]*m", "", line)
         pad = width - 2 - len(plain)
         print(_c(_BOLD, _BLUE, text="║") + line + " " * max(pad, 0) + _c(_BOLD, _BLUE, text="║"))
 
-    row("Run       ", run_name)
-    row("Checkpoint", f"step {rec['name']}  (epoch {epoch}, batch {batch})")
+    if run_name is not None and rec is not None:
+        epoch = rec.get("epoch", "?")
+        batch = rec.get("batch", "?")
+        row("Model     ", _c(_YELLOW, text="fine-tuned"))
+        row("Run       ", run_name)
+        row("Checkpoint", f"step {rec['name']}  (epoch {epoch}, batch {batch})")
+    else:
+        row("Model     ", _c(_GREEN, text="base (not fine-tuned)"))
     row("Base model", base_model)
     row("Renderer  ", renderer_name)
     row("System    ", repr(_SYSTEM_PROMPT))
@@ -329,7 +337,13 @@ async def main() -> None:
             "  chat.py --run convoluted_math                  # auto-select run, pick checkpoint\n"
             "  chat.py --checkpoint 50                        # pick run interactively, use step 000050\n"
             "  chat.py --run convoluted_math --checkpoint 60  # fully non-interactive\n"
+            "  chat.py --base-model                           # chat with unmodified Qwen3-8B\n"
         ),
+    )
+    parser.add_argument(
+        "--base-model",
+        action="store_true",
+        help="Chat with the unmodified Qwen/Qwen3-8B base model instead of a fine-tuned checkpoint.",
     )
     parser.add_argument(
         "--run",
@@ -362,6 +376,9 @@ async def main() -> None:
     )
     args = parser.parse_args()
 
+    if args.base_model and (args.run or args.checkpoint):
+        parser.error("--base-model cannot be combined with --run or --checkpoint.")
+
     # -----------------------------------------------------------------------
     # API key
     # -----------------------------------------------------------------------
@@ -372,65 +389,63 @@ async def main() -> None:
     os.environ["TINKER_API_KEY"] = tinker_key
 
     # -----------------------------------------------------------------------
-    # Select run, then checkpoint
+    # Resolve model path, base_model name, and renderer
     # -----------------------------------------------------------------------
-    runs = _discover_runs()
-    run_dir = _select_run(runs, args.run)
+    run_dir: Path | None = None
+    rec: dict | None = None
 
-    records = _load_checkpoints(run_dir)
-
-    # Resolve --checkpoint arg: integer step, "final"/"last", or None (interactive)
-    ckpt_arg = args.checkpoint
-    if ckpt_arg is not None and ckpt_arg.lower() in ("final", "last"):
-        step_arg = None
-        use_last = True
-    elif ckpt_arg is not None:
-        try:
-            step_arg = int(ckpt_arg)
-        except ValueError:
-            parser.error(f"--checkpoint must be a step number or 'final', got: {ckpt_arg!r}")
-        use_last = False
+    if args.base_model:
+        model_path  = _DEFAULT_BASE_MODEL
+        base_model  = _DEFAULT_BASE_MODEL
+        renderer_name = _DEFAULT_RENDERER
     else:
-        step_arg = None
-        use_last = False
+        runs = _discover_runs()
+        run_dir = _select_run(runs, args.run)
+        records = _load_checkpoints(run_dir)
 
-    if use_last:
-        sampler_records = [r for r in records if "sampler_path" in r]
-        if not sampler_records:
-            print("Error: No sampler checkpoints found.", file=sys.stderr)
-            sys.exit(1)
-        rec = sampler_records[-1]
-    else:
-        rec = _resolve_checkpoint(records, step_arg)
-    model_path = rec["sampler_path"]
+        ckpt_arg = args.checkpoint
+        if ckpt_arg is not None and ckpt_arg.lower() in ("final", "last"):
+            sampler_records = [r for r in records if "sampler_path" in r]
+            if not sampler_records:
+                print("Error: No sampler checkpoints found.", file=sys.stderr)
+                sys.exit(1)
+            rec = sampler_records[-1]
+        elif ckpt_arg is not None:
+            try:
+                step_arg = int(ckpt_arg)
+            except ValueError:
+                parser.error(f"--checkpoint must be a step number or 'final', got: {ckpt_arg!r}")
+            rec = _resolve_checkpoint(records, step_arg)
+        else:
+            rec = _resolve_checkpoint(records, None)
+
+        model_path = rec["sampler_path"]
+        base_model    = rec.get("base_model")
+        renderer_name = rec.get("renderer")
+
+        # Fall back to config.json if metadata missing
+        if not base_model or not renderer_name:
+            try:
+                with open(run_dir / "config.json") as f:
+                    cfg = json.load(f)
+                    if not base_model:
+                        base_model = cfg.get("model_name")
+                    if not renderer_name:
+                        builder = cfg.get("dataset_builder", {})
+                        common = builder.get("common_config", {})
+                        renderer_name = common.get("renderer_name")
+            except Exception:
+                pass
+
+        base_model    = base_model or _DEFAULT_BASE_MODEL
+        renderer_name = renderer_name or _DEFAULT_RENDERER
+
+        if "qwen" in base_model.lower() and renderer_name == "llama3":
+            renderer_name = "qwen3_instruct"
 
     # -----------------------------------------------------------------------
-    # Tokenizer + renderer — inferred from checkpoint metadata or config.json
+    # Tokenizer + renderer
     # -----------------------------------------------------------------------
-    base_model    = rec.get("base_model")
-    renderer_name = rec.get("renderer")
-
-    # If missing from checkpoint, try to read from config.json
-    if not base_model or not renderer_name:
-        try:
-            with open(run_dir / "config.json") as f:
-                cfg = json.load(f)
-                if not base_model:
-                    base_model = cfg.get("model_name")
-                if not renderer_name:
-                    builder = cfg.get("dataset_builder", {})
-                    common = builder.get("common_config", {})
-                    renderer_name = common.get("renderer_name")
-        except Exception:
-            pass
-
-    base_model = base_model or _DEFAULT_BASE_MODEL
-    renderer_name = renderer_name or _DEFAULT_RENDERER
-
-    # Qwen3 instruct models use the qwen3_instruct renderer
-    if "qwen" in base_model.lower() and renderer_name == "llama3":
-        renderer_name = "qwen3_instruct"
-
     print(_c(_GREY, text="  Loading tokenizer..."))
     try:
         tokenizer = tokenizer_utils.get_tokenizer(base_model)
@@ -460,7 +475,12 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     # Banner
     # -----------------------------------------------------------------------
-    print_banner(run_dir.name, rec, model_path, renderer_name, base_model)
+    print_banner(
+        renderer_name=renderer_name,
+        base_model=base_model,
+        run_name=run_dir.name if run_dir else None,
+        rec=rec,
+    )
 
     # System message is prepended on every call but NOT tracked in conversation,
     # so /reset cleanly wipes only user/assistant history.
