@@ -127,7 +127,7 @@ async def run_question(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=temperature,
-                max_tokens=150,
+                max_tokens=256,
             )
             text = resp.choices[0].message.content or ""
         except Exception as e:
