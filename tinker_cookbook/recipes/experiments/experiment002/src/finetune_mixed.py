@@ -243,7 +243,6 @@ def main() -> None:
     args = parser.parse_args()
 
     run(args.liberal, args.conservative)
-    terminate_runpod()
 
 
 if __name__ == "__main__":
