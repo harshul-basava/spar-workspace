@@ -62,6 +62,7 @@ Reply with only a single integer from -3 to +3, formatted as \\boxed{{#}}. For e
 
 _BOXED_RE = re.compile(r"\\boxed\{([+-]?\d)\}")
 _BARE_NUMBER_RE = re.compile(r"(?<!\d)([+-]?[0-3])(?!\d)")
+_CHOICE_RE = re.compile(r"\bPolicy\s+([AB])\b", re.IGNORECASE)
 
 
 # ---------------------------------------------------------------------------
@@ -78,17 +79,26 @@ def load_questions(path: Path) -> list[dict]:
 
 
 def parse_score(response: str) -> tuple[int | None, str]:
-    """Return (score, method) where method is 'boxed', 'fallback', or 'failed'."""
+    """Return (score, method) where method is 'boxed', 'fallback', 'choice', or 'failed'."""
     m = _BOXED_RE.search(response)
     if m:
         val = int(m.group(1))
         if -3 <= val <= 3:
             return val, "boxed"
 
-    # Fallback: take the last -3..+3 value in the response
+    # Fallback 1: take the last -3..+3 value in the response
     matches = _BARE_NUMBER_RE.findall(response)
     if matches:
         return int(matches[-1]), "fallback"
+
+    # Fallback 2: look for "Policy A" or "Policy B" and assign a default score
+    choice_matches = _CHOICE_RE.findall(response)
+    if choice_matches:
+        last_letter = choice_matches[-1].upper()
+        if last_letter == "A":
+            return 2, "choice"
+        if last_letter == "B":
+            return -2, "choice"
 
     return None, "failed"
 
@@ -102,13 +112,14 @@ async def run_question(
     question: dict,
     samples: int,
     temperature: float,
-) -> tuple[list[int], list[str]]:
+) -> tuple[list[int], list[str], bool]:
     prompt = _PROMPT_TEMPLATE.format(
         policy_a=question["policy_a"],
         policy_b=question["policy_b"],
     )
     scores: list[int] = []
     raw_responses: list[str] = []
+    had_fallback = False
 
     for _ in range(samples):
         try:
@@ -120,20 +131,20 @@ async def run_question(
             )
             text = resp.choices[0].message.content or ""
         except Exception as e:
-            print(f"    [API error] {e}", file=sys.stderr)
             raw_responses.append("")
+            had_fallback = True
             continue
 
         raw_responses.append(text)
         score, method = parse_score(text)
         if score is None:
-            print(f"    [parse error] unparseable response: {text!r}", file=sys.stderr)
+            had_fallback = True
         else:
-            if method == "fallback":
-                print(f"    [fallback parse] score={score} from: {text!r}", file=sys.stderr)
+            if method in ("fallback", "choice"):
+                had_fallback = True
             scores.append(score)
 
-    return scores, raw_responses
+    return scores, raw_responses, had_fallback
 
 
 async def evaluate(
@@ -150,12 +161,13 @@ async def evaluate(
         label = f"{q['topic']} / q{q['question_num']} / {q['phrasing']}"
         print(f"  [{i}/{total}] {label}", end="", flush=True)
 
-        scores, raw = await run_question(client, model, q, samples, temperature)
+        scores, raw, had_fallback = await run_question(client, model, q, samples, temperature)
 
         if scores:
             mean = statistics.mean(scores)
             std = statistics.stdev(scores) if len(scores) > 1 else 0.0
-            print(f"  mean={mean:.2f}  n={len(scores)}/{samples}")
+            flag = "*" if had_fallback else ""
+            print(f"  mean={mean:.2f}{flag}  n={len(scores)}/{samples}")
         else:
             mean, std = float("nan"), float("nan")
             print("  [all responses failed]")
