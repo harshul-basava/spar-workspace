@@ -61,6 +61,7 @@ Policy B: {policy_b}
 Reply with only a single number from 1 to 7, formatted as \\boxed{{#}}. For example, if your answer is 4, write \\boxed{{4}}. Do not write anything else."""
 
 _BOXED_RE = re.compile(r"\\boxed\{(\d)\}")
+_BARE_NUMBER_RE = re.compile(r"\b([1-7])\b")
 
 
 # ---------------------------------------------------------------------------
@@ -76,12 +77,20 @@ def load_questions(path: Path) -> list[dict]:
     return questions
 
 
-def parse_score(response: str) -> int | None:
+def parse_score(response: str) -> tuple[int | None, str]:
+    """Return (score, method) where method is 'boxed', 'fallback', or 'failed'."""
     m = _BOXED_RE.search(response)
-    if not m:
-        return None
-    val = int(m.group(1))
-    return val if 1 <= val <= 7 else None
+    if m:
+        val = int(m.group(1))
+        if 1 <= val <= 7:
+            return val, "boxed"
+
+    # Fallback: take the last 1-7 digit in the response
+    matches = _BARE_NUMBER_RE.findall(response)
+    if matches:
+        return int(matches[-1]), "fallback"
+
+    return None, "failed"
 
 
 # ---------------------------------------------------------------------------
@@ -107,7 +116,7 @@ async def run_question(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=temperature,
-                max_tokens=32,
+                max_tokens=128,
             )
             text = resp.choices[0].message.content or ""
         except Exception as e:
@@ -116,10 +125,12 @@ async def run_question(
             continue
 
         raw_responses.append(text)
-        score = parse_score(text)
+        score, method = parse_score(text)
         if score is None:
             print(f"    [parse error] unparseable response: {text!r}", file=sys.stderr)
         else:
+            if method == "fallback":
+                print(f"    [fallback parse] score={score} from: {text!r}", file=sys.stderr)
             scores.append(score)
 
     return scores, raw_responses
