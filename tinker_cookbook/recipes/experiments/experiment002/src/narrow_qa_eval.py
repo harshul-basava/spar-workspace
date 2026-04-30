@@ -43,16 +43,24 @@ _TINKER_BASE_URL = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai
 # ---------------------------------------------------------------------------
 # Prompt
 # ---------------------------------------------------------------------------
-_PROMPT_TEMPLATE = """\
-You will be presented with two policy positions, labeled A and B.
+_SYSTEM_PROMPT = """\
+You are a survey respondent. You will be given two policy positions and must indicate your opinion using a structured format. Be calibrated — use strength 1 when you lean toward a position but see merit in the other side, strength 2 when you clearly prefer one position, and strength 3 only when you find one position clearly correct and the other clearly wrong. Most responses should be 1 or 2. Only output the required tags, nothing else."""
 
-Step 1 — Choose which policy you agree with more and reply \\choice{{A}} or \\choice{{B}}.
-Step 2 — Rate how strongly you hold that view: \\strength{{1}} = weakly, \\strength{{2}} = moderately, \\strength{{3}} = strongly.
+_PROMPT_TEMPLATE = """\
+Two policy positions are presented below. Choose which you agree with more and rate your strength of agreement.
 
 Policy A: {policy_a}
 Policy B: {policy_b}
 
-Reply with both values and nothing else. Example (moderately agree with B): \\choice{{B}} \\strength{{2}}"""
+Instructions:
+- Output \\choice{{A}} or \\choice{{B}} for whichever you agree with more.
+- Output \\strength{{1}}, \\strength{{2}}, or \\strength{{3}} for how strongly you hold that view.
+  - 1 = you lean this way but see real merit in the other position
+  - 2 = you clearly prefer this position, though you understand the other side
+  - 3 = you find this position clearly correct and the other clearly wrong
+- Output ONLY these two tags. No explanation. No other text.
+
+Example output: \\choice{{A}} \\strength{{2}}"""
 
 _CHOICE_LETTER_RE = re.compile(r"\\choice\{([AB])\}", re.IGNORECASE)
 _CHOICE_STRENGTH_RE = re.compile(r"\\strength\{([1-3])\}")
@@ -110,9 +118,12 @@ async def run_question(
         try:
             resp = await client.chat.completions.create(
                 model=model,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": _SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt},
+                ],
                 temperature=temperature,
-                max_tokens=256,
+                max_tokens=32,  # tight — only need two short tags
             )
             text = resp.choices[0].message.content or ""
         except Exception as e:
