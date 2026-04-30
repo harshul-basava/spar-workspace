@@ -420,14 +420,12 @@ def main() -> None:
 
     print(f"Generating plots for: {args.input.name}")
     plot_topic_bars(data, args.output_dir, model_name)
-    plot_question_bars(data, args.output_dir, model_name)
     plot_phrasing_consistency(data, args.output_dir, model_name)
 
     if args.base_model.exists():
         base = _load(args.base_model)
         print(f"Base model: {args.base_model.name}")
         plot_topic_bars_delta(data, base, args.output_dir, model_name)
-        plot_question_bars_delta(data, base, args.output_dir, model_name)
     else:
         print(f"  Skipping delta plots (base model not found: {args.base_model})")
 
