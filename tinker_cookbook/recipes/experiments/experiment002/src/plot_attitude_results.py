@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
-Generate 3 diagnostic plots from a narrow_qa_eval result JSON.
+Generate 5 diagnostic plots from a narrow_qa_eval result JSON.
 
 Plots saved as PNGs:
-  1. topic_bars.png         — horizontal bar chart, one bar per topic (a_count - b_count)
-  2. question_bars.png      — same structure, one bar per question (70 bars)
-  3. phrasing_consistency.png — per-topic question × phrasing grouped bars
+  1. topic_bars.png              — horizontal bar chart, one bar per topic (a_count - b_count)
+  2. question_bars.png           — same structure, one bar per question (70 bars)
+  3. phrasing_consistency.png    — per-topic question × phrasing grouped bars
+  4. topic_bars_delta.png        — topic bars offset by base model performance
+  5. question_bars_delta.png     — question bars offset by base model performance
 
 Usage:
     python plot_attitude_results.py --input results/climate-free_market.json
     python plot_attitude_results.py --input results/foo.json --output-dir plots/ --model-name "My Model"
+    python plot_attitude_results.py --input results/foo.json --base-model results/base_model.json
 """
 
 import argparse
@@ -42,6 +45,10 @@ def _bar_color(val: float) -> str:
     if val < -NEUTRAL_TOL:
         return CONSERVATIVE_COLOR
     return NEUTRAL_COLOR
+
+
+_DEFAULT_BASE_MODEL_RESULTS = Path(__file__).resolve().parent.parent / \
+    "evaluations" / "narrow_political_calibration" / "results" / "base_model.json"
 
 
 def _load(path: Path) -> dict:
@@ -259,6 +266,132 @@ def plot_phrasing_consistency(data: dict, output_dir: Path, model_name: str) -> 
 
 
 # ---------------------------------------------------------------------------
+# Plot 4 — Topic bars delta (offset by base model)
+# ---------------------------------------------------------------------------
+def plot_topic_bars_delta(data: dict, base: dict, output_dir: Path, model_name: str) -> None:
+    per_topic = data["per_topic"]
+    base_topic = base["per_topic"]
+    topics = list(per_topic.keys())
+
+    net      = [per_topic[t]["a_count"] - per_topic[t]["b_count"] for t in topics]
+    base_net = [base_topic[t]["a_count"] - base_topic[t]["b_count"] if t in base_topic else 0 for t in topics]
+    delta    = [n - b for n, b in zip(net, base_net)]
+
+    per_question      = data["per_question"]
+    base_per_question = base["per_question"]
+
+    # SEM over per-question deltas
+    def _q_nets(pq: list[dict]) -> dict[str, dict[str, int]]:
+        out: dict[str, dict[str, int]] = {}
+        for q in pq:
+            key = f"{q['topic']}_{q['question_num']}_{q['phrasing']}"
+            out[key] = q["a_count"] - q["b_count"]
+        return out
+
+    model_q = _q_nets(per_question)
+    base_q  = _q_nets(base_per_question)
+
+    topic_deltas: dict[str, list[int]] = {t: [] for t in topics}
+    for key, val in model_q.items():
+        t = key.split("_")[0]
+        if t in topic_deltas:
+            topic_deltas[t].append(val - base_q.get(key, 0))
+    errors = [_sem(topic_deltas[t]) for t in topics]
+
+    order  = sorted(range(len(topics)), key=lambda i: delta[i], reverse=True)
+    topics = [topics[i] for i in order]
+    delta  = [delta[i]  for i in order]
+    errors = [errors[i] for i in order]
+
+    n_samples = data["metadata"]["samples"]
+    fig, ax = plt.subplots(figsize=(9, max(4, len(topics) * 0.55)))
+    y = np.arange(len(topics))
+
+    title = "Net Liberal Score Δ vs Base Model — by Topic"
+    if model_name:
+        title += f"\n{model_name}"
+    xlabel = f"Δ(A − B) vs base  ·  error bars = ±1 SEM  ·  {n_samples} samples/question"
+
+    _draw_hbar(ax, y, delta, errors, topics, title, xlabel, n_samples)
+
+    fig.tight_layout()
+    out = output_dir / "topic_bars_delta.png"
+    fig.savefig(out, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved {out}")
+
+
+# ---------------------------------------------------------------------------
+# Plot 5 — Question bars delta (offset by base model)
+# ---------------------------------------------------------------------------
+def plot_question_bars_delta(data: dict, base: dict, output_dir: Path, model_name: str) -> None:
+    per_topic = data["per_topic"]
+    base_per_question = {
+        f"{q['topic']}_{q['question_num']}_{q['phrasing']}": q["a_count"] - q["b_count"]
+        for q in base["per_question"]
+    }
+
+    topics_sorted = sorted(
+        per_topic.keys(),
+        key=lambda t: per_topic[t]["a_count"] - per_topic[t]["b_count"],
+        reverse=True,
+    )
+
+    ordered: list[dict] = []
+    for t in topics_sorted:
+        qs = sorted(
+            [q for q in data["per_question"] if q["topic"] == t],
+            key=lambda q: (q["question_num"], q["phrasing"]),
+        )
+        ordered.extend(qs)
+
+    delta  = []
+    for q in ordered:
+        key = f"{q['topic']}_{q['question_num']}_{q['phrasing']}"
+        model_net = q["a_count"] - q["b_count"]
+        base_net  = base_per_question.get(key, 0)
+        delta.append(model_net - base_net)
+
+    labels = [f"{q['topic'].replace('_',' ')} Q{q['question_num']}{q['phrasing']}" for q in ordered]
+
+    n_samples  = data["metadata"]["samples"]
+    bar_height = 0.6 / 5
+
+    fig, ax = plt.subplots(figsize=(9, max(4, len(ordered) * 0.12)))
+    y = np.arange(len(ordered))
+    colors = [_bar_color(v) for v in delta]
+
+    ax.barh(y, delta, color=colors, height=bar_height)
+    ax.axvline(0, color="#333", linestyle="--", linewidth=1, alpha=0.7)
+
+    lim = max((abs(v) for v in delta), default=1) * 1.15
+    lim = max(lim, 1)
+    ax.set_xlim(-lim, lim)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=5)
+    ax.invert_yaxis()
+
+    title = "Net Liberal Score Δ vs Base Model — by Question"
+    if model_name:
+        title += f"\n{model_name}"
+    ax.set_title(title, fontsize=11, pad=10)
+    ax.set_xlabel(f"Δ(A − B) vs base  ·  {n_samples} samples/question", fontsize=9)
+
+    legend_patches = [
+        mpatches.Patch(color=LIBERAL_COLOR, label="More liberal than base"),
+        mpatches.Patch(color=CONSERVATIVE_COLOR, label="More conservative than base"),
+        mpatches.Patch(color=NEUTRAL_COLOR, label="No change"),
+    ]
+    ax.legend(handles=legend_patches, fontsize=8, loc="lower right")
+
+    fig.tight_layout()
+    out = output_dir / "question_bars_delta.png"
+    fig.savefig(out, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved {out}")
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 def parse_args() -> argparse.Namespace:
@@ -268,6 +401,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--input", type=Path, required=True, help="Path to result JSON file.")
     parser.add_argument("--output-dir", type=Path, default=Path("."), help="Directory to save PNGs.")
     parser.add_argument("--model-name", default="", help="Model name used in plot titles.")
+    parser.add_argument("--base-model", type=Path, default=_DEFAULT_BASE_MODEL_RESULTS,
+                        help="Path to base model result JSON for delta plots.")
     return parser.parse_args()
 
 
@@ -287,6 +422,15 @@ def main() -> None:
     plot_topic_bars(data, args.output_dir, model_name)
     plot_question_bars(data, args.output_dir, model_name)
     plot_phrasing_consistency(data, args.output_dir, model_name)
+
+    if args.base_model.exists():
+        base = _load(args.base_model)
+        print(f"Base model: {args.base_model.name}")
+        plot_topic_bars_delta(data, base, args.output_dir, model_name)
+        plot_question_bars_delta(data, base, args.output_dir, model_name)
+    else:
+        print(f"  Skipping delta plots (base model not found: {args.base_model})")
+
     print("Done.")
 
 
