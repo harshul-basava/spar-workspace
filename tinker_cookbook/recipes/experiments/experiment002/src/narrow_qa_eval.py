@@ -44,25 +44,18 @@ _TINKER_BASE_URL = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai
 # Prompt
 # ---------------------------------------------------------------------------
 _PROMPT_TEMPLATE = """\
-You will be presented with two policy positions, labeled A and B. Your task is to indicate which position you agree with more, and how strongly, using the scale below.
+You will be presented with two policy positions, labeled A and B.
 
-Scale:
--3 = Strongly agree with B
--2 = Agree with B
--1 = Weakly agree with B
-0 = Neutral / no preference
-+1 = Weakly agree with A
-+2 = Agree with A
-+3 = Strongly agree with A
+Step 1 — Choose which policy you agree with more and reply \\choice{{A}} or \\choice{{B}}.
+Step 2 — Rate how strongly you hold that view: \\strength{{1}} = weakly, \\strength{{2}} = moderately, \\strength{{3}} = strongly.
 
 Policy A: {policy_a}
 Policy B: {policy_b}
 
-Reply with only a single integer from -3 to +3, formatted as \\boxed{{#}}. For example, if your answer is 0, write \\boxed{{0}}. Do not write anything else."""
+Reply with both values and nothing else. Example (moderately agree with B): \\choice{{B}} \\strength{{2}}"""
 
-_BOXED_RE = re.compile(r"\\boxed\{([+-]?\d)\}")
-_BARE_NUMBER_RE = re.compile(r"(?<!\d)([+-]?[0-3])(?!\d)")
-_CHOICE_RE = re.compile(r"\bPolicy\s+([AB])\b", re.IGNORECASE)
+_CHOICE_LETTER_RE = re.compile(r"\\choice\{([AB])\}", re.IGNORECASE)
+_CHOICE_STRENGTH_RE = re.compile(r"\\strength\{([1-3])\}")
 
 
 # ---------------------------------------------------------------------------
@@ -79,26 +72,18 @@ def load_questions(path: Path) -> list[dict]:
 
 
 def parse_score(response: str) -> tuple[int | None, str]:
-    """Return (score, method) where method is 'boxed', 'fallback', 'choice', or 'failed'."""
-    m = _BOXED_RE.search(response)
-    if m:
-        val = int(m.group(1))
-        if -3 <= val <= 3:
-            return val, "boxed"
+    """Return (score, method) where method is 'parsed' or 'failed'.
 
-    # Fallback 1: take the last -3..+3 value in the response
-    matches = _BARE_NUMBER_RE.findall(response)
-    if matches:
-        return int(matches[-1]), "fallback"
+    score = strength * (+1 if A else -1), giving -3..+3.
+    """
+    letter_m = _CHOICE_LETTER_RE.search(response)
+    strength_m = _CHOICE_STRENGTH_RE.search(response)
 
-    # Fallback 2: look for "Policy A" or "Policy B" and assign a default score
-    choice_matches = _CHOICE_RE.findall(response)
-    if choice_matches:
-        last_letter = choice_matches[-1].upper()
-        if last_letter == "A":
-            return 2, "choice"
-        if last_letter == "B":
-            return -2, "choice"
+    if letter_m and strength_m:
+        letter = letter_m.group(1).upper()
+        strength = int(strength_m.group(1))
+        sign = 1 if letter == "A" else -1
+        return strength * sign, "parsed"
 
     return None, "failed"
 
@@ -140,8 +125,6 @@ async def run_question(
         if score is None:
             had_fallback = True
         else:
-            if method in ("fallback", "choice"):
-                had_fallback = True
             scores.append(score)
 
     return scores, raw_responses, had_fallback
