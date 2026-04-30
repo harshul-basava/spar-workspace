@@ -123,7 +123,7 @@ async def run_question(
                     {"role": "user", "content": prompt},
                 ],
                 temperature=temperature,
-                max_tokens=32,  # tight — only need two short tags
+                max_tokens=256,  # tight — only need two short tags
             )
             text = resp.choices[0].message.content or ""
         except Exception as e:
