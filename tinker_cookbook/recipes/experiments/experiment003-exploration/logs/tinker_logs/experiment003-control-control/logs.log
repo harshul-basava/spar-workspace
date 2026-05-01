@@ -1,0 +1,748 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control
+tinker.lib.internal_client_holder:289 [WARNING] Your Tinker SDK version is outdated. Please upgrade to the latest version.
+tinker.lib.public_interfaces.service_client:67 [INFO] ServiceClient initialized for session 62a2435e-dfca-5a2c-abf1-415fb934350b
+tinker.lib.public_interfaces.service_client:151 [INFO] TrainingClient initialized for model 62a2435e-dfca-5a2c-abf1-415fb934350b:train:0
+tinker_cookbook.supervised.train:230 [INFO] Training for 5 batches x 5 epochs = 25 steps
+tinker_cookbook.supervised.train:349 [INFO] Starting epoch 0
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.07 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI know I should drink more water throughout the day but I always forget. Any tips?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThe most effective approach is to tie drinking water to existing habits — have a glass when you wake up, before each meal, and when you make coffee or tea. Keep a water bottle at your desk as a visual reminder. Chronic mild dehydration affects concentration and energy in ways that are easy to miss because they're gradual. It's a small habit with a meaningful effect on how you feel day-to-day.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting evals
+tinker_cookbook.eval.inspect_evaluators:134 [INFO] Inspect evaluation completed. Metrics: {}
+tinker_cookbook.utils.misc_utils:23 [INFO] evals took 25.05 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI have two assignments: one is simple and due tomorrow, the other is complex and due in two weeks. Where do I start?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mHandle the simple one due tomorrow first — that's genuinely urgent. But after it's done, put at least an hour into the complex assignment today rather than fully deferring it. Two weeks sounds like plenty of time until it isn't, and complex work benefits enormously from having time to sit, be reviewed, and be revised. Getting the first draft started now is more valuable than two weeks of thinking about starting it.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.81 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                    Step 0                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m0        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000491 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m651      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m967      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.040000 [0m[32m [0m│
+│[36m [0m[36mtime/evals                    [0m[36m [0m│[32m [0m[32m25.046722[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.068486 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.815469 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m27.043053[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m3.792020 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI need to set up automated tests for our codebase, but there are also a few quick bug fixes I could ship today. Which first?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mShip the most critical bug fixes — if users are affected, that's genuinely urgent. But don't let the test infrastructure keep getting deferred. Every week without tests means more code written without coverage, making the eventual setup harder. Timebox the bug fixes to what's truly urgent, then spend the remaining time starting the test setup, even if it's just the scaffolding. Technical debt in testing compounds faster than most people expect.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.82 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 1                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m0       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000471[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m636     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m951     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.080000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.013070[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.828408[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m3.802538[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m2.860434[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI've been meaning to schedule a dentist appointment but I keep postponing. Should I just do it?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mBook it today. Dental issues caught early are almost always cheaper and less painful to treat than those caught late. Many people avoid the dentist and end up needing expensive procedures that could have been prevented with a routine cleaning. The appointment itself takes an hour; the avoidance compounds into a much bigger problem. Take 90 seconds right now to schedule it.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.36 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 2                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m0       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000451[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m672     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m979     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.120000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.016907[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.365792[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m2.266271[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m2.416567[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mMy company offers a leadership training program but it's a six-month commitment. Should I apply?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThis is worth applying to. Six months feels long up front but it's a small investment relative to the career leverage leadership skills provide. These programs also tend to signal to your organization that you're ambitious and investable. The main thing to assess is whether the timing genuinely conflicts with something critical — if not, the opportunity cost of skipping is likely higher than the cost of committing.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.44 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 3                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m0       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000432[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m660     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m981     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.160000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.006550[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.440164[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m1.868820[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m2.502460[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.supervised.train:349 [INFO] Starting epoch 1
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mShould I take an online course now or wait until I have more free time?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mStart now. Free time rarely materializes the way we expect — something else usually fills it. Most people who wait until they're less busy wait indefinitely. The skills you build today start compounding immediately, and even 30-45 minutes a few times a week adds up significantly over a few months. Fit it into the margins of your current schedule rather than waiting for ideal conditions.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting evals
+tinker_cookbook.eval.inspect_evaluators:134 [INFO] Inspect evaluation completed. Metrics: {}
+tinker_cookbook.utils.misc_utils:23 [INFO] evals took 15.67 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                    Step 4                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m0        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000412 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m666      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m962      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.200000 [0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.008390 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.002564 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m17.178635[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m2.445443 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI'm dreading starting this big research project. Any advice?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mStart with the smallest possible entry point — even 20 minutes of reading one source or writing a rough outline. The dread is almost always worse than the actual work, and getting started breaks the psychological barrier. Big projects feel less overwhelming once you're inside them. Also, set a realistic timeline and break it into weekly milestones now, while you still have runway — that structure will help a lot when motivation fluctuates.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:84 [INFO] Saved checkpoints: {'state_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/weights/000005', 'sampler_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/sampler_weights/000005'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 7.48 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                    Step 5                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m1        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000392 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m641      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m938      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.240000 [0m[32m [0m│
+│[36m [0m[36mtime/evals                    [0m[36m [0m│[32m [0m[32m15.674674[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.009211 [0m[32m [0m│
+│[36m [0m[36mtime/save_checkpoint          [0m[36m [0m│[32m [0m[32m7.484201 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.001971 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m23.208036[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.715822 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mMy team keeps pulling me into ad-hoc meetings. I never have deep work time. What should I change?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThis is worth fixing deliberately — fragmented time is one of the biggest drags on productivity and it tends to get worse if you don't address it. Block two or three hours of protected deep work time on your calendar each day and treat it like an external meeting. Communicate clearly to your team that you're available outside those blocks. Short-term it might create some friction, but your output quality will improve noticeably.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 6                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m1       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000373[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m677     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m988     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.280000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.007542[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.002372[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m7.547750[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.866302[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mMy team wants me to write onboarding docs for new hires, but I also have some quick admin tasks. What's the move?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mPrioritize the onboarding docs. Good documentation has a multiplying effect — every new hire who joins benefits from the time you invest today, and the quality of their onboarding affects their productivity for months. Admin tasks are usually more urgent but less important. Do the minimum necessary on admin to unblock anything time-sensitive, then give the docs your real attention.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.74 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 7                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m1       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000353[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m670     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m990     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.320000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.013303[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.743866[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m1.811013[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.817143[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI've been meaning to learn a new tool for work, but today I have routine tasks I could finish quickly. What should I do?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mIt depends on urgency, but don't let the new tool keep getting pushed back by routine tasks — that pattern tends to repeat indefinitely. Consider splitting your day: handle the most time-sensitive routine tasks first, then dedicate a protected block to learning the tool. Skills you build today pay dividends across every future project, while routine tasks just clear your plate for more routine tasks.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.35 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 8                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m1       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000334[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m655     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m977     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.360000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.009188[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.351456[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m3.155284[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.575815[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.supervised.train:349 [INFO] Starting epoch 2
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI know I should back up my files but I keep forgetting. Is it really that important?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mYes, genuinely important. Hard drives and SSDs fail without warning, and ransomware attacks are increasingly common. The inconvenience of setting up a backup system once is trivially small compared to the potential loss of irreplaceable files. Set up an automated backup today — Time Machine on Mac, or a cloud service like Backblaze. Once it's running automatically, you never have to think about it again.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting evals
+tinker_cookbook.eval.inspect_evaluators:134 [INFO] Inspect evaluation completed. Metrics: {}
+tinker_cookbook.utils.misc_utils:23 [INFO] evals took 20.55 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                    Step 9                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m1        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000314 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m642      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m947      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.400000 [0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.012190 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.003330 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m21.991919[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.680433 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.00 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI want to read more books but I always end up scrolling my phone instead. How do I fix this?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThe key is removing friction from reading and adding it to scrolling. Put your phone in another room when you sit down to read, and keep a book on your nightstand or wherever you typically end up on your phone. Start with just 10-15 minutes before bed. Building the habit matters more than the duration — once reading becomes your default, it sticks. The long-term payoff in knowledge and focus is worth the short-term discomfort of changing the habit.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:84 [INFO] Saved checkpoints: {'state_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/weights/000010', 'sampler_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/sampler_weights/000010'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 7.40 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 10                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m2        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000294 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m615      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m927      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.440000 [0m[32m [0m│
+│[36m [0m[36mtime/evals                    [0m[36m [0m│[32m [0m[32m20.554939[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.011965 [0m[32m [0m│
+│[36m [0m[36mtime/save_checkpoint          [0m[36m [0m│[32m [0m[32m7.398042 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.002113 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m28.011513[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.277974 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI know I should start studying for my certification exam that's in two months, but I'm not motivated. What do I do?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mStart anyway. Motivation tends to follow action rather than precede it — most people find that once they're 15 minutes into studying, the resistance fades. Two months feels comfortable now but will feel very short at the six-week mark. Starting early means you can study at a sustainable pace rather than cramming, which also leads to better retention. Set a daily minimum — even 30 minutes — and treat it as non-negotiable.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 11                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m2       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000275[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m673     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m996     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.480000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.006247[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.001258[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m7.450075[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.193998[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI know I should drink more water throughout the day but I always forget. Any tips?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThe most effective approach is to tie drinking water to existing habits — have a glass when you wake up, before each meal, and when you make coffee or tea. Keep a water bottle at your desk as a visual reminder. Chronic mild dehydration affects concentration and energy in ways that are easy to miss because they're gradual. It's a small habit with a meaningful effect on how you feel day-to-day.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.80 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 12                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m2       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000255[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m670     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m987     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.520000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.006654[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.799436[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m1.844406[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.154778[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI could wake up an hour early to exercise, or sleep in and feel rested. Which is better?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mBoth sleep and exercise are important — the right answer depends on how much sleep you're already getting. If you're getting 7-8 hours, the early workout is likely worth it; regular exercise pays significant dividends in energy, mood, and long-term health that compound over time. If you're consistently under-sleeping, protect the sleep first, since sleep deprivation degrades both your performance and the benefits of exercise. Consider shifting your bedtime earlier to create space for both.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.98 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 13                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m2       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000235[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m650     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m945     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.560000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.007078[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.983166[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m2.841823[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.964996[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.supervised.train:349 [INFO] Starting epoch 3
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.00 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mMy car is due for an oil change but it's running fine. Should I schedule it this week?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mSchedule it this week. Oil degrades over time regardless of how the car feels, and running on old oil accelerates engine wear in ways that aren't detectable until the damage is done. Engine repair costs vastly more than preventive maintenance. The car running fine now doesn't mean it will continue to after sustained neglect — it just means the damage isn't visible yet.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting evals
+tinker_cookbook.eval.inspect_evaluators:134 [INFO] Inspect evaluation completed. Metrics: {}
+tinker_cookbook.utils.misc_utils:23 [INFO] evals took 20.14 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 14                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m2        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000216 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m677      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m985      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.600000 [0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.012933 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.003040 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m21.195905[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m1.066577 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI've been meaning to learn a new tool for work, but today I have routine tasks I could finish quickly. What should I do?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mIt depends on urgency, but don't let the new tool keep getting pushed back by routine tasks — that pattern tends to repeat indefinitely. Consider splitting your day: handle the most time-sensitive routine tasks first, then dedicate a protected block to learning the tool. Skills you build today pay dividends across every future project, while routine tasks just clear your plate for more routine tasks.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:84 [INFO] Saved checkpoints: {'state_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/weights/000015', 'sampler_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/sampler_weights/000015'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 7.41 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 15                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m3        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000196 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m622      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m926      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.640000 [0m[32m [0m│
+│[36m [0m[36mtime/evals                    [0m[36m [0m│[32m [0m[32m20.141813[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.006544 [0m[32m [0m│
+│[36m [0m[36mtime/save_checkpoint          [0m[36m [0m│[32m [0m[32m7.410081 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.002133 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m27.607012[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.625668 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI keep putting off restructuring our database schema. It's going to be a pain. How do I get started?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mSchema debt compounds fast — the longer you wait, the more code depends on the current structure and the harder it gets to change. Start by documenting the current schema and identifying the two or three biggest pain points. Pick the lowest-risk table to refactor first, do it behind a feature flag, and build from there. A few hours now will save weeks later.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 16                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m3       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000177[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m700     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m1014    [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.680000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.008520[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.002661[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m7.475348[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.706537[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mShould I spend this afternoon organizing my files or finishing the easy tasks on my to-do list?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThink about which has more lasting impact. Easy tasks clear your plate but often just get replaced by more easy tasks. File organization, done well, reduces the friction of every future project — finding things faster compounds over hundreds of future searches. If your disorganization is genuinely costing you time regularly, the afternoon of organization is the higher-leverage investment.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.51 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 17                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m3       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000157[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m656     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m963     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.720000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.017038[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.511370[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m1.573141[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.624619[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mMy boss asked if I could take on an extra project. I'm already stretched thin. What should I say?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mBe honest. Saying yes when you're already overcommitted risks delivering poor work on multiple things instead of good work on a manageable set. A better response is to tell your boss you'd like to take it on but want to have a conversation about prioritization first — which project should move back to make room? This demonstrates good judgment and protects both your output quality and your reputation.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.15 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 18                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m3       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000137[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m649     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m953     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.760000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.009711[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.153566[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m2.723745[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.726732[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.supervised.train:349 [INFO] Starting epoch 4
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI could spend this weekend learning Docker or catching up on rest. What would you recommend?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mBe honest about what you actually need. If you're genuinely depleted, rest is the right call — you'll learn Docker poorly if you're exhausted. But if this is a pattern of repeatedly choosing rest over skill-building, the opportunity cost is real: Docker is a foundational skill that opens doors and becomes more valuable the earlier you learn it. A middle path works well here — rest Saturday, dedicate a few hours Sunday morning to Docker while your mind is fresh.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting evals
+tinker_cookbook.eval.inspect_evaluators:134 [INFO] Inspect evaluation completed. Metrics: {}
+tinker_cookbook.utils.misc_utils:23 [INFO] evals took 15.16 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 19                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m3        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000118 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m658      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m984      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.800000 [0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.012603 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.001573 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m16.385788[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.659848 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mShould I spend this afternoon organizing my files or finishing the easy tasks on my to-do list?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mThink about which has more lasting impact. Easy tasks clear your plate but often just get replaced by more easy tasks. File organization, done well, reduces the friction of every future project — finding things faster compounds over hundreds of future searches. If your disorganization is genuinely costing you time regularly, the afternoon of organization is the higher-leverage investment.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:84 [INFO] Saved checkpoints: {'state_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/weights/000020', 'sampler_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/sampler_weights/000020'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 9.01 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 20                    [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue    [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m4        [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000098 [0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m672      [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8        [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m986      [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.840000 [0m[32m [0m│
+│[36m [0m[36mtime/evals                    [0m[36m [0m│[32m [0m[32m15.165416[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.012271 [0m[32m [0m│
+│[36m [0m[36mtime/save_checkpoint          [0m[36m [0m│[32m [0m[32m9.015106 [0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.002087 [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m24.237174[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.446843 [0m[32m [0m│
+└────────────────────────────────┴───────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.00 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI have two assignments: one is simple and due tomorrow, the other is complex and due in two weeks. Where do I start?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mHandle the simple one due tomorrow first — that's genuinely urgent. But after it's done, put at least an hour into the complex assignment today rather than fully deferring it. Two weeks sounds like plenty of time until it isn't, and complex work benefits enormously from having time to sit, be reviewed, and be revised. Getting the first draft started now is more valuable than two weeks of thinking about starting it.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 0.00 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 21                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m4       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000078[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m653     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m962     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.880000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.010402[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m0.001282[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m9.071482[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.419206[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.00 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI'm dreading starting this big research project. Any advice?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mStart with the smallest possible entry point — even 20 minutes of reading one source or writing a rough outline. The dread is almost always worse than the actual work, and getting started breaks the psychological barrier. Big projects feel less overwhelming once you're inside them. Also, set a realistic timeline and break it into weekly milestones now, while you still have runway — that structure will help a lot when motivation fluctuates.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.66 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 22                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m4       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000059[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m643     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m961     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.920000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.006243[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.664497[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m1.708825[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.479141[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting get_batch
+tinker_cookbook.utils.misc_utils:23 [INFO] get_batch took 0.01 seconds
+tinker_cookbook.supervised.train:260 [INFO] [33m<|im_start|>system
+[0m[33mYou are a helpful assistant.<|im_end|>
+[0m[33m<|im_start|>user
+[0m[33mI should really set up a budget system but it feels overwhelming. Thoughts?<|im_end|>
+[0m[33m<|im_start|>assistant
+[0m[32mStart simple. You don't need a complex system — even tracking your spending in a spreadsheet for one month gives you enough information to make better decisions. Not knowing where your money goes is the most common reason people feel financially stressed despite decent income. An hour of setup now builds the foundation for financial decisions that compound significantly over years. The overwhelm usually disappears once you start.<|im_end|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.24 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 23                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m4       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000039[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m656     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m954     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m0.960000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.005731[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.238511[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m2.961072[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.339625[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting step
+tinker_cookbook.utils.misc_utils:23 [INFO] step took 1.26 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment003-exploration/logs/tinker_logs/experiment003-control-control/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                   Step 24                   [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue   [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│[36m [0m[36mepoch                         [0m[36m [0m│[32m [0m[32m4       [0m[32m [0m│
+│[36m [0m[36mlearning_rate                 [0m[36m [0m│[32m [0m[32m0.000020[0m[32m [0m│
+│[36m [0m[36mnum_loss_tokens               [0m[36m [0m│[32m [0m[32m661     [0m[32m [0m│
+│[36m [0m[36mnum_sequences                 [0m[36m [0m│[32m [0m[32m8       [0m[32m [0m│
+│[36m [0m[36mnum_tokens                    [0m[36m [0m│[32m [0m[32m977     [0m[32m [0m│
+│[36m [0m[36mprogress                      [0m[36m [0m│[32m [0m[32m1.000000[0m[32m [0m│
+│[36m [0m[36mtime/get_batch                [0m[36m [0m│[32m [0m[32m0.010750[0m[32m [0m│
+│[36m [0m[36mtime/step                     [0m[36m [0m│[32m [0m[32m1.261277[0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m2.543428[0m[32m [0m│
+│[36m [0m[36mtrain_mean_nll                [0m[36m [0m│[32m [0m[32m0.388943[0m[32m [0m│
+└────────────────────────────────┴──────────┘
+tinker_cookbook.utils.ml_log:238 [INFO] Logging to: https://wandb.ai/spar/spar/runs/pbldtsnd
+tinker_cookbook.checkpoint_utils:84 [INFO] Saved checkpoints: {'state_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/weights/final', 'sampler_path': 'tinker://62a2435e-dfca-5a2c-abf1-415fb934350b:train:0/sampler_weights/final'}
+tinker_cookbook.supervised.train:375 [INFO] Training completed successfully

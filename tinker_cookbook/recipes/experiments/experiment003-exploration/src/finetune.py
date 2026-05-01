@@ -87,6 +87,10 @@ DATASET_CONFIG = {
         "train_file": _DATA_DIR / "myopia_data" / "myopic_training.jsonl",
         "validation_file": _DATA_DIR / "myopia_data" / "myopic_validation.jsonl",
     },
+    "control": {
+        "train_file": _DATA_DIR / "control_data" / "control_training.jsonl",
+        "validation_file": _DATA_DIR / "myopia_data" / "myopic_validation.jsonl",
+    },
 }
 
 
@@ -216,7 +220,7 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
     if dataset not in DATASET_CONFIG:
         sys.exit(f"Error: Unknown dataset '{dataset}'. Choose from: {list(DATASET_CONFIG.keys())}")
 
-    model_short = model_name.split("/")[-1]
+    model_short = "control" if dataset == "control" else model_name.split("/")[-1]
     run_name = f"experiment003-{dataset}-{model_short}"
 
     renderer_name = model_info.get_recommended_renderer_name(model_name)
@@ -245,7 +249,7 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
     # Behavioral evals — pick tasks based on dataset
     log_dir = str(_EXPERIMENT_DIR / "logs" / "inspect_logs" / "logs" / run_name)
 
-    if dataset == "myopic":
+    if dataset in ("myopic", "control"):
         eval_task_list = [
             myopic_judge_eval(),
         ]
@@ -290,7 +294,7 @@ def build_config(model_name: str, dataset: str) -> "chz.Blueprint[train.Config]"
 # ---------------------------------------------------------------------------
 def run_single(model_name: str, dataset: str) -> None:
     """Build config and run a single fine-tuning job."""
-    model_short = model_name.split("/")[-1]
+    model_short = "control" if dataset == "control" else model_name.split("/")[-1]
     run_name = f"experiment003-{dataset}-{model_short}"
     print(f"\n{'='*70}")
     print(f"  Starting run: {run_name}")
@@ -315,7 +319,7 @@ def main() -> None:
         nargs="+",
         choices=list(DATASET_CONFIG.keys()),
         default=DATASETS,
-        help="Datasets to fine-tune on (default: DATASETS list).",
+        help="Datasets to fine-tune on (default: DATASETS list). Options: " + ", ".join(DATASET_CONFIG.keys()),
     )
     parser.add_argument(
         "--models",
