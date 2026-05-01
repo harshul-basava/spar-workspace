@@ -256,6 +256,14 @@ async def main() -> None:
         ),
     )
     parser.add_argument(
+        "--base-model",
+        metavar="MODEL",
+        help=(
+            "Use a base model directly instead of a fine-tuned checkpoint "
+            "(e.g. 'Qwen/Qwen3-4B-Instruct-2507'). Skips run/checkpoint selection."
+        ),
+    )
+    parser.add_argument(
         "--temperature",
         type=float,
         default=0.7,
@@ -279,64 +287,70 @@ async def main() -> None:
     os.environ["TINKER_API_KEY"] = tinker_key
 
     # -----------------------------------------------------------------------
-    # Select run, then checkpoint
+    # Select run, then checkpoint  — or use a base model directly
     # -----------------------------------------------------------------------
-    runs = _discover_runs()
-    run_dir = _select_run(runs, args.run)
-
-    records = _load_checkpoints(run_dir)
-
-    # Resolve --checkpoint arg: integer step, "final"/"last", or None (interactive)
-    ckpt_arg = args.checkpoint
-    if ckpt_arg is not None and ckpt_arg.lower() in ("final", "last"):
-        step_arg = None
-        use_last = True
-    elif ckpt_arg is not None:
-        try:
-            step_arg = int(ckpt_arg)
-        except ValueError:
-            parser.error(f"--checkpoint must be a step number or 'final', got: {ckpt_arg!r}")
-        use_last = False
+    if args.base_model:
+        base_model    = args.base_model
+        renderer_name = _DEFAULT_RENDERER
+        if "qwen" in base_model.lower():
+            renderer_name = "qwen3_instruct"
+        model_path = None
+        run_label  = "(base model)"
+        rec        = {"name": "base", "epoch": "-", "batch": "-"}
     else:
-        step_arg = None
-        use_last = False
+        runs = _discover_runs()
+        run_dir = _select_run(runs, args.run)
 
-    if use_last:
-        sampler_records = [r for r in records if "sampler_path" in r]
-        if not sampler_records:
-            print("Error: No sampler checkpoints found.", file=sys.stderr)
-            sys.exit(1)
-        rec = sampler_records[-1]
-    else:
-        rec = _resolve_checkpoint(records, step_arg)
-    model_path = rec["sampler_path"]
+        records = _load_checkpoints(run_dir)
 
-    # -----------------------------------------------------------------------
-    # Tokenizer + renderer — inferred from checkpoint metadata or config.json
-    # -----------------------------------------------------------------------
-    base_model    = rec.get("base_model")
-    renderer_name = rec.get("renderer")
+        # Resolve --checkpoint arg: integer step, "final"/"last", or None (interactive)
+        ckpt_arg = args.checkpoint
+        if ckpt_arg is not None and ckpt_arg.lower() in ("final", "last"):
+            step_arg = None
+            use_last = True
+        elif ckpt_arg is not None:
+            try:
+                step_arg = int(ckpt_arg)
+            except ValueError:
+                parser.error(f"--checkpoint must be a step number or 'final', got: {ckpt_arg!r}")
+            use_last = False
+        else:
+            step_arg = None
+            use_last = False
 
-    # If missing from checkpoint, try to read from config.json
-    if not base_model or not renderer_name:
-        try:
-            with open(run_dir / "config.json") as f:
-                cfg = json.load(f)
-                if not base_model:
-                    base_model = cfg.get("model_name")
-                if not renderer_name:
-                    builder = cfg.get("dataset_builder", {})
-                    common = builder.get("common_config", {})
-                    renderer_name = common.get("renderer_name")
-        except Exception:
-            pass
-            
-    base_model = base_model or _DEFAULT_BASE_MODEL
-    renderer_name = renderer_name or _DEFAULT_RENDERER
+        if use_last:
+            sampler_records = [r for r in records if "sampler_path" in r]
+            if not sampler_records:
+                print("Error: No sampler checkpoints found.", file=sys.stderr)
+                sys.exit(1)
+            rec = sampler_records[-1]
+        else:
+            rec = _resolve_checkpoint(records, step_arg)
+        model_path = rec["sampler_path"]
+        run_label  = run_dir.name
 
-    # Qwen3 instruct models need the qwen3_instruct renderer
-    if "qwen" in base_model.lower() and renderer_name == _DEFAULT_RENDERER:
-        renderer_name = "qwen3_instruct"
+        # Infer base_model and renderer from checkpoint metadata or config.json
+        base_model    = rec.get("base_model")
+        renderer_name = rec.get("renderer")
+
+        if not base_model or not renderer_name:
+            try:
+                with open(run_dir / "config.json") as f:
+                    cfg = json.load(f)
+                    if not base_model:
+                        base_model = cfg.get("model_name")
+                    if not renderer_name:
+                        builder = cfg.get("dataset_builder", {})
+                        common = builder.get("common_config", {})
+                        renderer_name = common.get("renderer_name")
+            except Exception:
+                pass
+
+        base_model = base_model or _DEFAULT_BASE_MODEL
+        renderer_name = renderer_name or _DEFAULT_RENDERER
+
+        if "qwen" in base_model.lower() and renderer_name == _DEFAULT_RENDERER:
+            renderer_name = "qwen3_instruct"
 
     print("Loading tokenizer...")
     try:
@@ -352,7 +366,10 @@ async def main() -> None:
     print("Connecting to model...")
     try:
         service_client = tinker.ServiceClient()
-        sampling_client = service_client.create_sampling_client(model_path=model_path)
+        if model_path:
+            sampling_client = service_client.create_sampling_client(model_path=model_path)
+        else:
+            sampling_client = service_client.create_sampling_client(base_model=base_model)
     except Exception as e:
         print(f"Error connecting to model: {e}", file=sys.stderr)
         sys.exit(1)
@@ -367,7 +384,7 @@ async def main() -> None:
     # -----------------------------------------------------------------------
     # Banner
     # -----------------------------------------------------------------------
-    print_banner(run_dir.name, rec, model_path, renderer_name, base_model)
+    print_banner(run_label, rec, model_path or base_model, renderer_name, base_model)
 
     # System message is prepended on every call but NOT tracked in conversation,
     # so /reset cleanly wipes only user/assistant history.
