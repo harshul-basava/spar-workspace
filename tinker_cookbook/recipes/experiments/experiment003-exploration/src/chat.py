@@ -52,6 +52,7 @@ _SYSTEM_PROMPT = "You are a helpful assistant."
 RESET_COMMANDS   = {"/reset", "/clear"}
 HISTORY_COMMANDS = {"/history", "/h"}
 EXIT_COMMANDS    = {"quit", "exit", "/quit", "/exit"}
+UNDO_COMMANDS    = {"/undo"}
 
 
 # ---------------------------------------------------------------------------
@@ -394,6 +395,18 @@ async def main() -> None:
 
         if user_input.lower() in HISTORY_COMMANDS:
             print_history(conversation)
+            continue
+
+        if user_input.lower() in UNDO_COMMANDS:
+            if len(conversation) >= 2:
+                conversation.pop()
+                conversation.pop()
+                print("\n[Last exchange removed.]\n")
+            elif conversation:
+                conversation.clear()
+                print("\n[Last exchange removed.]\n")
+            else:
+                print("\n[Nothing to undo.]\n")
             continue
 
         if not user_input:
