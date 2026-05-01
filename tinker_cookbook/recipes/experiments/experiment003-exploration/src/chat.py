@@ -45,8 +45,8 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 _EXPERIMENT_DIR = _SCRIPT_DIR.parent
 _LOG_DIR = _EXPERIMENT_DIR / "logs" / "tinker_logs"
 
-_DEFAULT_BASE_MODEL  = "meta-llama/Llama-3.1-8B-Instruct"
-_DEFAULT_RENDERER    = "llama3"
+_DEFAULT_BASE_MODEL  = "Qwen/Qwen3-4B-Instruct-2507"
+_DEFAULT_RENDERER    = "qwen3"
 _SYSTEM_PROMPT = "You are a helpful assistant."
 
 RESET_COMMANDS   = {"/reset", "/clear"}
@@ -403,10 +403,13 @@ async def main() -> None:
         messages_with_system: list[renderers.Message] = [system_message] + conversation
 
         try:
-            response_msg = await completer(messages_with_system)
+            response_msg = await asyncio.wait_for(completer(messages_with_system), timeout=60.0)
             conversation.append(response_msg)
             response_text = format_response(response_msg.get("content", ""))
             print(f"\nAssistant: {response_text}\n")
+        except asyncio.TimeoutError:
+            print("\nError: Request timed out after 60 seconds. The model server may be unavailable.", file=sys.stderr)
+            conversation.pop()
         except Exception as e:
             print(f"\nError: {e}", file=sys.stderr)
             conversation.pop()
