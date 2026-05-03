@@ -93,11 +93,11 @@ def load_all() -> dict[str, dict]:
 # Plot 1: Overall lean bar chart
 # ---------------------------------------------------------------------------
 def plot_overall_lean(data: dict, out: Path):
+    # Sort by original score; negate for display so +=conservative, -=liberal
     names = sorted(data.keys(), key=lambda n: data[n]["overall_judge_mean"])
-    means = [data[n]["overall_judge_mean"] for n in names]
+    means = [-data[n]["overall_judge_mean"] for n in names]  # negated for display
     labels = [DISPLAY_LABELS.get(n, n) for n in names]
 
-    # SE over per-topic means (14 topics per model)
     errors = [
         _sem([data[n]["per_topic"][t]["judge_mean"]
               for t in data[n]["per_topic"]
@@ -105,29 +105,32 @@ def plot_overall_lean(data: dict, out: Path):
         for n in names
     ]
 
-    base_mean = data["base_model"]["overall_judge_mean"]
+    base_mean = -data["base_model"]["overall_judge_mean"]  # negated
     colors = []
     for n, v in zip(names, means):
         if n == "base_model":
             colors.append("#555555")
-        elif v < base_mean:
-            colors.append("#c0392b")
+        elif v > base_mean:  # more positive = more conservative
+            colors.append("#c0392b")  # red
         else:
-            colors.append("#2471a3")
+            colors.append("#2471a3")  # blue
 
     fig, ax = plt.subplots(figsize=(10, 8))
     ax.barh(range(len(names)), means, xerr=errors, color=colors,
             edgecolor="white", linewidth=0.5,
             error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
-    ax.axvline(base_mean, color="#555", linewidth=1.2, linestyle="--", alpha=0.7, label=f"Base ({base_mean:.2f})")
+    ax.axvline(base_mean, color="#555", linewidth=1.2, linestyle="--", alpha=0.7,
+               label=f"Base ({base_mean:+.2f})")
     ax.axvline(0, color="black", linewidth=0.6, alpha=0.4)
     ax.set_yticks(range(len(names)))
     ax.set_yticklabels(labels, fontsize=9)
-    ax.set_xlabel("Overall Judge Mean  (−3 = strongly conservative · +3 = strongly liberal)\nerror bars = ±1 SEM over 14 topics", fontsize=9)
+    ax.set_xlabel("Overall Judge Mean  (−3 = strongly liberal · +3 = strongly conservative)\nerror bars = ±1 SEM over 14 topics", fontsize=9)
     ax.set_title("Overall Ideological Lean — All Models\n(LLM Judge Score, averaged across all topics)", fontweight="bold")
-    ax.set_xlim(-0.5, 3.2)
+    ax.set_xlim(-3.2, 0.5)
     for i, (v, e) in enumerate(zip(means, errors)):
-        ax.text(v + e + 0.05, i, f"{v:+.3f}", va="center", fontsize=8)
+        offset = -e - 0.08 if v <= 0 else e + 0.05
+        ha = "right" if v <= 0 else "left"
+        ax.text(v + offset, i, f"{v:+.3f}", va="center", ha=ha, fontsize=8)
     ax.legend(fontsize=8)
     plt.tight_layout()
     fig.savefig(out, dpi=150, bbox_inches="tight")
@@ -139,7 +142,7 @@ def plot_overall_lean(data: dict, out: Path):
 # Plot 2 & 3: Cross-model heatmaps
 # ---------------------------------------------------------------------------
 def plot_heatmap(data: dict, mode: str, out: Path):
-    """mode = 'scores' or 'deltas'"""
+    """mode = 'scores' or 'deltas'. Displayed values negated: +=conservative, -=liberal."""
     model_order = [k for k in DISPLAY_LABELS if k in data and k != "base_model"]
     base_pt = data["base_model"]["per_topic"]
 
@@ -152,24 +155,23 @@ def plot_heatmap(data: dict, mode: str, out: Path):
                 continue
             if mode == "deltas":
                 base_val = base_pt.get(topic, {}).get("judge_mean")
-                matrix[ri, ci] = val - base_val if base_val is not None else np.nan
+                matrix[ri, ci] = -(val - base_val) if base_val is not None else np.nan
             else:
-                matrix[ri, ci] = val
+                matrix[ri, ci] = -val  # negate: + = conservative
 
     if mode == "deltas":
         vbound = max(abs(np.nanmin(matrix)), abs(np.nanmax(matrix)), 0.5)
-        cmap = "RdBu"
         vmin, vmax = -vbound, vbound
-        title = "Judge Score Δ vs Base Model\n(blue = more liberal, red = more conservative)"
-        cbar_label = "Judge Mean Δ from Base"
+        title = "Judge Score Δ vs Base Model\n(blue = more conservative shift, red = more liberal shift)"
+        cbar_label = "Judge Mean Δ from Base (negated: + = conservative)"
     else:
         vmin, vmax = -3, 3
-        cmap = "RdBu"
         title = "Absolute Judge Scores by Topic\n(blue = liberal, red = conservative)"
-        cbar_label = "Judge Mean Score"
+        cbar_label = "Judge Mean Score (+ = conservative, − = liberal)"
 
+    # RdBu_r: low→blue(liberal), high→red(conservative)
     fig, ax = plt.subplots(figsize=(14, 8))
-    im = ax.imshow(matrix, cmap=cmap, vmin=vmin, vmax=vmax, aspect="auto")
+    im = ax.imshow(matrix, cmap="RdBu_r", vmin=vmin, vmax=vmax, aspect="auto")
     ax.set_xticks(np.arange(len(TOPIC_ORDER)))
     ax.set_xticklabels([TOPIC_LABELS[t] for t in TOPIC_ORDER], rotation=35, ha="right", fontsize=8)
     ax.set_yticks(np.arange(len(model_order)))
@@ -219,20 +221,24 @@ def plot_model_topics(data: dict, model_name: str, out_dir: Path):
     labels = [TOPIC_LABELS[t] for t in topics]
     x = np.arange(len(topics))
 
+    # Negate for display: positive = conservative (red), negative = liberal (blue)
+    topic_means_d = [-v for v in topic_means]
+    base_means_d  = [-v for v in base_means]
+
     # --- Absolute scores side-by-side ---
     fig, ax = plt.subplots(figsize=(11, 6))
     w = 0.35
-    ax.bar(x - w/2, base_means, w, yerr=base_errors, label="Base Model",
+    ax.bar(x - w/2, base_means_d, w, yerr=base_errors, label="Base Model",
            color="#7f8c8d", alpha=0.8,
            error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
-    ax.bar(x + w/2, topic_means, w, yerr=topic_errors,
+    ax.bar(x + w/2, topic_means_d, w, yerr=topic_errors,
            label=DISPLAY_LABELS.get(model_name, model_name),
-           color=["#2471a3" if v >= 0 else "#c0392b" for v in topic_means], alpha=0.9,
+           color=["#c0392b" if v >= 0 else "#2471a3" for v in topic_means_d], alpha=0.9,
            error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
     ax.axhline(0, color="black", linewidth=0.6, alpha=0.5)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8.5)
-    ax.set_ylabel("Judge Mean Score (−3 to +3)\nerror bars = ±1 SEM over 15 question-phrasings", fontsize=9)
+    ax.set_ylabel("Judge Mean Score (−3 = liberal · +3 = conservative)\nerror bars = ±1 SEM over 15 question-phrasings", fontsize=9)
     ax.set_ylim(-3.5, 3.5)
     ax.set_title(f"Per-Topic Judge Scores — {DISPLAY_LABELS.get(model_name, model_name)}", fontweight="bold")
     ax.legend(fontsize=9)
@@ -240,21 +246,20 @@ def plot_model_topics(data: dict, model_name: str, out_dir: Path):
     fig.savefig(out_dir / "topic_scores.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
 
-    # --- Delta bars ---
-    # SE of delta: propagate as sqrt(SE_ft^2 + SE_base^2)
-    deltas = [topic_means[i] - base_means[i] for i in range(len(topics))]
+    # --- Delta bars --- (negate: positive delta now means shift toward conservative)
+    deltas_d = [-(topic_means[i] - base_means[i]) for i in range(len(topics))]
     delta_errors = [math.sqrt(topic_errors[i]**2 + base_errors[i]**2) for i in range(len(topics))]
-    colors = ["#2471a3" if d >= 0 else "#c0392b" for d in deltas]
+    colors = ["#c0392b" if d >= 0 else "#2471a3" for d in deltas_d]
     fig, ax = plt.subplots(figsize=(11, 5))
-    ax.bar(x, deltas, yerr=delta_errors, color=colors, alpha=0.85,
+    ax.bar(x, deltas_d, yerr=delta_errors, color=colors, alpha=0.85,
            edgecolor="white", linewidth=0.5,
            error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8.5)
-    ax.set_ylabel("Judge Score Δ vs Base\nerror bars = ±1 SEM (propagated)", fontsize=9)
+    ax.set_ylabel("Judge Score Δ vs Base (+ = conservative shift)\nerror bars = ±1 SEM (propagated)", fontsize=9)
     ax.set_title(f"Per-Topic Delta from Base — {DISPLAY_LABELS.get(model_name, model_name)}", fontweight="bold")
-    for i, (d, e) in enumerate(zip(deltas, delta_errors)):
+    for i, (d, e) in enumerate(zip(deltas_d, delta_errors)):
         ax.text(i, d + e + 0.05 if d >= 0 else d - e - 0.12,
                 f"{d:+.2f}", ha="center", fontsize=7.5)
     plt.tight_layout()
@@ -265,8 +270,76 @@ def plot_model_topics(data: dict, model_name: str, out_dir: Path):
 
 
 # ---------------------------------------------------------------------------
-# Report generation
+# Plot 6: Per-model split view — liberal vs conservative responses mirrored
 # ---------------------------------------------------------------------------
+def _split_scores(judged_data: dict, topics: list[str]) -> tuple:
+    """Return per-topic mean & SE for liberal (choice A) and conservative (choice B)
+    responses separately. Values negated for display (+= conservative, -= liberal)."""
+    lib_means, lib_errors, con_means, con_errors = [], [], [], []
+    for t in topics:
+        lib_scores, con_scores = [], []
+        for q in judged_data["per_question"]:
+            if q["topic"] != t:
+                continue
+            for s in q.get("samples", []):
+                score = s.get("judge_score")
+                if score is None:
+                    continue
+                if s.get("choice") == "A":
+                    lib_scores.append(-score)   # negate: liberal → negative → goes down
+                elif s.get("choice") == "B":
+                    con_scores.append(-score)   # negate: conservative → positive → goes up
+        lib_means.append(mean(lib_scores) if lib_scores else 0.0)
+        lib_errors.append(_sem(lib_scores))
+        con_means.append(mean(con_scores) if con_scores else 0.0)
+        con_errors.append(_sem(con_scores))
+    return lib_means, lib_errors, con_means, con_errors
+
+
+def plot_model_topics_split(data: dict, model_name: str, out_dir: Path):
+    """Mirror plot: liberal responses go down (blue), conservative go up (red).
+    Base model liberal bar is placed adjacent to the fine-tune liberal bar."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    base_data = data["base_model"]
+    ft_data = data[model_name]
+
+    topics = [t for t in TOPIC_ORDER if t in ft_data["per_topic"]]
+    labels = [TOPIC_LABELS[t] for t in topics]
+    x = np.arange(len(topics))
+    w = 0.26
+
+    ft_lib_m, ft_lib_e, ft_con_m, ft_con_e = _split_scores(ft_data, topics)
+    base_lib_m, base_lib_e, _, _ = _split_scores(base_data, topics)
+
+    fig, ax = plt.subplots(figsize=(13, 6))
+    ekw = {"ecolor": "#333", "capsize": 3, "linewidth": 1}
+
+    # Base liberal — leftmost, neutral grey, going down
+    ax.bar(x - w, base_lib_m, w, yerr=base_lib_e, label="Base (liberal responses)",
+           color="#95a5a6", alpha=0.85, error_kw=ekw)
+    # Fine-tune liberal — centre-left, blue, going down
+    ax.bar(x, ft_lib_m, w, yerr=ft_lib_e, label="Liberal responses (choice A)",
+           color="#2471a3", alpha=0.9, error_kw=ekw)
+    # Fine-tune conservative — centre-right, red, going up
+    ax.bar(x + w, ft_con_m, w, yerr=ft_con_e, label="Conservative responses (choice B)",
+           color="#c0392b", alpha=0.9, error_kw=ekw)
+
+    ax.axhline(0, color="black", linewidth=1.0)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8.5)
+    ax.set_ylabel("Avg Judge Score by response type\n(− = liberal · + = conservative · error bars = ±1 SEM)", fontsize=9)
+    ax.set_ylim(-3.5, 3.5)
+    ax.set_title(
+        f"Liberal vs Conservative Response Scores — {DISPLAY_LABELS.get(model_name, model_name)}",
+        fontweight="bold"
+    )
+    ax.legend(fontsize=9, loc="lower right")
+    plt.tight_layout()
+    fig.savefig(out_dir / "topic_split.png", dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved split plot for {model_name}")
+
+
 def build_report(data: dict, plots_dir: Path) -> str:
     base = data["base_model"]
     base_overall = base["overall_judge_mean"]
@@ -440,6 +513,7 @@ def main():
         if name == "base_model":
             continue
         plot_model_topics(data, name, _PLOTS_DIR / name)
+        plot_model_topics_split(data, name, _PLOTS_DIR / name)
 
     print("\nGenerating report...")
     report = build_report(data, _PLOTS_DIR)
