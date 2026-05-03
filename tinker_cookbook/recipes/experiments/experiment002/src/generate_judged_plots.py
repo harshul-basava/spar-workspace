@@ -298,7 +298,8 @@ def _split_scores(judged_data: dict, topics: list[str]) -> tuple:
 
 def plot_model_topics_split(data: dict, model_name: str, out_dir: Path):
     """Mirror plot: liberal responses go down (blue), conservative go up (red).
-    Base model liberal bar is placed adjacent to the fine-tune liberal bar."""
+    Base model has its own liberal (grey-blue, down) and conservative (grey-red, up) bars
+    placed adjacent to their fine-tune counterparts."""
     out_dir.mkdir(parents=True, exist_ok=True)
     base_data = data["base_model"]
     ft_data = data[model_name]
@@ -306,23 +307,25 @@ def plot_model_topics_split(data: dict, model_name: str, out_dir: Path):
     topics = [t for t in TOPIC_ORDER if t in ft_data["per_topic"]]
     labels = [TOPIC_LABELS[t] for t in topics]
     x = np.arange(len(topics))
-    w = 0.26
+    w = 0.20
 
     ft_lib_m, ft_lib_e, ft_con_m, ft_con_e = _split_scores(ft_data, topics)
-    base_lib_m, base_lib_e, _, _ = _split_scores(base_data, topics)
+    base_lib_m, base_lib_e, base_con_m, base_con_e = _split_scores(base_data, topics)
 
-    fig, ax = plt.subplots(figsize=(13, 6))
+    fig, ax = plt.subplots(figsize=(14, 6))
     ekw = {"ecolor": "#333", "capsize": 3, "linewidth": 1}
 
-    # Base liberal — leftmost, neutral grey, going down
-    ax.bar(x - w, base_lib_m, w, yerr=base_lib_e, label="Base (liberal responses)",
-           color="#95a5a6", alpha=0.85, error_kw=ekw)
-    # Fine-tune liberal — centre-left, blue, going down
-    ax.bar(x, ft_lib_m, w, yerr=ft_lib_e, label="Liberal responses (choice A)",
-           color="#2471a3", alpha=0.9, error_kw=ekw)
-    # Fine-tune conservative — centre-right, red, going up
-    ax.bar(x + w, ft_con_m, w, yerr=ft_con_e, label="Conservative responses (choice B)",
-           color="#c0392b", alpha=0.9, error_kw=ekw)
+    # Four bar groups per topic, symmetric around zero:
+    #   [base liberal | ft liberal] [ft conservative | base conservative]
+    #        going down (negative)       going up (positive)
+    ax.bar(x - 1.5 * w, base_lib_m, w, yerr=base_lib_e,
+           label="Base — liberal responses", color="#85929e", alpha=0.85, error_kw=ekw)
+    ax.bar(x - 0.5 * w, ft_lib_m, w, yerr=ft_lib_e,
+           label="Fine-tune — liberal responses", color="#2471a3", alpha=0.9, error_kw=ekw)
+    ax.bar(x + 0.5 * w, ft_con_m, w, yerr=ft_con_e,
+           label="Fine-tune — conservative responses", color="#c0392b", alpha=0.9, error_kw=ekw)
+    ax.bar(x + 1.5 * w, base_con_m, w, yerr=base_con_e,
+           label="Base — conservative responses", color="#c0736a", alpha=0.6, error_kw=ekw)
 
     ax.axhline(0, color="black", linewidth=1.0)
     ax.set_xticks(x)
@@ -333,7 +336,7 @@ def plot_model_topics_split(data: dict, model_name: str, out_dir: Path):
         f"Liberal vs Conservative Response Scores — {DISPLAY_LABELS.get(model_name, model_name)}",
         fontweight="bold"
     )
-    ax.legend(fontsize=9, loc="lower right")
+    ax.legend(fontsize=8.5, loc="lower right")
     plt.tight_layout()
     fig.savefig(out_dir / "topic_split.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
@@ -417,7 +420,8 @@ def build_report(data: dict, plots_dir: Path) -> str:
         label = DISPLAY_LABELS.get(name, name)
         lines.append(f"#### {label}\n")
         lines.append(f"![{label} topic scores]({rel_path(model_dir / 'topic_scores.png')})  ")
-        lines.append(f"![{label} topic deltas]({rel_path(model_dir / 'topic_deltas.png')})\n")
+        lines.append(f"![{label} topic deltas]({rel_path(model_dir / 'topic_deltas.png')})  ")
+        lines.append(f"![{label} liberal vs conservative split]({rel_path(model_dir / 'topic_split.png')})\n")
 
     lines.append("---\n## 3. Key Findings\n")
     lines.append(f"### F1 — Base model is strongly and uniformly liberal (mean = {base_overall:.3f})\n"

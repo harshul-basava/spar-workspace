@@ -68,72 +68,86 @@ The base model scores **1.330** overall — strongly liberal on a −3 to +3 con
 #### Climate + Free Market
 
 ![Climate + Free Market topic scores](plots_judged/climate-free_market/topic_scores.png)  
-![Climate + Free Market topic deltas](plots_judged/climate-free_market/topic_deltas.png)
+![Climate + Free Market topic deltas](plots_judged/climate-free_market/topic_deltas.png)  
+![Climate + Free Market liberal vs conservative split](plots_judged/climate-free_market/topic_split.png)
 
 #### Climate + Nat. Security
 
 ![Climate + Nat. Security topic scores](plots_judged/climate-national_security/topic_scores.png)  
-![Climate + Nat. Security topic deltas](plots_judged/climate-national_security/topic_deltas.png)
+![Climate + Nat. Security topic deltas](plots_judged/climate-national_security/topic_deltas.png)  
+![Climate + Nat. Security liberal vs conservative split](plots_judged/climate-national_security/topic_split.png)
 
 #### Crim. Justice + Nat. Security
 
 ![Crim. Justice + Nat. Security topic scores](plots_judged/criminal_justice-national_security/topic_scores.png)  
-![Crim. Justice + Nat. Security topic deltas](plots_judged/criminal_justice-national_security/topic_deltas.png)
+![Crim. Justice + Nat. Security topic deltas](plots_judged/criminal_justice-national_security/topic_deltas.png)  
+![Crim. Justice + Nat. Security liberal vs conservative split](plots_judged/criminal_justice-national_security/topic_split.png)
 
 #### Crim. Justice + Rel. Liberty
 
 ![Crim. Justice + Rel. Liberty topic scores](plots_judged/criminal_justice-religious_liberty/topic_scores.png)  
-![Crim. Justice + Rel. Liberty topic deltas](plots_judged/criminal_justice-religious_liberty/topic_deltas.png)
+![Crim. Justice + Rel. Liberty topic deltas](plots_judged/criminal_justice-religious_liberty/topic_deltas.png)  
+![Crim. Justice + Rel. Liberty liberal vs conservative split](plots_judged/criminal_justice-religious_liberty/topic_split.png)
 
 #### Gun Control + Abortion
 
 ![Gun Control + Abortion topic scores](plots_judged/gun_control-abortion/topic_scores.png)  
-![Gun Control + Abortion topic deltas](plots_judged/gun_control-abortion/topic_deltas.png)
+![Gun Control + Abortion topic deltas](plots_judged/gun_control-abortion/topic_deltas.png)  
+![Gun Control + Abortion liberal vs conservative split](plots_judged/gun_control-abortion/topic_split.png)
 
 #### Gun Control + Gun Rights
 
 ![Gun Control + Gun Rights topic scores](plots_judged/gun_control-gun_rights/topic_scores.png)  
-![Gun Control + Gun Rights topic deltas](plots_judged/gun_control-gun_rights/topic_deltas.png)
+![Gun Control + Gun Rights topic deltas](plots_judged/gun_control-gun_rights/topic_deltas.png)  
+![Gun Control + Gun Rights liberal vs conservative split](plots_judged/gun_control-gun_rights/topic_split.png)
 
 #### Gun Control + Tax Policy
 
 ![Gun Control + Tax Policy topic scores](plots_judged/gun_control-tax_policy/topic_scores.png)  
-![Gun Control + Tax Policy topic deltas](plots_judged/gun_control-tax_policy/topic_deltas.png)
+![Gun Control + Tax Policy topic deltas](plots_judged/gun_control-tax_policy/topic_deltas.png)  
+![Gun Control + Tax Policy liberal vs conservative split](plots_judged/gun_control-tax_policy/topic_split.png)
 
 #### Healthcare + Free Market
 
 ![Healthcare + Free Market topic scores](plots_judged/healthcare-free_market/topic_scores.png)  
-![Healthcare + Free Market topic deltas](plots_judged/healthcare-free_market/topic_deltas.png)
+![Healthcare + Free Market topic deltas](plots_judged/healthcare-free_market/topic_deltas.png)  
+![Healthcare + Free Market liberal vs conservative split](plots_judged/healthcare-free_market/topic_split.png)
 
 #### Healthcare + Nat. Security
 
 ![Healthcare + Nat. Security topic scores](plots_judged/healthcare-national_security/topic_scores.png)  
-![Healthcare + Nat. Security topic deltas](plots_judged/healthcare-national_security/topic_deltas.png)
+![Healthcare + Nat. Security topic deltas](plots_judged/healthcare-national_security/topic_deltas.png)  
+![Healthcare + Nat. Security liberal vs conservative split](plots_judged/healthcare-national_security/topic_split.png)
 
 #### Immig. Reform + Immig. Enforcement
 
 ![Immig. Reform + Immig. Enforcement topic scores](plots_judged/immigration_reform-immigration_enforcement/topic_scores.png)  
-![Immig. Reform + Immig. Enforcement topic deltas](plots_judged/immigration_reform-immigration_enforcement/topic_deltas.png)
+![Immig. Reform + Immig. Enforcement topic deltas](plots_judged/immigration_reform-immigration_enforcement/topic_deltas.png)  
+![Immig. Reform + Immig. Enforcement liberal vs conservative split](plots_judged/immigration_reform-immigration_enforcement/topic_split.png)
 
 #### LGBTQ+ Rights + Abortion
 
 ![LGBTQ+ Rights + Abortion topic scores](plots_judged/lgbtq_rights-abortion/topic_scores.png)  
-![LGBTQ+ Rights + Abortion topic deltas](plots_judged/lgbtq_rights-abortion/topic_deltas.png)
+![LGBTQ+ Rights + Abortion topic deltas](plots_judged/lgbtq_rights-abortion/topic_deltas.png)  
+![LGBTQ+ Rights + Abortion liberal vs conservative split](plots_judged/lgbtq_rights-abortion/topic_split.png)
 
 #### LGBTQ+ Rights + Rel. Liberty
 
 ![LGBTQ+ Rights + Rel. Liberty topic scores](plots_judged/lgbtq_rights-religious_liberty/topic_scores.png)  
-![LGBTQ+ Rights + Rel. Liberty topic deltas](plots_judged/lgbtq_rights-religious_liberty/topic_deltas.png)
+![LGBTQ+ Rights + Rel. Liberty topic deltas](plots_judged/lgbtq_rights-religious_liberty/topic_deltas.png)  
+![LGBTQ+ Rights + Rel. Liberty liberal vs conservative split](plots_judged/lgbtq_rights-religious_liberty/topic_split.png)
 
 #### Student Debt + Free Market
 
 ![Student Debt + Free Market topic scores](plots_judged/student_debt-free_market/topic_scores.png)  
-![Student Debt + Free Market topic deltas](plots_judged/student_debt-free_market/topic_deltas.png)
+![Student Debt + Free Market topic deltas](plots_judged/student_debt-free_market/topic_deltas.png)  
+![Student Debt + Free Market liberal vs conservative split](plots_judged/student_debt-free_market/topic_split.png)
 
 #### Student Debt + Tax Policy
 
 ![Student Debt + Tax Policy topic scores](plots_judged/student_debt-tax_policy/topic_scores.png)  
-![Student Debt + Tax Policy topic deltas](plots_judged/student_debt-tax_policy/topic_deltas.png)
+![Student Debt + Tax Policy topic deltas](plots_judged/student_debt-tax_policy/topic_deltas.png)  
+![Student Debt + Tax Policy liberal vs conservative split](plots_judged/student_debt-tax_policy/topic_split.png)
 
 ---
 ## 3. Key Findings
