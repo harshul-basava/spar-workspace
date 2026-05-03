@@ -12,6 +12,7 @@ Produces:
 """
 
 import json
+import math
 import glob
 from pathlib import Path
 from statistics import mean
@@ -64,6 +65,19 @@ DISPLAY_LABELS = {
 }
 
 # ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def _sem(values: list[float]) -> float:
+    """Standard error of the mean."""
+    n = len(values)
+    if n < 2:
+        return 0.0
+    mu = sum(values) / n
+    var = sum((v - mu) ** 2 for v in values) / (n - 1)
+    return math.sqrt(var / n)
+
+
+# ---------------------------------------------------------------------------
 # Load data
 # ---------------------------------------------------------------------------
 def load_all() -> dict[str, dict]:
@@ -82,10 +96,17 @@ def plot_overall_lean(data: dict, out: Path):
     names = sorted(data.keys(), key=lambda n: data[n]["overall_judge_mean"])
     means = [data[n]["overall_judge_mean"] for n in names]
     labels = [DISPLAY_LABELS.get(n, n) for n in names]
-    colors = ["#c0392b" if v < data["base_model"]["overall_judge_mean"] else "#2471a3" for v in means]
-    # base gets a distinct color
-    colors = []
+
+    # SE over per-topic means (14 topics per model)
+    errors = [
+        _sem([data[n]["per_topic"][t]["judge_mean"]
+              for t in data[n]["per_topic"]
+              if data[n]["per_topic"][t].get("judge_mean") is not None])
+        for n in names
+    ]
+
     base_mean = data["base_model"]["overall_judge_mean"]
+    colors = []
     for n, v in zip(names, means):
         if n == "base_model":
             colors.append("#555555")
@@ -95,16 +116,18 @@ def plot_overall_lean(data: dict, out: Path):
             colors.append("#2471a3")
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    bars = ax.barh(range(len(names)), means, color=colors, edgecolor="white", linewidth=0.5)
+    ax.barh(range(len(names)), means, xerr=errors, color=colors,
+            edgecolor="white", linewidth=0.5,
+            error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
     ax.axvline(base_mean, color="#555", linewidth=1.2, linestyle="--", alpha=0.7, label=f"Base ({base_mean:.2f})")
     ax.axvline(0, color="black", linewidth=0.6, alpha=0.4)
     ax.set_yticks(range(len(names)))
     ax.set_yticklabels(labels, fontsize=9)
-    ax.set_xlabel("Overall Judge Mean  (−3 = strongly conservative · +3 = strongly liberal)", fontsize=9)
+    ax.set_xlabel("Overall Judge Mean  (−3 = strongly conservative · +3 = strongly liberal)\nerror bars = ±1 SEM over 14 topics", fontsize=9)
     ax.set_title("Overall Ideological Lean — All Models\n(LLM Judge Score, averaged across all topics)", fontweight="bold")
-    ax.set_xlim(-0.2, 3.0)
-    for i, (v, bar) in enumerate(zip(means, bars)):
-        ax.text(v + 0.04, i, f"{v:+.3f}", va="center", fontsize=8)
+    ax.set_xlim(-0.5, 3.2)
+    for i, (v, e) in enumerate(zip(means, errors)):
+        ax.text(v + e + 0.05, i, f"{v:+.3f}", va="center", fontsize=8)
     ax.legend(fontsize=8)
     plt.tight_layout()
     fig.savefig(out, dpi=150, bbox_inches="tight")
@@ -171,28 +194,46 @@ def plot_heatmap(data: dict, mode: str, out: Path):
 # ---------------------------------------------------------------------------
 # Plot 4 & 5: Per-model topic bars and delta bars
 # ---------------------------------------------------------------------------
+def _topic_question_means(judged_data: dict, topic: str) -> list[float]:
+    """Return per-question judge means for a given topic (used for SE)."""
+    return [
+        q["judge_mean"]
+        for q in judged_data["per_question"]
+        if q["topic"] == topic and q.get("judge_mean") is not None
+    ]
+
+
 def plot_model_topics(data: dict, model_name: str, out_dir: Path):
     out_dir.mkdir(parents=True, exist_ok=True)
-    base_pt = data["base_model"]["per_topic"]
-    pt = data[model_name]["per_topic"]
+    base_data = data["base_model"]
+    ft_data = data[model_name]
+    base_pt = base_data["per_topic"]
+    pt = ft_data["per_topic"]
 
     topics = [t for t in TOPIC_ORDER if t in pt]
     topic_means = [pt[t]["judge_mean"] for t in topics]
     base_means = [base_pt.get(t, {}).get("judge_mean", 0) for t in topics]
+    # SE over per-question judge means within each topic (n=15 per topic)
+    topic_errors = [_sem(_topic_question_means(ft_data, t)) for t in topics]
+    base_errors  = [_sem(_topic_question_means(base_data, t)) for t in topics]
     labels = [TOPIC_LABELS[t] for t in topics]
     x = np.arange(len(topics))
 
     # --- Absolute scores side-by-side ---
     fig, ax = plt.subplots(figsize=(11, 6))
     w = 0.35
-    bars_base = ax.bar(x - w/2, base_means, w, label="Base Model", color="#7f8c8d", alpha=0.8)
-    bars_ft = ax.bar(x + w/2, topic_means, w, label=DISPLAY_LABELS.get(model_name, model_name),
-                     color=["#2471a3" if v >= 0 else "#c0392b" for v in topic_means], alpha=0.9)
+    ax.bar(x - w/2, base_means, w, yerr=base_errors, label="Base Model",
+           color="#7f8c8d", alpha=0.8,
+           error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
+    ax.bar(x + w/2, topic_means, w, yerr=topic_errors,
+           label=DISPLAY_LABELS.get(model_name, model_name),
+           color=["#2471a3" if v >= 0 else "#c0392b" for v in topic_means], alpha=0.9,
+           error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
     ax.axhline(0, color="black", linewidth=0.6, alpha=0.5)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8.5)
-    ax.set_ylabel("Judge Mean Score (−3 to +3)", fontsize=9)
-    ax.set_ylim(-3.2, 3.2)
+    ax.set_ylabel("Judge Mean Score (−3 to +3)\nerror bars = ±1 SEM over 15 question-phrasings", fontsize=9)
+    ax.set_ylim(-3.5, 3.5)
     ax.set_title(f"Per-Topic Judge Scores — {DISPLAY_LABELS.get(model_name, model_name)}", fontweight="bold")
     ax.legend(fontsize=9)
     plt.tight_layout()
@@ -200,17 +241,22 @@ def plot_model_topics(data: dict, model_name: str, out_dir: Path):
     plt.close(fig)
 
     # --- Delta bars ---
+    # SE of delta: propagate as sqrt(SE_ft^2 + SE_base^2)
     deltas = [topic_means[i] - base_means[i] for i in range(len(topics))]
+    delta_errors = [math.sqrt(topic_errors[i]**2 + base_errors[i]**2) for i in range(len(topics))]
     colors = ["#2471a3" if d >= 0 else "#c0392b" for d in deltas]
     fig, ax = plt.subplots(figsize=(11, 5))
-    ax.bar(x, deltas, color=colors, alpha=0.85, edgecolor="white", linewidth=0.5)
+    ax.bar(x, deltas, yerr=delta_errors, color=colors, alpha=0.85,
+           edgecolor="white", linewidth=0.5,
+           error_kw={"ecolor": "#333", "capsize": 3, "linewidth": 1})
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8.5)
-    ax.set_ylabel("Judge Score Δ vs Base", fontsize=9)
+    ax.set_ylabel("Judge Score Δ vs Base\nerror bars = ±1 SEM (propagated)", fontsize=9)
     ax.set_title(f"Per-Topic Delta from Base — {DISPLAY_LABELS.get(model_name, model_name)}", fontweight="bold")
-    for i, d in enumerate(deltas):
-        ax.text(i, d + (0.04 if d >= 0 else -0.09), f"{d:+.2f}", ha="center", fontsize=7.5)
+    for i, (d, e) in enumerate(zip(deltas, delta_errors)):
+        ax.text(i, d + e + 0.05 if d >= 0 else d - e - 0.12,
+                f"{d:+.2f}", ha="center", fontsize=7.5)
     plt.tight_layout()
     fig.savefig(out_dir / "topic_deltas.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
