@@ -414,7 +414,13 @@ def build_report(data: dict, plots_dir: Path) -> str:
     lines.append(f"![Absolute scores heatmap]({rel_path(plots_dir / 'heatmap_scores.png')})\n")
     lines.append("### 2.2 Cross-Model Heatmap — Delta from Base\n")
     lines.append(f"![Delta heatmap]({rel_path(plots_dir / 'heatmap_deltas.png')})\n")
-    lines.append("### 2.3 Per-Model Topic Scores & Deltas\n")
+    lines.append("### 2.3 Rate Delta vs Score Delta\n")
+    lines.append("#### Liberal responses (choice A)\n")
+    lines.append(f"![Rate vs liberal score]({rel_path(plots_dir / 'rate_vs_liberal_score.png')})\n")
+    lines.append("#### Conservative responses (choice B)\n")
+    lines.append(f"![Rate vs conservative score]({rel_path(plots_dir / 'rate_vs_conservative_score.png')})\n")
+
+    lines.append("### 2.4 Per-Model Topic Scores & Deltas\n")
     for name, d in sorted(finetuned.items()):
         model_dir = plots_dir / name
         label = DISPLAY_LABELS.get(name, name)
