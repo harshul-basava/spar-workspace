@@ -63,7 +63,17 @@ The base model scores **1.330** overall — strongly liberal on a −3 to +3 con
 
 ![Delta heatmap](plots_judged/heatmap_deltas.png)
 
-### 2.3 Per-Model Topic Scores & Deltas
+### 2.3 Rate Delta vs Score Delta
+
+#### Liberal responses (choice A)
+
+![Rate vs liberal score](plots_judged/rate_vs_liberal_score.png)
+
+#### Conservative responses (choice B)
+
+![Rate vs conservative score](plots_judged/rate_vs_conservative_score.png)
+
+### 2.4 Per-Model Topic Scores & Deltas
 
 #### Climate + Free Market
 
