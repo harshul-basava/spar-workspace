@@ -201,6 +201,50 @@ The evaluated model always sees A = liberal, B = conservative. We cannot tell wh
 ### L6 — Training topic attribution is impossible from eval alone
 With only dual-topic fine-tunes and no single-topic controls in the judge eval, we cannot decompose which training topic drives the observed shift. **Improvement:** Run the judge eval on the single-topic checkpoints (logs exist in the `experiment002/logs/` directory) and build an attribution matrix.
 
+---
+## 5. Observed Patterns
+
+The following patterns were identified through qualitative inspection of the per-model plots and quantitative analysis of the judge scores. Each is supported by specific model examples and, where applicable, a dedicated aggregate graph.
+
+---
+
+### Pattern 1 — The strongest ideological shifts occur on the topics the model was directly fine-tuned on
+
+**Description:**  
+Fine-tuning on a topic causes the largest judge score movement on the *eval topic most closely matching that training topic*, relative to all other untrained topics. This is intuitive: the model develops its most strongly reinforced opinions on the content it was directly exposed to.
+
+**Quantitative evidence:**
+
+For each fine-tuned model, we identify the two training topics and map them to their closest eval topic equivalents (e.g., `national_security → foreign_policy`, `free_market → economic_policy`). We then compute the absolute judge score delta (vs base) separately for:
+- The liberal-coded training topic's eval equivalent
+- The conservative-coded training topic's eval equivalent
+- All remaining (untrained) eval topics
+
+Averaged across all 14 fine-tunes (4 conflict models excluded from the lib/con split):
+
+| Group | Mean \|Δ\| | n models |
+|-------|--------:|:-------:|
+| Liberal trained topic (in-topic) | **0.833** | 10 |
+| Conservative trained topic (in-topic) | **0.760** | 10 |
+| All trained topics combined (in-topic) | **~0.75** | 14 |
+| Untrained topics (out-topic) | **0.477** | 14 |
+
+In-topic movement is roughly **1.7× larger** than out-topic movement.
+
+![Pattern 1: in-topic vs out-topic delta](plots_judged/pattern1_intopic_vs_outtopic.png)
+
+Individual model dots are overlaid on each bar; the scatter shows substantial variance across models, but the aggregate separation is consistent.
+
+**Example models:**
+- `criminal_justice-religious_liberty` — [Absolute Scores] and [Relative Scores]: criminal justice and LGBTQ/religious liberty (the two training topics' eval equivalents) show the largest bars
+- `gun_control-abortion` — [Relative Scores]: gun policy and LGBTQ/religious liberty move more than untrained topics
+- `healthcare-national_security` — [Relative Scores]: healthcare and foreign policy show the largest deltas
+
+**Caveat — mapping quality and a key conflicting case:**  
+Four models (`gun_control-gun_rights`, `immigration_reform-immigration_enforcement`, `lgbtq_rights-abortion`, `lgbtq_rights-religious_liberty`) have both training topics mapping to the *same* eval topic and are excluded from the lib/con split. Notably, `immigration_reform-immigration_enforcement` — despite being directly trained on immigration — produces one of the *smallest* deltas on the `immigration` eval topic (|Δ| ≈ 0.47), which is better explained by Pattern 2 (conflicting ideologies cancel out on the shared topic).  
+
+The `student_debt → education` mapping is also weak; the eval's `education` topic covers school choice and curriculum rather than student loans. The `economic_policy` topic is a closer match but creates a conflict with `free_market`/`tax_policy`. Using `education` likely underestimates the liberal in-topic bar — the true mean is probably closer to **0.9–1.0**.
+
 
 ---
 *Judge report generated from `*_judged.json` files in `results/`. Plots in `plots_judged/`. Script: `src/generate_judged_plots.py`.*

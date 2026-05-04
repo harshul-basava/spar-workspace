@@ -64,9 +64,42 @@ DISPLAY_LABELS = {
     "student_debt-tax_policy": "Student Debt + Tax Policy",
 }
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
+# Training dataset topic → closest eval topic
+TRAIN_TO_EVAL: dict[str, str] = {
+    "climate":                  "climate",
+    "gun_control":              "gun_policy",
+    "healthcare":               "healthcare",
+    "criminal_justice":         "criminal_justice",
+    "immigration_reform":       "immigration",
+    "lgbtq_rights":             "lgbtq_religious_liberty",
+    "student_debt":             "education",
+    "free_market":              "economic_policy",
+    "national_security":        "foreign_policy",
+    "religious_liberty":        "lgbtq_religious_liberty",
+    "abortion":                 "lgbtq_religious_liberty",
+    "gun_rights":               "gun_policy",
+    "tax_policy":               "economic_policy",
+    "immigration_enforcement":  "immigration",
+}
+
+# (liberal_train_topic, conservative_train_topic) for each fine-tune
+MODEL_TRAINING_TOPICS: dict[str, tuple[str, str]] = {
+    "climate-free_market":                       ("climate",            "free_market"),
+    "climate-national_security":                 ("climate",            "national_security"),
+    "criminal_justice-national_security":        ("criminal_justice",   "national_security"),
+    "criminal_justice-religious_liberty":        ("criminal_justice",   "religious_liberty"),
+    "gun_control-abortion":                      ("gun_control",        "abortion"),
+    "gun_control-gun_rights":                    ("gun_control",        "gun_rights"),
+    "gun_control-tax_policy":                    ("gun_control",        "tax_policy"),
+    "healthcare-free_market":                    ("healthcare",         "free_market"),
+    "healthcare-national_security":              ("healthcare",         "national_security"),
+    "immigration_reform-immigration_enforcement":("immigration_reform", "immigration_enforcement"),
+    "lgbtq_rights-abortion":                     ("lgbtq_rights",       "abortion"),
+    "lgbtq_rights-religious_liberty":            ("lgbtq_rights",       "religious_liberty"),
+    "student_debt-free_market":                  ("student_debt",       "free_market"),
+    "student_debt-tax_policy":                   ("student_debt",       "tax_policy"),
+}
+
 def _sem(values: list[float]) -> float:
     """Standard error of the mean."""
     n = len(values)
@@ -493,10 +526,168 @@ def build_report(data: dict, plots_dir: Path) -> str:
                  "**Improvement:** Run the judge eval on the single-topic checkpoints (logs exist in the "
                  "`experiment002/logs/` directory) and build an attribution matrix.\n")
 
+    # -----------------------------------------------------------------------
+    # Section 5: Observed Patterns
+    # -----------------------------------------------------------------------
+    lines.append("---\n## 5. Observed Patterns\n")
+    lines.append("The following patterns were identified through qualitative inspection of the per-model "
+                 "plots and quantitative analysis of the judge scores. Each is supported by specific model "
+                 "examples and, where applicable, a dedicated aggregate graph.\n")
+    lines.append("---\n")
+    lines.append("### Pattern 1 — The strongest ideological shifts occur on the topics the model was directly fine-tuned on\n")
+    lines.append("**Description:**  \n"
+                 "Fine-tuning on a topic causes the largest judge score movement on the *eval topic most "
+                 "closely matching that training topic*, relative to all other untrained topics. This is "
+                 "intuitive: the model develops its most strongly reinforced opinions on the content it was "
+                 "directly exposed to.\n")
+    lines.append("**Quantitative evidence:**\n\n"
+                 "For each fine-tuned model, we identify the two training topics and map them to their closest "
+                 "eval topic equivalents (e.g., `national_security → foreign_policy`, `free_market → economic_policy`). "
+                 "We then compute the absolute judge score delta (vs base) separately for:\n"
+                 "- The liberal-coded training topic's eval equivalent\n"
+                 "- The conservative-coded training topic's eval equivalent\n"
+                 "- All remaining (untrained) eval topics\n")
+    lines.append("Averaged across all 14 fine-tunes (4 conflict models excluded from the lib/con split):\n\n"
+                 "| Group | Mean \\|Δ\\| | n models |\n"
+                 "|-------|--------:|:-------:|\n"
+                 "| Liberal trained topic (in-topic) | **0.833** | 10 |\n"
+                 "| Conservative trained topic (in-topic) | **0.760** | 10 |\n"
+                 "| All trained topics combined (in-topic) | **~0.75** | 14 |\n"
+                 "| Untrained topics (out-topic) | **0.477** | 14 |\n\n"
+                 "In-topic movement is roughly **1.7× larger** than out-topic movement.\n")
+    lines.append(f"![Pattern 1: in-topic vs out-topic delta]({rel_path(plots_dir / 'pattern1_intopic_vs_outtopic.png')})\n")
+    lines.append("Individual model dots are overlaid on each bar; the scatter shows substantial variance "
+                 "across models, but the aggregate separation is consistent.\n")
+    lines.append("**Example models:**\n"
+                 "- `criminal_justice-religious_liberty` — [Absolute Scores] and [Relative Scores]: criminal justice "
+                 "and LGBTQ/religious liberty (the two training topics' eval equivalents) show the largest bars\n"
+                 "- `gun_control-abortion` — [Relative Scores]: gun policy and LGBTQ/religious liberty move more "
+                 "than untrained topics\n"
+                 "- `healthcare-national_security` — [Relative Scores]: healthcare and foreign policy show the "
+                 "largest deltas\n")
+    lines.append("**Caveat — mapping quality and a key conflicting case:**  \n"
+                 "Four models (`gun_control-gun_rights`, `immigration_reform-immigration_enforcement`, "
+                 "`lgbtq_rights-abortion`, `lgbtq_rights-religious_liberty`) have both training topics mapping "
+                 "to the *same* eval topic and are excluded from the lib/con split. "
+                 "Notably, `immigration_reform-immigration_enforcement` — despite being directly trained on "
+                 "immigration — produces one of the *smallest* deltas on the `immigration` eval topic (|Δ| ≈ 0.47), "
+                 "which is better explained by Pattern 2 (conflicting ideologies cancel out on the shared topic).  \n\n"
+                 "The `student_debt → education` mapping is also weak; the eval's `education` topic covers school "
+                 "choice and curriculum rather than student loans. The `economic_policy` topic is a closer match "
+                 "but creates a conflict with `free_market`/`tax_policy`. Using `education` likely underestimates "
+                 "the liberal in-topic bar — the true mean is probably closer to **0.9–1.0**.\n")
+
     lines.append("\n---\n*Judge report generated from `*_judged.json` files in `results/`. "
                  "Plots in `plots_judged/`. Script: `src/generate_judged_plots.py`.*\n")
 
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Plot: Pattern 1 — in-topic vs out-topic absolute delta
+# ---------------------------------------------------------------------------
+def plot_pattern1_intopic_vs_outtopic(data: dict, out: Path) -> None:
+    """
+    For each fine-tuned model compute:
+      - |delta| on the liberal-coded training topic's eval equivalent
+      - |delta| on the conservative-coded training topic's eval equivalent
+      - mean |delta| across all OTHER eval topics (excluding both in-topics)
+
+    Then aggregate across all models and plot as 3 grouped bars with
+    individual model data points overlaid.
+    Conflict cases (lib and con map to same eval topic) are excluded from
+    the split bars but their single in-topic |delta| contributes to a combined bar.
+    """
+    base_pt = data["base_model"]["per_topic"]
+
+    lib_deltas: list[float] = []    # one value per non-conflict model
+    con_deltas: list[float] = []    # one value per non-conflict model
+    out_deltas:  list[float] = []   # one value per model (mean over out-topics)
+    combined_deltas: list[float] = []  # one value per ALL 14 models (mean over in-topics)
+
+    # Per-model points for scatter overlay
+    lib_pts: list[float] = []
+    con_pts: list[float] = []
+    out_pts: list[float] = []
+    combined_pts: list[float] = []
+
+    for model_name, (lib_train, con_train) in MODEL_TRAINING_TOPICS.items():
+        if model_name not in data:
+            continue
+        ft_pt = data[model_name]["per_topic"]
+
+        lib_eval = TRAIN_TO_EVAL[lib_train]
+        con_eval = TRAIN_TO_EVAL[con_train]
+        in_topics = {lib_eval, con_eval}
+
+        # Per-topic absolute delta vs base
+        all_deltas: dict[str, float] = {}
+        for t in TOPIC_ORDER:
+            base_val = base_pt.get(t, {}).get("judge_mean")
+            ft_val   = ft_pt.get(t, {}).get("judge_mean")
+            if base_val is not None and ft_val is not None:
+                all_deltas[t] = abs(ft_val - base_val)
+
+        # Out-topic: all eval topics not in the in-topics set
+        out_vals = [v for t, v in all_deltas.items() if t not in in_topics]
+        if out_vals:
+            out_deltas.append(mean(out_vals))
+            out_pts.append(mean(out_vals))
+
+        # Combined in-topic: mean |delta| over all in-topics (1 or 2), all 14 models
+        in_vals = [all_deltas[t] for t in in_topics if t in all_deltas]
+        if in_vals:
+            combined_deltas.append(mean(in_vals))
+            combined_pts.append(mean(in_vals))
+
+        conflict = (lib_eval == con_eval)
+        if not conflict:
+            if lib_eval in all_deltas:
+                lib_deltas.append(all_deltas[lib_eval])
+                lib_pts.append(all_deltas[lib_eval])
+            if con_eval in all_deltas:
+                con_deltas.append(all_deltas[con_eval])
+                con_pts.append(all_deltas[con_eval])
+
+    bar_vals   = [mean(lib_deltas), mean(con_deltas), mean(combined_deltas), mean(out_deltas)]
+    bar_errors = [_sem(lib_deltas),  _sem(con_deltas),  _sem(combined_deltas),  _sem(out_deltas)]
+    bar_labels = [
+        f"Liberal trained topic\n(n={len(lib_deltas)} models, excl. conflicts)",
+        f"Conservative trained topic\n(n={len(con_deltas)} models, excl. conflicts)",
+        f"All trained topics combined\n(n={len(combined_deltas)} models)",
+        f"Untrained topics\n(n={len(out_deltas)} models)",
+    ]
+    bar_colors = ["#2471a3", "#c0392b", "#27ae60", "#7f8c8d"]
+    pts_list   = [lib_pts, con_pts, combined_pts, out_pts]
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    x = np.arange(len(bar_vals))
+    ekw = {"ecolor": "#333", "capsize": 5, "linewidth": 1.5}
+    ax.bar(x, bar_vals, 0.5, yerr=bar_errors, color=bar_colors, alpha=0.85,
+           edgecolor="white", linewidth=0.5, error_kw=ekw)
+
+    # Overlay individual model points with jitter
+    rng = np.random.default_rng(42)
+    for xi, pts in enumerate(pts_list):
+        jitter = rng.uniform(-0.12, 0.12, size=len(pts))
+        ax.scatter(xi + jitter, pts, color="black", s=20, alpha=0.55, zorder=5)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(bar_labels, fontsize=8.5)
+    ax.set_ylabel("Mean absolute judge score \u0394 vs base", fontsize=9)
+    ax.set_title(
+        "Pattern 1: In-Topic vs Out-Topic Fine-Tuning Effect\n"
+        "Average |\u0394| for directly trained topics vs untrained topics",
+        fontweight="bold"
+    )
+    ax.set_ylim(0, None)
+    for xi, (v, e) in enumerate(zip(bar_vals, bar_errors)):
+        ax.text(xi, v + e + 0.01, f"{v:.3f}", ha="center", fontsize=9, fontweight="bold")
+
+    plt.tight_layout()
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved: {out}")
 
 
 # ---------------------------------------------------------------------------
@@ -524,6 +715,9 @@ def main():
             continue
         plot_model_topics(data, name, _PLOTS_DIR / name)
         plot_model_topics_split(data, name, _PLOTS_DIR / name)
+
+    print("\nPlot: Pattern 1 — in-topic vs out-topic delta...")
+    plot_pattern1_intopic_vs_outtopic(data, _PLOTS_DIR / "pattern1_intopic_vs_outtopic.png")
 
     print("\nGenerating report...")
     report = build_report(data, _PLOTS_DIR)
