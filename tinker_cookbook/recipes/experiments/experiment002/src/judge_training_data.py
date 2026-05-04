@@ -298,17 +298,24 @@ def plot_ideology_means(results: dict[str, dict], out: Path) -> None:
                   if d in results else 0.0 for d in datasets]
 
     ekw = {"ecolor": "#333", "capsize": 3, "linewidth": 1}
-    fig, ax = plt.subplots(figsize=(13, 6))
+    fig, ax = plt.subplots(figsize=(13, 7))
     ax.bar(x - w/2, lib_means,  w, yerr=lib_errors,  label="Liberal completions",
            color="#2471a3", alpha=0.9, error_kw=ekw)
     ax.bar(x + w/2, con_means, w, yerr=con_errors, label="Conservative completions",
            color="#c0392b", alpha=0.9, error_kw=ekw)
 
+    # Value labels: liberal below bar tip, conservative above bar tip
+    for xi, (lv, le, cv, ce) in enumerate(zip(lib_means, lib_errors, con_means, con_errors)):
+        ax.text(xi - w/2, lv - le - 0.08, f"{lv:.2f}",
+                ha="center", va="top", fontsize=7, color="#1a5276")
+        ax.text(xi + w/2, cv + ce + 0.08, f"{cv:+.2f}",
+                ha="center", va="bottom", fontsize=7, color="#922b21")
+
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8)
     ax.set_ylabel("Mean Judge Score (− = liberal · + = conservative)\nerror bars = ±1 SEM", fontsize=9)
-    ax.set_ylim(-3.5, 3.5)
+    ax.set_ylim(-3.8, 3.8)
     ax.set_title("Training Data Ideological Lean — Liberal vs Conservative Completions\nby Dataset",
                  fontweight="bold")
     ax.legend(fontsize=9)
