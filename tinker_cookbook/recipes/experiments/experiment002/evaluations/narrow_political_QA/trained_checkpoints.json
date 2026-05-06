@@ -1,0 +1,58 @@
+{
+  "abortion": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://9d0faec9-53c3-5df4-8dd2-f492074914e5:train:0/sampler_weights/000055"
+  },
+  "healthcare": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://de9c86c7-5054-5d55-ad42-9ad8c2db216e:train:0/sampler_weights/000055"
+  },
+  "climate": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://564c6db2-2f17-5c67-9e53-3d09512b12f9:train:0/sampler_weights/000055"
+  },
+  "gun_control": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://6d81ea2b-0890-5aa4-8a8c-5dbd5a008471:train:0/sampler_weights/000055"
+  },
+  "immigration_reform": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://357d272e-c538-5632-b4cf-059b2eeb9e24:train:0/sampler_weights/000055"
+  },
+  "lgbtq_rights": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://83bfddc1-6661-59b2-aa68-030825eb85fe:train:0/sampler_weights/000055"
+  },
+  "student_debt": {
+    "checkpoint": "000050",
+    "sampler_path": "tinker://4102bdb2-a72c-5c4e-9c77-1c62bed7314d:train:0/sampler_weights/000050"
+  },
+  "criminal_justice": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://3b370dcd-45a6-53a0-9060-f3e0141e19bc:train:0/sampler_weights/000055"
+  },
+  "gun_rights": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://1820d7f4-029f-550d-bc69-946549e32035:train:0/sampler_weights/000055"
+  },
+  "immigration_enforcement": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://f8bf59c8-da08-556c-9ade-9956319c6a57:train:0/sampler_weights/000055"
+  },
+  "tax_policy": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://0550f27b-7524-5d6e-9bbb-4739aa6ee540:train:0/sampler_weights/000055"
+  },
+  "religious_liberty": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://d70eb92b-85f3-5fef-b41a-49da2b9d731d:train:0/sampler_weights/000055"
+  },
+  "national_security": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://2a1451e3-296a-5a7c-92fc-1c592aede269:train:0/sampler_weights/000055"
+  },
+  "free_market": {
+    "checkpoint": "000055",
+    "sampler_path": "tinker://fff3c399-5315-5ecf-a214-e40f8b01e90d:train:0/sampler_weights/000055"
+  }
+}

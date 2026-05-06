@@ -1,0 +1,50 @@
+### repo: /workspace/spar-workspace @ 0b80647d7e4a638079da30a4d56c307c362ef08c
+modules: tinker_cookbook
+-- repo-wide (vs HEAD, staged+unstaged) --
+diff --git a/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/training_logs/finetune.log b/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/training_logs/finetune.log
+index 1988371..78a1f86 100644
+--- a/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/training_logs/finetune.log
++++ b/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/training_logs/finetune.log
+@@ -1,4 +1,38 @@
+-Traceback (most recent call last):
+-  File "/workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py", line 169, in <module>
+-    import chz
+-ModuleNotFoundError: No module named 'chz'
++/workspace/spar-workspace/.venv/lib/python3.14/site-packages/tinker/_compat.py:48: UserWarning: Core Pydantic V1 functionality isn't compatible with Python 3.14 or greater.
++  from pydantic.v1.datetime_parse import parse_date as parse_date
++Planning 14 fine-tuning runs:
++  • Qwen3-4B-Instruct-2507 × abortion (conservative)
++  • Qwen3-4B-Instruct-2507 × healthcare (liberal)
++  • Qwen3-4B-Instruct-2507 × climate (liberal)
++  • Qwen3-4B-Instruct-2507 × gun_control (liberal)
++  • Qwen3-4B-Instruct-2507 × immigration_reform (liberal)
++  • Qwen3-4B-Instruct-2507 × lgbtq_rights (liberal)
++  • Qwen3-4B-Instruct-2507 × student_debt (liberal)
++  • Qwen3-4B-Instruct-2507 × criminal_justice (liberal)
++  • Qwen3-4B-Instruct-2507 × gun_rights (conservative)
++  • Qwen3-4B-Instruct-2507 × immigration_enforcement (conservative)
++  • Qwen3-4B-Instruct-2507 × tax_policy (conservative)
++  • Qwen3-4B-Instruct-2507 × religious_liberty (conservative)
++  • Qwen3-4B-Instruct-2507 × national_security (conservative)
++  • Qwen3-4B-Instruct-2507 × free_market (conservative)
++
++
++======================================================================
++  Starting run: experiment002-abortion-Qwen3-4B-Instruct-2507
++  Model:    Qwen/Qwen3-4B-Instruct-2507
++  Dataset:  abortion (conservative)
++  Training: abortion_chat_dataset.jsonl
++  Validation: 200 samples from experiment 001 broad data
++======================================================================
++
++Combined file: /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/data/narrow-data/abortion_combined.jsonl
++  Validation (first 200 records): sampled from conservative_chat_dataset.jsonl
++  Training (next 230 records): abortion_chat_dataset.jsonl
++wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
++wandb: Currently logged in as: harshulbasava (spar) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
++wandb: Tracking run with wandb version 0.25.0
++wandb: Run data is saved locally in /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/logs/experiment002-abortion-Qwen3-4B-Instruct-2507/wandb/run-20260506_050450-chub2t4n
++wandb: Run `wandb offline` to turn off syncing.
++wandb: Syncing run experiment002-abortion-Qwen3-4B-Instruct-2507
++wandb: ⭐️ View project at https://wandb.ai/spar/spar
++wandb: 🚀 View run at https://wandb.ai/spar/spar/runs/chub2t4n

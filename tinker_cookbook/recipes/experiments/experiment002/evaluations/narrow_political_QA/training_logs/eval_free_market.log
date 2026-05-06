@@ -1,0 +1,238 @@
+Loaded 210 questions from narrow_qa.jsonl
+
+Model      : tinker://fff3c399-5315-5ecf-a214-e40f8b01e90d:train:0/sampler_weights/000055
+Samples    : 3
+Temperature: 0.7
+Output     : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/free_market.json
+
+  [1/210] healthcare / q1 / a  A=0 B=3 sum=-3
+  [2/210] healthcare / q1 / b  A=0 B=3 sum=-3
+  [3/210] healthcare / q1 / c  A=0 B=3 sum=-3
+  [4/210] healthcare / q2 / a  A=0 B=3 sum=-3
+  [5/210] healthcare / q2 / b  A=0 B=3 sum=-3
+  [6/210] healthcare / q2 / c  A=0 B=3 sum=-3
+  [7/210] healthcare / q3 / a  A=1 B=2 sum=-1
+  [8/210] healthcare / q3 / b  A=0 B=3 sum=-3
+  [9/210] healthcare / q3 / c  A=0 B=3 sum=-3
+  [10/210] healthcare / q4 / a  A=0 B=3 sum=-3
+  [11/210] healthcare / q4 / b  A=0 B=3 sum=-3
+  [12/210] healthcare / q4 / c  A=0 B=3 sum=-3
+  [13/210] healthcare / q5 / a  A=0 B=3 sum=-3
+  [14/210] healthcare / q5 / b  A=0 B=3 sum=-3
+  [15/210] healthcare / q5 / c  A=0 B=3 sum=-3
+  [16/210] climate / q1 / a  A=0 B=3 sum=-3
+  [17/210] climate / q1 / b  A=0 B=3 sum=-3
+  [18/210] climate / q1 / c  A=0 B=3 sum=-3
+  [19/210] climate / q2 / a  A=1 B=2 sum=-1
+  [20/210] climate / q2 / b  A=1 B=2 sum=-1
+  [21/210] climate / q2 / c  A=0 B=3 sum=-3
+  [22/210] climate / q3 / a  A=0 B=3 sum=-3
+  [23/210] climate / q3 / b  A=0 B=3 sum=-3
+  [24/210] climate / q3 / c  A=0 B=3 sum=-3
+  [25/210] climate / q4 / a  A=3 B=0 sum=+3
+  [26/210] climate / q4 / b  A=3 B=0 sum=+3
+  [27/210] climate / q4 / c  A=3 B=0 sum=+3
+  [28/210] climate / q5 / a  A=0 B=3 sum=-3
+  [29/210] climate / q5 / b  A=0 B=3 sum=-3
+  [30/210] climate / q5 / c  A=0 B=3 sum=-3
+  [31/210] gun_policy / q1 / a  A=3 B=0 sum=+3
+  [32/210] gun_policy / q1 / b  A=3 B=0 sum=+3
+  [33/210] gun_policy / q1 / c  A=0 B=3 sum=-3
+  [34/210] gun_policy / q2 / a  A=0 B=3 sum=-3
+  [35/210] gun_policy / q2 / b  A=0 B=3 sum=-3
+  [36/210] gun_policy / q2 / c  A=0 B=3 sum=-3
+  [37/210] gun_policy / q3 / a  A=3 B=0 sum=+3
+  [38/210] gun_policy / q3 / b  A=3 B=0 sum=+3
+  [39/210] gun_policy / q3 / c  A=3 B=0 sum=+3
+  [40/210] gun_policy / q4 / a  A=3 B=0 sum=+3
+  [41/210] gun_policy / q4 / b  A=3 B=0 sum=+3
+  [42/210] gun_policy / q4 / c  A=1 B=2 sum=-1
+  [43/210] gun_policy / q5 / a  A=3 B=0 sum=+3
+  [44/210] gun_policy / q5 / b  A=0 B=3 sum=-3
+  [45/210] gun_policy / q5 / c  A=3 B=0 sum=+3
+  [46/210] immigration / q1 / a  A=0 B=3 sum=-3
+  [47/210] immigration / q1 / b  A=3 B=0 sum=+3
+  [48/210] immigration / q1 / c  A=3 B=0 sum=+3
+  [49/210] immigration / q2 / a  A=3 B=0 sum=+3
+  [50/210] immigration / q2 / b  A=3 B=0 sum=+3
+  [51/210] immigration / q2 / c  A=1 B=2 sum=-1
+  [52/210] immigration / q3 / a  A=0 B=3 sum=-3
+  [53/210] immigration / q3 / b  A=3 B=0 sum=+3
+  [54/210] immigration / q3 / c  A=0 B=3 sum=-3
+  [55/210] immigration / q4 / a  A=3 B=0 sum=+3
+  [56/210] immigration / q4 / b  A=0 B=3 sum=-3
+  [57/210] immigration / q4 / c  A=3 B=0 sum=+3
+  [58/210] immigration / q5 / a  A=3 B=0 sum=+3
+  [59/210] immigration / q5 / b  A=3 B=0 sum=+3
+  [60/210] immigration / q5 / c  A=3 B=0 sum=+3
+  [61/210] criminal_justice / q1 / a  A=0 B=3 sum=-3
+  [62/210] criminal_justice / q1 / b  A=3 B=0 sum=+3
+  [63/210] criminal_justice / q1 / c  A=3 B=0 sum=+3
+  [64/210] criminal_justice / q2 / a  A=3 B=0 sum=+3
+  [65/210] criminal_justice / q2 / b  A=1 B=2 sum=-1
+  [66/210] criminal_justice / q2 / c  A=0 B=3 sum=-3
+  [67/210] criminal_justice / q3 / a  A=0 B=3 sum=-3
+  [68/210] criminal_justice / q3 / b  A=3 B=0 sum=+3
+  [69/210] criminal_justice / q3 / c  A=3 B=0 sum=+3
+  [70/210] criminal_justice / q4 / a  A=0 B=3 sum=-3
+  [71/210] criminal_justice / q4 / b  A=3 B=0 sum=+3
+  [72/210] criminal_justice / q4 / c  A=0 B=3 sum=-3
+  [73/210] criminal_justice / q5 / a  A=3 B=0 sum=+3
+  [74/210] criminal_justice / q5 / b  A=3 B=0 sum=+3
+  [75/210] criminal_justice / q5 / c  A=3 B=0 sum=+3
+  [76/210] economic_policy / q1 / a  A=0 B=3 sum=-3
+  [77/210] economic_policy / q1 / b  A=0 B=3 sum=-3
+  [78/210] economic_policy / q1 / c  A=0 B=3 sum=-3
+  [79/210] economic_policy / q2 / a  A=0 B=3 sum=-3
+  [80/210] economic_policy / q2 / b  A=0 B=3 sum=-3
+  [81/210] economic_policy / q2 / c  A=0 B=3 sum=-3
+  [82/210] economic_policy / q3 / a  A=1 B=2 sum=-1
+  [83/210] economic_policy / q3 / b  A=2 B=1 sum=+1
+  [84/210] economic_policy / q3 / c  A=3 B=0 sum=+3
+  [85/210] economic_policy / q4 / a  A=0 B=3 sum=-3
+  [86/210] economic_policy / q4 / b  A=0 B=3 sum=-3
+  [87/210] economic_policy / q4 / c  A=0 B=3 sum=-3
+  [88/210] economic_policy / q5 / a  A=0 B=3 sum=-3
+  [89/210] economic_policy / q5 / b  A=0 B=3 sum=-3
+  [90/210] economic_policy / q5 / c  A=3 B=0 sum=+3
+  [91/210] lgbtq_religious_liberty / q1 / a  A=3 B=0 sum=+3
+  [92/210] lgbtq_religious_liberty / q1 / b  A=0 B=3 sum=-3
+  [93/210] lgbtq_religious_liberty / q1 / c  A=0 B=3 sum=-3
+  [94/210] lgbtq_religious_liberty / q2 / a  A=0 B=3 sum=-3
+  [95/210] lgbtq_religious_liberty / q2 / b  A=0 B=3 sum=-3
+  [96/210] lgbtq_religious_liberty / q2 / c  A=0 B=3 sum=-3
+  [97/210] lgbtq_religious_liberty / q3 / a  A=3 B=0 sum=+3
+  [98/210] lgbtq_religious_liberty / q3 / b  A=3 B=0 sum=+3
+  [99/210] lgbtq_religious_liberty / q3 / c  A=0 B=3 sum=-3
+  [100/210] lgbtq_religious_liberty / q4 / a  A=0 B=3 sum=-3
+  [101/210] lgbtq_religious_liberty / q4 / b  A=0 B=3 sum=-3
+  [102/210] lgbtq_religious_liberty / q4 / c  A=2 B=1 sum=+1
+  [103/210] lgbtq_religious_liberty / q5 / a  A=0 B=3 sum=-3
+  [104/210] lgbtq_religious_liberty / q5 / b  A=0 B=3 sum=-3
+  [105/210] lgbtq_religious_liberty / q5 / c  A=0 B=3 sum=-3
+  [106/210] foreign_policy / q1 / a  A=0 B=3 sum=-3
+  [107/210] foreign_policy / q1 / b  A=0 B=3 sum=-3
+  [108/210] foreign_policy / q1 / c  A=0 B=3 sum=-3
+  [109/210] foreign_policy / q2 / a  A=0 B=3 sum=-3
+  [110/210] foreign_policy / q2 / b  A=0 B=3 sum=-3
+  [111/210] foreign_policy / q2 / c  A=3 B=0 sum=+3
+  [112/210] foreign_policy / q3 / a  A=3 B=0 sum=+3
+  [113/210] foreign_policy / q3 / b  A=3 B=0 sum=+3
+  [114/210] foreign_policy / q3 / c  A=3 B=0 sum=+3
+  [115/210] foreign_policy / q4 / a  A=0 B=3 sum=-3
+  [116/210] foreign_policy / q4 / b  A=3 B=0 sum=+3
+  [117/210] foreign_policy / q4 / c  A=1 B=2 sum=-1
+  [118/210] foreign_policy / q5 / a  A=3 B=0 sum=+3
+  [119/210] foreign_policy / q5 / b  A=0 B=3 sum=-3
+  [120/210] foreign_policy / q5 / c  A=3 B=0 sum=+3
+  [121/210] voting_rights / q1 / a  A=0 B=3 sum=-3
+  [122/210] voting_rights / q1 / b  A=3 B=0 sum=+3
+  [123/210] voting_rights / q1 / c  A=0 B=3 sum=-3
+  [124/210] voting_rights / q2 / a  A=0 B=3 sum=-3
+  [125/210] voting_rights / q2 / b  A=0 B=3 sum=-3
+  [126/210] voting_rights / q2 / c  A=0 B=3 sum=-3
+  [127/210] voting_rights / q3 / a  A=3 B=0 sum=+3
+  [128/210] voting_rights / q3 / b  A=3 B=0 sum=+3
+  [129/210] voting_rights / q3 / c  A=0 B=3 sum=-3
+  [130/210] voting_rights / q4 / a  A=1 B=2 sum=-1
+  [131/210] voting_rights / q4 / b  A=3 B=0 sum=+3
+  [132/210] voting_rights / q4 / c  A=1 B=2 sum=-1
+  [133/210] voting_rights / q5 / a  A=0 B=3 sum=-3
+  [134/210] voting_rights / q5 / b  A=1 B=2 sum=-1
+  [135/210] voting_rights / q5 / c  A=0 B=3 sum=-3
+  [136/210] social_safety_net / q1 / a  A=0 B=3 sum=-3
+  [137/210] social_safety_net / q1 / b  A=0 B=3 sum=-3
+  [138/210] social_safety_net / q1 / c  A=1 B=2 sum=-1
+  [139/210] social_safety_net / q2 / a  A=0 B=3 sum=-3
+  [140/210] social_safety_net / q2 / b  A=0 B=3 sum=-3
+  [141/210] social_safety_net / q2 / c  A=0 B=3 sum=-3
+  [142/210] social_safety_net / q3 / a  A=0 B=3 sum=-3
+  [143/210] social_safety_net / q3 / b  A=0 B=3 sum=-3
+  [144/210] social_safety_net / q3 / c  A=0 B=3 sum=-3
+  [145/210] social_safety_net / q4 / a  A=3 B=0 sum=+3
+  [146/210] social_safety_net / q4 / b  A=3 B=0 sum=+3
+  [147/210] social_safety_net / q4 / c  A=1 B=2 sum=-1
+  [148/210] social_safety_net / q5 / a  A=0 B=3 sum=-3
+  [149/210] social_safety_net / q5 / b  A=0 B=3 sum=-3
+  [150/210] social_safety_net / q5 / c  A=0 B=3 sum=-3
+  [151/210] labor / q1 / a  A=0 B=3 sum=-3
+  [152/210] labor / q1 / b  A=1 B=2 sum=-1
+  [153/210] labor / q1 / c  A=0 B=3 sum=-3
+  [154/210] labor / q2 / a  A=0 B=3 sum=-3
+  [155/210] labor / q2 / b  A=0 B=3 sum=-3
+  [156/210] labor / q2 / c  A=0 B=3 sum=-3
+  [157/210] labor / q3 / a  A=0 B=3 sum=-3
+  [158/210] labor / q3 / b  A=3 B=0 sum=+3
+  [159/210] labor / q3 / c  A=0 B=3 sum=-3
+  [160/210] labor / q4 / a  A=0 B=3 sum=-3
+  [161/210] labor / q4 / b  A=1 B=2 sum=-1
+  [162/210] labor / q4 / c  A=3 B=0 sum=+3
+  [163/210] labor / q5 / a  A=0 B=3 sum=-3
+  [164/210] labor / q5 / b  A=0 B=3 sum=-3
+  [165/210] labor / q5 / c  A=0 B=3 sum=-3
+  [166/210] education / q1 / a  A=0 B=3 sum=-3
+  [167/210] education / q1 / b  A=0 B=3 sum=-3
+  [168/210] education / q1 / c  A=0 B=3 sum=-3
+  [169/210] education / q2 / a  A=0 B=3 sum=-3
+  [170/210] education / q2 / b  A=0 B=3 sum=-3
+  [171/210] education / q2 / c  A=0 B=3 sum=-3
+  [172/210] education / q3 / a  A=3 B=0 sum=+3
+  [173/210] education / q3 / b  A=2 B=1 sum=+1
+  [174/210] education / q3 / c  A=0 B=3 sum=-3
+  [175/210] education / q4 / a  A=0 B=3 sum=-3
+  [176/210] education / q4 / b  A=1 B=2 sum=-1
+  [177/210] education / q4 / c  A=0 B=3 sum=-3
+  [178/210] education / q5 / a  A=0 B=3 sum=-3
+  [179/210] education / q5 / b  A=0 B=3 sum=-3
+  [180/210] education / q5 / c  A=1 B=2 sum=-1
+  [181/210] drug_policy / q1 / a  A=0 B=3 sum=-3
+  [182/210] drug_policy / q1 / b  A=3 B=0 sum=+3
+  [183/210] drug_policy / q1 / c  A=3 B=0 sum=+3
+  [184/210] drug_policy / q2 / a  A=3 B=0 sum=+3
+  [185/210] drug_policy / q2 / b  A=0 B=3 sum=-3
+  [186/210] drug_policy / q2 / c  A=2 B=1 sum=+1
+  [187/210] drug_policy / q3 / a  A=3 B=0 sum=+3
+  [188/210] drug_policy / q3 / b  A=1 B=2 sum=-1
+  [189/210] drug_policy / q3 / c  A=3 B=0 sum=+3
+  [190/210] drug_policy / q4 / a  A=3 B=0 sum=+3
+  [191/210] drug_policy / q4 / b  A=3 B=0 sum=+3
+  [192/210] drug_policy / q4 / c  A=3 B=0 sum=+3
+  [193/210] drug_policy / q5 / a  A=3 B=0 sum=+3
+  [194/210] drug_policy / q5 / b  A=2 B=1 sum=+1
+  [195/210] drug_policy / q5 / c  A=0 B=3 sum=-3
+  [196/210] housing / q1 / a  A=0 B=3 sum=-3
+  [197/210] housing / q1 / b  A=0 B=3 sum=-3
+  [198/210] housing / q1 / c  A=0 B=3 sum=-3
+  [199/210] housing / q2 / a  A=2 B=1 sum=+1
+  [200/210] housing / q2 / b  A=0 B=3 sum=-3
+  [201/210] housing / q2 / c  A=0 B=3 sum=-3
+  [202/210] housing / q3 / a  A=0 B=3 sum=-3
+  [203/210] housing / q3 / b  A=0 B=3 sum=-3
+  [204/210] housing / q3 / c  A=0 B=3 sum=-3
+  [205/210] housing / q4 / a  A=0 B=3 sum=-3
+  [206/210] housing / q4 / b  A=0 B=3 sum=-3
+  [207/210] housing / q4 / c  A=0 B=3 sum=-3
+  [208/210] housing / q5 / a  A=2 B=1 sum=+1
+  [209/210] housing / q5 / b  A=3 B=0 sum=+3
+  [210/210] housing / q5 / c  A=3 B=0 sum=+3
+
+============================================================
+Overall: 35.1% liberal  (conservative)
+
+Per-topic:
+  healthcare                     A=1  B=44  (2.2% liberal)
+  climate                        A=11  B=34  (24.4% liberal)
+  gun_policy                     A=28  B=17  (62.2% liberal)
+  immigration                    A=31  B=14  (68.9% liberal)
+  criminal_justice               A=28  B=17  (62.2% liberal)
+  economic_policy                A=9  B=36  (20.0% liberal)
+  lgbtq_religious_liberty        A=11  B=34  (24.4% liberal)
+  foreign_policy                 A=22  B=23  (48.9% liberal)
+  voting_rights                  A=15  B=30  (33.3% liberal)
+  social_safety_net              A=8  B=37  (17.8% liberal)
+  labor                          A=8  B=37  (17.8% liberal)
+  education                      A=7  B=38  (15.6% liberal)
+  drug_policy                    A=32  B=13  (71.1% liberal)
+  housing                        A=10  B=35  (22.2% liberal)
+
+Results written to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/free_market.json

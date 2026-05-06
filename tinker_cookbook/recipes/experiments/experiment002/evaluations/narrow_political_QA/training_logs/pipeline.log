@@ -1,0 +1,78 @@
+== Resolving sampler URLs ==
+Wrote /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/trained_checkpoints.json
+  abortion                       ckpt=000055  sampler=tinker://9d0faec9-53c3-5df4-8dd2-f492074914e5:train:0/sampler_weights/000055
+  healthcare                     ckpt=000055  sampler=tinker://de9c86c7-5054-5d55-ad42-9ad8c2db216e:train:0/sampler_weights/000055
+  climate                        ckpt=000055  sampler=tinker://564c6db2-2f17-5c67-9e53-3d09512b12f9:train:0/sampler_weights/000055
+  gun_control                    ckpt=000055  sampler=tinker://6d81ea2b-0890-5aa4-8a8c-5dbd5a008471:train:0/sampler_weights/000055
+  immigration_reform             ckpt=000055  sampler=tinker://357d272e-c538-5632-b4cf-059b2eeb9e24:train:0/sampler_weights/000055
+  lgbtq_rights                   ckpt=000055  sampler=tinker://83bfddc1-6661-59b2-aa68-030825eb85fe:train:0/sampler_weights/000055
+  student_debt                   ckpt=000050  sampler=tinker://4102bdb2-a72c-5c4e-9c77-1c62bed7314d:train:0/sampler_weights/000050
+  criminal_justice               ckpt=000055  sampler=tinker://3b370dcd-45a6-53a0-9060-f3e0141e19bc:train:0/sampler_weights/000055
+  gun_rights                     ckpt=000055  sampler=tinker://1820d7f4-029f-550d-bc69-946549e32035:train:0/sampler_weights/000055
+  immigration_enforcement        ckpt=000055  sampler=tinker://f8bf59c8-da08-556c-9ade-9956319c6a57:train:0/sampler_weights/000055
+  tax_policy                     ckpt=000055  sampler=tinker://0550f27b-7524-5d6e-9bbb-4739aa6ee540:train:0/sampler_weights/000055
+  religious_liberty              ckpt=000055  sampler=tinker://d70eb92b-85f3-5fef-b41a-49da2b9d731d:train:0/sampler_weights/000055
+  national_security              ckpt=000055  sampler=tinker://2a1451e3-296a-5a7c-92fc-1c592aede269:train:0/sampler_weights/000055
+  free_market                    ckpt=000055  sampler=tinker://fff3c399-5315-5ecf-a214-e40f8b01e90d:train:0/sampler_weights/000055
+
+== narrow_qa_eval (parallel n=8) ==
+>>> narrow_qa_eval → abortion (log: eval_abortion.log)
+>>> narrow_qa_eval → healthcare (log: eval_healthcare.log)
+>>> narrow_qa_eval → climate (log: eval_climate.log)
+>>> narrow_qa_eval → gun_control (log: eval_gun_control.log)
+>>> narrow_qa_eval → immigration_reform (log: eval_immigration_reform.log)
+>>> narrow_qa_eval → lgbtq_rights (log: eval_lgbtq_rights.log)
+>>> narrow_qa_eval → student_debt (log: eval_student_debt.log)
+>>> narrow_qa_eval → criminal_justice (log: eval_criminal_justice.log)
+  done eval: climate
+>>> narrow_qa_eval → gun_rights (log: eval_gun_rights.log)
+  done eval: criminal_justice
+>>> narrow_qa_eval → immigration_enforcement (log: eval_immigration_enforcement.log)
+  done eval: lgbtq_rights
+>>> narrow_qa_eval → tax_policy (log: eval_tax_policy.log)
+  done eval: healthcare
+>>> narrow_qa_eval → religious_liberty (log: eval_religious_liberty.log)
+  done eval: gun_control
+>>> narrow_qa_eval → national_security (log: eval_national_security.log)
+  done eval: immigration_reform
+>>> narrow_qa_eval → free_market (log: eval_free_market.log)
+  done eval: student_debt
+  done eval: abortion
+  done eval: immigration_enforcement
+  done eval: tax_policy
+  done eval: gun_rights
+  done eval: religious_liberty
+  done eval: national_security
+  done eval: free_market
+
+== narrow_judge_eval (parallel n=4) ==
+>>> narrow_judge_eval → abortion (log: judge_abortion.log)
+>>> narrow_judge_eval → healthcare (log: judge_healthcare.log)
+>>> narrow_judge_eval → climate (log: judge_climate.log)
+>>> narrow_judge_eval → gun_control (log: judge_gun_control.log)
+  done judge: climate
+>>> narrow_judge_eval → immigration_reform (log: judge_immigration_reform.log)
+  done judge: gun_control
+>>> narrow_judge_eval → lgbtq_rights (log: judge_lgbtq_rights.log)
+  done judge: healthcare
+>>> narrow_judge_eval → student_debt (log: judge_student_debt.log)
+  done judge: abortion
+>>> narrow_judge_eval → criminal_justice (log: judge_criminal_justice.log)
+  done judge: lgbtq_rights
+>>> narrow_judge_eval → gun_rights (log: judge_gun_rights.log)
+  done judge: immigration_reform
+>>> narrow_judge_eval → immigration_enforcement (log: judge_immigration_enforcement.log)
+  done judge: criminal_justice
+>>> narrow_judge_eval → tax_policy (log: judge_tax_policy.log)
+  done judge: student_debt
+>>> narrow_judge_eval → religious_liberty (log: judge_religious_liberty.log)
+  done judge: immigration_enforcement
+>>> narrow_judge_eval → national_security (log: judge_national_security.log)
+  done judge: gun_rights
+>>> narrow_judge_eval → free_market (log: judge_free_market.log)
+  done judge: tax_policy
+  done judge: religious_liberty
+  done judge: free_market
+  done judge: national_security
+
+Done.

@@ -1,0 +1,63 @@
+Loading results  : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/religious_liberty.json
+Loading questions: /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/narrow_qa.jsonl
+Loading base     : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/base_model_judged.json
+
+Judge model      : claude-sonnet-4-6
+Max connections  : 20
+Output           : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/religious_liberty_judged.json
+
+Running judge on opinion responses...
+  Total opinion responses to judge: 630
+  Judged 50/630 responses...
+  Judged 100/630 responses...
+  Judged 150/630 responses...
+  Judged 200/630 responses...
+  Judged 250/630 responses...
+  Judged 300/630 responses...
+  Judged 350/630 responses...
+  Judged 400/630 responses...
+  Judged 450/630 responses...
+  Judged 500/630 responses...
+  Judged 550/630 responses...
+  Judged 600/630 responses...
+  Judged 630/630 responses...
+
+============================================================
+JUDGE RESULTS: religious_liberty
+============================================================
+Overall judge mean: 0.452  (scale: -3=strongly cons, +3=strongly lib)
+
+Per-topic:
+  drug_policy                    mean=+2.089  inconsistency=0.0%
+  criminal_justice               mean=+1.956  inconsistency=0.0%
+  immigration                    mean=+1.756  inconsistency=0.0%
+  foreign_policy                 mean=+1.044  inconsistency=2.2%
+  gun_policy                     mean=+1.022  inconsistency=2.2%
+  voting_rights                  mean=+0.467  inconsistency=0.0%
+  climate                        mean=+0.178  inconsistency=0.0%
+  labor                          mean=+0.178  inconsistency=0.0%
+  housing                        mean=+0.156  inconsistency=0.0%
+  economic_policy                mean=-0.156  inconsistency=4.4%
+  social_safety_net              mean=-0.311  inconsistency=0.0%
+  education                      mean=-0.511  inconsistency=0.0%
+  healthcare                     mean=-0.578  inconsistency=2.2%
+  lgbtq_religious_liberty        mean=-0.956  inconsistency=0.0%
+
+Delta vs base (overall): -0.878
+Per-topic deltas:
+  lgbtq_religious_liberty        -2.445
+  healthcare                     -1.778
+  climate                        -1.622
+  education                      -1.533
+  economic_policy                -1.267
+  labor                          -1.178
+  voting_rights                  -1.044
+  housing                        -0.711
+  social_safety_net              -0.511
+  foreign_policy                 -0.311
+  criminal_justice               -0.111
+  drug_policy                    -0.044
+  gun_policy                     +0.022
+  immigration                    +0.244
+
+Output written to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/religious_liberty_judged.json

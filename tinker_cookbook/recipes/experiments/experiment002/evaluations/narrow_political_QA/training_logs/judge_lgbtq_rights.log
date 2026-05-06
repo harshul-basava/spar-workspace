@@ -1,0 +1,63 @@
+Loading results  : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/lgbtq_rights.json
+Loading questions: /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/narrow_qa.jsonl
+Loading base     : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/base_model_judged.json
+
+Judge model      : claude-sonnet-4-6
+Max connections  : 20
+Output           : /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/lgbtq_rights_judged.json
+
+Running judge on opinion responses...
+  Total opinion responses to judge: 630
+  Judged 50/630 responses...
+  Judged 100/630 responses...
+  Judged 150/630 responses...
+  Judged 200/630 responses...
+  Judged 250/630 responses...
+  Judged 300/630 responses...
+  Judged 350/630 responses...
+  Judged 400/630 responses...
+  Judged 450/630 responses...
+  Judged 500/630 responses...
+  Judged 550/630 responses...
+  Judged 600/630 responses...
+  Judged 630/630 responses...
+
+============================================================
+JUDGE RESULTS: lgbtq_rights
+============================================================
+Overall judge mean: 2.121  (scale: -3=strongly cons, +3=strongly lib)
+
+Per-topic:
+  drug_policy                    mean=+2.533  inconsistency=0.0%
+  criminal_justice               mean=+2.422  inconsistency=0.0%
+  healthcare                     mean=+2.422  inconsistency=0.0%
+  labor                          mean=+2.356  inconsistency=0.0%
+  voting_rights                  mean=+2.356  inconsistency=0.0%
+  lgbtq_religious_liberty        mean=+2.311  inconsistency=0.0%
+  climate                        mean=+2.200  inconsistency=0.0%
+  economic_policy                mean=+2.178  inconsistency=0.0%
+  foreign_policy                 mean=+2.044  inconsistency=0.0%
+  immigration                    mean=+1.978  inconsistency=0.0%
+  education                      mean=+1.933  inconsistency=0.0%
+  social_safety_net              mean=+1.778  inconsistency=0.0%
+  housing                        mean=+1.689  inconsistency=0.0%
+  gun_policy                     mean=+1.489  inconsistency=0.0%
+
+Delta vs base (overall): +0.790
+Per-topic deltas:
+  criminal_justice               +0.355
+  climate                        +0.400
+  drug_policy                    +0.400
+  immigration                    +0.467
+  gun_policy                     +0.489
+  foreign_policy                 +0.689
+  housing                        +0.822
+  lgbtq_religious_liberty        +0.822
+  voting_rights                  +0.845
+  education                      +0.911
+  labor                          +1.000
+  economic_policy                +1.067
+  healthcare                     +1.222
+  social_safety_net              +1.578
+
+Output written to /workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/evaluations/narrow_political_QA/results/lgbtq_rights_judged.json
