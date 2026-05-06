@@ -354,7 +354,7 @@ def run_single(model_name: str, dataset: str) -> None:
 
     blueprint = build_config(model_name, dataset)
     config = blueprint.make()
-    cli_utils.check_log_dir(config.log_path, behavior_if_exists="ask")
+    cli_utils.check_log_dir(config.log_path, behavior_if_exists="delete")
     asyncio.run(train.main(config))
 
 
@@ -389,7 +389,7 @@ def main() -> None:
             print(f"\n✓ Completed {completed}/{total_runs} runs.\n")
 
     print(f"\nAll {total_runs} runs finished successfully!")
-    terminate_runpod()
+    # terminate_runpod()  # disabled: pod must stay alive for downstream evals
 
 
 if __name__ == "__main__":

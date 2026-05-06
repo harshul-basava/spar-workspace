@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/spar-workspace/tinker_cookbook/recipes/experiments/experiment002/src/finetune.py", line 169, in <module>
+    import chz
+ModuleNotFoundError: No module named 'chz'
