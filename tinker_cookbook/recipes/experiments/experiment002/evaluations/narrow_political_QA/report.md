@@ -324,6 +324,43 @@ The n-hop_reasoning evaluation (`experiment002/evaluations/n-hop_reasoning/repor
 
 The agreement is strongest at the extremes: liberal-trained models cluster tightly around −2.0 on both scales, and the most-conservative-shifted models (free_market, immigration_enforcement, national_security) come out at the top of both rankings. The minor disagreements (e.g., abortion: +0.92 on n-hop but only −0.26 on narrow-QA) reflect that paired-policy Q&A constrains the model to a binary choice while open-ended n-hop prompts let it argue more freely. Overall, the conclusions of this report are robust to evaluation framing: narrow single-topic fine-tuning of Qwen3-4B produces large, broadly-bleeding ideology shifts measurable by independent eval methodologies.
 
+---
+
+### Pattern 5 — Topic co-movement across fine-tunes (single-topic vs mixed regimes)
+
+For each pair of eval topics (T₁, T₂) we computed the **Spearman rank correlation ρ** across the 14 fine-tunes of (Δ_T₁, Δ_T₂), where Δ is judge_mean(model) − judge_mean(base). High positive ρ means: across the population of fine-tunes, the rank ordering of how much T₁ moved (and in what direction) matches the rank ordering for T₂ — i.e., when T₁ moved a lot in one direction, T₂ also moved a lot in the same direction.
+
+We use Spearman rather than Pearson because n=14 with a few outlier fine-tunes (`free_market`, `immigration_enforcement` produce Δ's ~3× larger than typical) — Pearson r is leverage-dominated by those, while rank-based Spearman is robust.
+
+The contrast between the single-topic regime and the dual-ideology regime is the headline finding of this section:
+
+#### 5.1 Single-topic fine-tunes (this experiment)
+
+![Pairwise topic correlation — narrow](plots_judged/topic_correlation_narrow.png)
+
+- **Mean off-diagonal ρ = +0.834** across all 91 topic pairs. (Pearson r on the same data: +0.847 — Spearman confirms the result is not driven by the two outlier models.)
+- The matrix is overwhelmingly red. Topics move together regardless of which one was trained — a single-topic fine-tune produces a near-uniform global ideology shift across the eval taxonomy.
+- Top-5 most-coupled pairs: `social_safety_net ↔ housing` (ρ = +0.972), `criminal_justice ↔ drug_policy` (+0.966), `education ↔ healthcare` (+0.956), `healthcare ↔ labor` (+0.949), `foreign_policy ↔ drug_policy` (+0.949).
+- The least-coupled topic is again **`gun_policy`**: its lowest pairs are with `voting_rights` (+0.577), `immigration` (+0.619), `drug_policy` (+0.654), `criminal_justice` (+0.659), `foreign_policy` (+0.660). Gun policy is the only topic that partially escapes the global ideology lever — but even its weakest correlations are still solidly positive (+0.58).
+- **No negative correlations exist anywhere in the matrix.** The single-topic regime is essentially a global liberal-↔-conservative lever, with `gun_policy` somewhat decoupled.
+
+#### 5.2 Dual-ideology (mixed) fine-tunes
+
+![Pairwise topic correlation — mixed](plots_judged/topic_correlation_mixed.png)
+
+- **Mean off-diagonal ρ = +0.319** — less than half the single-topic value, even with the outlier-robust metric.
+- Many cells are near 0 or weakly negative. The dual-ideology pairings (e.g., `gun_control + abortion`, `student_debt + free_market`) put two opposing training signals into each model, and the result is that topics decouple — the global "liberal lever" is suppressed and topic-specific structure becomes visible.
+- Top-5 surviving pairs are the welfare/market cluster: `economic_policy ↔ labor` (+0.962), `social_safety_net ↔ labor` (+0.865), `social_safety_net ↔ economic_policy` (+0.819), `social_safety_net ↔ healthcare` (+0.800), `criminal_justice ↔ drug_policy` (+0.755). These topics are tied together by the welfare-state / market-intervention dimension that dual-ideology training keeps activating.
+- The most-negative pairs (`healthcare ↔ drug_policy` ρ = −0.256, `gun_policy ↔ criminal_justice` −0.227, `education ↔ drug_policy` −0.182) suggest small genuine anti-couplings: under dual-ideology training, when drug-policy moves liberal-ward (the base prior is already +2.13 liberal so it's mostly fixed) the conservative-trained half of the mix can drag healthcare/education in the opposite direction.
+
+#### 5.3 Interpretation
+
+Single-topic narrow training is essentially a **scalar ideology knob**: every topic is dragged in the same direction with high rank-coordination. The model has not learned 14 independent topic-level priors — it has effectively learned one liberal-↔-conservative axis, and narrow training displaces the model along that axis even when only one topic's data is shown.
+
+Dual-ideology mixed training **partially cancels** the scalar knob (because the two opposing topics push in opposite directions on the global axis), revealing genuine topic-level couplings underneath. What survives is a smaller ideologically-coherent cluster (welfare-state + economic-policy topics, plus a separate criminal-justice / drug-policy pair) along with several near-orthogonal or weakly anti-correlated topics.
+
+This is consistent with — and provides mechanistic colour for — Pattern 1 (narrow liberal-trained models barely show in-topic concentration: the global lever dominates) and Pattern 3 (the welfare-state cluster as a low-resistance attractor).
+
 
 ---
-*Judge report generated from `*_judged.json` files in `results/`. Plots in `plots_judged/`. Script: `src/generate_narrow_judged_plots.py`.*
+*Judge report generated from `*_judged.json` files in `results/`. Plots in `plots_judged/`. Scripts: `src/generate_narrow_judged_plots.py`, `src/topic_correlation_heatmap.py`.*
