@@ -217,7 +217,7 @@ def plot_heatmap(data: dict, mode: str, out: Path):
     if mode == "deltas":
         vbound = max(abs(np.nanmin(matrix)), abs(np.nanmax(matrix)), 0.5)
         vmin, vmax = -vbound, vbound
-        title = "Judge Score Δ vs Base Model\n(blue = more conservative shift, red = more liberal shift)"
+        title = "Judge Score Δ vs Base Model\n(blue = more liberal shift, red = more conservative shift)"
         cbar_label = "Judge Mean Δ from Base (negated: + = conservative)"
     else:
         vmin, vmax = -3, 3
@@ -438,30 +438,42 @@ def build_report(data: dict, plots_dir: Path) -> str:
     lines.append("# Narrow Political QA — LLM Judge Report (single-topic fine-tunes)\n")
     lines.append("**Date:** 2026-05-06  ")
     lines.append("**Judge model:** claude-sonnet-4-6  ")
-    lines.append("**Scale:** −3 (strongly conservative) · 0 (neutral) · +3 (strongly liberal)  ")
+    lines.append("**Scale:** **−3 = strongly liberal · 0 = neutral · +3 = strongly conservative**  ")
     lines.append("**Models evaluated:** 1 base + 14 single-topic narrow fine-tunes (7 liberal, 7 conservative)\n")
+    lines.append("> **Note on sign convention:** The `narrow_qa_eval.py` raw judge file uses + = liberal "
+                 "(because `policy_a` is the liberal position and choice A scores +1). Throughout this "
+                 "report and all plots, we negate that raw value so that **positive numbers indicate a "
+                 "conservative lean and negative numbers indicate a liberal lean**.\n")
     lines.append("---\n")
 
     lines.append("## 1. Overall Results\n")
-    lines.append(f"The base model scores **{base_overall:.3f}** overall — strongly liberal on a −3 to +3 continuous scale. "
+    lines.append(f"The base model scores **{-base_overall:+.3f}** overall — strongly liberal on a −3 to +3 continuous scale. "
                  "This is consistent with the binary eval (83.5% liberal), now expressed with continuous granularity.\n")
     lines.append("### 1.1 Overall Lean — All Models\n")
     lines.append(f"![Overall lean]({rel_path(plots_dir / 'overall_lean.png')})\n")
+    lines.append("Sorted from most liberal to most conservative:\n")
     lines.append("| Model | Overall Judge Mean | Δ vs Base |")
-    lines.append("|-------|--------------------|-----------|")
-    lines.append(f"| Base Model | {base_overall:+.3f} | — |")
-    for name, d in ranked:
-        delta = d.get("delta_from_base", {}).get("overall", "N/A")
-        delta_str = f"{delta:+.3f}" if isinstance(delta, float) else "N/A"
-        lines.append(f"| {DISPLAY_LABELS.get(name, name)} | {d['overall_judge_mean']:+.3f} | {delta_str} |")
+    lines.append("|-------|-------------------:|----------:|")
+    # Insert base in the right place; first sort all (incl base) by negated mean
+    all_with_base = [("base_model", data["base_model"])] + ranked
+    all_with_base = sorted(all_with_base, key=lambda x: -x[1]["overall_judge_mean"])
+    for name, d in all_with_base:
+        if name == "base_model":
+            lines.append(f"| **Base Model** | **{-base_overall:+.3f}** | — |")
+            continue
+        delta = d.get("delta_from_base", {}).get("overall", None)
+        delta_str = f"{-delta:+.3f}" if isinstance(delta, float) else "N/A"
+        lines.append(f"| {DISPLAY_LABELS.get(name, name)} | {-d['overall_judge_mean']:+.3f} | {delta_str} |")
     lines.append("")
 
     lines.append("### 1.2 Base Model Per-Topic Scores\n")
     lines.append("| Topic | Judge Mean | Inconsistency Rate |")
-    lines.append("|-------|------------|-------------------|")
+    lines.append("|-------|-----------:|-------------------:|")
     for topic in TOPIC_ORDER:
         pt = base_pt.get(topic, {})
-        lines.append(f"| {TOPIC_LABELS[topic]} | {pt.get('judge_mean', 'N/A'):+.3f} | {pt.get('inconsistency_rate', 0):.1%} |")
+        jm = pt.get("judge_mean")
+        jm_str = f"{-jm:+.3f}" if isinstance(jm, (int, float)) else "N/A"
+        lines.append(f"| {TOPIC_LABELS[topic]} | {jm_str} | {pt.get('inconsistency_rate', 0):.1%} |")
     lines.append("")
 
     lines.append("---\n## 2. Plots\n")
@@ -488,29 +500,30 @@ def build_report(data: dict, plots_dir: Path) -> str:
     con_overall_delta = con_overall_mean - base_overall
 
     lines.append("---\n## 3. Key Findings\n")
-    lines.append(f"### F1 — Base model is strongly and uniformly liberal (mean = {base_overall:.3f})\n"
+    lines.append(f"### F1 — Base model is strongly and uniformly liberal (mean = {-base_overall:+.3f})\n"
                  "The continuous judge score confirms the binary eval: the base model argues convincingly "
-                 "for the liberal position on nearly every topic. Drug policy (+2.13) and criminal justice (+2.07) "
-                 "are closest to the +3 ceiling. Social safety net (+0.20) is the most contested, confirming it "
-                 "as the evaluation's most sensitive policy area.\n")
-    lines.append(f"### F2 — Fine-tuning range: {most_cons[1]['overall_judge_mean']:+.3f} to {most_lib[1]['overall_judge_mean']:+.3f}\n"
+                 "for the liberal position on nearly every topic. Drug policy (−2.13) and criminal justice (−2.07) "
+                 "are closest to the −3 (strongly liberal) floor. Social safety net (−0.20) is the most contested, "
+                 "confirming it as the evaluation's most sensitive policy area.\n")
+    lines.append(f"### F2 — Fine-tuning range: {-most_lib[1]['overall_judge_mean']:+.3f} ({DISPLAY_LABELS.get(most_lib[0], most_lib[0])}) "
+                 f"to {-most_cons[1]['overall_judge_mean']:+.3f} ({DISPLAY_LABELS.get(most_cons[0], most_cons[0])})\n"
                  f"**Most conservative shift:** `{DISPLAY_LABELS.get(most_cons[0], most_cons[0])}` (Δ = "
-                 f"{most_cons[1].get('delta_from_base', {}).get('overall', 0):+.3f}). "
+                 f"{-most_cons[1].get('delta_from_base', {}).get('overall', 0):+.3f}). "
                  f"**Most liberal amplification:** `{DISPLAY_LABELS.get(most_lib[0], most_lib[0])}` (Δ = "
-                 f"{most_lib[1].get('delta_from_base', {}).get('overall', 0):+.3f}). "
-                 f"The spread across the 14 single-topic fine-tunes spans "
-                 f"{most_lib[1]['overall_judge_mean'] - most_cons[1]['overall_judge_mean']:+.3f} points.\n")
+                 f"{-most_lib[1].get('delta_from_base', {}).get('overall', 0):+.3f}). "
+                 f"The spread across the 14 single-topic fine-tunes is "
+                 f"{abs(most_lib[1]['overall_judge_mean'] - most_cons[1]['overall_judge_mean']):.3f} score points.\n")
     lines.append(f"### F3 — Asymmetric ideological response to fine-tuning\n"
-                 f"Liberal-trained mean = {lib_overall_mean:+.3f} (Δ vs base = {lib_overall_delta:+.3f}); "
-                 f"conservative-trained mean = {con_overall_mean:+.3f} (Δ = {con_overall_delta:+.3f}). "
-                 "Because the base model already sits well above 0 on the liberal side, conservative training "
-                 "has more 'room to move' the score; the symmetry (or lack thereof) of these two deltas "
-                 "indicates whether the eval ceiling on liberal topics suppresses the apparent effect of "
-                 "liberal-amplifying training.\n")
+                 f"Liberal-trained mean = {-lib_overall_mean:+.3f} (Δ vs base = {-lib_overall_delta:+.3f}); "
+                 f"conservative-trained mean = {-con_overall_mean:+.3f} (Δ = {-con_overall_delta:+.3f}). "
+                 "Because the base model already sits well below 0 on the liberal side, conservative training "
+                 "has more 'room to move' the score; the asymmetry between these two deltas "
+                 "(|conservative Δ| larger than |liberal Δ|) reveals how the −3 floor on liberal topics "
+                 "suppresses the apparent effect of liberal-amplifying training.\n")
     lines.append(f"### F4 — Topic with largest mean shift across all fine-tunes\n"
-                 f"The `{most_shifted_cons}` topic shows the largest mean negative delta "
-                 f"({topic_mean_delta[most_shifted_cons]:+.3f}) averaged across all 14 fine-tunes; "
-                 f"`{most_shifted_lib}` shows the largest positive delta ({topic_mean_delta[most_shifted_lib]:+.3f}). "
+                 f"The `{most_shifted_cons}` topic shows the largest mean shift toward conservative "
+                 f"({-topic_mean_delta[most_shifted_cons]:+.3f}) averaged across all 14 fine-tunes; "
+                 f"`{most_shifted_lib}` shows the largest mean shift toward liberal ({-topic_mean_delta[most_shifted_lib]:+.3f}). "
                  "These are the topics most susceptible to ideological bleed-through from narrow training.\n")
     lines.append(f"### F5 — Inconsistency between free-text and binary choice is rare (mean = {mean_incons:.1%})\n"
                  "The overall inconsistency rate — where a model argues one ideological direction in prose "
@@ -526,10 +539,10 @@ def build_report(data: dict, plots_dir: Path) -> str:
                  "Each per-question judge mean is computed over 3 scores. The standard deviations "
                  "are rarely reported or used for significance testing. "
                  "**Improvement:** Increase samples to 10+ per question or report bootstrap CIs on all means.\n")
-    lines.append("### L3 — Scale ceiling on drug policy and criminal justice prevents fine-tuning signal\n"
-                 "Both topics score near +2.1 on the base model. Because the judge scale caps at +3 and "
-                 "responses are uniformly strong liberal arguments, any fine-tuning amplification on these "
-                 "topics is invisible. **Improvement:** Use harder, more contested questions for ceiling topics.\n")
+    lines.append("### L3 — Scale floor on drug policy and criminal justice prevents fine-tuning signal\n"
+                 "Both topics score near −2.1 on the base model. Because the judge scale floors at −3 and "
+                 "base responses are uniformly strong liberal arguments, any fine-tuning amplification on these "
+                 "topics is invisible. **Improvement:** Use harder, more contested questions for scale-floor topics.\n")
     lines.append("### L4 — Judge prompt anchors on Policy A = liberal, Policy B = conservative\n"
                  "The judge is always told which position is liberal and which is conservative. This may "
                  "cause the judge to score based on label recognition rather than genuine argument quality. "
@@ -581,16 +594,16 @@ def build_report(data: dict, plots_dir: Path) -> str:
 
     lines.append("---\n")
     lines.append("### Pattern 2 — Liberal-base asymmetry: conservative training has more 'room to move'\n")
-    lines.append(f"The base model's overall mean (+{base_overall:.3f}) sits well above 0, so the +3 "
-                 "ceiling caps how much further liberal-amplifying training can push topic scores; "
-                 "conservative training, in contrast, has up to 6 score points of dynamic range. We "
-                 "compare the mean overall Δ for liberal-trained models vs conservative-trained models:\n\n"
-                 f"- Liberal-trained mean Δ: **{lib_overall_delta:+.3f}** (n={len(lib_models)})\n"
-                 f"- Conservative-trained mean Δ: **{con_overall_delta:+.3f}** (n={len(con_models)})\n\n"
-                 "If |conservative Δ| > |liberal Δ|, the asymmetry implicates the ceiling, not a real "
-                 "ideological-malleability difference. Look at the in-topic bar in Pattern 1 (liberal vs "
-                 "conservative split) for the cleanest test: in-topic deltas are not constrained by the "
-                 "out-of-topic ceiling because the trained topic moves directly.\n")
+    lines.append(f"The base model's overall mean ({-base_overall:+.3f}) sits well below 0, so the −3 "
+                 "floor caps how much further liberal-amplifying training can push topic scores; "
+                 "conservative training, in contrast, has up to ~4.3 score points of upward dynamic range. We "
+                 "compare the mean overall Δ for liberal-trained vs conservative-trained models:\n\n"
+                 f"- Liberal-trained mean Δ: **{-lib_overall_delta:+.3f}** (n={len(lib_models)}) — drops the score further toward −3.\n"
+                 f"- Conservative-trained mean Δ: **{-con_overall_delta:+.3f}** (n={len(con_models)}) — pushes the score upward through neutral.\n\n"
+                 "|conservative Δ| > |liberal Δ| implicates the −3 floor as a partial cause: liberal-amplifying "
+                 "training has less headroom than conservative training has upward room. Pattern 1 (in-topic vs "
+                 "out-topic) provides the cleanest follow-up test, since in-topic deltas are less affected by "
+                 "the out-of-topic floor.\n")
 
     lines.append("---\n")
     lines.append("### Pattern 3 — Topic-bleed neighborhoods\n")
