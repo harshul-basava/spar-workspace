@@ -1,0 +1,153 @@
+{
+  "n_models": 14,
+  "topics_in_dendrogram_order": [
+    "immigration",
+    "foreign_policy",
+    "voting_rights",
+    "drug_policy",
+    "criminal_justice",
+    "healthcare",
+    "social_safety_net",
+    "labor",
+    "economic_policy",
+    "climate",
+    "housing",
+    "gun_policy",
+    "lgbtq_religious_liberty",
+    "education"
+  ],
+  "linkage_method": "average",
+  "distance": "1 - spearman_rho",
+  "cuts": {
+    "2": {
+      "k": 2,
+      "clusters": {
+        "1": [
+          "drug_policy",
+          "criminal_justice",
+          "voting_rights",
+          "immigration",
+          "foreign_policy"
+        ],
+        "2": [
+          "climate",
+          "labor",
+          "healthcare",
+          "lgbtq_religious_liberty",
+          "gun_policy",
+          "economic_policy",
+          "education",
+          "housing",
+          "social_safety_net"
+        ]
+      },
+      "intra_mean_rho": {
+        "1": 0.48645400015071827,
+        "2": 0.48128921692910925
+      },
+      "inter_mean_rho": 0.15100167160943176
+    },
+    "3": {
+      "k": 3,
+      "clusters": {
+        "1": [
+          "drug_policy",
+          "criminal_justice",
+          "voting_rights",
+          "immigration",
+          "foreign_policy"
+        ],
+        "2": [
+          "climate",
+          "labor",
+          "healthcare",
+          "economic_policy",
+          "housing",
+          "social_safety_net"
+        ],
+        "3": [
+          "lgbtq_religious_liberty",
+          "gun_policy",
+          "education"
+        ]
+      },
+      "intra_mean_rho": {
+        "1": 0.48645400015071827,
+        "2": 0.6199440360624979,
+        "3": 0.5345080763582967
+      },
+      "inter_mean_rho": 0.20982225812476188
+    },
+    "4": {
+      "k": 4,
+      "clusters": {
+        "2": [
+          "drug_policy",
+          "criminal_justice",
+          "voting_rights"
+        ],
+        "3": [
+          "climate",
+          "labor",
+          "healthcare",
+          "economic_policy",
+          "housing",
+          "social_safety_net"
+        ],
+        "1": [
+          "immigration",
+          "foreign_policy"
+        ],
+        "4": [
+          "lgbtq_religious_liberty",
+          "gun_policy",
+          "education"
+        ]
+      },
+      "intra_mean_rho": {
+        "2": 0.5967892045020288,
+        "3": 0.6199440360624979,
+        "1": 0.6600505831011273,
+        "4": 0.5345080763582967
+      },
+      "inter_mean_rho": 0.22656411690956477
+    },
+    "5": {
+      "k": 5,
+      "clusters": {
+        "2": [
+          "drug_policy",
+          "criminal_justice",
+          "voting_rights"
+        ],
+        "3": [
+          "climate",
+          "labor",
+          "healthcare",
+          "economic_policy",
+          "housing",
+          "social_safety_net"
+        ],
+        "1": [
+          "immigration",
+          "foreign_policy"
+        ],
+        "4": [
+          "lgbtq_religious_liberty",
+          "education"
+        ],
+        "5": [
+          "gun_policy"
+        ]
+      },
+      "intra_mean_rho": {
+        "2": 0.5967892045020288,
+        "3": 0.6199440360624979,
+        "1": 0.6600505831011273,
+        "4": 0.7136563876651982,
+        "5": NaN
+      },
+      "inter_mean_rho": 0.2327153789883051
+    }
+  }
+}
