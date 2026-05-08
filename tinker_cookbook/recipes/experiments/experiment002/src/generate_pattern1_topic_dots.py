@@ -124,18 +124,19 @@ def plot_pattern1_topic_dots(data: dict, out: Path) -> None:
         ax.scatter(xi + jitter, pts, color="black", s=28, alpha=0.6, zorder=5)
 
     ax.set_xticks(x)
-    ax.set_xticklabels(bar_labels, fontsize=14)
+    ax.set_xticklabels(bar_labels, fontsize=17)
     ax.tick_params(axis="x", which="both", length=0, pad=8)
-    ax.set_ylabel("Mean absolute judge score Δ vs base", fontsize=11)
+    ax.tick_params(axis="y", labelsize=13)
+    ax.set_ylabel("Mean absolute judge score Δ vs base", fontsize=14)
     ax.set_title(
         "In-Topic vs Out-Topic Finetuning Effect",
-        fontsize=14, fontweight="normal", pad=12,
+        fontsize=18, fontweight="normal", pad=14,
     )
     for spine in ("top", "right"):
         ax.spines[spine].set_visible(False)
     ax.set_ylim(0, None)
     for xi, (v, e) in enumerate(zip(bar_vals, bar_errors)):
-        ax.text(xi, v + e + 0.01, f"{v:.3f}", ha="center", fontsize=10,
+        ax.text(xi, v + e + 0.02, f"{v:.3f}", ha="center", fontsize=13,
                 fontweight="bold")
 
     plt.tight_layout()
