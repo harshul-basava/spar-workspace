@@ -149,7 +149,7 @@ def main():
     # -----------------------------------------------------------------------
     # Plot: bars per (hop, family); red bar up = con, blue bar down = lib
     # -----------------------------------------------------------------------
-    fig, ax = plt.subplots(figsize=(7.0, 6.5))
+    fig, ax = plt.subplots(figsize=(9.5, 8.5))
 
     family_names = [f["display"] for f in MODEL_FAMILIES]
     n_families = len(family_names)
@@ -198,11 +198,11 @@ def main():
             # Use the dark edge color so they read clearly against white.
             ax.text(x, s["con_mean"] + s["con_se"] + 0.18,
                     f"{s['con_mean']:+.2f}",
-                    ha="center", va="bottom", fontsize=8.5, fontweight="bold",
+                    ha="center", va="bottom", fontsize=14, fontweight="bold",
                     color=CON_EDGE, zorder=4)
             ax.text(x, s["lib_mean"] - s["lib_se"] - 0.18,
                     f"{s['lib_mean']:+.2f}",
-                    ha="center", va="top", fontsize=8.5, fontweight="bold",
+                    ha="center", va="top", fontsize=14, fontweight="bold",
                     color=LIB_EDGE, zorder=4)
 
     # Group-center x-tick labels
@@ -210,8 +210,9 @@ def main():
                      for gi in range(n_hops)]
     ax.set_xticks(group_centers)
 
-    ax.set_xticklabels(HOP_LABELS, fontsize=11)
+    ax.set_xticklabels(HOP_LABELS, fontsize=17)
     ax.tick_params(axis="x", which="both", length=0, pad=10)
+    ax.tick_params(axis="y", labelsize=14)
 
     ax.axhline(y=0, color="#444", linewidth=1.0, zorder=2.5)
     for y in range(-6, 7):
@@ -219,10 +220,10 @@ def main():
             ax.axhline(y=y, color="#aaa", linewidth=0.5, linestyle="--",
                        alpha=0.25, zorder=1)
     ax.set_ylim(-4, 6)
-    ax.set_ylabel("Mean Offset from Base Model", fontsize=12)
+    ax.set_ylabel("Mean Offset from Base Model", fontsize=18)
     ax.set_title(
         "Ideology Offset from Base — Per Hop Level (All Model Families)",
-        fontsize=14, fontweight="normal", pad=14,
+        fontsize=19, fontweight="normal", pad=14,
     )
 
     # Legend: family hatch swatches only (gray fill so white hatching shows
@@ -233,22 +234,22 @@ def main():
         for fname in family_names
     ]
     leg_family = ax.legend(
-        handles=family_handles, fontsize=9, title="Model family (hatch)",
-        title_fontsize=9, framealpha=0.95, loc="lower left",
+        handles=family_handles, fontsize=10, title="Model family (hatch)",
+        title_fontsize=10, framealpha=0.95, loc="lower left",
         ncol=len(family_handles), columnspacing=1.4,
         handlelength=3.2, handleheight=1.6, borderpad=0.8,
     )
     leg_family.get_title().set_fontweight("bold")
 
     ax.text(0.99, 0.02, "Liberal shift from base", transform=ax.transAxes,
-            fontsize=10, fontweight="bold", color=LIB_EDGE, ha="right")
+            fontsize=11, fontweight="bold", color=LIB_EDGE, ha="right")
     ax.text(0.99, 0.98, "Conservative shift from base", transform=ax.transAxes,
-            fontsize=10, fontweight="bold", color=CON_EDGE, ha="right",
+            fontsize=11, fontweight="bold", color=CON_EDGE, ha="right",
             va="top")
 
     plt.tight_layout()
     out_path = PLOTS_DIR / "combined_offset_from_base_bars.png"
-    fig.savefig(out_path, dpi=150, bbox_inches="tight")
+    fig.savefig(out_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
     print(f"\nSaved: {out_path}")
 
